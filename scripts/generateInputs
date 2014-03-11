@@ -1,0 +1,14 @@
+templatefile=${1}
+
+#popsize
+sed	 "118s/%%/10/g" "${templatefile}" > "${templatefile}_10.new"
+#pcross
+sed	 "120s/%%/10/g" "${templatefile}" > "${templatefile}_11.new"
+#pcross
+sed	 "124s/%%/10/g" "${templatefile}" > "${templatefile}_12.new"
+#pcross
+sed	 "128s/%%/10/g" "${templatefile}" > "${templatefile}_13.new"
+#pcross
+sed	 "130s/%%/10/g" "${templatefile}" > "${templatefile}_14.new"
+#pcross
+sed	 "132s/%%/10/g" "${templatefile}" > "${templatefile}_15.new"

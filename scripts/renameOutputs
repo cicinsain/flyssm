@@ -1,0 +1,7 @@
+a=1
+for i in ${1}_parm_*; do
+	new=$(printf "${1}_parm_%03d.fout" ${a})
+	mv ${i} ${new}
+	let a=a+1
+done
+

@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# FILES=("input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.7_pMut_0.05.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.7_pMut_0.1.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.7_pMut_0.3.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.7_pMut_0.5.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.8_pMut_0.05.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.8_pMut_0.1.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.8_pMut_0.3.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.8_pMut_0.5.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.9_pMut_0.05.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.9_pMut_0.1.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.9_pMut_0.3.inp"
+# "input/tllg58c13-v5.55_1_io_pSize_400_nGen_10000_pCross_0.9_pMut_0.5.inp")
+
+#FILES=$(ls input/archives/10000/*.inp) 
+
+#for inp in ${FILES[@]}; do
+#	echo $(basename $inp)
+#done
+
+# sim=($(sed -n '3p' < $1))
+# echo $sim
+# for i in {1..5}; do
+# 	# echo ${sim[$i]}
+# 	c=$(printf "%06d" ${sim[$i]})
+# 	d=../input/${inputfile}_outputs/${inputfile}_parm_${c}.fout
+# 	echo $d
+# done
+
+cd /home/amir/Dropbox/Study/master/fly_nsga2/
+
+FILES=$(ls input/tllg58c13-v4.2/tllg58c13-v4.2_001_inputs/400_800_jobs/400_800/*.inp)
+
+for inp in ${FILES[@]}; do
+    # echo "------> Making fly_nsga2 instance in TMPDIR"
+    echo $inp
+    b_inp=$(basename $inp)
+    tdir=job_${b_inp}
+    echo $tdir
+    # mkdir $TMPDIR/${tdir}
+    # cp -rf $HOME/master/fly_nsga2 $TMPDIR/${tdir}
+    # cd $TMPDIR/${tdir}/fly_nsga2
+
+    inputfile=${b_inp}
+    # echo "------> Running the simulation..."
+    echo $inputfile
+    # ./fly/fly_nsga2 -s rck -t -i 4.0 -a 0.001 input/${inputfile}
+    echo "-------------------"
+done

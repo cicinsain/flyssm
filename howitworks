@@ -1,0 +1,70 @@
+Hi again
+
+Here it works this way:
+
+It starts with a set of parameters. 
+All parameters are physically located in inp->zyg.parm. Then we have a mask in inp->twe which is made of zeros and ones. Prameters with inp->twe = 0 are fixed while those with inp->twe = 1 are changed in the optimization process. The we have inp->tra.array which is an array of pointers to parameters to be optimized. That means that if for a certain parameter in inp->zyg.parm we have inpt->twe=0 then we will have a pointer in inp->tra.array to that parameter. Each change to inp->tra.array is actually a change to the corresponding parameter in inp->zyg.parm.
+
+So Now that you got the connection we can go on. :)
+
+In the function moves.c->InitMoves() you will see a line where the pointer to inp->tra.array is set to ptab, so in the rrst of this file when we talk about ptab, we talk about the array of parameters inp->tra.array. The optimizer is working only on inp->tra.array that means only on parameters that are not fixed.
+
+Here the key is the moves.c -> GenerateMove function. 
+
+1. This function makes a "move", where "move" means change 1 parameter. 
+2. Then it computes the new energy (energy = score + penalty) and it compares the new energy and the old energy. 
+Our objective is to minimize the energy, so: 
+3a. if new energy < oldenergy, then accept move (keep these parameters and set oldenergy = newenergy for the next iteration). 
+3b. else if newenergy > old energy accept the move with very low probability to avoid local minimas, but in general reject the move. That means undo the change to that parameter..
+4. go to 1. and change the next parameter
+
+If you look at the code:
+
+
+this "if" is true only for the first loop. We need this run to get the first real value for the old_energy variable. The real value is obtained in base of the initial parameters read from the input file in MoveSA.
+if( old_energy == -999. ) {
+        MoveSA( NULL, distp, out, NULL, 0, 0 );
+        old_energy = out->score + out->penalty;
+        if( old_energy == FORBIDDEN_MOVE )
+            error( "GenerateMove: 1st call gave forbidden move" );
+}
+
+    /* make a "move" */
+
+    Move( files, distp );  //changing one parameter. If you check this function, few lines lower, you will see thet it changes on parameter in the ptab structure that we mentioned few lines upper. ptab is the same as inp->tra.array - array of parameters.
+
+    acc_tab[idx].hits++;    //this is something for the statistics, needed by the SA
+    //new_energy = Score();
+
+    //call MoveSA that calls score and returns the energy in the "out" structure
+    MoveSA( NULL, distp, out, NULL, 0, 0 ); 
+
+    new_energy = out->score + out->penalty;   //compute new_energy and compare it to old_energy, and see if we have an improvement.
+    if( new_energy >= FORBIDDEN_MOVE ) { //forbidden move is a very big value, means "don't ever accept this move". This happens when parameters go out of limits, or the penalty is too big
+        return ( FORBIDDEN_MOVE );
+    } else {
+        delta_e = new_energy - old_energy;
+
+        //printf("%d) %lg - %lg = %lg ENERGYCHANGE\n", idx, new_energy, old_energy, delta_e);
+        return ( delta_e );
+    }
+
+
+
+So if you want to use a different optimizer, but the same criteria of accept/reject move, maybe you can just adapt the Move() function to change the parameter array according to your optimizer.
+
+Mutate() is something that we don't use, and is related to the biological part, not to the optimization part.
+
+zyg->nalleles is the number of genotypes. This is if we optimize on different organisms at the same time. i.e. we have data for a wildtype organism and data for a mutant organism. So we want to get a gene circuit that fits best to both types of data. I guess you will always have only one genotype. So we call Blastoderm() for each genotype, not for each gene. 
+
+Blastoderm() fnuction: We are simulating one or more stages in early development of drosophila embryo, in order to get the expression levels per gene/nuclei/timepoint. once that we have those numbers, they will be compared with the data in the Eval() function, and the "error" (or score) will be computed. 
+Between two stages we have a cell division and the number of nuclei doubles. So our steps can be Mitosis (does a small step forward after the division to avoid errors,, Division (just sets the right number of nuclei after the division), and Propagation (between two divisions). In case of propagation, we run the solver to simulate the time between the two divisions.
+
+But remember, we are not doing it gene per gene. All 4 gap genes together are elements of our model. Solvers are calling the model that is located in zygotic.c. So if you will use our model, maybe you have to change only the score function (the Eval() function to be precise) to a function that computes the score per gene for your purpose.
+
+
+Hope that helped a little bit
+
+Best,
+
+D.

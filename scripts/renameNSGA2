@@ -1,0 +1,5 @@
+for nsga2ofile in ../*.out; do
+	new=${nsga2ofile:0:-4}_${1}
+	mv ${nsga2ofile} ${new}
+done
+

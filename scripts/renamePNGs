@@ -1,0 +1,6 @@
+qb=1
+for pngfile in ${1}*.png; do
+	new=$(printf "%06d.png" ${b})
+	mv ${pngfile} ${1}${new}
+	let b=b+1
+done
