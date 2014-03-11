@@ -5,7 +5,7 @@
 
 void evaluate(double *s, AMOSAType *amosaParams)
 {  
-	if (!strcmp(amosaParams->c_problem, "ZDT1"))
+/*	if (!strcmp(amosaParams->c_problem, "ZDT1"))
 		ZDT1(s, amosaParams);    
 	else if(!strcmp(amosaParams->c_problem,"ZDT2"))
 		ZDT2(s, amosaParams);
@@ -13,9 +13,10 @@ void evaluate(double *s, AMOSAType *amosaParams)
 		ZDT3(s, amosaParams);
 	else if(!strcmp(amosaParams->c_problem,"ZDT6"))
 		ZDT6(s, amosaParams);
-	else if(!strcmp(amosaParams->c_problem,"SCH1"))
+	else */
+	if(!strcmp(amosaParams->c_problem,"SCH1"))
 		SCH1(s, amosaParams);
-	else if(!strcmp(amosaParams->c_problem,"SCH2"))
+	/*else if(!strcmp(amosaParams->c_problem,"SCH2"))
 		SCH2(s, amosaParams);
 	else if(!strcmp(amosaParams->c_problem,"Dev1"))
 		Dev1(s, amosaParams);
@@ -44,7 +45,7 @@ void evaluate(double *s, AMOSAType *amosaParams)
 	else if (!strcmp(amosaParams->c_problem,"DTLZ110"))
 		DTLZ110(s, amosaParams);
 	else if (!strcmp(amosaParams->c_problem,"DTLZ115"))
-		DTLZ115(s, amosaParams);
+		DTLZ115(s, amosaParams);*/
 	else
 	{
 		printf("Invalid argument for test amosaParams->c_problem given. Exiting.\n");

@@ -516,12 +516,15 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
     //name of the output dir
     //extern char *outname;
     ScoreEval eval;
+
+    #ifdef NSGA2
     /*==== 
         Amir: Initialize the struct for each objectives.*/
     eval.nsga2_evals = (ScoreEval **) malloc(inp->zyg.defs.ngenes * sizeof(ScoreEval));
     for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
         eval.nsga2_evals[g] = (ScoreEval *) malloc( sizeof(ScoreEval));
     }
+    #endif
 
     int i, j, ii;
     double totalscore = 0;
@@ -747,9 +750,11 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
         chisq += eval.chisq;
         /*====
             Amir: Computing the chisq_s for each objective...*/
+        #ifdef NSGA2
         for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
             chisq_s[g] += eval.nsga2_evals[g]->chisq;
         }
+        #endif
 
         //printf("EVAL %d = %lg\n", i, eval.chisq);
         if( i == 0 ) {
@@ -800,11 +805,13 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
     }
     out->size_resid_arr = eval.residuals_size;
 
+#ifdef NSGA2
     // printf("Scoring completed.\n");
     for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
         free(eval.nsga2_evals[g]);
     }
     free(eval.nsga2_evals);
+#endif
     free(chisq_s);
 }
 
@@ -971,12 +978,14 @@ GeneBasedEval(ScoreEval * eval, NArrPtr * Solution, int gindex, Input * inp )
         // printf("%d\n", inp->zyg.defs.egenes);
         // printf("eval->chisq: %lf\n", eval->chisq);
         // printf("evals: ");
+        #ifdef NSGA2 
+        
         for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
             eval->nsga2_evals[g]->chisq          = chisq_s[g];
             // printf(" %lf,", eval->nsga2_evals[g]->chisq);
         }
         // printf("\n");
-
+        #endif
 
         free(difference_s);
         free(chisq_s);

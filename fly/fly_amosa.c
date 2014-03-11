@@ -53,8 +53,7 @@
 /*=================
     NSGA2
     */
-# include "nsga2.h"        
-# include "rand.h"
+# include "amosa.h"
 
 
 
@@ -66,7 +65,11 @@
 /*========
     defining the NSGA2Type paramters...
     */
+#ifdef NSGA2
 NSGA2Type nsga2Params;
+#endif
+
+AMOSAType amosaParams;
 
 /*** Constants *************************************************************/
 
@@ -547,7 +550,9 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
 
         // Reads all the nsga2 parameters from the input file, and translate the variables boundaries 
         // from SearchSpace to the nsga2.max/min
+        #ifdef NSGA2
         nsga2Params = ReadNSGA2Parameters(infile, &inp);    
+        #endif
 
         i_temp = InitMoves( infile, &inp );     /* set initial temperature and initialize */
         // initialize distribution stuff
@@ -573,13 +578,19 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
 
     inp.lparm = CopyParm( inp.zyg.parm, &( inp.zyg.defs ) );
 
-    InitNSGA2(&inp, &nsga2Params, inname);
-    RunNSGA2(&inp, &nsga2Params, inname);
+    #ifdef NSGA2
+        InitNSGA2(&inp, &nsga2Params, inname);
+        RunNSGA2(&inp, &nsga2Params, inname);
+    #endif
+        ReadAMOSAParameters(&amosaParams);
+        InitAMOSA(&amosaParams);
+        RunAMOSA(&amosaParams);
+
 
     // Ignore the Score function in order to avoid running the SA
 #ifndef NSGA2
     //In this function all the calculations are made
-    Score( &inp, out, jacobian );
+    // Score( &inp, out, jacobian );
 #endif
     FreeMutant( inp.lparm );
 

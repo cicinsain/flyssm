@@ -29,7 +29,7 @@
 
 #include "global.h"
 #include "distributions.h"
-// #include "nsga2.h"
+// #include "amosa.h"
 
 
 /*** CONSTANTS *************************************************************/

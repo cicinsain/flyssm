@@ -779,7 +779,7 @@ ReadTheProblem( FILE * fp ) {
 }
 
 
-
+#ifdef NSGA2
 /*
      ReadNSGA2Parameters: 
         - Read all the neccessary control paramters for running NSGA2 algorithm,
@@ -791,6 +791,7 @@ ReadTheProblem( FILE * fp ) {
         - The random initial seed for nsga2 algorithm will generate if the input value
             sets as '[random]'
  */
+
 NSGA2Type
 ReadNSGA2Parameters( FILE * fp, Input *inp ) {
     printf("Reading NSGA2 parameters...\n");
@@ -1022,7 +1023,7 @@ ReadNSGA2Parameters( FILE * fp, Input *inp ) {
     return l_nsga2Params;
 }
 
-
+#endif
 
 /** ReadGenotypes: This function reads all the genotypes in a datafile & 
  *                  returns an SList with genotype number and pointers to 

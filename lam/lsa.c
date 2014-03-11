@@ -71,15 +71,9 @@
 #include <MPI.h>
 #endif
 
-#ifndef NSGA2 // To avoid the duplicate key definition
-#define NSGA2
+#ifndef AMOSA // To avoid the duplicate key definition
+#define AMOSA
 #endif
-/*=================
-    Amir: NSGA2
-    */
-// #include "nsga2.h"
-// #include "rand.h"
-
 
 
 /* STATIC VARIABLES ********************************************************/
@@ -413,7 +407,7 @@ main( int argc, char **argv ) {
 
     /* the following is for non-equlibration runs and equilibration runs that  */
     /* have not yet settled to their equilibrium temperature                   */
-    #ifndef NSGA2
+    #ifndef AMOSA
     if( ( bench != 1 ) && ( ( equil != 1 ) || ( 1.0 / S > equil_param.end_T ) ) ) {
         Loop(  );
     }

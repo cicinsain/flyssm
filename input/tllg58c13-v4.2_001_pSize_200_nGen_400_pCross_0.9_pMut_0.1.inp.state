@@ -1,0 +1,338 @@
+./fly/fly_amosa -s rck -t -i 4.9 -a 0.001 input/tllg58c13-v4.2_001_pSize_200_nGen_400_pCross_0.9_pMut_0.1.inp
+input/tllg58c13-v4.2_001_pSize_200_nGen_400_pCross_0.9_pMut_0.1.inp
+input/tllg58c13-v4.2_001_pSize_200_nGen_400_pCross_0.9_pMut_0.1.inp
+DvdtOrig
+Rkck
+1
+0
+0
+1
+1000
+100
+100000000
+0
+8
+4.9
+0
+0
+0.000
+0.080
+44
+0
+0
+0
+26.82335054
+12.64584415
+23.28453833
+24.48259949
+0.01657195
+0.00441201
+-0.00570715
+-0.19655634
+-0.0370559
+0.05629413
+-0.01208362
+-0.07347323
+0.00641557
+-0.22974807
+0.01768133
+0.00144208
+-0.12672871
+0.00095179
+-0.01956472
+0.02708718
+0.03882552
+0.00620087
+0.0167687
+-0.03275255
+0.07235224
+0.01497864
+-0.15010887
+-0.00683359
+0.02629917
+0.02338136
+-0.07710051
+-0.00214066
+-0.01333367
+0.01843562
+-0.078635
+-0.01182617
+0.29999989
+0.29999998
+0.29999997
+0.3
+0.138629279183645
+0.06522562322343217
+0.1261741794896403
+0.1386294197537175
+-999
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0 5 0 0
+0
+0
+1e+38
+0
+0
+0
+0
+0
+0
+1e-06
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+dsfmt_id=dSFMT2-19937:117-19:ffafffffffb3f-ffdfffc90fffd
+dsfmt_idx=382
+dsfmt_state[000]=0x1.fa9732864258ap+0 0x1.2ac22577ac932p+0
+dsfmt_state[001]=0x1.cb06b3f9a1b6ep+0 0x1.5579ca278ca73p+0
+dsfmt_state[002]=0x1.953c9cca8a8c3p+0 0x1.27975dc62b221p+0
+dsfmt_state[003]=0x1.c5bcf3824119ap+0 0x1.70cb794a4638ap+0
+dsfmt_state[004]=0x1.2da33ed97e079p+0 0x1.484516c1b4e67p+0
+dsfmt_state[005]=0x1.24693ad4703a4p+0 0x1.3c5518c27f9bp+0
+dsfmt_state[006]=0x1.2ae87549b44d7p+0 0x1.8a81a0ac70793p+0
+dsfmt_state[007]=0x1.b53f57edeb2f9p+0 0x1.744e06e00c62cp+0
+dsfmt_state[008]=0x1.ef80644aa0c8p+0 0x1.9ae00ad05871bp+0
+dsfmt_state[009]=0x1.512321a972f89p+0 0x1.2c56014327945p+0
+dsfmt_state[010]=0x1.ef18fe6cfc86dp+0 0x1.2128f5003d495p+0
+dsfmt_state[011]=0x1.6e23534223d68p+0 0x1.c8f9f8e2112b2p+0
+dsfmt_state[012]=0x1.d5c36312aae21p+0 0x1.dd7abfc70be1bp+0
+dsfmt_state[013]=0x1.c586eed961046p+0 0x1.648479ee4aed2p+0
+dsfmt_state[014]=0x1.95f33ee3a7071p+0 0x1.8847f0f9250f4p+0
+dsfmt_state[015]=0x1.fb5795b1e2a8dp+0 0x1.f916d15c7d096p+0
+dsfmt_state[016]=0x1.ecf982581c80bp+0 0x1.03dfe2a9fc89fp+0
+dsfmt_state[017]=0x1.9478e29efda15p+0 0x1.bc39135272682p+0
+dsfmt_state[018]=0x1.df40eff1b4ae2p+0 0x1.9c18af82ec7dp+0
+dsfmt_state[019]=0x1.81152bdd9bf23p+0 0x1.8c71b87f2a4dep+0
+dsfmt_state[020]=0x1.8549e5c5a64c8p+0 0x1.31c74243b7a0dp+0
+dsfmt_state[021]=0x1.3e3f34d56ea47p+0 0x1.cc550e8e45e06p+0
+dsfmt_state[022]=0x1.d916c14684517p+0 0x1.2b6dd4898b55bp+0
+dsfmt_state[023]=0x1.34fef82b1e128p+0 0x1.5605a199f5ddfp+0
+dsfmt_state[024]=0x1.70c8b32152de2p+0 0x1.e78c9578c436fp+0
+dsfmt_state[025]=0x1.7cfaed1bfc216p+0 0x1.5fcd6773bfb42p+0
+dsfmt_state[026]=0x1.3314b413cd03bp+0 0x1.cff5c41a90c9cp+0
+dsfmt_state[027]=0x1.f042b5dd397e7p+0 0x1.43b6f144d1fp+0
+dsfmt_state[028]=0x1.799eebe82da3bp+0 0x1.b2af59f921958p+0
+dsfmt_state[029]=0x1.d0ff5b33f9982p+0 0x1.a65558edbf284p+0
+dsfmt_state[030]=0x1.1e1de3f977801p+0 0x1.8828d6da861abp+0
+dsfmt_state[031]=0x1.5bc62e9ab8082p+0 0x1.9ef6e186a3bc3p+0
+dsfmt_state[032]=0x1.8d7182206de4bp+0 0x1.88015eec75129p+0
+dsfmt_state[033]=0x1.777dac6704f32p+0 0x1.1eff9880bf388p+0
+dsfmt_state[034]=0x1.1e31b2e16782ap+0 0x1.bf745da950d31p+0
+dsfmt_state[035]=0x1.e9c9ccad7f26p+0 0x1.9e1c1e8bde249p+0
+dsfmt_state[036]=0x1.e5f6eef04e41ap+0 0x1.1341e60d0722ep+0
+dsfmt_state[037]=0x1.652e4fb408bap+0 0x1.a617d643e41efp+0
+dsfmt_state[038]=0x1.66b21673f5be9p+0 0x1.93b27c143ed9fp+0
+dsfmt_state[039]=0x1.28912723699dp+0 0x1.194ea6c99a3eep+0
+dsfmt_state[040]=0x1.dc5f4281e8457p+0 0x1.c6ad57402374bp+0
+dsfmt_state[041]=0x1.8a33371243677p+0 0x1.1bbb6dd3c256p+0
+dsfmt_state[042]=0x1.136ab6a54fedbp+0 0x1.6d0a190c18bbcp+0
+dsfmt_state[043]=0x1.98db4225c8bfbp+0 0x1.1710f6edcd8e1p+0
+dsfmt_state[044]=0x1.6c6359c041936p+0 0x1.abf012baa0736p+0
+dsfmt_state[045]=0x1.9d75ca95be519p+0 0x1.b2dfd9a8546ccp+0
+dsfmt_state[046]=0x1.80c9099408a89p+0 0x1.9afd7c1bd8eefp+0
+dsfmt_state[047]=0x1.ebfeadc35e62ap+0 0x1.365b290737b75p+0
+dsfmt_state[048]=0x1.c2ad76d08eb5fp+0 0x1.9ca664d845a66p+0
+dsfmt_state[049]=0x1.bd79eb1defa67p+0 0x1.4d3309aca16b7p+0
+dsfmt_state[050]=0x1.02790f94c02b8p+0 0x1.94918121248c9p+0
+dsfmt_state[051]=0x1.597b8719ec20ep+0 0x1.0121ca1d5ddcbp+0
+dsfmt_state[052]=0x1.2b4ccce4c21dcp+0 0x1.6afcf9da6814ep+0
+dsfmt_state[053]=0x1.f986501fb885p+0 0x1.8efbb170fb714p+0
+dsfmt_state[054]=0x1.c626e4e480c7p+0 0x1.59ff41b393da5p+0
+dsfmt_state[055]=0x1.e212f39dcc2eap+0 0x1.4bfb1f15e3f69p+0
+dsfmt_state[056]=0x1.61de54c4c5ab5p+0 0x1.1fcecd774cfd6p+0
+dsfmt_state[057]=0x1.0c1afa33716p+0 0x1.855885984888cp+0
+dsfmt_state[058]=0x1.f57f7ecbf10f5p+0 0x1.da2767e6b482ep+0
+dsfmt_state[059]=0x1.adf74607c3f7ap+0 0x1.9238e5c9b3db2p+0
+dsfmt_state[060]=0x1.5488bfe1c7c91p+0 0x1.af2cc5d0d7964p+0
+dsfmt_state[061]=0x1.3b981d9eb939fp+0 0x1.64937063cc34p+0
+dsfmt_state[062]=0x1.25632e012c946p+0 0x1.68c2ece6ac4b4p+0
+dsfmt_state[063]=0x1.9c1670ebbed22p+0 0x1.e7d4eb1da6da1p+0
+dsfmt_state[064]=0x1.19fe14820a561p+0 0x1.eeac47562072cp+0
+dsfmt_state[065]=0x1.f027eb5682087p+0 0x1.68471e10af421p+0
+dsfmt_state[066]=0x1.f8d7decf8cd67p+0 0x1.42e1927fe2ef6p+0
+dsfmt_state[067]=0x1.27209a0a81b4ep+0 0x1.4dc36023ccf9bp+0
+dsfmt_state[068]=0x1.8149b7ad551c3p+0 0x1.9c1afd455026fp+0
+dsfmt_state[069]=0x1.5f8c517f275fp+0 0x1.e9c74267ea699p+0
+dsfmt_state[070]=0x1.659e51ce9cedcp+0 0x1.c7db84f978ed8p+0
+dsfmt_state[071]=0x1.8f24742f3aee3p+0 0x1.89634cf69f9f2p+0
+dsfmt_state[072]=0x1.7b504f4d117a4p+0 0x1.139d2dc84a28p+0
+dsfmt_state[073]=0x1.f9c73a57c2034p+0 0x1.9e32c7f1fbc2p+0
+dsfmt_state[074]=0x1.a9a3d2efd2d84p+0 0x1.df6b05b7c09ap+0
+dsfmt_state[075]=0x1.53fa1b9959766p+0 0x1.77d4abb55577dp+0
+dsfmt_state[076]=0x1.a3f58dca7f698p+0 0x1.7bc20f68916eap+0
+dsfmt_state[077]=0x1.b56c1ba196c9ep+0 0x1.1b75c7e150dcp+0
+dsfmt_state[078]=0x1.002d8181830b3p+0 0x1.d80a94ff641d7p+0
+dsfmt_state[079]=0x1.2505138b5ab84p+0 0x1.43066db739398p+0
+dsfmt_state[080]=0x1.16a1e37602619p+0 0x1.f85b3d92363b3p+0
+dsfmt_state[081]=0x1.7292207d27919p+0 0x1.ce13b8e355ae6p+0
+dsfmt_state[082]=0x1.92576e692e72ap+0 0x1.370b2e1a1eed8p+0
+dsfmt_state[083]=0x1.401a8ffe9a6bcp+0 0x1.e527d252f9096p+0
+dsfmt_state[084]=0x1.54662501ee83cp+0 0x1.78feef20d37fcp+0
+dsfmt_state[085]=0x1.1efea6115157p+0 0x1.47797f0e65943p+0
+dsfmt_state[086]=0x1.92db4c5ad62bcp+0 0x1.f12a7bf305d5ep+0
+dsfmt_state[087]=0x1.0798628efa975p+0 0x1.cad49e21a32a1p+0
+dsfmt_state[088]=0x1.1236043d2f992p+0 0x1.4df1f0e20690cp+0
+dsfmt_state[089]=0x1.dd5fa78a6037p+0 0x1.6ff8f2dae3708p+0
+dsfmt_state[090]=0x1.826a8024f5bd3p+0 0x1.b0595dd85c5e1p+0
+dsfmt_state[091]=0x1.8d4d9f88804ffp+0 0x1.5b2ed093b92a6p+0
+dsfmt_state[092]=0x1.e54d34a0a80bbp+0 0x1.349bd330ac782p+0
+dsfmt_state[093]=0x1.59d0950bd3e05p+0 0x1.5a4580b3ed9cdp+0
+dsfmt_state[094]=0x1.3e551965402fap+0 0x1.4b14ee4005cd4p+0
+dsfmt_state[095]=0x1.c4e6036563ca7p+0 0x1.96c11b67b6028p+0
+dsfmt_state[096]=0x1.ac291323c33dp+0 0x1.f4d87f4f55db7p+0
+dsfmt_state[097]=0x1.e71cade404d62p+0 0x1.c0f9f04fe0038p+0
+dsfmt_state[098]=0x1.17d4607782f79p+0 0x1.7d6d7a21bd15ep+0
+dsfmt_state[099]=0x1.38494546a49fap+0 0x1.01b6e564283f2p+0
+dsfmt_state[100]=0x1.b9bc63d332891p+0 0x1.8d12a1c63e34bp+0
+dsfmt_state[101]=0x1.05aab98d0ee5cp+0 0x1.b75444a1ec0a8p+0
+dsfmt_state[102]=0x1.df9d8883a32d1p+0 0x1.6dc84b087b537p+0
+dsfmt_state[103]=0x1.a8a5ad612b87ap+0 0x1.f58f24b79ae56p+0
+dsfmt_state[104]=0x1.14bf2bf6d247fp+0 0x1.fa6fd17b66752p+0
+dsfmt_state[105]=0x1.37c5a729dbf1p+0 0x1.1c06f34123b28p+0
+dsfmt_state[106]=0x1.ea1e2444eb844p+0 0x1.8da7ecf15d1d4p+0
+dsfmt_state[107]=0x1.330e3f69619fdp+0 0x1.badb181e93cd8p+0
+dsfmt_state[108]=0x1.18bdc3ef5544fp+0 0x1.f948f40df87adp+0
+dsfmt_state[109]=0x1.572b2c1b79bbap+0 0x1.53d8e2e6dfa8bp+0
+dsfmt_state[110]=0x1.07b2cfa1535f4p+0 0x1.3db80425e38ep+0
+dsfmt_state[111]=0x1.a65ce673d1b3cp+0 0x1.2a4b0b5bfe09fp+0
+dsfmt_state[112]=0x1.96e728703c75fp+0 0x1.44ab1735a0d57p+0
+dsfmt_state[113]=0x1.7aa13b579a934p+0 0x1.4a800388f4645p+0
+dsfmt_state[114]=0x1.725b110be49c8p+0 0x1.9928efedc2304p+0
+dsfmt_state[115]=0x1.3e41b58de5b37p+0 0x1.5864ed450ea1p+0
+dsfmt_state[116]=0x1.854a9f3a745fbp+0 0x1.a3e896326d97fp+0
+dsfmt_state[117]=0x1.a70355ce0fee1p+0 0x1.169aeb1ecb689p+0
+dsfmt_state[118]=0x1.81c42532fbeb4p+0 0x1.c51914328f07fp+0
+dsfmt_state[119]=0x1.d6e922bb9c911p+0 0x1.92375e70e4cddp+0
+dsfmt_state[120]=0x1.049f1eae6aed3p+0 0x1.78aa3529539c1p+0
+dsfmt_state[121]=0x1.1993a939fef33p+0 0x1.60ffef7677fc8p+0
+dsfmt_state[122]=0x1.36d5ae9a53f1ep+0 0x1.0f20b9a063da2p+0
+dsfmt_state[123]=0x1.bc4832c3cd9dep+0 0x1.d6264807491d3p+0
+dsfmt_state[124]=0x1.9132f9d1b5764p+0 0x1.58d0eb5b1ba7dp+0
+dsfmt_state[125]=0x1.3328b6cf6afdfp+0 0x1.7d8645b94cc68p+0
+dsfmt_state[126]=0x1.0d5471060f836p+0 0x1.427a65c2189cep+0
+dsfmt_state[127]=0x1.0a9f8178d05dfp+0 0x1.c9cc2b8776505p+0
+dsfmt_state[128]=0x1.2a6e750c335efp+0 0x1.f7637448e7a25p+0
+dsfmt_state[129]=0x1.b57ad04477888p+0 0x1.55021fd0f4111p+0
+dsfmt_state[130]=0x1.fabb65a69bea8p+0 0x1.eab6a1f959d73p+0
+dsfmt_state[131]=0x1.c2c175652e643p+0 0x1.678fd7967a357p+0
+dsfmt_state[132]=0x1.72dd60a5822e1p+0 0x1.c41c2e7069d8p+0
+dsfmt_state[133]=0x1.22d15ca8c4f03p+0 0x1.b8a63e9af085fp+0
+dsfmt_state[134]=0x1.258f1023af9f8p+0 0x1.f977f29349b94p+0
+dsfmt_state[135]=0x1.9f36b58b2be37p+0 0x1.646c7dbcf3b8bp+0
+dsfmt_state[136]=0x1.57159794c5ad9p+0 0x1.7edc0c355d1dap+0
+dsfmt_state[137]=0x1.33157c6f41849p+0 0x1.21ae4189b0879p+0
+dsfmt_state[138]=0x1.3a5f6958b3e4bp+0 0x1.c7a43343b2238p+0
+dsfmt_state[139]=0x1.3d32e46b87d6cp+0 0x1.ac882cb27f154p+0
+dsfmt_state[140]=0x1.b5844ae552615p+0 0x1.fa4c78c623906p+0
+dsfmt_state[141]=0x1.9d59e845b83b7p+0 0x1.d94a2dc04d78cp+0
+dsfmt_state[142]=0x1.fff565ce54558p+0 0x1.bde6088f73bc3p+0
+dsfmt_state[143]=0x1.f33eca917a781p+0 0x1.ceef789bcca5ap+0
+dsfmt_state[144]=0x1.d6be0025d78b3p+0 0x1.1618293cd0dd1p+0
+dsfmt_state[145]=0x1.399f5d79f95f3p+0 0x1.ff19ad24a6654p+0
+dsfmt_state[146]=0x1.e98141203476fp+0 0x1.e16edac3fc8f8p+0
+dsfmt_state[147]=0x1.2a8c964cee2cdp+0 0x1.08fb44bb6b4p+0
+dsfmt_state[148]=0x1.27b9b5c52a483p+0 0x1.9a120cf371d4ap+0
+dsfmt_state[149]=0x1.85b2414dd5023p+0 0x1.e66e04ebd4e54p+0
+dsfmt_state[150]=0x1.15cca2a44021dp+0 0x1.9c38b407f4171p+0
+dsfmt_state[151]=0x1.73e2fe97d7869p+0 0x1.ea2733e742884p+0
+dsfmt_state[152]=0x1.73e6feb1b91f5p+0 0x1.3da7addb681c8p+0
+dsfmt_state[153]=0x1.b5bb777ce07ebp+0 0x1.61a1ac3e99734p+0
+dsfmt_state[154]=0x1.5e693b4d725ep+0 0x1.439b25937093ap+0
+dsfmt_state[155]=0x1.62477f4a17e41p+0 0x1.37f19c1811461p+0
+dsfmt_state[156]=0x1.1cec3868cfee8p+0 0x1.64b1de1e1f061p+0
+dsfmt_state[157]=0x1.045ddacb0b34ap+0 0x1.641986db1610cp+0
+dsfmt_state[158]=0x1.41e1d5f01c4d5p+0 0x1.d8e03c19868ebp+0
+dsfmt_state[159]=0x1.f82a7e82e91e1p+0 0x1.e43d4c5545132p+0
+dsfmt_state[160]=0x1.6fb11cccfd553p+0 0x1.a37e81c333c01p+0
+dsfmt_state[161]=0x1.7ea8ed1ea4bd6p+0 0x1.1aa8d9d978a8cp+0
+dsfmt_state[162]=0x1.657c58be04a8ep+0 0x1.8062135c486dep+0
+dsfmt_state[163]=0x1.7f3aaab28295bp+0 0x1.521338e000bd6p+0
+dsfmt_state[164]=0x1.d0340c0b8ca8p+0 0x1.7494eeebe9d9cp+0
+dsfmt_state[165]=0x1.331ca608d999p+0 0x1.b682ec16dc148p+0
+dsfmt_state[166]=0x1.21bb63d3b3159p+0 0x1.12c565d84449ep+0
+dsfmt_state[167]=0x1.580278abb73cp+0 0x1.133ce96c17101p+0
+dsfmt_state[168]=0x1.225381e3c3a4bp+0 0x1.7c4de1053331fp+0
+dsfmt_state[169]=0x1.651603685059fp+0 0x1.316da84d119b5p+0
+dsfmt_state[170]=0x1.f9cf182a8b0aap+0 0x1.b3d5351ebf989p+0
+dsfmt_state[171]=0x1.2eebe45ff033cp+0 0x1.cee5bc316583fp+0
+dsfmt_state[172]=0x1.f5b2d5e36accdp+0 0x1.2f848b3e51073p+0
+dsfmt_state[173]=0x1.d95a9995191e6p+0 0x1.18752533af5fep+0
+dsfmt_state[174]=0x1.c198652943548p+0 0x1.b48b320c8ca98p+0
+dsfmt_state[175]=0x1.bb2dabc007c5bp+0 0x1.ffc5800f1c625p+0
+dsfmt_state[176]=0x1.bc9dab1b845a7p+0 0x1.ce87c62d24fc4p+0
+dsfmt_state[177]=0x1.f3df680fcb3dfp+0 0x1.2610e809da439p+0
+dsfmt_state[178]=0x1.d259ea3ba54b3p+0 0x1.4794404caf185p+0
+dsfmt_state[179]=0x1.557ed1f353eap+0 0x1.510fa0e04884fp+0
+dsfmt_state[180]=0x1.c3a01a94b7f72p+0 0x1.5cb8ee3ebf79cp+0
+dsfmt_state[181]=0x1.32dd71fca4fdap+0 0x1.053f926138b7ap+0
+dsfmt_state[182]=0x1.dec605557ee7ap+0 0x1.f8a3d1dbda4bap+0
+dsfmt_state[183]=0x1.89d2894c731edp+0 0x1.b93362aaff50bp+0
+dsfmt_state[184]=0x1.a29b1caea8693p+0 0x1.3a1ef0260b81cp+0
+dsfmt_state[185]=0x1.a10594fc1ba65p+0 0x1.6e6d8cd7f8d9ep+0
+dsfmt_state[186]=0x1.82a2cab123785p+0 0x1.1d23b07dd451p+0
+dsfmt_state[187]=0x1.b1ba776468733p+0 0x1.8732e983f4ad1p+0
+dsfmt_state[188]=0x1.b206151f388b1p+0 0x1.345581d6dc501p+0
+dsfmt_state[189]=0x1.17d00ff8e76acp+0 0x1.1b63bb8fb53f6p+0
+dsfmt_state[190]=0x1.a5f87cc806875p+0 0x1.f4cd6baa7f23dp+0
+dsfmt_state[191]=0x1.312e7a0c2c6ap+762 0x1.e1390466d8dbdp-924
+

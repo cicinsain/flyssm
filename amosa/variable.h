@@ -1,8 +1,8 @@
 //Declaring Constants.
 
-#define PI 3.1415927
-#define TRUE 1
-#define FALSE 0
+// #define pi 3.1415927
+// #define TRUE 1
+// #define FALSE 0
 
 //Declaring Global Variables.
 

@@ -8,7 +8,9 @@
 #include <time.h>
 #include <string.h>
 
-#define PI 3.1415927
+#include "maternal.h"
+
+#define pi 3.14159265358979
 #define TRUE 1
 #define FALSE 0
 
@@ -40,6 +42,9 @@ typedef struct AMOSAType
  	double *d_max_real_var;		/* Store maximum value of the real variables */
 } AMOSAType;
 
+void InitAMOSA(AMOSAType *);
+void ReadAMOSAParameters(AMOSAType *);
+void RunAMOSA(AMOSAType *);
 
 
 

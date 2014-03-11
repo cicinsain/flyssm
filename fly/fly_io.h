@@ -23,14 +23,15 @@
 #include "moves.h"
 #include "score.h"  // Added to resolve the implicit declarion of InitLimits and Penalty2Limits in fly_io.c
 
-# include "nsga2.h"
+# include "amosa.h"
 
+#ifdef NSGA2
 /*=================
   NSGA2: ReadNSGA2Parameters prototype
   */
 NSGA2Type ReadNSGA2Parameters (FILE *fp, Input *inp);
 
-
+#endif
 
 
 /* A function that reads EqParms from the data file */

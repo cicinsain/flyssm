@@ -8,9 +8,9 @@
 // Declaring User Defined Header Files.
 #include "amosa.h"
 
-#include "number_of_variable.h"
+// #include "number_of_variable.h"
 #include "evaluate.h"
-#include "number_of_functions.h"
+// #include "number_of_functions.h"
 #include "clustering.h"
 #include "real_mutate_ind.h"
 #include "init_sol.h"
@@ -55,9 +55,11 @@ void InitAMOSA(AMOSAType *amosaParams){
   
   for (i = 0; i < amosaParams->i_totalno_var; i++){
       printf ("\n Enter minimum value of real-variable %d: ", i);
-      scanf ("%lf", &amosaParams->d_min_real_var[i]);
+      // scanf ("%lf", &amosaParams->d_min_real_var[i]);
+      amosaParams->d_min_real_var[i] = 0;
       printf ("Enter maximum value of real-variable %d: ", i);
-      scanf ("%lf", &amosaParams->d_max_real_var[i]);
+      // scanf ("%lf", &amosaParams->d_max_real_var[i]);
+      amosaParams->d_max_real_var[i] = 2;
       // amosaParams->d_min_real_var[i]=0;
       // amosaParams->d_max_real_var[i]=1;
     }
@@ -75,27 +77,32 @@ void InitAMOSA(AMOSAType *amosaParams){
 
 }
 
-void ReadParameters(int argc, char *argv[], AMOSAType *amosaParams){
+void ReadAMOSAParameters(AMOSAType *amosaParams){
   amosaParams->d_tmax = 100.;
 
   int i;
 
-  if (argc != 2){   /* Checks whether the command given to run the program is wrong or not */
-      printf ("\n Wrong Usages");
-      printf ("\n It should be ./amosa problem\n \n");
-      exit (1);
-    }
+  // if (argc != 2){   /* Checks whether the command given to run the program is wrong or not */
+  //     printf ("\n Wrong Usages");
+  //     printf ("\n It should be ./amosa problem\n \n");
+  //     exit (1);
+  //   }
 
-  printf("%s\n", argv[1]);
-  sprintf (amosaParams->c_problem, "%s", argv[1]);
+  // printf("%s\n", argv[1]);
+  // sprintf (amosaParams->c_problem, "%s", argv[1]);
+  sprintf (amosaParams->c_problem, "%s", "SCH1");
   printf ("\n %s ", amosaParams->c_problem);
 
-  amosaParams->i_no_offunc = number_of_functions(amosaParams);
+  // amosaParams->i_no_offunc = number_of_functions(amosaParams);
+  amosaParams->i_no_offunc = 2;
   printf ("\nNumber of functions in %s is %d", amosaParams->c_problem, amosaParams->i_no_offunc);
 
   printf ("\n Give me the values of Hard-limit and Soft-limit: ");
-  scanf ("%d %d", &amosaParams->i_hardl, &amosaParams->i_softl);
-  // printf ("\n softl=%d", amosaParams->i_softl);
+  // scanf ("%d %d", &amosaParams->i_hardl, &amosaParams->i_softl);
+  amosaParams->i_hardl = 50;
+  amosaParams->i_softl = 100;
+  printf ("\n softl=%d", amosaParams->i_softl);
+  printf ("\n hardl=%d", amosaParams->i_hardl);
 
   amosaParams->i_no_ofiter = 500;     /* number of iterations per temperature i sset to 100 */
   amosaParams->d_tmin      = 0.0000025;   /* the minimum temperature is set to 0.0000025 */
@@ -103,13 +110,16 @@ void ReadParameters(int argc, char *argv[], AMOSAType *amosaParams){
   amosaParams->d_func_range = (double *) malloc (amosaParams->i_no_offunc * sizeof (double)); /* dynamically allocating memory to store the functional values of the archive solutions */
   for (i = 0; i < amosaParams->i_no_offunc; i++){
       printf ("\n Enter range of %d th function: ", (i + 1));
-      scanf ("%lf", &amosaParams->d_func_range[i]);
+      // scanf ("%lf", &amosaParams->d_func_range[i]);
+      amosaParams->d_func_range[i] = 4;
   }
 
   printf ("\n Enter the value of cooling rate: ");
-  scanf ("%lf", &amosaParams->d_alpha);
+  // scanf ("%lf", &amosaParams->d_alpha);
+  amosaParams->d_alpha = 0.001;
 
-  amosaParams->i_totalno_var = number_of_variable(amosaParams);
+  // amosaParams->i_totalno_var = number_of_variable(amosaParams);
+  amosaParams->i_totalno_var = 1;
   printf ("\n Total number of variables in %s is %d", amosaParams->c_problem, amosaParams->i_totalno_var);
 
   amosaParams->seed = 67644288;
@@ -117,20 +127,20 @@ void ReadParameters(int argc, char *argv[], AMOSAType *amosaParams){
 }
 
 
-int
-main (int argc, char *argv[])
-{
-  ReadParameters(argc, argv, &amosaParams);
-	InitAMOSA(&amosaParams);
+// int
+// main (int argc, char *argv[])
+// {
+//   ReadParameters(argc, argv, &amosaParams);
+// 	InitAMOSA(&amosaParams);
 
-  RunAMOSA (&amosaParams);     /* calling mainprocess() which runs the main algorithm proposed in AMOSA */
-  (void) time (&t2);    /* time() gives the current time, in seconds, elapsed since 00:00:00 GMT, January
-                  1, 1970. It stores that value in the location *t2, provided that t2 is
-                  not a null pointer. */
+//   RunAMOSA (&amosaParams);     /* calling mainprocess() which runs the main algorithm proposed in AMOSA */
+//  (void) time (&t2);     /* time() gives the current time, in seconds, elapsed since 00:00:00 GMT, January */
+                           /*   1, 1970. It stores that value in the location *t2, provided that t2 is */
+                           /*   not a null pointer. */
 
-  printf ("\n Total number of iterations: %d", amosaParams.i_no_ofiter );
-  printf ("\n Total time needed=%d", (int) (t2 - t1));  /* Displaying the time taken to run the AMOSA process */
-  printf ("\n Total processor time taken by a program is=%f", (float) (clock () / CLOCKS_PER_SEC)); /* Displaying the number of clock ticks since program start */
-  // return 0;
+//   printf ("\n Total number of iterations: %d", amosaParams.i_no_ofiter );
+//   printf ("\n Total time needed=%d", (int) (t2 - t1));  /* Displaying the time taken to run the AMOSA process */
+//   printf ("\n Total processor time taken by a program is=%f", (float) (clock () / CLOCKS_PER_SEC)); /* Displaying the number of clock ticks since program start */
+//   // return 0;
 
-}
+// }

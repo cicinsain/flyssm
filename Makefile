@@ -4,7 +4,7 @@ VERSION = 10.0
 
 # executables to make
 
-FLYEXECS = unfold printscore fly_nsga2 scramble 
+FLYEXECS = unfold printscore fly_amosa scramble 
 
 # FLAGS FOR -v FOR ALL EXECUTABLES ##################################
 # this passes user and host name, compiler and version to the com-
@@ -32,7 +32,7 @@ ifneq (,$(findstring linux,$(OSTYPE)))
 	MPIFLAGS = $(CCFLAGS) -OMPI_CC
 	DEBUGFLAGS = $(DEBUGFLAGS) -OMPI_CC
 	PROFILEFLAGS = $(PROFILEFLAGS) -OMPI_CC
-	FLYEXECS = unfold printscore fly_nsga2 scramble ##fly_sa.mpi
+	FLYEXECS = unfold printscore fly_amosa scramble ##fly_sa.mpi
 	SUNDIALS = /usr/local
 endif
 
@@ -77,7 +77,7 @@ r/local	LIBS = -lm
 endif
 
 ifeq ($(CC),gcc)
-  	CCFLAGS = -Wall -m64 -O2 -std=gnu99 -DHAVE_SSE2 -DNSGA2 
+  	CCFLAGS = -Wall -m64 -O2 -std=gnu99 -DHAVE_SSE2 -DAMOSA
    	PROFILEFLAGS = -g -pg -O2 -DHAVE_SSE2
 	LIBS = -lm -lgsl -lgslcblas -lsundials_cvode -lsundials_nvecserial -L$(SUNDIALS)/lib
 	FLIBS = -lm -lgsl -lgslcblas -lsundials_cvode -lsundials_nvecserial -L$(SUNDIALS)/lib
@@ -110,7 +110,7 @@ endif
 # export all variables that Makefiles in subdirs need
 # 2012 july 25, I needed to add the location of my sundials libraries - A. Crombach
 
-export INCLUDES = -I. -I../lam -I/usr/local/include -I$(SUNDIALS)/include -I../nsga2
+export INCLUDES = -I. -I../lam -I/usr/local/include -I$(SUNDIALS)/include -I../amosa -I/usr/include/malloc
 export CFLAGS = -std=gnu99 $(CCFLAGS) $(INCLUDES) 
 export VFLAGS
 export CC
@@ -130,24 +130,23 @@ fly: lsa
 deps: 
 	cd fly && $(MAKE) -f basic.mk Makefile && chmod +w Makefile
 
-lsa: n2
+lsa: mo
 	cd lam && make
 
-n2:
-	cd nsga2 && make
-
+mo:
+	cd amosa && make
 clean:
 	rm -f core* *.o *.il
 	rm -f */core* */*.o */*.il
 	rm -f fly/unfold fly/printscore fly/scramble
-	rm -f fly/fly_nsga2 #fly/fly_sa.mpi
-	#rm -f nsga2/*.o
+	rm -f fly/fly_amosa #fly/fly_sa.mpi
+	#rm -f amosa/*.o
 
 veryclean:
 	rm -f core* *.o *.il
 	rm -f */core* */*.o */*.il */*.slog */*.pout */*.uout
 	rm -f fly/unfold fly/printscore fly/scramble
-	rm -f fly/fly_nsga2 #fly/fly_sa.mpi
+	rm -f fly/fly_amosa #fly/fly_sa.mpi
 	rm -f lam/gen_deviates
 	rm -f fly/Makefile
 	rm -f fly/zygotic.cmp.c
