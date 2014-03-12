@@ -33,6 +33,7 @@ NSGA2Type ReadNSGA2Parameters (FILE *fp, Input *inp);
 
 #endif
 
+AMOSAType ReadAMOSAParameters (FILE *fp, Input *inp);
 
 /* A function that reads EqParms from the data file */
 

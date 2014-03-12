@@ -2,8 +2,9 @@
 #include <stdio.h>
 
 #include "amosa.h"
+#include "problemdef.h"
 
-void evaluate(double *s, AMOSAType *amosaParams)
+void evaluate(double *s, AMOSAType *amosaParams, Input *inp, ScoreOutput *out)
 {  
 /*	if (!strcmp(amosaParams->c_problem, "ZDT1"))
 		ZDT1(s, amosaParams);    
@@ -16,6 +17,10 @@ void evaluate(double *s, AMOSAType *amosaParams)
 	else */
 	if(!strcmp(amosaParams->c_problem,"SCH1"))
 		SCH1(s, amosaParams);
+	else if(!strcmp(amosaParams->c_problem,"GeneBased")){
+		objective_function(s, amosaParams, inp, out);
+		// printf("%lf\n", out->score);
+	}
 	/*else if(!strcmp(amosaParams->c_problem,"SCH2"))
 		SCH2(s, amosaParams);
 	else if(!strcmp(amosaParams->c_problem,"Dev1"))

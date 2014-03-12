@@ -42,9 +42,11 @@ typedef struct AMOSAType
  	double *d_max_real_var;		/* Store maximum value of the real variables */
 } AMOSAType;
 
-void InitAMOSA(AMOSAType *);
-void ReadAMOSAParameters(AMOSAType *);
-void RunAMOSA(AMOSAType *);
+void InitAMOSA(Input *, AMOSAType *);
+void ReadAMOSAParams(AMOSAType *);
+void RunAMOSA(Input *, AMOSAType *);
+
+// AMOSAType ReadAMOSAParams(FILE *, Input *);
 
 
 

@@ -2,6 +2,21 @@
 // #include <malloc.h>
 #include "amosa.h"
 
+
+void SCH1(double *s, AMOSAType *amosaParams)
+ {
+    double value;
+    
+    double func1,func2;
+   
+    value     = s[0];
+    func1     = value*value;
+    func2     = (value-2.0)*(value-2.0);
+    amosaParams->d_eval[0] = func1;
+    amosaParams->d_eval[1] = func2;
+    return;
+ } 
+ 
 // void DTLZ1(double *s, AMOSAType *amosaParams)
 //  {
 //    int i;
@@ -433,19 +448,7 @@
 
 // }
 
-void SCH1(double *s, AMOSAType *amosaParams)
- {
-    double value;
-	
-	double func1,func2;
-   
-    value     = s[0];
-    func1     = value*value;
-    func2     = (value-2.0)*(value-2.0);
-    amosaParams->d_eval[0] = func1;
-    amosaParams->d_eval[1] = func2;
-    return;
- } 
+
 
 // void SCH2(double *s, AMOSAType *amosaParams)
 //  {

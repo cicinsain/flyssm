@@ -28,7 +28,7 @@ OSTYPE=linux-gnu
 # The gcc version specified manually due to the miss configuration of my Mac
 ifneq (,$(findstring linux,$(OSTYPE)))
 	MPICC = /usr/local/bin/mpicc
-	CC = gcc
+	CC = gcc-4.8
 	MPIFLAGS = $(CCFLAGS) -OMPI_CC
 	DEBUGFLAGS = $(DEBUGFLAGS) -OMPI_CC
 	PROFILEFLAGS = $(PROFILEFLAGS) -OMPI_CC
@@ -76,7 +76,7 @@ r/local	LIBS = -lm
         export ICC = "yes"
 endif
 
-ifeq ($(CC),gcc)
+ifeq ($(CC),gcc-4.8)
   	CCFLAGS = -Wall -m64 -O2 -std=gnu99 -DHAVE_SSE2 -DAMOSA
    	PROFILEFLAGS = -g -pg -O2 -DHAVE_SSE2
 	LIBS = -lm -lgsl -lgslcblas -lsundials_cvode -lsundials_nvecserial -L$(SUNDIALS)/lib

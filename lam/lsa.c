@@ -580,25 +580,26 @@ Initialize( int argc, char **argv ) {
 
 /*=====
 	Amir*/
-#ifndef NSGA2
-	if( !equil && !bench && !nofile_flag ) {    	
-	        if( !stateflag ) {
-	            WriteLog(  );
-	#ifdef MPI
-	            if( !tuning )
-	#endif
-	                StateWrite( files.statefile );
-	        } else
-	            RestoreLog(  );
-	    }
-	#ifdef MPI
-	    /* if we are in tuning mode: initialize/restore tuning structs */
+    // TODO: Uncomment the block below for LSA.
+// #ifndef NSGA2
+// 	if( !equil && !bench && !nofile_flag ) {    	
+// 	        if( !stateflag ) {
+// 	            WriteLog(  );
+// 	#ifdef MPI
+// 	            if( !tuning )
+// 	#endif
+// 	                StateWrite( files.statefile );
+// 	        } else
+// 	            RestoreLog(  );
+// 	    }
+// 	#ifdef MPI
+// 	    /* if we are in tuning mode: initialize/restore tuning structs */
 
-	    if( tuning )
-	        InitTuning(  );
+// 	    if( tuning )
+// 	        InitTuning(  );
 
-	#endif
-#endif
+// 	#endif
+// #endif
 
 }
 

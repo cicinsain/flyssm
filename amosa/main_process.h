@@ -37,49 +37,61 @@ Step 1: Open  terminal
 #include <time.h>
 
 #include "amosa.h"
+// #include "global.h"
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
+ScoreOutput out;
 
 ///----------------------------------------------------------------------------------------
-void RunAMOSA(AMOSAType *amosaParams)
+void RunAMOSA(Input *inp, AMOSAType *amosaParams)
 {
 
 // Variable declaration
+// 
+    out.score          = 1e38;           // start with a very large number
+    out.penalty        = 0;
+    out.size_resid_arr = 0;
+    out.jacobian       = NULL;
+    out.residuals      = NULL;
+    out.nsga2_outs     = (ScoreOutput **) malloc( inp->zyg.defs.ngenes * sizeof(ScoreOutput));
+    for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
+        out.nsga2_outs[g] = (ScoreOutput *) malloc ( sizeof(ScoreOutput) );
+    }
 
 //-----------------------------------------------------------------------------------------------------------      
-      int    r;
-      int    i;
-      int    j;
-      int    h;
-      int    k;
-      int    l;
-      int    flag;
-      int    pos;
-      int    f;
-      int    n;
-      int    m;
-      int    p1;
-      int    p2;
-      double ran2;
-      double p;
-      double deldom;
-      double amount;
-      float  ran1;
-      int    count;
-      int    duplicate;
-      int    count1;
-      int    count2;
-      double **archive1;
-      int    isdom;
-      double *current;
-      double *newsol;
-      double t;
-      double*func_new;
-      double *func_current;
-      double **area2;
+    int    r;
+    int    i;
+    int    j;
+    int    h;
+    int    k;
+    int    l;
+    int    flag;
+    int    pos;
+    int    f;
+    int    n;
+    int    m;
+    int    p1;
+    int    p2;
+    double ran2;
+    double p;
+    double deldom;
+    double amount;
+    float  ran1;
+    int    count;
+    int    duplicate;
+    int    count1;
+    int    count2;
+    double **archive1;
+    int    isdom;
+    double *current;
+    double *newsol;
+    double t;
+    double*func_new;
+    double *func_current;
+    double **area2;
 
 
-      FILE *fp;
+    FILE *fp;
 
 //------------------------------------------------------------------------------------------------------------------
 
@@ -88,28 +100,35 @@ void RunAMOSA(AMOSAType *amosaParams)
 //-----------------------------------------------------------------------------------------------------------------------------
 
 
-      p2=amosaParams->i_softl+3;
-      p1=amosaParams->i_archivesize-1;
-      duplicate=0;
-      area2= (double **)malloc(sizeof(double *)*(p2));
-      current=(double *)malloc(sizeof(double)*amosaParams->i_totalno_var);
-      newsol=(double *)malloc(sizeof(double)*amosaParams->i_totalno_var);
-      
+    printf("\n Starting the AMOSA...");
+    p2=amosaParams->i_softl+3;
+    p1=amosaParams->i_archivesize-1;
+    duplicate=0;
+    area2= (double **)malloc(sizeof(double *)*(p2));
+    current=(double *)malloc(sizeof(double)*amosaParams->i_totalno_var);
+    newsol=(double *)malloc(sizeof(double)*amosaParams->i_totalno_var);
+    
 
-      for(i=0;i<(p2);i++)
-       area2[i]=(double *)malloc(amosaParams->i_no_offunc*sizeof(double));
-     archive1=(double **)malloc(sizeof(double *)*(p2-1));
-     for(i=0;i<(p2-1);i++)
-       archive1[i]=(double *)malloc(amosaParams->i_totalno_var*sizeof(double));
-     func_new=(double *)malloc(amosaParams->i_no_offunc*sizeof(double));
-     func_current=(double *)malloc(amosaParams->i_no_offunc*sizeof(double));
-     srand(amosaParams->seed);
-     if(p1>0)
-     {
-       r=((rand()/(RAND_MAX+1.0))*p1);
-      }//End of if
-      else r=0;
-      for(i=0;i<amosaParams->i_totalno_var;i++)
+    for(i=0;i<(p2);i++)
+        area2[i]=(double *)malloc(amosaParams->i_no_offunc*sizeof(double));
+    
+    archive1=(double **)malloc(sizeof(double *)*(p2-1));
+    
+    for(i=0;i<(p2-1);i++)
+        archive1[i]=(double *)malloc(amosaParams->i_totalno_var*sizeof(double));
+    
+    func_new=(double *)malloc(amosaParams->i_no_offunc*sizeof(double));
+    func_current=(double *)malloc(amosaParams->i_no_offunc*sizeof(double));
+    srand(amosaParams->seed);
+    
+    if(p1>0)
+    {
+        r=((rand()/(RAND_MAX+1.0))*p1);
+    }//End of if
+    else 
+        r=0;
+      
+    for(i=0;i<amosaParams->i_totalno_var;i++)
       {
        current[i]=amosaParams->d_archive[r][i];
 
@@ -138,7 +157,7 @@ void RunAMOSA(AMOSAType *amosaParams)
 
 		  }//End of for loop  
       real_mutate_ind(newsol, amosaParams);
-      evaluate(newsol, amosaParams);    
+      evaluate(newsol, amosaParams, inp, &out);    
       for(h=0;h<amosaParams->i_no_offunc;h++)
         func_new[h]=amosaParams->d_eval[h];
       count2=0;

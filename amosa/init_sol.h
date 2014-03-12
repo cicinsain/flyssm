@@ -1,7 +1,7 @@
 #include "amosa.h"
 
 /* The following function initializes the softl number of solutions*/
-void initialize_sol(AMOSAType *amosaParams)
+void initialize_sol(Input *inp, ScoreOutput *out, AMOSAType *amosaParams)
 {
 
 // variable declaration
@@ -38,7 +38,7 @@ void initialize_sol(AMOSAType *amosaParams)
     }     //end of outer for loop	    
 
     printf("----------------------\n");
-    printf("\n Initializion... "); 
+    printf("\n Initializing Archive..."); 
     d_xnew=(double *) malloc(amosaParams->i_totalno_var *sizeof(double));    
 
     /* Performing some hill-climbing operation on solutions of the archive */    
@@ -46,7 +46,7 @@ void initialize_sol(AMOSAType *amosaParams)
     {
         for(j=0;j<amosaParams->i_hillclimb_no;j++)
         {
-          evaluate(amosaParams->d_solution[ii], amosaParams);         /* This function calls different evaluation functions */
+          evaluate(amosaParams->d_solution[ii], amosaParams, inp, out);         /* This function calls different evaluation functions */
 
             for(i=0;i<amosaParams->i_no_offunc;i++)
                 d_area1[i]=amosaParams->d_eval[i];
@@ -55,9 +55,8 @@ void initialize_sol(AMOSAType *amosaParams)
                 d_xnew[f]=amosaParams->d_solution[ii][f];
 
             real_mutate_ind(d_xnew, amosaParams);    	        /* Function performing mutation on individual string */
-            evaluate(d_xnew, amosaParams);                    /* This function calls different evaluation functions */
+            evaluate(d_xnew, amosaParams, inp, out);                    /* This function calls different evaluation functions */
                                                               
-
             for(i=0;i<amosaParams->i_no_offunc;i++)
                 d_area2[i]=amosaParams->d_eval[i];
 
@@ -76,7 +75,7 @@ void initialize_sol(AMOSAType *amosaParams)
     }     //end of outer for loop
     // printf("\n At the end of initialize solution\n\n");
 
-  }
+}
 
 //------------------------------------------------------------------------------------------------------------------------
 // End of initialie_sol function

@@ -104,6 +104,33 @@ angle2:
 $$
 
 
+$amosa
+i_hardl:
+50
+i_softl:
+100
+i_no_ofiter:
+500
+i_hillclimb_no:
+20
+i_maxno_bit:
+0
+i_arrsize:
+0
+i_totalno_var:
+1
+i_no_offunc:
+2
+seed:
+67644288
+d_tmax:
+100.
+d_tmin:
+0.0000025
+d_alpha:
+0.001
+$$
+
 $input
 promoter_strengths:
  26.82335054  12.64584415  23.28453833  24.48259949 

@@ -19,118 +19,138 @@
 #include "creating_archive.h"
 #include "burn_in_period.h"
 
+// #include "global.h"
+
+// #include "problemdef.h"
+
 AMOSAType amosaParams;
+ScoreOutput out;
+
+
+
 time_t t1, t2;
 
 
 /* Initialize the parmaters and read the inputs */
-void InitAMOSA(AMOSAType *amosaParams){
+void InitAMOSA(Input *inp, AMOSAType *amosaParams){
   int i;
   (void) time (&t1);    /* time() gives the current time, in seconds, elapsed since 00:00:00 GMT, January
                            1, 1970. It stores that value in the location *t1, provided that t1 is
                            not a null pointer. */
 
 
+    out.score          = 1e38;           // start with a very large number
+    out.penalty        = 0;
+    out.size_resid_arr = 0;
+    out.jacobian       = NULL;
+    out.residuals      = NULL;
+    out.nsga2_outs     = (ScoreOutput **) malloc( inp->zyg.defs.ngenes * sizeof(ScoreOutput));
+    for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
+        out.nsga2_outs[g] = (ScoreOutput *) malloc ( sizeof(ScoreOutput) );
+    }
 
-  amosaParams->i_hillclimb_no = 20;		/* setting hill climd number to 10 */
+  // amosaParams->i_hillclimb_no = 20;		/* setting hill climd number to 10 */
   amosaParams->d_solution = (double **) malloc (amosaParams->i_softl * sizeof (double *));	/* memory allocation for storing solution in a variable named solution. */
   for (i = 0; i < amosaParams->i_softl; i++)
-    amosaParams->d_solution[i] = (double *) malloc (amosaParams->i_totalno_var * sizeof (double));
+      amosaParams->d_solution[i] = (double *) malloc (amosaParams->i_totalno_var * sizeof (double));
 
   amosaParams->d_archive = (double **) malloc ((amosaParams->i_softl + 3) * sizeof (double *));	/* memory allocation for archive */
   for (i = 0; i < (amosaParams->i_softl + 3); i++)
-  	amosaParams->d_archive[i] = (double *) malloc (amosaParams->i_totalno_var * sizeof (double));
+  	 amosaParams->d_archive[i] = (double *) malloc (amosaParams->i_totalno_var * sizeof (double));
 
-  amosaParams->d_min_real_var = (double *) malloc (amosaParams->i_totalno_var * sizeof (double));	/* memory allocation to store the minimum value of real variables in the functions */
-  if (amosaParams->d_min_real_var == NULL){/* if there is any allocation error then report it and exit */
-      printf ("\n Error in allocation");
-      exit (1);
-    }
+  // amosaParams->d_min_real_var = (double *) malloc (amosaParams->i_totalno_var * sizeof (double));	/* memory allocation to store the minimum value of real variables in the functions */
+  // if (amosaParams->d_min_real_var == NULL){/* if there is any allocation error then report it and exit */
+  //     printf ("\n Error in allocation");
+  //     exit (1);
+  //   }
 
-  amosaParams->d_max_real_var = (double *) malloc (amosaParams->i_totalno_var * sizeof (double));	/* memory allocation to store the maximum value of real variables in the functions */
-  if (amosaParams->d_max_real_var == NULL){/* if there is any allocation error then report it and exit */
-      printf ("\n Error in allocation");
-      exit (1);
-    }
+  // amosaParams->d_max_real_var = (double *) malloc (amosaParams->i_totalno_var * sizeof (double));	/* memory allocation to store the maximum value of real variables in the functions */
+  // if (amosaParams->d_max_real_var == NULL){ //if there is any allocation error then report it and exit 
+  //     printf ("\n Error in allocation");
+  //     exit (1);
+  //   }
   
-  for (i = 0; i < amosaParams->i_totalno_var; i++){
-      printf ("\n Enter minimum value of real-variable %d: ", i);
-      // scanf ("%lf", &amosaParams->d_min_real_var[i]);
-      amosaParams->d_min_real_var[i] = 0;
-      printf ("Enter maximum value of real-variable %d: ", i);
-      // scanf ("%lf", &amosaParams->d_max_real_var[i]);
-      amosaParams->d_max_real_var[i] = 2;
-      // amosaParams->d_min_real_var[i]=0;
-      // amosaParams->d_max_real_var[i]=1;
-    }
-    printf("\n");
+  // for (i = 0; i < amosaParams->i_totalno_var; i++){
+  //     printf ("\n Enter minimum value of real-variable %d: ", i);
+  //     // scanf ("%lf", &amosaParams->d_min_real_var[i]);
+  //     amosaParams->d_min_real_var[i] = 0;
+  //     printf ("Enter maximum value of real-variable %d: ", i);
+  //     // scanf ("%lf", &amosaParams->d_max_real_var[i]);
+  //     amosaParams->d_max_real_var[i] = 2;
+  //     // amosaParams->d_min_real_var[i]=0;
+  //     // amosaParams->d_max_real_var[i]=1;
+  //   }
+  //   printf("\n");
 
   amosaParams->d_func_archive = (double **) malloc ((amosaParams->i_softl + 3) * sizeof (double *));	/* allocating memory for func_archive */
   for (i = 0; i < (amosaParams->i_softl + 3); i++)
-    amosaParams->d_func_archive[i] = (double *) malloc (amosaParams->i_no_offunc * sizeof (double));
+      amosaParams->d_func_archive[i] = (double *) malloc (amosaParams->i_no_offunc * sizeof (double));
+  
   amosaParams->d_eval = (double *) malloc (amosaParams->i_no_offunc * sizeof (double));
 
-  initialize_sol (amosaParams);		/* Initializing the archive by calling this function */
-  creating_archive (amosaParams);		/* Creation the archive */
+  // printf("\n Initializing the Archive.");
+  initialize_sol (inp, &out, amosaParams);		/* Initializing the archive by calling this function */
+  // printf("Creating the Archive.\n");
+  creating_archive (inp, &out, amosaParams);		/* Creation the archive */
 //      burn_in_period();   /* Computing maximum temperature(declared as amosaParams->d_tmax) using burn in period */
 
 
 }
 
-void ReadAMOSAParameters(AMOSAType *amosaParams){
-  amosaParams->d_tmax = 100.;
+// void ReadAMOSAParams(AMOSAType *amosaParams){
+//   amosaParams->d_tmax = 100.;
 
-  int i;
+//   int i;
 
-  // if (argc != 2){   /* Checks whether the command given to run the program is wrong or not */
-  //     printf ("\n Wrong Usages");
-  //     printf ("\n It should be ./amosa problem\n \n");
-  //     exit (1);
-  //   }
+//   // if (argc != 2){   /* Checks whether the command given to run the program is wrong or not */
+//   //     printf ("\n Wrong Usages");
+//   //     printf ("\n It should be ./amosa problem\n \n");
+//   //     exit (1);
+//   //   }
 
-  // printf("%s\n", argv[1]);
-  // sprintf (amosaParams->c_problem, "%s", argv[1]);
-  sprintf (amosaParams->c_problem, "%s", "SCH1");
-  printf ("\n %s ", amosaParams->c_problem);
+//   // printf("%s\n", argv[1]);
+//   // sprintf (amosaParams->c_problem, "%s", argv[1]);
+//   sprintf (amosaParams->c_problem, "%s", "SCH1");
+//   printf ("\n %s ", amosaParams->c_problem);
 
-  // amosaParams->i_no_offunc = number_of_functions(amosaParams);
-  amosaParams->i_no_offunc = 2;
-  printf ("\nNumber of functions in %s is %d", amosaParams->c_problem, amosaParams->i_no_offunc);
+//   // amosaParams->i_no_offunc = number_of_functions(amosaParams);
+//   amosaParams->i_no_offunc = 2;
+//   printf ("\nNumber of functions in %s is %d", amosaParams->c_problem, amosaParams->i_no_offunc);
 
-  printf ("\n Give me the values of Hard-limit and Soft-limit: ");
-  // scanf ("%d %d", &amosaParams->i_hardl, &amosaParams->i_softl);
-  amosaParams->i_hardl = 50;
-  amosaParams->i_softl = 100;
-  printf ("\n softl=%d", amosaParams->i_softl);
-  printf ("\n hardl=%d", amosaParams->i_hardl);
+//   printf ("\n Give me the values of Hard-limit and Soft-limit: ");
+//   // scanf ("%d %d", &amosaParams->i_hardl, &amosaParams->i_softl);
+//   amosaParams->i_hardl = 50;
+//   amosaParams->i_softl = 100;
+//   printf ("\n softl=%d", amosaParams->i_softl);
+//   printf ("\n hardl=%d", amosaParams->i_hardl);
 
-  amosaParams->i_no_ofiter = 500;     /* number of iterations per temperature i sset to 100 */
-  amosaParams->d_tmin      = 0.0000025;   /* the minimum temperature is set to 0.0000025 */
+//   amosaParams->i_no_ofiter = 500;     /* number of iterations per temperature i sset to 100 */
+//   amosaParams->d_tmin      = 0.0000025;   /* the minimum temperature is set to 0.0000025 */
 
-  amosaParams->d_func_range = (double *) malloc (amosaParams->i_no_offunc * sizeof (double)); /* dynamically allocating memory to store the functional values of the archive solutions */
-  for (i = 0; i < amosaParams->i_no_offunc; i++){
-      printf ("\n Enter range of %d th function: ", (i + 1));
-      // scanf ("%lf", &amosaParams->d_func_range[i]);
-      amosaParams->d_func_range[i] = 4;
-  }
+//   amosaParams->d_func_range = (double *) malloc (amosaParams->i_no_offunc * sizeof (double)); /* dynamically allocating memory to store the functional values of the archive solutions */
+//   for (i = 0; i < amosaParams->i_no_offunc; i++){
+//       printf ("\n Enter range of %d th function: ", (i + 1));
+//       // scanf ("%lf", &amosaParams->d_func_range[i]);
+//       amosaParams->d_func_range[i] = 4;
+//   }
 
-  printf ("\n Enter the value of cooling rate: ");
-  // scanf ("%lf", &amosaParams->d_alpha);
-  amosaParams->d_alpha = 0.001;
+//   printf ("\n Enter the value of cooling rate: ");
+//   // scanf ("%lf", &amosaParams->d_alpha);
+//   amosaParams->d_alpha = 0.001;
 
-  // amosaParams->i_totalno_var = number_of_variable(amosaParams);
-  amosaParams->i_totalno_var = 1;
-  printf ("\n Total number of variables in %s is %d", amosaParams->c_problem, amosaParams->i_totalno_var);
+//   // amosaParams->i_totalno_var = number_of_variable(amosaParams);
+//   amosaParams->i_totalno_var = 1;
+//   printf ("\n Total number of variables in %s is %d", amosaParams->c_problem, amosaParams->i_totalno_var);
 
-  amosaParams->seed = 67644288;
-  srand (amosaParams->seed);
-}
+//   amosaParams->seed = 67644288;
+//   srand (amosaParams->seed);
+// }
 
 
 // int
 // main (int argc, char *argv[])
 // {
-//   ReadParameters(argc, argv, &amosaParams);
+//   ReadParams(argc, argv, &amosaParams);
 // 	InitAMOSA(&amosaParams);
 
 //   RunAMOSA (&amosaParams);     /* calling mainprocess() which runs the main algorithm proposed in AMOSA */

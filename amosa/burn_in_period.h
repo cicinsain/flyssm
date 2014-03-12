@@ -8,7 +8,7 @@
 /* Function to initialize Tmax which is the maximum temperature */
 
 // void burn_in_period()
-void burn_in_period(AMOSAType *amosaParams)
+void burn_in_period(Input *inp, ScoreOutput *out, AMOSAType *amosaParams)
 {
 
 // variable declaration
@@ -42,7 +42,7 @@ void burn_in_period(AMOSAType *amosaParams)
    for(h=0;h<amosaParams->i_totalno_var;h++)
     d_newsol[h]=amosaParams->d_archive[r][h];
           real_mutate_ind(d_newsol, amosaParams);   /* Function performimg mutation on individual string */
-          evaluate(d_newsol, amosaParams);     /* This function calls different evaluation functions*/
+          evaluate(d_newsol, amosaParams, inp, out);     /* This function calls different evaluation functions*/
   for(h=0;h<amosaParams->i_no_offunc;h++)
    func[h]=amosaParams->d_eval[h];
  d_energy=find_sign_dom(func,func1, amosaParams);

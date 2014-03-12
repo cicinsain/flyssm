@@ -125,9 +125,9 @@ typedef struct ScoreEval {
     size_t residuals_size;
     double *residuals;
 
-#ifdef NSGA2
+// #ifdef NSGA2
     struct ScoreEval **nsga2_evals; 
-#endif
+// #endif
 } ScoreEval;
 
 /** @brief Information from History and ExternalInputs */

@@ -550,9 +550,11 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
 
         // Reads all the nsga2 parameters from the input file, and translate the variables boundaries 
         // from SearchSpace to the nsga2.max/min
-        #ifdef NSGA2
-        nsga2Params = ReadNSGA2Parameters(infile, &inp);    
-        #endif
+        // #ifdef NSGA2
+        // nsga2Params = ReadNSGA2Parameters(infile, &inp);    
+        // #endif
+
+        amosaParams = ReadAMOSAParameters(infile, &inp);
 
         i_temp = InitMoves( infile, &inp );     /* set initial temperature and initialize */
         // initialize distribution stuff
@@ -578,13 +580,13 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
 
     inp.lparm = CopyParm( inp.zyg.parm, &( inp.zyg.defs ) );
 
-    #ifdef NSGA2
-        InitNSGA2(&inp, &nsga2Params, inname);
-        RunNSGA2(&inp, &nsga2Params, inname);
-    #endif
-        ReadAMOSAParameters(&amosaParams);
-        InitAMOSA(&amosaParams);
-        RunAMOSA(&amosaParams);
+    // #ifdef NSGA2
+    //     InitNSGA2(&inp, &nsga2Params, inname);
+    //     RunNSGA2(&inp, &nsga2Params, inname);
+    // #endif
+        // ReadAMOSAParams(&amosaParams);
+        InitAMOSA(&inp, &amosaParams);
+        RunAMOSA(&inp, &amosaParams);
 
 
     // Ignore the Score function in order to avoid running the SA
