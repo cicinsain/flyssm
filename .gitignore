@@ -1,8 +1,6 @@
 # Object files
 *.o
 *.ko
-*.obj
-*.elf
 
 # Libraries
 *.lib
@@ -18,11 +16,21 @@
 *.exe
 *.out
 *.app
-<<<<<<< HEAD
-*.i*86
-*.x86_64
-*.hex
+
+# Output files
+*.fout
+*.out
+*.network
+
+# Media
+*.png
+*.eps
+*.pdf
+*.mpg
 
 # SublimeText
 *.sublime*
 
+# Directories
+jobs/
+input/
