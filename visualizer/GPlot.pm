@@ -219,11 +219,13 @@ END_WRITE
  
 	($gscript = <<END_WRITE) =~ s/^\s+//gm;
             set output "$sfile\.png"
-        set terminal png $fsize size $xsize,$ysize \\
-                             xffffff x000000 x000000 \\
-                             x6b8e23 x191970 xff0000 xffa500 \\
-                             xffd700 x66cdaa xffdab9 x9acd32 \\
- 	   	             x00ced1 xdda0dd xd02090 x000000
+        # set terminal png $fsize size $xsize,$ysize \\
+        #                      xffffff x000000 x000000 \\
+        #                      x6b8e23 x191970 xff0000 xffa500 \\
+        #                      xffd700 x66cdaa xffdab9 x9acd32 \\
+ 	   	  #            x00ced1 xdda0dd xd02090 x000000
+
+          set terminal png background "#000000"
 
 # settings for inverted graphs (black background) 
 #           set terminal png $fsize size $xsize,$ysize \\
@@ -300,9 +302,9 @@ END_WRITE
     unless ( $ylabel eq "" ) { $gscript .= "set ylabel \"$ylabel\"\n"; }
 
     if ( $thick eq ".5"){
-        $term = "set term pngcairo lw .5"
+        $term = "set term png lw .5"
     }else{
-        $term = "set term pngcairo lw 1.5"
+        $term = "set term png lw 1.5"
     }
 
 # more gnuplot options; these are all set to default, change as you see fit
