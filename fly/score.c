@@ -909,8 +909,8 @@ GeneBasedEval(ScoreEval * eval, NArrPtr * Solution, int gindex, Input * inp )
             // oindex = (point.index) % inp->zyg.defs.ngenes; // It causes the error but I am aware of that since I wanted this value from 0
                                                                 // this makes compiler confused since it is not intialized yet.
 
-            oindex = (point.index) % (inp->zyg.defs.ngenes); 
             point = fact_tab.record[tindex].array[vindex];
+            oindex = (point.index) % (inp->zyg.defs.ngenes); 
                                                              
             // oindex--;
             // printf("%d, ", oindex);
