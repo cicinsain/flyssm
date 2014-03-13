@@ -1079,7 +1079,7 @@ sub get_flysa_opts {
     if ( $i>=$#data ) { croak "version could not be found in $datafile"; }
 
     @cmd = split /\s+/, $cmd;
-    unless ($cmd[0] =~ /fly_sa/) { 
+    unless ($cmd[0] =~ /fly_amosa/) {   # I changed it from fly_sa to fly_amosa
 	croak "fly_sa command line not found in $datafile!"; }
     for ( $i=0; $i<=$#cmd; $i++ ) {
 	if ( $cmd[$i] =~ /^\-a/ ) {
