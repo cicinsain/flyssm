@@ -124,11 +124,11 @@ i_no_offunc:
 seed:
 67644288
 d_tmax:
-100.
+1000000.
 d_tmin:
 0.0000025
 d_alpha:
-0.001
+0.0001
 $$
 
 $input
@@ -158,28 +158,114 @@ $$
 
 $eqparms
 promoter_strengths:
--25.43471408  16.26270886  36.02335940  63.90842261 
+ 26.040456994  21.960815378  15.424143812  13.585085487 
 genetic_interconnect_matrix:
--36.83886112 -28.85344907  31.23987369 -43.34228762 
- 32.71106671 -23.84257007  -2.69033816  -3.55933053 
- 17.06170994  14.17168428 -37.20351669 -28.86030577 
- 11.97552150  57.98737510 -23.99692303  -1.47968735 
+  0.017737666   0.022913468  -0.000456495   0.020903672 
+ -0.029776714  -0.008070499  -0.033304489  -0.010164284 
+ -0.027677293  -0.026940502  -0.029693129   0.033938065 
+  0.027447984   0.009427982  -0.007544800   0.032750193 
 external_input_strengths:
- 42.01651798 -17.31703796  21.30595756  16.09151352 
- 15.26157429  -7.29519136 -18.17058617  23.79349805 
-  2.53417098 -45.02934689 -25.49817588 -40.50507194 
- 24.44935119 -10.59392294   0.67494325 -14.15829302 
+  0.056645261  -0.050758940   0.005045784   0.046131827 
+  0.006364192   0.014627517   0.022906636  -0.065465514 
+  0.066592824   0.007932130  -0.035178001  -0.029036357 
+  0.018349811  -0.034387589  -0.029273910  -0.046062394 
 maternal_connection_strengths:
-  0.00000000   0.00000000   0.00000000   0.00000000 
+  0.000000000   0.000000000   0.000000000   0.000000000 
 promoter_thresholds:
- -2.50000000  -2.50000000  -2.50000000  -2.50000000 
+ -2.500000000  -2.500000000  -2.500000000  -2.500000000 
 diffusion_parameter(s):
- 14.33030427 -26.96752707 -56.92201130 -10.54902869 
+  0.046280709   0.239875779   0.192217544   0.200267435 
 protein_half_lives:
-  0.02863158  -0.02256566  -0.01466925   0.02528839 
+  6.728786240   6.107042528   5.931049349  12.304631834 
 translational_transcriptional_delays:
-  6.00000000   6.00000000   6.00000000   6.00000000 
+  6.000000000   6.000000000   6.000000000   6.000000000 
 $$
+
+$annealing_input
+seed_for_random_number_generator(octal_decimal_or_hex):
+0x2864258A
+start_temperature:
+1000000.
+gain_for_jump_size_control:
+3.
+interval:
+100
+$$
+
+$tune_parameters
+lambda__lambdamemu_lambdamemv_control:
+.00001 .2 100. 1.
+initmoves_tau_freezecount_Sskip:
+100000 100 5 10
+criterion:
+.0001
+mixing_interval:
+25
+$$
+
+$annealing_output
+final_energy:
+99999999999999997748809823456034029568.000
+max_count:
+600
+$$
+
+$tweak
+Parameters correspond to eqparms: 1 means tweak, 0 means don't.
+promoter_strengths:
+ 1 1 1 1
+genetic_interconnect_matrix:
+ 1 1 1 1
+ 1 1 1 1
+ 1 1 1 1
+ 1 1 1 1
+external_input_strengths:
+ 1 1 1 1
+ 1 1 1 1
+ 1 1 1 1
+ 1 1 1 1
+maternal_connection_strengths:
+ 0 0 0 0
+promoter_thresholds:
+ 0 0 0 0
+diffusion_parameters:
+ 1 1 1 1
+protein_half_lives:
+ 1 1 1 1
+translational_transcriptional_delays:
+ 0 0 0 0
+$$
+
+$limits
+Lambda_for_penalty:
+0.001
+promoter_strength_ranges:
+(10.0, 30.0) (10.0, 30.0) (10.0, 30.0) (10.0, 30.0) 
+interconnect_matrix_ranges:
+N/A
+external_input_ranges:
+N/A
+maternal_connection_ranges:
+N/A
+promotor_threshold_ranges:
+N/A
+diffusion_parameter_range(s):
+(0.0, 0.3) (0.0, 0.3) (0.0, 0.3) (0.0, 0.3) 
+protein_half_life_ranges:
+(5, 20) (5, 20) (5, 20) (5, 20) 
+translational_transcriptional_delays:
+(2, 10) (2, 10) (2, 10) (2, 10) 
+$$
+
+$equilibrate
+end_T:
+1000000.0
+fix_T_skip:
+100000
+fix_T_step:
+100000
+$$
+
 
 $bias_wt
 
@@ -1368,90 +1454,7 @@ $bcd_wt
 
 $$
 
-$annealing_input
-seed_for_random_number_generator(octal_decimal_or_hex):
-0x2864258A
-start_temperature:
-1000000.
-gain_for_jump_size_control:
-3.
-interval:
-100
-$$
 
-$tune_parameters
-lambda__lambdamemu_lambdamemv_control:
-.00001 .2 100. 1.
-initmoves_tau_freezecount_Sskip:
-100000 100 5 10
-criterion:
-.0001
-mixing_interval:
-25
-$$
-
-$annealing_output
-final_energy:
-99999999999999997748809823456034029568.000
-max_count:
-600
-$$
-
-$tweak
-Parameters correspond to eqparms: 1 means tweak, 0 means don't.
-promoter_strengths:
- 1 1 1 1
-genetic_interconnect_matrix:
- 1 1 1 1
- 1 1 1 1
- 1 1 1 1
- 1 1 1 1
-external_input_strengths:
- 1 1 1 1
- 1 1 1 1
- 1 1 1 1
- 1 1 1 1
-maternal_connection_strengths:
- 0 0 0 0
-promoter_thresholds:
- 0 0 0 0
-diffusion_parameters:
- 1 1 1 1
-protein_half_lives:
- 1 1 1 1
-translational_transcriptional_delays:
- 0 0 0 0
-$$
-
-$limits
-Lambda_for_penalty:
-0.001
-promoter_strength_ranges:
-(10.0, 30.0) (10.0, 30.0) (10.0, 30.0) (10.0, 30.0) 
-interconnect_matrix_ranges:
-N/A
-external_input_ranges:
-N/A
-maternal_connection_ranges:
-N/A
-promotor_threshold_ranges:
-N/A
-diffusion_parameter_range(s):
-(0.0, 0.3) (0.0, 0.3) (0.0, 0.3) (0.0, 0.3) 
-protein_half_life_ranges:
-(5, 20) (5, 20) (5, 20) (5, 20) 
-translational_transcriptional_delays:
-(2, 10) (2, 10) (2, 10) (2, 10) 
-$$
-
-$equilibrate
-end_T:
-1000000.0
-fix_T_skip:
-100000
-fix_T_step:
-100000
-$$
 
 $penalty_data.WWWW
 

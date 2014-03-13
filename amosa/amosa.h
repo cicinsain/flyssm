@@ -44,7 +44,7 @@ typedef struct AMOSAType
 
 void InitAMOSA(Input *, AMOSAType *);
 void ReadAMOSAParams(AMOSAType *);
-void RunAMOSA(Input *, AMOSAType *);
+void RunAMOSA(Input *, AMOSAType *, char *);
 
 // AMOSAType ReadAMOSAParams(FILE *, Input *);
 

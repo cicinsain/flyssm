@@ -37,13 +37,14 @@ Step 1: Open  terminal
 #include <time.h>
 
 #include "amosa.h"
+#include "report.h"
 // #include "global.h"
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ScoreOutput out;
 
 ///----------------------------------------------------------------------------------------
-void RunAMOSA(Input *inp, AMOSAType *amosaParams)
+void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
 {
 
 // Variable declaration
@@ -558,13 +559,15 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams)
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                   for(i=0;i<amosaParams->i_archivesize;i++)
-                   {
-                    fprintf(fp,"\n");
-                    for(h=0;h<amosaParams->i_no_offunc;h++)
-                      fprintf(fp,"%f\t",amosaParams->d_func_archive[i][h]);
+                    for(i=0;i<amosaParams->i_archivesize;i++)
+                    {
+                        fprintf(fp,"\n");
+                        for(h=0;h<amosaParams->i_no_offunc;h++)
+                            fprintf(fp, "%f\t", amosaParams->d_func_archive[i][h]);
 
-    }//End of for loop
+                    }//End of for loop
+
+                    write_params_to_fly_output_standard(amosaParams, inp, inname);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 

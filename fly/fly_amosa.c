@@ -586,7 +586,7 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
     // #endif
         // ReadAMOSAParams(&amosaParams);
         InitAMOSA(&inp, &amosaParams);
-        RunAMOSA(&inp, &amosaParams);
+        RunAMOSA(&inp, &amosaParams, inname);
 
 
     // Ignore the Score function in order to avoid running the SA
