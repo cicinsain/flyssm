@@ -841,7 +841,7 @@ GeneBasedEval(ScoreEval * eval, NArrPtr * Solution, int gindex, Input * inp )
     int sindex;                 /* index for Solution timepoints */
     int vindex;                 /* index for facts datapoint */
                                 /* gindex: genotype index, as an input from Blastoderm */
-    int oindex;                 /* index for each objectives */
+    int oindex=0;                 /* index for each objectives */
 
     double time;                /* time for each facts timepoint */
     double *v;                  /* ptr to solution for each timepoint */
@@ -906,9 +906,15 @@ GeneBasedEval(ScoreEval * eval, NArrPtr * Solution, int gindex, Input * inp )
         // printf("----%d\n", fact_tab.record[tindex].size);
 
         for( vindex = 0; vindex < fact_tab.record[tindex].size; vindex++ ) {
-            oindex = point.index % inp->zyg.defs.ngenes;
+            // oindex = (point.index) % inp->zyg.defs.ngenes; // It causes the error but I am aware of that since I wanted this value from 0
+                                                                // this makes compiler confused since it is not intialized yet.
 
             point = fact_tab.record[tindex].array[vindex];
+            oindex = (point.index) % (inp->zyg.defs.ngenes); 
+                                                             
+            // oindex--;
+            // printf("%d, ", oindex);
+            
             difference = point.conc - v[point.index];
             
             /*=====
