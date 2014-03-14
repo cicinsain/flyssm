@@ -6,7 +6,7 @@
 FOBJ = zygotic.o fly_io.o maternal.o integrate.o translate.o \
          ../lam/error.o ../lam/distributions.o ../lam/random.o ../lam/ioTools.o solvers.o score.o ../lam/dSFMT.o ../lam/dSFMT_str_state.o
 # serial code
-FSOBJ = moves.o ../lam/lsa.o savestate.o fly_amosa.o
+FSOBJ = moves.o ../lam/lsa.o savestate.o $(execFile).o
 
 NSGA2OBJ = ../nsga2/allocate.o ../nsga2/decode.o ../nsga2/fillnds.o ../nsga2/mutation.o ../nsga2/rank.o ../nsga2/auxiliary.o ../nsga2/display.o ../nsga2/initialize.o ../nsga2/nsga2.o ../nsga2/report.o ../nsga2/crossover.o ../nsga2/dominance.o ../nsga2/list.o ../nsga2/problemdef.o ../nsga2/sort.o ../nsga2/crowddist.o ../nsga2/eval.o ../nsga2/merge.o ../nsga2/rand.o ../nsga2/tourselect.o
 AMOSAOBJ = ../amosa/amosa_real.o
@@ -35,8 +35,8 @@ all: $(FLYEXECS)
 
 # special cases: dependencies and flags for individual .c files
 
-fly_amosa.o: fly_amosa.c
-	$(CC) -c $(CFLAGS) $(VFLAGS) fly_amosa.c
+$(execFile).o: $(execFile).c
+	$(CC) -c $(CFLAGS) $(VFLAGS) $(execFile).c
 
 printscore.o: printscore.c
 	$(CC) -c $(CFLAGS) $(VFLAGS) printscore.c
@@ -67,8 +67,8 @@ zygotic.o: zygotic.c
 
 # executable targets: serial ...
 
-fly_amosa: $(FOBJ) $(FSOBJ)
-	$(CC) -o fly_amosa $(CFLAGS) $(LDFLAGS) $(FOBJ) $(FSOBJ) $(AMOSAOBJ) $(FLIBS) 
+$(execFile): $(FOBJ) $(FSOBJ)
+	$(CC) -o $(execFile) $(CFLAGS) $(LDFLAGS) $(FOBJ) $(FSOBJ) $(AMOSAOBJ) $(FLIBS) 
 
 printscore: $(POBJ)
 	$(CC) -o printscore $(CFLAGS) $(LDFLAGS) $(POBJ) $(LIBS) 

@@ -4,7 +4,24 @@ VERSION = 10.0
 
 # executables to make
 
-FLYEXECS = unfold printscore fly_amosa scramble 
+nsga2Rule=n2
+amosaRule=mo
+nsga2Folder=nsga2
+amosaFolder=amosa
+
+ifeq ($(METHOD),-DAMOSA)
+	execFile = fly_amosa
+	FLYEXECS = unfold printscore execFile scramble 
+	methodRule=$(amosaRule)
+	methodFolder=$(amosaFolder)
+else ifeq ($(METHOD), -DNSGA2)
+	execFile = fly_nsga2
+	FLYEXECS = unfold printscore execFile scramble
+	methodRule=$(nsga2Rule)
+	methodFolder=$(nsga2Folder)
+endif
+
+
 
 # FLAGS FOR -v FOR ALL EXECUTABLES ##################################
 # this passes user and host name, compiler and version to the com-
@@ -20,6 +37,9 @@ VFLAGS = $(USRFLAG) $(HOSTFLAG) $(COMPFLAG) $(FLAGFLAG) $(VERSFLAG)
 
 # find out about which architecture we're on and set compiler 
 # accordingly
+
+AMOSAFLAGS = -DAMOSA
+NSGA2FLAGS = -DNSGA2
 
 OSTYPE=linux-gnu
 #ifeq ($(OSTYPE),linux-gnu)
@@ -77,7 +97,7 @@ r/local	LIBS = -lm
 endif
 
 ifeq ($(CC),gcc)
-  	CCFLAGS = -Wall -m64 -O2 -std=gnu99 -DHAVE_SSE2 -DAMOSA
+  	CCFLAGS = -Wall -m64 -O2 -std=gnu99 -DHAVE_SSE2 $(METHOD) 
    	PROFILEFLAGS = -g -pg -O2 -DHAVE_SSE2
 	LIBS = -lm -lgsl -lgslcblas -lsundials_cvode -lsundials_nvecserial -L$(SUNDIALS)/lib
 	FLIBS = -lm -lgsl -lgslcblas -lsundials_cvode -lsundials_nvecserial -L$(SUNDIALS)/lib
@@ -111,7 +131,7 @@ endif
 # 2012 july 25, I needed to add the location of my sundials libraries - A. Crombach
 
 export INCLUDES = -I. -I../lam -I/usr/local/include -I$(SUNDIALS)/include -I../amosa -I/usr/include/malloc
-export CFLAGS = -std=gnu99 $(CCFLAGS) $(INCLUDES) 
+export CFLAGS = -std=gnu99 $(CCFLAGS) $(INCLUDES)
 export VFLAGS
 export CC
 export KCC
@@ -122,6 +142,10 @@ export FLIBS
 export MPIFLAGS
 export FLYEXECS
 
+export NSGA2FLAGS
+export AMOSAFLAGS
+export execFile
+
 #define targets
 
 fly: lsa 
@@ -130,11 +154,12 @@ fly: lsa
 deps: 
 	cd fly && $(MAKE) -f basic.mk Makefile && chmod +w Makefile
 
-lsa: mo
+lsa: $(methodRule)
 	cd lam && make
 
-mo:
-	cd amosa && make
+$(methodRule):
+	cd $(methodFolder) && make
+
 clean:
 	rm -f core* *.o *.il
 	rm -f */core* */*.o */*.il
