@@ -6,10 +6,16 @@
 FOBJ = zygotic.o fly_io.o maternal.o integrate.o translate.o \
          ../lam/error.o ../lam/distributions.o ../lam/random.o ../lam/ioTools.o solvers.o score.o ../lam/dSFMT.o ../lam/dSFMT_str_state.o
 # serial code
-FSOBJ = moves.o ../lam/lsa.o savestate.o $(execFile).o
+FSOBJ = moves.o ../lam/lsa.o savestate.o flyMOP.o
 
 NSGA2OBJ = ../nsga2/allocate.o ../nsga2/decode.o ../nsga2/fillnds.o ../nsga2/mutation.o ../nsga2/rank.o ../nsga2/auxiliary.o ../nsga2/display.o ../nsga2/initialize.o ../nsga2/nsga2.o ../nsga2/report.o ../nsga2/crossover.o ../nsga2/dominance.o ../nsga2/list.o ../nsga2/problemdef.o ../nsga2/sort.o ../nsga2/crowddist.o ../nsga2/eval.o ../nsga2/merge.o ../nsga2/rand.o ../nsga2/tourselect.o
 AMOSAOBJ = ../amosa/amosa_real.o
+
+ifeq ($(METHOD), -DAMOSA)
+	METHODOBJ = $(AMOSAOBJ)
+else ifeq ($(METHOD), -DNSGA2)
+	METHODOBJ = $(NSGA2OBJ)
+endif
 
 # parallel code
 #FPOBJ = moves-mpi.o fly_sa-mpi.o ../lam/lsa-mpi.o savestate-mpi.o
@@ -35,8 +41,8 @@ all: $(FLYEXECS)
 
 # special cases: dependencies and flags for individual .c files
 
-$(execFile).o: $(execFile).c
-	$(CC) -c $(CFLAGS) $(VFLAGS) $(execFile).c
+flyMOP.o: flyMOP.c
+	$(CC) -c $(CFLAGS) $(VFLAGS) flyMOP.c
 
 printscore.o: printscore.c
 	$(CC) -c $(CFLAGS) $(VFLAGS) printscore.c
@@ -68,7 +74,7 @@ zygotic.o: zygotic.c
 # executable targets: serial ...
 
 $(execFile): $(FOBJ) $(FSOBJ)
-	$(CC) -o $(execFile) $(CFLAGS) $(LDFLAGS) $(FOBJ) $(FSOBJ) $(AMOSAOBJ) $(FLIBS) 
+	$(CC) -o $(execFile) $(CFLAGS) $(LDFLAGS) $(FOBJ) $(FSOBJ) $(METHODOBJ) $(FLIBS) 
 
 printscore: $(POBJ)
 	$(CC) -o printscore $(CFLAGS) $(LDFLAGS) $(POBJ) $(LIBS) 
@@ -97,7 +103,7 @@ Makefile: ${FRC}
 	chmod -w $@
 
 #Automatically generated dependencies list#
-fly_amosa.o: fly_amosa.c \
+flyMOP.o: flyMOP.c \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/float.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/limits.h \
   /usr/include/limits.h /usr/include/sys/cdefs.h \
@@ -162,40 +168,7 @@ fly_amosa.o: fly_amosa.c \
   ../lam/ioTools.h /usr/include/math.h /usr/include/sys/time.h \
   /usr/include/time.h /usr/include/_structs.h \
   /usr/include/sys/_structs.h /usr/include/sys/_types/_clock_t.h \
-  ../amosa/amosa.h /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h solvers.h \
-  /usr/local/include/cvode/cvode.h \
+  solvers.h /usr/local/include/cvode/cvode.h \
   /usr/local/include/sundials/sundials_nvector.h \
   /usr/local/include/sundials/sundials_types.h \
   /usr/local/include/sundials/sundials_config.h \
@@ -262,39 +235,7 @@ fly_io.o: fly_io.c /usr/include/string.h /usr/include/_types.h \
   /usr/include/_structs.h /usr/include/sys/_structs.h \
   /usr/include/sys/_types/_clock_t.h /usr/include/sys/_select.h \
   ../lam/error.h ../lam/distributions.h moves.h ../lam/sa.h maternal.h \
-  score.h ../amosa/amosa.h /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h
+  score.h
 integrate.o: integrate.c /usr/include/stdio.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_symbol_aliasing.h \
   /usr/include/sys/_posix_availability.h /usr/include/Availability.h \
@@ -368,39 +309,7 @@ integrate.o: integrate.c /usr/include/stdio.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_types/_fd_set.h /usr/include/sys/_types/_fd_clr.h \
   /usr/include/sys/_types/_fd_isset.h /usr/include/sys/_types/_fd_zero.h \
   /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h moves.h \
-  ../lam/sa.h ../amosa/amosa.h /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h
+  ../lam/sa.h
 maternal.o: maternal.c \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/float.h \
   /usr/include/stdlib.h /usr/include/Availability.h \
@@ -457,39 +366,7 @@ maternal.o: maternal.c \
   /usr/include/sys/_types/_fd_set.h /usr/include/sys/_types/_fd_clr.h \
   /usr/include/sys/_types/_fd_isset.h /usr/include/sys/_types/_fd_zero.h \
   /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h moves.h \
-  ../lam/sa.h score.h ../amosa/amosa.h /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h
+  ../lam/sa.h score.h
 moves.o: moves.c /usr/include/math.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_symbol_aliasing.h \
   /usr/include/sys/_posix_availability.h /usr/include/Availability.h \
@@ -540,40 +417,7 @@ moves.o: moves.c /usr/include/math.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_types/_fd_isset.h /usr/include/sys/_types/_fd_zero.h \
   /usr/include/sys/_types/_fd_copy.h /usr/include/time.h \
   /usr/include/_structs.h /usr/include/sys/_structs.h \
-  /usr/include/sys/_types/_clock_t.h /usr/include/sys/_select.h score.h \
-  ../amosa/amosa.h /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h
+  /usr/include/sys/_types/_clock_t.h /usr/include/sys/_select.h score.h
 printscore.o: printscore.c /usr/include/math.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_symbol_aliasing.h \
   /usr/include/sys/_posix_availability.h /usr/include/Availability.h \
@@ -634,40 +478,7 @@ printscore.o: printscore.c /usr/include/math.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_types/_wint_t.h ../lam/ioTools.h \
   /usr/include/sys/time.h /usr/include/time.h /usr/include/_structs.h \
   /usr/include/sys/_structs.h /usr/include/sys/_types/_clock_t.h moves.h \
-  ../lam/sa.h ../amosa/amosa.h /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h solvers.h \
-  /usr/local/include/cvode/cvode.h \
+  ../lam/sa.h solvers.h /usr/local/include/cvode/cvode.h \
   /usr/local/include/sundials/sundials_nvector.h \
   /usr/local/include/sundials/sundials_types.h \
   /usr/local/include/sundials/sundials_config.h \
@@ -785,40 +596,7 @@ score.o: score.c /usr/include/math.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_types/_fd_copy.h /usr/include/time.h \
   /usr/include/_structs.h /usr/include/sys/_structs.h \
   /usr/include/sys/_types/_clock_t.h /usr/include/sys/_select.h \
-  ../lam/error.h moves.h ../lam/sa.h ../amosa/amosa.h \
-  /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h integrate.h \
+  ../lam/error.h moves.h ../lam/sa.h integrate.h \
   /usr/local/include/gsl/gsl_errno.h /usr/include/errno.h \
   /usr/include/sys/errno.h /usr/local/include/gsl/gsl_types.h \
   /usr/local/include/gsl/gsl_spline.h \
@@ -911,40 +689,7 @@ scramble.o: scramble.c /usr/include/stdlib.h /usr/include/Availability.h \
   fly_io.h /usr/include/ctype.h /usr/include/runetype.h \
   /usr/include/sys/_types/_wint_t.h ../lam/ioTools.h /usr/include/math.h \
   /usr/include/sys/time.h /usr/include/time.h /usr/include/_structs.h \
-  /usr/include/sys/_structs.h ../amosa/amosa.h \
-  /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h zygotic.h ../lam/random.h scramble.h
+  /usr/include/sys/_structs.h zygotic.h ../lam/random.h scramble.h
 solvers.o: solvers.c \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/float.h \
   /usr/include/math.h /usr/include/sys/cdefs.h \
@@ -1063,39 +808,7 @@ translate.o: translate.c /usr/include/ctype.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_types/_fd_copy.h /usr/include/time.h \
   /usr/include/_structs.h /usr/include/sys/_structs.h \
   /usr/include/sys/_types/_clock_t.h /usr/include/sys/_select.h moves.h \
-  ../lam/sa.h ../amosa/amosa.h /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h zygotic.h
+  ../lam/sa.h zygotic.h
 unfold.o: unfold.c /usr/include/stdlib.h /usr/include/Availability.h \
   /usr/include/AvailabilityInternal.h /usr/include/_types.h \
   /usr/include/sys/_types.h /usr/include/sys/cdefs.h \
@@ -1171,40 +884,7 @@ unfold.o: unfold.c /usr/include/stdlib.h /usr/include/Availability.h \
   /usr/local/include/sundials/sundials_math.h zygotic.h score.h fly_io.h \
   /usr/include/ctype.h /usr/include/runetype.h \
   /usr/include/sys/_types/_wint_t.h ../lam/ioTools.h /usr/include/math.h \
-  /usr/include/sys/time.h moves.h ../lam/sa.h ../amosa/amosa.h \
-  /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h
+  /usr/include/sys/time.h moves.h ../lam/sa.h
 zygotic.o: zygotic.c /usr/include/ctype.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_symbol_aliasing.h \
   /usr/include/sys/_posix_availability.h /usr/include/runetype.h \
@@ -1276,36 +956,4 @@ zygotic.o: zygotic.c /usr/include/ctype.h /usr/include/sys/cdefs.h \
   /usr/include/sys/_types/_fd_set.h /usr/include/sys/_types/_fd_clr.h \
   /usr/include/sys/_types/_fd_isset.h /usr/include/sys/_types/_fd_zero.h \
   /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h moves.h \
-  ../lam/sa.h score.h ../amosa/amosa.h /usr/include/malloc/malloc.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/5.1/include/stddef.h \
-  /usr/include/mach/mach_types.h /usr/include/mach/host_info.h \
-  /usr/include/mach/message.h /usr/include/mach/port.h \
-  /usr/include/mach/boolean.h /usr/include/mach/machine/boolean.h \
-  /usr/include/mach/i386/boolean.h /usr/include/mach/machine/vm_types.h \
-  /usr/include/mach/i386/vm_types.h /usr/include/mach/i386/vm_param.h \
-  /usr/include/sys/_types/_mach_port_t.h /usr/include/mach/kern_return.h \
-  /usr/include/mach/machine/kern_return.h \
-  /usr/include/mach/i386/kern_return.h /usr/include/mach/vm_statistics.h \
-  /usr/include/mach/machine.h /usr/include/mach/time_value.h \
-  /usr/include/mach/host_notify.h /usr/include/mach/host_special_ports.h \
-  /usr/include/mach/memory_object_types.h /usr/include/mach/vm_prot.h \
-  /usr/include/mach/vm_sync.h /usr/include/mach/vm_types.h \
-  /usr/include/mach/exception_types.h \
-  /usr/include/mach/machine/exception.h \
-  /usr/include/mach/i386/exception.h /usr/include/mach/thread_status.h \
-  /usr/include/mach/machine/thread_status.h \
-  /usr/include/mach/i386/thread_status.h /usr/include/mach/i386/fp_reg.h \
-  /usr/include/mach/i386/thread_state.h /usr/include/i386/eflags.h \
-  /usr/include/mach/machine/thread_state.h \
-  /usr/include/mach/processor_info.h \
-  /usr/include/mach/machine/processor_info.h \
-  /usr/include/mach/i386/processor_info.h /usr/include/mach/task_info.h \
-  /usr/include/mach/policy.h /usr/include/mach/task_policy.h \
-  /usr/include/mach/task_special_ports.h /usr/include/mach/thread_info.h \
-  /usr/include/mach/thread_policy.h \
-  /usr/include/mach/thread_special_ports.h \
-  /usr/include/mach/clock_types.h /usr/include/mach/vm_attributes.h \
-  /usr/include/mach/vm_inherit.h /usr/include/mach/vm_purgable.h \
-  /usr/include/mach/vm_behavior.h /usr/include/mach/vm_region.h \
-  /usr/include/mach/machine/vm_param.h /usr/include/mach/kmod.h \
-  /usr/include/mach/std_types.h
+  ../lam/sa.h score.h

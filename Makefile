@@ -14,11 +14,13 @@ ifeq ($(METHOD),-DAMOSA)
 	FLYEXECS = unfold printscore execFile scramble 
 	methodRule=$(amosaRule)
 	methodFolder=$(amosaFolder)
+	methodINCLUDES=-I../amosa
 else ifeq ($(METHOD), -DNSGA2)
 	execFile = fly_nsga2
 	FLYEXECS = unfold printscore execFile scramble
 	methodRule=$(nsga2Rule)
 	methodFolder=$(nsga2Folder)
+	methodINCLUDES=-I../nsga2
 endif
 
 
@@ -52,7 +54,7 @@ ifneq (,$(findstring linux,$(OSTYPE)))
 	MPIFLAGS = $(CCFLAGS) -DOMPI_CC
 	DEBUGFLAGS = $(DEBUGFLAGS) -DOMPI_CC
 	PROFILEFLAGS = $(PROFILEFLAGS) -DOMPI_CC
-	FLYEXECS = unfold printscore fly_amosa scramble ##fly_sa.mpi
+	FLYEXECS = unfold printscore $(execFile) scramble ##fly_sa.mpi
 	SUNDIALS = /usr/local
 endif
 
@@ -130,7 +132,7 @@ endif
 # export all variables that Makefiles in subdirs need
 # 2012 july 25, I needed to add the location of my sundials libraries - A. Crombach
 
-export INCLUDES = -I. -I../lam -I/usr/local/include -I$(SUNDIALS)/include -I../amosa -I/usr/include/malloc
+export INCLUDES = -I. -I../lam -I/usr/local/include -I$(SUNDIALS)/include $(methodINCLUDES) -I/usr/include/malloc
 export CFLAGS = -std=gnu99 $(CCFLAGS) $(INCLUDES)
 export VFLAGS
 export CC
@@ -144,6 +146,7 @@ export FLYEXECS
 
 export NSGA2FLAGS
 export AMOSAFLAGS
+export METHOD
 export execFile
 
 #define targets
@@ -164,14 +167,14 @@ clean:
 	rm -f core* *.o *.il
 	rm -f */core* */*.o */*.il
 	rm -f fly/unfold fly/printscore fly/scramble
-	rm -f fly/fly_amosa #fly/fly_sa.mpi
+	rm -f fly/fly_amosa fly/fly_nsga2 #fly/fly_sa.mpi
 	#rm -f amosa/*.o
 
 veryclean:
 	rm -f core* *.o *.il
 	rm -f */core* */*.o */*.il */*.slog */*.pout */*.uout
 	rm -f fly/unfold fly/printscore fly/scramble
-	rm -f fly/fly_amosa #fly/fly_sa.mpi
+	rm -f fly/fly_amosa fly/fly_nsga2 #fly/fly_sa.mpi
 	rm -f lam/gen_deviates
 	rm -f fly/Makefile
 	rm -f fly/zygotic.cmp.c
