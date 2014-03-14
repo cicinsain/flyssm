@@ -8,7 +8,7 @@ FOBJ = zygotic.o fly_io.o maternal.o integrate.o translate.o \
 # serial code
 FSOBJ = moves.o ../lam/lsa.o savestate.o fly_amosa.o
 
-# NSGA2OBJ = ../nsga2/allocate.o ../nsga2/decode.o ../nsga2/fillnds.o ../nsga2/mutation.o ../nsga2/rank.o ../nsga2/auxiliary.o ../nsga2/display.o ../nsga2/initialize.o ../nsga2/nsga2.o ../nsga2/report.o ../nsga2/crossover.o ../nsga2/dominance.o ../nsga2/list.o ../nsga2/problemdef.o ../nsga2/sort.o ../nsga2/crowddist.o ../nsga2/eval.o ../nsga2/merge.o ../nsga2/rand.o ../nsga2/tourselect.o
+NSGA2OBJ = ../nsga2/allocate.o ../nsga2/decode.o ../nsga2/fillnds.o ../nsga2/mutation.o ../nsga2/rank.o ../nsga2/auxiliary.o ../nsga2/display.o ../nsga2/initialize.o ../nsga2/nsga2.o ../nsga2/report.o ../nsga2/crossover.o ../nsga2/dominance.o ../nsga2/list.o ../nsga2/problemdef.o ../nsga2/sort.o ../nsga2/crowddist.o ../nsga2/eval.o ../nsga2/merge.o ../nsga2/rand.o ../nsga2/tourselect.o
 AMOSAOBJ = ../amosa/amosa_real.o
 
 # parallel code
@@ -56,14 +56,14 @@ zygotic.o: zygotic.c
 #fly_sa-mpi.o: fly_sa.c
 #	$(MPICC) -c -o fly_sa-mpi.o $(MPIFLAGS) $(CFLAGS) $(VFLAGS) fly_sa.c
 
-lsa-mpi.o: ../lam/lsa.c
-	$(MPICC) -c -o ../lam/lsa-mpi.o $(MPIFLAGS) $(CFLAGS) ../lam/lsa.c
+# lsa-mpi.o: ../lam/lsa.c
+# 	$(MPICC) -c -o ../lam/lsa-mpi.o $(MPIFLAGS) $(CFLAGS) ../lam/lsa.c
 
-moves-mpi.o: moves.c 
-	$(MPICC) -c -o moves-mpi.o $(MPIFLAGS) $(CFLAGS) moves.c
+# moves-mpi.o: moves.c 
+# 	$(MPICC) -c -o moves-mpi.o $(MPIFLAGS) $(CFLAGS) moves.c
 
-savestate-mpi.o: savestate.c
-	$(MPICC) -c -o savestate-mpi.o $(MPIFLAGS) $(CFLAGS) savestate.c
+# savestate-mpi.o: savestate.c
+# 	$(MPICC) -c -o savestate-mpi.o $(MPIFLAGS) $(CFLAGS) savestate.c
 
 # executable targets: serial ...
 

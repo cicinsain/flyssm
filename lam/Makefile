@@ -10,7 +10,8 @@ DIS_HEADS = global.h distributions.h error.h random.h
 #targets
 
 #all: gen_deviates deviates.o distributions.o error.o lsa.o random.o
-all: gen_deviates deviates.o distributions.o ioTools.o error.o lsa.o random.o lsa-mpi.o 
+all: gen_deviates deviates.o distributions.o ioTools.o error.o lsa.o random.o 
+	#lsa-mpi.o 
 
 gen_deviates: $(GDOBJ)
 	$(CC) -o gen_deviates $(CFLAGS) $(LDFLAGS) $(GDOBJ) $(LIBS)
@@ -42,8 +43,8 @@ ioTools.o: ioTools.h ioTools.c
 
 # parallel stuff
 
-lsa-mpi.o: lsa.c
-	$(MPICC) -c -o lsa-mpi.o $(MPIFLAGS) $(CFLAGS) lsa.c
+#lsa-mpi.o: lsa.c
+	# $(MPICC) -c -o lsa-mpi.o $(MPIFLAGS) $(CFLAGS) lsa.c
 
 # ... and here are the cleanup and make deps rules
 

@@ -29,9 +29,9 @@ OSTYPE=linux-gnu
 ifneq (,$(findstring linux,$(OSTYPE)))
 	MPICC = /usr/local/bin/mpicc
 	CC = gcc
-	MPIFLAGS = $(CCFLAGS) -OMPI_CC
-	DEBUGFLAGS = $(DEBUGFLAGS) -OMPI_CC
-	PROFILEFLAGS = $(PROFILEFLAGS) -OMPI_CC
+	MPIFLAGS = $(CCFLAGS) -DOMPI_CC
+	DEBUGFLAGS = $(DEBUGFLAGS) -DOMPI_CC
+	PROFILEFLAGS = $(PROFILEFLAGS) -DOMPI_CC
 	FLYEXECS = unfold printscore fly_amosa scramble ##fly_sa.mpi
 	SUNDIALS = /usr/local
 endif
