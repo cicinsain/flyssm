@@ -125,7 +125,7 @@ typedef struct ScoreEval {
     size_t residuals_size;
     double *residuals;
 
-// #ifdef NSGA2
+// #if defined(AMOSA) || defined(NSGA2)
     struct ScoreEval **nsga2_evals; 
 // #endif
 } ScoreEval;

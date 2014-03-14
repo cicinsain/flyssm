@@ -517,14 +517,14 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
     //extern char *outname;
     ScoreEval eval;
 
-    // #ifdef NSGA2
+    #if defined(AMOSA) || defined(NSGA2)
     /*==== 
         Amir: Initialize the struct for each objectives.*/
-    eval.nsga2_evals = (ScoreEval **) malloc(inp->zyg.defs.ngenes * sizeof(ScoreEval));
-    for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
-        eval.nsga2_evals[g] = (ScoreEval *) malloc( sizeof(ScoreEval));
-    }
-    // #endif
+        eval.nsga2_evals = (ScoreEval **) malloc(inp->zyg.defs.ngenes * sizeof(ScoreEval));
+        for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
+            eval.nsga2_evals[g] = (ScoreEval *) malloc( sizeof(ScoreEval));
+        }
+    #endif
 
     int i, j, ii;
     double totalscore = 0;
@@ -543,8 +543,10 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
 
     /*======
         Amir: To store each objectives chisq.*/
-    double *chisq_s;
-        chisq_s = (double *) calloc (inp->zyg.defs.ngenes, sizeof(double));
+    #if defined(AMOSA) || defined(NSGA2)
+        double *chisq_s;
+            chisq_s = (double *) calloc (inp->zyg.defs.ngenes, sizeof(double));
+    #endif
 
     /* debugging mode: need debugging file name */
     if( debug ) {
@@ -732,9 +734,9 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
         if( gutparms.flag )     
             GutEval( &eval, &answer, i, inp );
         else {
-                // #ifndef NSGA2
-                //     Eval( &eval, &answer, i, inp );
-                // #else
+                #if !(defined(NSGA2) || defined(AMOSA))
+                    Eval( &eval, &answer, i, inp );
+                #else
             /*=======
                 Amir: Calling GeneBasedEval() instead of Eva(). */
                 // if ( i == 0 ){
@@ -744,19 +746,19 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
                 //     }
                 // }
                     GeneBasedEval(&eval, &answer, i, inp);
-                // #endif
+                #endif
         }
 
         chisq += eval.chisq;
         /*====
             Amir: Computing the chisq_s for each objective...*/
-        // #ifdef NSGA2
-        for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
-            chisq_s[g] += eval.nsga2_evals[g]->chisq;
-            // printf("%lf,", chisq_s[g]);
-        }
-        // printf("\n");
-        // #endif
+        #if defined(AMOSA) || defined(NSGA2)
+            for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
+                chisq_s[g] += eval.nsga2_evals[g]->chisq;
+                // printf("%lf,", chisq_s[g]);
+            }
+            // printf("\n");
+        #endif
 
         //printf("EVAL %d = %lg\n", i, eval.chisq);
         if( i == 0 ) {
@@ -785,11 +787,15 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
     /*=====
         Amir: Declaring the total chisq for each objectives...*/
     // printf("%f\n", out->score);
-    for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
-        // out->nsga2_outs[g]->score = chisq_s[g];
-        out->nsga2_outs[g]->score = chisq_s[g] + out->penalty;
-        // printf("%f,", out->nsga2_outs[g]->score);
-    }
+    #if defined(AMOSA) || defined(NSGA2)
+
+        for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
+            // out->nsga2_outs[g]->score = chisq_s[g];
+            out->nsga2_outs[g]->score = chisq_s[g] + out->penalty;
+            // printf("%f,", out->nsga2_outs[g]->score);
+        }
+
+    #endif
     // printf("\n");
 
    // printf("score=%lg\n", out->score);
@@ -807,18 +813,19 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
     }
     out->size_resid_arr = eval.residuals_size;
 
-// #ifdef NSGA2
-    // printf("Scoring completed.\n");
-    for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
-        free(eval.nsga2_evals[g]);
-    }
-    free(eval.nsga2_evals);
-// #endif
-    free(chisq_s);
+    #if defined(AMOSA) || defined(NSGA2)
+        // printf("Scoring completed.\n");
+        for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
+            free(eval.nsga2_evals[g]);
+        }
+        free(eval.nsga2_evals);
+        free(chisq_s);
+    #endif
+        
 }
 
 
-// #ifdef NSGA2
+#if defined(AMOSA) || defined(NSGA2)
 /*
     GeneBasedEval: Perform the same function of Eval(), and also reports the chisq for each genes.
 
@@ -854,13 +861,17 @@ GeneBasedEval(ScoreEval * eval, NArrPtr * Solution, int gindex, Input * inp )
 
     /*====
         Amir */
+    // #if defined(AMOSA) || defined(NSGA2)
+
     double *difference_s;         
         difference_s = (double *) malloc ( inp->zyg.defs.ngenes * sizeof(double) );
     double *chisq_s;           
         chisq_s      = (double *) calloc ( inp->zyg.defs.ngenes,  sizeof(double) );
-
     int *currsize_s;
         currsize_s = (int *) calloc (inp->zyg.defs.ngenes ,  sizeof(int) );
+
+    // #endif
+
     /* the classic difference between the sum of solution  */
     /* and the sum of facts */
     /* extablish a pointer to the appropriate facts section in GenoTab */
@@ -910,6 +921,8 @@ GeneBasedEval(ScoreEval * eval, NArrPtr * Solution, int gindex, Input * inp )
                                                                 // this makes compiler confused since it is not intialized yet.
 
             point = fact_tab.record[tindex].array[vindex];
+
+
             oindex = (point.index) % (inp->zyg.defs.ngenes); 
                                                              
             // oindex--;
@@ -986,22 +999,24 @@ GeneBasedEval(ScoreEval * eval, NArrPtr * Solution, int gindex, Input * inp )
         // printf("%d\n", inp->zyg.defs.egenes);
         // printf("eval->chisq: %lf\n", eval->chisq);
         // printf("evals: ");
-        // #ifdef NSGA2 
+    // #if defined(AMOSA) || defined(NSGA2)
         
         for (int g = 0; g < inp->zyg.defs.ngenes; ++g){
             eval->nsga2_evals[g]->chisq          = chisq_s[g];
             // printf(" %lf,", eval->nsga2_evals[g]->chisq);
         }
         // printf("\n");
-        // #endif
+
+    // #endif
 
         free(difference_s);
         free(chisq_s);
         free(currsize_s);
 
+
 }
 
-// #endif
+#endif
 
 
 

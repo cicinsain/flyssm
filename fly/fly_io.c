@@ -473,7 +473,7 @@ WriteParameters( char *filename, EqParms * p, char *title, int ndigits, TheProbl
     if( !outfile )              /* sorry for the confusion! */
         error( "WriteParameters: error opening output file" );
 
-#ifdef AMOSA
+#if defined(AMOSA) || defined(NSGA2)
     sprintf( temp, "%s_parm_%06d.fout", filename, fn_counter);
     fn_counter++;
 #else
@@ -544,7 +544,7 @@ WriteParameters( char *filename, EqParms * p, char *title, int ndigits, TheProbl
     if( -1 == system( shell_cmd ) )
         error( "WriteParameters: error renaming temp file %s" );
 
-#ifndef AMOSA
+#if !defined(AMOSA) || !defined(NSGA2)
     if( remove( temp ) )
         warning( "WriteParameters: temp file %s could not be deleted", temp );
 #endif

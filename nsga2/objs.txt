@@ -1,0 +1,47 @@
+GDOBJ = allocate.o auxiliary.o crossover.o crowddist.o decode.o display.o dominance.o eval.o fillnds.o initialize.o list.o merge.o mutation.o nsga2.o problemdef.o rand.o rank.o report.o sort.o tourselect.o 
+
+DIS_HEADS = nsga2.h rand.h
+
+
+all: nsga2r 
+
+allocate.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+auxiliary.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+crossover.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+crowddist.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+decode.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+display.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+dominance.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+eval.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+fillnds.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+initialize.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+list.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+merge.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+mutation.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+nsga2.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+problemdef.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+rand.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+rank.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+report.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+sort.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 
+tourselect.o: $(DIS_HEAD) 
+	$(CC) $(CFLAGS) -c 

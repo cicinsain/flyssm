@@ -53,7 +53,12 @@
 /*=================
     NSGA2
     */
-# include "amosa.h"
+#ifdef AMOSA
+    #include "amosa.h"
+#elif NSGA2
+    #include "nsga2.h"
+#endif
+
 
 
 
@@ -66,10 +71,12 @@
     defining the NSGA2Type paramters...
     */
 #ifdef NSGA2
-NSGA2Type nsga2Params;
+    NSGA2Type nsga2Params;
 #endif
 
-AMOSAType amosaParams;
+#ifdef AMOSA
+    AMOSAType amosaParams;
+#endif
 
 /*** Constants *************************************************************/
 

@@ -206,10 +206,6 @@ main( int argc, char **argv ) {
     nrows  = inp.zyg.defs.ngenes;
     egenes = inp.zyg.defs.egenes;
 
-    // #ifdef NSGA2
-    //     popFile = fopen(outname, "a");
-    // #endif
-
 
     for( i = 0; i < ncols; ++i ) {
         if( inp.twe.Rtweak[i] == 1 ) {  /* scramble Rs here */

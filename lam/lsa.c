@@ -72,9 +72,13 @@
 #endif
 
 #ifndef AMOSA // To avoid the duplicate key definition
-#define AMOSA
+	#define AMOSA
 #endif
 
+#ifndef NSGA2 // To avoid the duplicate key definition
+	#define NSGA2
+#endif
+ 
 
 /* STATIC VARIABLES ********************************************************/
 
@@ -381,8 +385,10 @@ main( int argc, char **argv ) {
 #else
     #ifdef NSGA2
     	printf("Starting Non-dominated Sorting Genetic Algorithm\n");
+    #elif AMOSA
+    	printf("Starting Archived Multi-objective Simulated Annealing\n");
     #else
-    	printf( "Starting Simulated Annealing\n" );
+    	printf("Starting Simulated Annealing\n" );
     #endif
 #endif
 
@@ -407,7 +413,7 @@ main( int argc, char **argv ) {
 
     /* the following is for non-equlibration runs and equilibration runs that  */
     /* have not yet settled to their equilibrium temperature                   */
-    #ifndef AMOSA
+    #if !defined(AMOSA) || !defined(NSGA2)
     if( ( bench != 1 ) && ( ( equil != 1 ) || ( 1.0 / S > equil_param.end_T ) ) ) {
         Loop(  );
     }
@@ -581,25 +587,25 @@ Initialize( int argc, char **argv ) {
 /*=====
 	Amir*/
     // TODO: Uncomment the block below for LSA.
-// #ifndef NSGA2
-// 	if( !equil && !bench && !nofile_flag ) {    	
-// 	        if( !stateflag ) {
-// 	            WriteLog(  );
-// 	#ifdef MPI
-// 	            if( !tuning )
-// 	#endif
-// 	                StateWrite( files.statefile );
-// 	        } else
-// 	            RestoreLog(  );
-// 	    }
-// 	#ifdef MPI
-// 	    /* if we are in tuning mode: initialize/restore tuning structs */
+#if !(defined(NSGA2) || defined(AMOSA))
+	if( !equil && !bench && !nofile_flag ) {    	
+	        if( !stateflag ) {
+	            WriteLog(  );
+	#ifdef MPI
+	            if( !tuning )
+	#endif
+	                StateWrite( files.statefile );
+	        } else
+	            RestoreLog(  );
+	    }
+	#ifdef MPI
+	    /* if we are in tuning mode: initialize/restore tuning structs */
 
-// 	    if( tuning )
-// 	        InitTuning(  );
+	    if( tuning )
+	        InitTuning(  );
 
-// 	#endif
-// #endif
+	#endif
+#endif
 
 }
 

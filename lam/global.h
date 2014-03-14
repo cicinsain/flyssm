@@ -34,7 +34,11 @@
 
 #include <float.h>
 
-
+// #ifdef AMOSA
+//     #include "amosa.h"
+// #elif NSGA2
+//     #include "nsga2.h"
+// #endif
 
 
 /*** A global in global for debugging **************************************/
@@ -76,9 +80,10 @@ typedef struct ScoreOutput {
     /*============
     	Amir: adding array of scores for multi-objective optimization purpose.
     	*/
-// #ifdef NSGA2
+    // #if defined(AMOSA) || defined(NSGA2)
+    //      TODO: Found the problem here: If I use the #if then the code won't work. It seems that the NSGA2 is not defined here...
     	struct ScoreOutput **nsga2_outs;
-// #endif
+    // #endif
 } ScoreOutput;
 
 
