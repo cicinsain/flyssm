@@ -1,5 +1,5 @@
 /**
- * @file fly_nsga2.c                                                
+ * @file flyMOP.c                                                
  * @author JR, modified by Yoginho,                            
  *   -D landscape option by Lorraine Greenwald in Oct 2002,            
  *   -g option by Yousong Wang in Feb 2002,        
@@ -9,7 +9,7 @@
  * Anton Crombach and Yogi Jaeger
  * 
  * @brief Although main() is in lsa.c, this is the file that 'defines'    
- * the fly_nsga2 program.
+ * the flyMOP program.
  *
  * It contains most of its problem-      
  * specific code (except for move generation -> moves.c, saving    
@@ -17,7 +17,7 @@
  * with the specific cost function that is used -> translate.c).   
  *                                                                 
  * After I've told you all that's NOT in this file, here's what    
- * the funcs below actually do: parsing fly_nsga2 command line opts   
+ * the funcs below actually do: parsing flyMOP command line opts   
  * is one of its jobs; there are funcs that make the first and     
  * last moves and funcs that read and write Lam and Lam-independent 
  * annealing parameters to the problem-specific data file.    
@@ -96,7 +96,7 @@ const char *OPTS = ":a:b:Bc:C:De:Ef:g:hi:lLm:nNopQr:s:StTvw:W:y:";
 
 #ifdef MPI
 static const char usage[] =
-    "Usage: fly_nsga2.mpi [-b <bkup_freq>] [-B] [-C <covar_ind>] \n"
+    "Usage: flyMOP.mpi [-b <bkup_freq>] [-B] [-C <covar_ind>] \n"
     "                  [-D] [-e <freeze_crit>][-E] [-f <param_prec>] [-g <g(u)>]\n"
     "                  [-h] [-i <stepsize>] [-l] [-L] [-n] [-N] [-p] [-s <solver>]\n"
     "                  [-S] [-t] [-T] [-v] [-w <out_file>]\n" "                  [-W <tune_stat>] [-y <log_freq>]\n" "                  <datafile>\n";
@@ -217,12 +217,12 @@ ParseCommandLine( int argc, char **argv ) {
 
 
 #ifdef MPI
-    sprintf( version, "fly_nsga2 version %s parallel", VERS );
+    sprintf( version, "flyMOP version %s parallel", VERS );
 #else
 #ifdef ALPHA_DU
-    sprintf( version, "fly_nsga2 version %s serial dec-kcc-dxml", VERS );
+    sprintf( version, "flyMOP version %s serial dec-kcc-dxml", VERS );
 #else
-//    sprintf(version, "fly_nsga2 version %s serial", VERS);
+//    sprintf(version, "flyMOP version %s serial", VERS);
 #endif
 #endif
 
@@ -258,29 +258,29 @@ ParseCommandLine( int argc, char **argv ) {
         case 'a':
             accuracy = atof( optarg );
             if( accuracy <= 0 )
-                error( "fly_nsga2: accuracy (%g) is too small", accuracy );
+                error( "flyMOP: accuracy (%g) is too small", accuracy );
             break;
         case 'b':              /* -b sets backup frequency (to write state file) */
             state_write = strtol( optarg, NULL, 0 );
             if( state_write < 1 )
-                error( "fly_nsga2: max. backup frequency is every tau steps i.e. -b 1" );
+                error( "flyMOP: max. backup frequency is every tau steps i.e. -b 1" );
             if( state_write == LONG_MAX )
-                error( "fly_nsga2: argument for -b too large" );
+                error( "flyMOP: argument for -b too large" );
             break;
         case 'B':              /* -B runs in benchmark mode -> quit after intial steps */
             bench = 1;
             time_flag = 1;
             break;
         case 'c':              /* -c sets the frequency for printing captions */
-            error( "fly_nsga2: -c is not supported anymore, captions off for good" );
+            error( "flyMOP: -c is not supported anymore, captions off for good" );
             /* if you want to be able to insert captions into .log files, uncomment    *
              * the following lines; CAUTION: make sure that RestoreLog() works proper- *
              * ly with captions before you do this!                                    */
             /*      captions = strtol(optarg, NULL, 0);
                if ( captions < 1 )
-               error("fly_nsga2: can't print captions more than every line (-c 1)");
+               error("flyMOP: can't print captions more than every line (-c 1)");
                if ( captions == LONG_MAX )
-               error("fly_nsga2: argument for -c too large");                        */
+               error("flyMOP: argument for -c too large");                        */
             break;
         case 'C':              /* parallel code: -C sets the covar sample index */
 #ifdef MPI
@@ -290,10 +290,10 @@ ParseCommandLine( int argc, char **argv ) {
              * work yourself; that's what I say. Grmbl.                                */
             /*    covar_index = atoi(optarg); 
                if ( covar_index < 1 )
-               error("fly_nsga2: covariation sample index must be >= 1");            */
-            error( "fly_nsga2: -C does not work yet, try to run on fewer nodes" );
+               error("flyMOP: covariation sample index must be >= 1");            */
+            error( "flyMOP: -C does not work yet, try to run on fewer nodes" );
 #else
-            error( "fly_nsga2: can't use -C in serial, tuning only in parallel" );
+            error( "flyMOP: can't use -C in serial, tuning only in parallel" );
 #endif
             break;
         case 'D':
@@ -307,7 +307,7 @@ ParseCommandLine( int argc, char **argv ) {
             else if( !( strcmp( optarg, "abs" ) ) )
                 stop_flag = absolute_energy;
             else
-                error( "fly_nsga2: valid stopping criteria are pfreeze, afreeze, abs" );
+                error( "flyMOP: valid stopping criteria are pfreeze, afreeze, abs" );
             break;
         case 'E':              /* -E does equilibration runs */
             equil = 1;
@@ -315,9 +315,9 @@ ParseCommandLine( int argc, char **argv ) {
         case 'f':
             precision = atoi( optarg ); /* -f determines float precision */
             if( precision < 0 )
-                error( "fly_nsga2: what exactly would a negative precision be???" );
+                error( "flyMOP: what exactly would a negative precision be???" );
             if( precision > MAX_PRECISION )
-                error( "fly_nsga2: max. float precision is %d!", MAX_PRECISION );
+                error( "flyMOP: max. float precision is %d!", MAX_PRECISION );
             break;
         case 'g':              /* -g choose g(u) function */
             pd = DvdtOrig;      //
@@ -332,7 +332,7 @@ ParseCommandLine( int argc, char **argv ) {
             else if( !( strcmp( optarg, "k" ) ) ) {
                 gofu = Kolja;
             } else
-                error( "fly_nsga2: %s is an invalid g(u), should be e, h, s or t", optarg );
+                error( "flyMOP: %s is an invalid g(u), should be e, h, s or t", optarg );
             break;
         case 'h':              /* -h help option */
             PrintMsg( help, 0 );
@@ -340,11 +340,11 @@ ParseCommandLine( int argc, char **argv ) {
         case 'i':              /* -i sets the stepsize */
             stepsize = atof( optarg );
             if( stepsize < 0 )
-                error( "fly_nsga2: going backwards? (hint: check your -i)" );
+                error( "flyMOP: going backwards? (hint: check your -i)" );
             if( stepsize == 0 )
-                error( "fly_nsga2: going nowhere? (hint: check your -i)" );
+                error( "flyMOP: going nowhere? (hint: check your -i)" );
             if( stepsize > MAX_STEPSIZE )
-                error( "fly_nsga2: stepsize %g too large (max. is %g)", stepsize, MAX_STEPSIZE );
+                error( "flyMOP: stepsize %g too large (max. is %g)", stepsize, MAX_STEPSIZE );
             break;
         case 'l':              /* -l displays the log to the screen */
             log_flag = 1;
@@ -353,7 +353,7 @@ ParseCommandLine( int argc, char **argv ) {
 #ifdef MPI
             write_llog = 1;
 #else
-            error( "fly_nsga2: can't use -L in serial, tuning only in parallel" );
+            error( "flyMOP: can't use -L in serial, tuning only in parallel" );
 #endif
             break;
         case 'm':              /* -m sets the score method: w for wls, o for ols */
@@ -377,13 +377,13 @@ ParseCommandLine( int argc, char **argv ) {
             break;
         case 'Q':              /* -Q sets quenchit mode (serial code only) */
 #ifdef MPI
-            error( "fly_nsga2: can't use -Q in parallel, quenchit only in serial" );
+            error( "flyMOP: can't use -Q in parallel, quenchit only in serial" );
 #else
             quenchit = 1;
 #endif
             break;
         case 'r':
-            error( "fly_nsga2: -r is currently not supported, use -g instead" );
+            error( "flyMOP: -r is currently not supported, use -g instead" );
             break;
         case 's':              /* -s sets solver to be used */
             if( !( strcmp( optarg, "a" ) ) )
@@ -415,13 +415,13 @@ ParseCommandLine( int argc, char **argv ) {
             /* else if (!(strcmp(optarg, "bnd")))
                ps = Band; */
             else
-                error( "fly_nsga2: invalid solver (%s), use: a,bs,e,h,kr,mi,me,r{2,4,ck,f}", optarg );
+                error( "flyMOP: invalid solver (%s), use: a,bs,e,h,kr,mi,me,r{2,4,ck,f}", optarg );
             break;
         case 'S':              /* -S unsets the auto_stop_tune flag */
 #ifdef MPI
             auto_stop_tune = 0;
 #else
-            error( "fly_nsga2: can't use -S in serial, tuning only in parallel" );
+            error( "flyMOP: can't use -S in serial, tuning only in parallel" );
 #endif
             break;
         case 't':              /* -t saves times in data and .times files */
@@ -431,7 +431,7 @@ ParseCommandLine( int argc, char **argv ) {
 #ifdef MPI
             tuning = 1;
 #else
-            error( "fly_nsga2: can't use -T in serial, tuning only in parallel" );
+            error( "flyMOP: can't use -T in serial, tuning only in parallel" );
 #endif
             break;
         case 'v':              /* -v prints version message */
@@ -447,36 +447,36 @@ ParseCommandLine( int argc, char **argv ) {
 #ifdef MPI
             write_tune_stat = atoi( optarg );
             if( write_tune_stat < 1 )
-                error( "fly_nsga2: frequency of writing tune stats must be >= 1" );
+                error( "flyMOP: frequency of writing tune stats must be >= 1" );
 #else
-            error( "fly_nsga2: can't use -W in serial, tuning only in parallel" );
+            error( "flyMOP: can't use -W in serial, tuning only in parallel" );
 #endif
             break;
         case 'y':              /* -y set frequency to print log */
             print_freq = strtol( optarg, NULL, 0 );
             if( print_freq < 1 )
-                error( "fly_nsga2: can't print status more than every tau steps (-y 1)" );
+                error( "flyMOP: can't print status more than every tau steps (-y 1)" );
             if( print_freq == LONG_MAX )
-                error( "fly_nsga2: argument for -y too large" );
+                error( "flyMOP: argument for -y too large" );
             break;
         case ':':
-            error( "fly_nsga2: need an argument for option -%c", optopt );
+            error( "flyMOP: need an argument for option -%c", optopt );
             break;
         case '?':
         default:
-            error( "fly_nsga2: unrecognized option -%c", optopt );
+            error( "flyMOP: unrecognized option -%c", optopt );
         }
     }
 
     /* error checking here */
 #ifdef MPI
     if( ( tuning == 1 ) && ( equil == 1 ) )
-        error( "fly_nsga2: can't combine -E with -T" );
+        error( "flyMOP: can't combine -E with -T" );
     if( write_llog && !tuning )
-        error( "fly_nsga2: -L only makes sense when tuning" );
+        error( "flyMOP: -L only makes sense when tuning" );
 #else
     if( ( quenchit == 1 ) && ( equil == 1 ) )
-        error( "fly_nsga2: can't combine -E with -Q" );
+        error( "flyMOP: can't combine -E with -Q" );
 #endif
     if( ( ( argc - ( optind - 1 ) ) != 2 ) )
         PrintMsg( usage, 1 );
@@ -539,7 +539,7 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
 
         infile = fopen( inname, "r" );
         if( !infile )
-            file_error( "fly_nsga2 error opening input file" );
+            file_error( "flyMOP error opening input file" );
         if( debug ) {
             slogfile = fopen( strcat( inname, ".slog" ), "w" );
             if( !slogfile )
@@ -588,6 +588,8 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
     }
 
     inp.lparm = CopyParm( inp.zyg.parm, &( inp.zyg.defs ) );
+
+    // printf("version: %s\n", state_ptr->tune.progname);
 
     #ifdef NSGA2
         InitNSGA2(&inp, &nsga2Params, inname);
@@ -662,7 +664,7 @@ RestoreState( NucStatePtr state_ptr, DistParms * distp, Files * files ) {
     //rand = ( unsigned short * ) calloc( 3, sizeof( unsigned short ) );
 
     StateRead( statefile, options, move_ptr, stats, rand, delta );
-    /* restore options in fly_nsga2.c (and some in lsa.c) */
+    /* restore options in flyMOP.c (and some in lsa.c) */
 
     RestoreOptions( options );
 
@@ -678,7 +680,7 @@ RestoreState( NucStatePtr state_ptr, DistParms * distp, Files * files ) {
     inname = files->inputfile;
     infile = fopen( inname, "r" );
     if( !infile )
-        file_error( "fly_nsga2" );
+        file_error( "flyMOP" );
 
     if( debug ) {
         slogfile = fopen( strcat( inname, ".slog" ), "a" );

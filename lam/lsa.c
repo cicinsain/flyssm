@@ -557,13 +557,13 @@ Initialize( int argc, char **argv ) {
     /* and we need to account for the case when tau isn't divisible by nnodes  */
 
     if( ( state->tune.tau % nnodes ) != 0 )
-        error( "fly_sa: the number of processors (%d) must be a divisor of tau (%d)", nnodes, state->tune.tau );
+        error( "flyMOP: the number of processors (%d) must be a divisor of tau (%d)", nnodes, state->tune.tau );
     proc_tau = state->tune.tau / nnodes;        /* local copy of tau */
 
     //printf("#%d: proc_tau = %d = %d/%d\n", proc_id, proc_tau, state->tune.tau, nnodes);
 
     if( ( state->tune.initial_moves % nnodes ) != 0 )
-        error( "fly_sa: number of init moves must be divisible by nnodes (%d)", nnodes );
+        error( "flyMOP: number of init moves must be divisible by nnodes (%d)", nnodes );
     proc_init = state->tune.initial_moves / nnodes;     /* # of initial moves */
 #else
     proc_tau = state->tune.tau; /* static copy to tau */
@@ -1021,10 +1021,10 @@ InitTuning( void ) {
     /* error check */
 
     if( nnodes <= 1 )
-        error( "fly_sa: tuning does not make sense on one processor" );
+        error( "flyMOP: tuning does not make sense on one processor" );
 
     if( covar_index > state->tune.mix_interval )
-        error( "fly_sa: you can't sample over more than the whole mix interval" );
+        error( "flyMOP: you can't sample over more than the whole mix interval" );
 
     /* set size of sample interval */
 
@@ -1034,24 +1034,24 @@ InitTuning( void ) {
     /* by the way: sample_size corresponds to covar_index * proc_tau */
 
     if( ( covar_sample % nnodes ) != 0 )
-        error( "fly_sa: covar_sample (%d) not divisible by nnodes", covar_sample );
+        error( "flyMOP: covar_sample (%d) not divisible by nnodes", covar_sample );
 
     sample_size = covar_sample / nnodes;
 
     /* tune_interval: how many covar_samples per mix_interval? */
 
     if( ( state->tune.mix_interval % covar_index ) != 0 )
-        error( "fly_sa: mix interval (%d) not divisible by covar_index", state->tune.mix_interval );
+        error( "flyMOP: mix interval (%d) not divisible by covar_index", state->tune.mix_interval );
 
     tune_interval = state->tune.mix_interval / covar_index;
 
     /* size of every tune interval in between writing tuning stats */
 
     if( write_tune_stat > tune_interval )
-        error( "fly_sa: freq of writing tune stats (%d) must be smaller than %d", write_tune_stat, tune_interval );
+        error( "flyMOP: freq of writing tune stats (%d) must be smaller than %d", write_tune_stat, tune_interval );
 
     if( ( tune_interval % write_tune_stat ) != 0 )
-        error( "fly_sa: tune_interval (%d) not divisible by write_tune_stat (%d)", tune_interval, write_tune_stat );
+        error( "flyMOP: tune_interval (%d) not divisible by write_tune_stat (%d)", tune_interval, write_tune_stat );
 
     sub_tune_interval = tune_interval / write_tune_stat;
 
