@@ -474,6 +474,7 @@ WriteParameters( char *filename, EqParms * p, char *title, int ndigits, TheProbl
         error( "WriteParameters: error opening output file" );
 
 #if defined(AMOSA) || defined(NSGA2)
+        // printf("HI\n");
     sprintf( temp, "%s_parm_%06d.fout", filename, fn_counter);
     fn_counter++;
 #else
@@ -544,7 +545,7 @@ WriteParameters( char *filename, EqParms * p, char *title, int ndigits, TheProbl
     if( -1 == system( shell_cmd ) )
         error( "WriteParameters: error renaming temp file %s" );
 
-#if !defined(AMOSA) || !defined(NSGA2)
+#if !(defined(AMOSA) || defined(NSGA2))
     if( remove( temp ) )
         warning( "WriteParameters: temp file %s could not be deleted", temp );
 #endif
@@ -1039,62 +1040,80 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
    
     if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_hardl ) ) ) /* read the number of paramters */
         error( "ReadTheAMOSAParameters: error reading amosa section (i_hardl)" );
-    printf("i_hardl : %d\n", l_amosaParams.i_hardl );
+    // printf("i_hardl : %d\n", l_amosaParams.i_hardl );
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 
 
     if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_softl ) ) ) /* read the number of binary parameters, in this case: 0*/
         error( "ReadTheAMOSAParameters: error reading amosa section (i_softl)" );
-    printf("i_softl: %d\n", l_amosaParams.i_softl);
+    // printf("i_softl: %d\n", l_amosaParams.i_softl);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the second text line */
 
 
     if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_no_ofiter ) ) ) /* read the number of objectives, in gene-based version is equal to number of genes. They are defined in problemdef.c [objective_function]*/       
         error( "ReadTheAMOSAParameters: error reading amosa section (i_no_ofiter)" );
-    printf("i_no_ofiter: %d\n", l_amosaParams.i_no_ofiter);
+    // printf("i_no_ofiter: %d\n", l_amosaParams.i_no_ofiter);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the second text line */
 
     if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_hillclimb_no ) ) ) /* read the number of constraints, the constraints are defined in problemdef.c [objective_function]*/
         error( "ReadTheAMOSAParameters: error reading amosa section (i_hillclimb_no)" );
-    printf("i_hillclimb_no: %d\n", l_amosaParams.i_hillclimb_no);
+    // printf("i_hillclimb_no: %d\n", l_amosaParams.i_hillclimb_no);
     fscanf( fp, "%*s\n" );      /* next line (ignore comment) */
 
 
     if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_maxno_bit ) ) ) /* read the population size.*/
         error( "ReadTheAMOSAParameters: error reading amosa section (i_maxno_bit)" );
-    printf("i_maxno_bit: %d\n", l_amosaParams.i_maxno_bit);
+    // printf("i_maxno_bit: %d\n", l_amosaParams.i_maxno_bit);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
 
     if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_arrsize ) ) )  /* read the crossover rate for real variables. */
         error( "ReadTheAMOSAParameters: error reading amosa section (i_arrsize)" );
-    printf("i_arrsize: %d\n", l_amosaParams.i_arrsize);
+    // printf("i_arrsize: %d\n", l_amosaParams.i_arrsize);
     fscanf( fp, "%*s\n" );      /* advance the pointer once more */
 
 
     if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_totalno_var ) ) ) /* read the number of paramters */
         error( "ReadTheAMOSAParameters: error reading amosa section (i_totalno_var)" );
-    printf("i_totalno_var: %d\n", l_amosaParams.i_totalno_var);
+    // printf("i_totalno_var: %d\n", l_amosaParams.i_totalno_var);
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 // /*-->*/    l_amosaParams.i_totalno_var = inp->tra.size;     // The number of parameters will be set using the number of parameters that selected for tweaking process.
             // TODO: Uncomment the line above for production
 
     if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_no_offunc ) ) ) /* read the number of paramters */
         error( "ReadTheAMOSAParameters: error reading amosa section (i_no_offunc)" );
-    printf("i_no_offunc: %d\n", l_amosaParams.i_no_offunc);
+    // printf("i_no_offunc: %d\n", l_amosaParams.i_no_offunc);
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 // /*-->*/   l_amosaParams.i_no_offunc = inp->zyg.defs.ngenes;
              // TODO: Uncomment the line above for production
 
 
+
+
     if( 1 != ( fscanf( fp, "%ld\n", &l_amosaParams.seed ) ) ) /* read the random seed */
     {
-        printf("seed: %ld\n", l_amosaParams.seed);
+        // printf("seed: %ld\n", l_amosaParams.seed);
         srand(time(NULL));
         l_amosaParams.seed = rand();
         fscanf( fp, "%*s\n" );
         // error( "ReadTheAMOSAParameters: error reading amosa section (seed)" );
     }
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */ 
+
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_amosaParams.d_tmax ) ) ) /* read the number of paramters */
+        error( "ReadTheAMOSAParameters: error reading amosa section (d_tmax)" );
+    // printf("d_tmax: %d\n", l_amosaParams.d_tmax);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_amosaParams.d_tmin ) ) ) /* read the number of paramters */
+        error( "ReadTheAMOSAParameters: error reading amosa section (d_tmin)" );
+    // printf("d_tmin: %d\n", l_amosaParams.d_tmin);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_amosaParams.d_alpha ) ) ) /* read the number of paramters */
+        error( "ReadTheAMOSAParameters: error reading amosa section (d_alpha)" );
+    // printf("d_alpha: %d\n", l_amosaParams.d_alpha);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 
     
     // sprintf (l_amosaParams.c_problem, "%s", "SCH1");
@@ -1155,15 +1174,15 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
 
     // TODO: Uncomment for GeneBased
     sprintf (l_amosaParams.c_problem, "%s", "GeneBased");
-    printf("c_problem: %s\n", l_amosaParams.c_problem);
+    // printf("c_problem: %s\n", l_amosaParams.c_problem);
     
     /*-->*/    l_amosaParams.i_totalno_var = inp->tra.size;     // The number of parameters will be set using the number of parameters that selected for tweaking process.
 
     /*-->*/   l_amosaParams.i_no_offunc = inp->zyg.defs.ngenes;
 
-        printf("i_totalno_var: %d\n", l_amosaParams.i_totalno_var);
+        // printf("i_totalno_var: %d\n", l_amosaParams.i_totalno_var);
 
-    printf("i_no_offunc: %d\n", l_amosaParams.i_no_offunc);
+    // printf("i_no_offunc: %d\n", l_amosaParams.i_no_offunc);
 
 
 
@@ -1172,10 +1191,11 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
 
     l_amosaParams.d_func_range = (double *) malloc (l_amosaParams.i_no_offunc * sizeof (double)); /* dynamically allocating memory to store the functional values of the archive solutions */
 
+    // The upper bound of functions are determined by calculatig the maximum distances between the measured data and the x axes.
     for (int i = 0; i < l_amosaParams.i_no_offunc; i++){
         l_amosaParams.d_func_range[i] = 3771450;
-        printf ("\n Enter range of %d th function: ", (i + 1));
-        printf ("%lf", l_amosaParams.d_func_range[i]);
+        // printf ("\n Enter range of %d th function: ", (i + 1));
+        // printf ("%lf", l_amosaParams.d_func_range[i]);
     }
 
 
@@ -1193,8 +1213,8 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
         if( inp->twe.Rtweak[i] == 1 ){
             l_amosaParams.d_min_real_var[n]   = inp->sco.searchspace->Rlim[i]->lower;
             l_amosaParams.d_max_real_var[n++] = inp->sco.searchspace->Rlim[i]->upper;
-            printf("R: %f,", l_amosaParams.d_min_real_var[n-1]);
-            printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
+            // printf("R: %f,", l_amosaParams.d_min_real_var[n-1]);
+            // printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
         }
     }
 
@@ -1203,8 +1223,8 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
             if( inp->twe.Ttweak[( i * inp->zyg.defs.ngenes ) + j] == 1 ) {
                 l_amosaParams.d_min_real_var[n]   = inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->lower / inp->sco.searchspace->pen_vec[j + 2];
                 l_amosaParams.d_max_real_var[n++] = inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->upper / inp->sco.searchspace->pen_vec[j + 2];
-                printf("T: %f,", l_amosaParams.d_min_real_var[n-1]);
-                printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
+                // printf("T: %f,", l_amosaParams.d_min_real_var[n-1]);
+                // printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
             }
         }
     }
@@ -1215,8 +1235,8 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
             if( inp->twe.Etweak[( i * inp->zyg.defs.egenes ) + j] == 1 ) {
                 l_amosaParams.d_min_real_var[n]   = inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->lower / inp->sco.searchspace->pen_vec[inp->zyg.defs.ngenes + j + 2];
                 l_amosaParams.d_max_real_var[n++] = inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->upper / inp->sco.searchspace->pen_vec[inp->zyg.defs.ngenes + j + 2];
-                printf("E: %f,", l_amosaParams.d_min_real_var[n-1]);
-                printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
+                // printf("E: %f,", l_amosaParams.d_min_real_var[n-1]);
+                // printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
             }
         }
     }
@@ -1226,8 +1246,8 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
         if( inp->twe.mtweak[i] == 1 ){
             l_amosaParams.d_min_real_var[n]   = inp->sco.searchspace->mlim[i]->lower / inp->sco.searchspace->pen_vec[1];
             l_amosaParams.d_max_real_var[n++] = inp->sco.searchspace->mlim[i]->upper / inp->sco.searchspace->pen_vec[1];
-            printf("m: %f,", l_amosaParams.d_min_real_var[n-1]);
-            printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
+            // printf("m: %f,", l_amosaParams.d_min_real_var[n-1]);
+            // printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
         }
     }
 
@@ -1235,8 +1255,8 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
         if( inp->twe.htweak[i] == 1 ){
             l_amosaParams.d_min_real_var[n]   = inp->sco.searchspace->hlim[i]->lower;
             l_amosaParams.d_max_real_var[n++] = inp->sco.searchspace->hlim[i]->upper;
-            printf("h: %f,", l_amosaParams.d_min_real_var[n-1]);
-            printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
+            // printf("h: %f,", l_amosaParams.d_min_real_var[n-1]);
+            // printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
         }
     }
 
@@ -1245,8 +1265,8 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
         if( inp->twe.dtweak[i] == 1 ){
             l_amosaParams.d_min_real_var[n]   = inp->sco.searchspace->dlim[i]->lower;
             l_amosaParams.d_max_real_var[n++] = inp->sco.searchspace->dlim[i]->upper;
-            printf("d: %f,", l_amosaParams.d_min_real_var[n-1]);
-            printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
+            // printf("d: %f,", l_amosaParams.d_min_real_var[n-1]);
+            // printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
         }
     }
 
@@ -1254,8 +1274,8 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
         if( inp->twe.lambdatweak[i] == 1 ){
             l_amosaParams.d_min_real_var[n]   = inp->sco.searchspace->lambdalim[i]->lower;
             l_amosaParams.d_max_real_var[n++] = inp->sco.searchspace->lambdalim[i]->upper;
-            printf("l: %f,", l_amosaParams.d_min_real_var[n-1]);
-            printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
+            // printf("l: %f,", l_amosaParams.d_min_real_var[n-1]);
+            // printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
         }
     }
 
@@ -1263,8 +1283,8 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
         if( inp->twe.tautweak[i] == 1 ){
             l_amosaParams.d_min_real_var[n]   = inp->sco.searchspace->taulim[i]->lower;
             l_amosaParams.d_max_real_var[n++] = inp->sco.searchspace->taulim[i]->upper;
-            printf("tau: %f,", l_amosaParams.d_min_real_var[n-1]);
-            printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
+            // printf("tau: %f,", l_amosaParams.d_min_real_var[n-1]);
+            // printf("%f\n", l_amosaParams.d_max_real_var[n-1]);
         }
     }
     // ------------------------------------------------------------------------------------
