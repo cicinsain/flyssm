@@ -25,11 +25,11 @@ typedef struct AMOSAType
 	int i_totalno_var;			/* Total number of variable of the functions */
 	int i_archivesize;			/* Stores the archive size */
 	int i_no_offunc;			/* Number of function */
-
+    
 	long seed;					/* seed for random number generation */
-
+    
 	char c_problem[50];			/* function name to be optimized */
-
+    
 	double d_tmax;				/* maximum temperature */
 	double d_tmin;				/* minimum temperature */
 	double d_alpha;				/* cooling rate */
