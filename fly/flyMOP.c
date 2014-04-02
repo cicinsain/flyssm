@@ -102,7 +102,7 @@ static const char usage[] =
     "                  [-S] [-t] [-T] [-v] [-w <out_file>]\n" "                  [-W <tune_stat>] [-y <log_freq>]\n" "                  <datafile>\n";
 #else
 static const char usage[] =
-    "Usage: fly_nsga2 [-a <accuracy>] [-b <bkup_freq>] [-B] [-e <freeze_crit>] [-E]\n"
+    "Usage: flyMOP [-a <accuracy>] [-b <bkup_freq>] [-B] [-e <freeze_crit>] [-E]\n"
     "              [-f <param_prec>] [-g <g(u)>] [-h] [-i <stepsize>] [-l] [-L] \n"
     "              [-m <score_method>] [-n] [-N] [-p] [-Q] [-s <solver>] [-t] [-v]\n"
     "              [-w <out_file>] [-y <log_freq>]\n" "              <datafile>\n";
@@ -110,9 +110,9 @@ static const char usage[] =
 
 static const char help[] =
 #ifdef MPI
-    "Usage: fly_nsga2.mpi [options] <datafile>\n\n"
+    "Usage: flyMOP.mpi [options] <datafile>\n\n"
 #else
-    "Usage: fly_nsga2 [options] <datafile>\n\n"
+    "Usage: flyMOP [options] <datafile>\n\n"
 #endif
     "Argument:\n"
     "  <datafile>          input data file\n\n"
