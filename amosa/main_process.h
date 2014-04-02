@@ -144,8 +144,8 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
     printf("%lf\n", amosaParams->d_tmax);
     for(t=amosaParams->d_tmax;t>=amosaParams->d_tmin;t=t*amosaParams->d_alpha)
     {
-        printf("\n temp=%lf",t);
-        printf("hi\n");
+        printf("\n ----- ----- ----- temp=%lf",t);
+        // printf("hi\n");
         
         for(j=1;j<=amosaParams->i_no_ofiter;j++)
         {
@@ -431,7 +431,9 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
                 {
                     p=1.0/(1.0+exp(deldom/(t)));// The probability of case 2(a)
                     ran2=(rand()/(RAND_MAX+1.0));
+#if DEBUG
                     printf("\n p=%lf",p);
+#endif                  
                     if(p>=ran2)
                     {
                         for(f=0;f<amosaParams->i_totalno_var;f++)

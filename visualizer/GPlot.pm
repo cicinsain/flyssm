@@ -225,12 +225,12 @@ END_WRITE
         #                      xffd700 x66cdaa xffdab9 x9acd32 \\
  	   	  #            x00ced1 xdda0dd xd02090 x000000
 
-          set terminal png background "#000000"
+          # set term png background "x000000"
 
 # settings for inverted graphs (black background) 
-#           set terminal png $fsize size $xsize,$ysize \\
-#	                     x000000 xffffff xffffff \\
-#                            xffd700 x9acd32 x00ced1 xff0000 xffdab9 
+          # set terminal png $fsize size $xsize,$ysize \\
+	         #             x000000 xffffff xffffff \\
+          #                  xffd700 x9acd32 x00ced1 xff0000 xffdab9 
 END_WRITE
 
 # case 4: we want to save the output as .eps
@@ -304,7 +304,7 @@ END_WRITE
     if ( $thick eq ".5"){
         $term = "set term png lw .5"
     }else{
-        $term = "set term png lw 1.5"
+        $term = "set term png lw 2"
     }
 
 # more gnuplot options; these are all set to default, change as you see fit

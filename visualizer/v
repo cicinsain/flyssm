@@ -62,7 +62,7 @@ my $lastmod = "Monday, Apr 15, 2009";
 #my $unf = "unfold_3d_kr"; my $printsc = "printscore_3d";
 #my $unf = "unfold_dhb"; my $printsc = "printscore_dhb";
 #my $unf = "unfold_log"; my $printsc = "printscore_log";
-my $unf = "/Users/amabdol/Dropbox/Developer/PhD/fly_amosa/visualizer/unfold"; my $printsc = "/Users/amabdol/Dropbox/Developer/PhD/fly_amosa/visualizer/printscore";
+my $unf = "/Users/amabdol/Dropbox/Developer/PhD/flyMOP/visualizer/unfold"; my $printsc = "/Users/amabdol/Dropbox/Developer/PhD/flyMOP/visualizer/printscore";
 # my $unf = "/home/amabdol/master/fly_nsga2/visualizer/unfold"; my $printsc = "/home/amabdol/master/fly_nsga2/visualizer/printscore";
 
 

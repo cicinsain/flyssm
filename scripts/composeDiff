@@ -4,5 +4,5 @@ files=("HKGN.010.550." "HKGN.024.225." "HKGN.030.475." "HKGN.036.725." "HKGN.042
 
 for i in {0..8}; do
 	convert ${1}${files[$i]}"d.png" -transparent white ${1}${files[$i]}"d.png"
-	composite -gravity center ${1}${files[$i]}"d.png" ${1}${files[$i]}"t.png" ${1}${files[$i]}"c.png"
+	convert -composite -gravity center ${1}${files[$i]}"t.png" ${1}${files[$i]}"d.png"  ${1}${files[$i]}"c.png"
 done
