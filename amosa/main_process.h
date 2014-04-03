@@ -142,6 +142,9 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
     }//End of for loop
     
     printf("%lf\n", amosaParams->d_tmax);
+    printf("%lf\n", amosaParams->d_tmin);
+    printf("%lf\n", amosaParams->d_alpha);
+
     for(t=amosaParams->d_tmax;t>=amosaParams->d_tmin;t=t*amosaParams->d_alpha)
     {
         printf("\n ----- ----- ----- temp=%lf",t);
