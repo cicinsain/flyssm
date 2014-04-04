@@ -110,7 +110,7 @@ KillSection( char *filename, char *title ) {
         error( "KillSection: error creating temporary file" );
     }
 #endif
-    printf("%s\n", temp);
+    // printf("%s\n", temp);
 
     // printf("%s\n", temp);
     tmpfile = fopen( temp, "w" );       /* ... and open it for writing */

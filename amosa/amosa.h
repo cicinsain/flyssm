@@ -22,6 +22,7 @@ typedef struct AMOSAType
 	int i_hillclimb_no;			/* Total number of hill_climbing number */
 	int i_maxno_bit;			/* maximum number of bits used to encode one variable */
 	int i_arrsize;				/* Total length of each string */
+	int i_no_total_iter;		/* Total number of iteration for cooling schedule */
 	int i_totalno_var;			/* Total number of variable of the functions */
 	int i_archivesize;			/* Stores the archive size */
 	int i_no_offunc;			/* Number of function */
@@ -29,6 +30,7 @@ typedef struct AMOSAType
 	long seed;					/* seed for random number generation */
     
 	char c_problem[50];			/* function name to be optimized */
+	char c_cooling_method;		/* l: linear, e: exponential, g: guesian */
     
 	double d_tmax;				/* maximum temperature */
 	double d_tmin;				/* minimum temperature */

@@ -43,6 +43,26 @@
 
 ScoreOutput out;
 
+
+double tempreture(int i, double t, AMOSAType *amosaParams){
+    switch(amosaParams->c_cooling_method){
+        case 'l':
+            return t * amosaParams->d_alpha;
+            break;
+        case 'd':
+            return t - amosaParams->d_alpha;
+            break;
+        case 'e':
+            // printf("%lf\n", amosaParams->d_tmax * pow( (amosaParams->d_tmin / amosaParams->d_tmax), ((double)i / amosaParams->i_no_total_iter) ));
+            return amosaParams->d_tmax * pow( (amosaParams->d_tmin / amosaParams->d_tmax), ((double)i / amosaParams->i_no_total_iter) );
+            break;
+        case 'g':
+            break;
+    }
+    return 0;
+}
+
+
 ///----------------------------------------------------------------------------------------
 void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
 {
@@ -90,6 +110,7 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
     double*func_new;
     double *func_current;
     double **area2;
+    int t_iter = 0;
     
     
     FILE *fp;
@@ -145,7 +166,7 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
     printf("%lf\n", amosaParams->d_tmin);
     printf("%lf\n", amosaParams->d_alpha);
 
-    for(t=amosaParams->d_tmax;t>=amosaParams->d_tmin;t=t*amosaParams->d_alpha)
+    for(t = amosaParams->d_tmax; t >= amosaParams->d_tmin; t = tempreture(t_iter++, t, amosaParams))
     {
         printf("\n ----- ----- ----- temp=%lf",t);
         // printf("hi\n");
@@ -229,7 +250,9 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
             {
                 k=0;count=0;
                 deldom=1000000;
+#ifdef DEBUG
                 printf("\n New  sol dominates current sol");
+#endif
                 
                 for(i=0;i<amosaParams->i_archivesize;i++)
                 {
@@ -568,9 +591,9 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
     
     for(i=0;i<amosaParams->i_archivesize;i++)
     {
-        fprintf(fp,"\n");
         for(h=0;h<amosaParams->i_no_offunc;h++)
             fprintf(fp, "%f\t", amosaParams->d_func_archive[i][h]);
+        fprintf(fp,"\n");
         
     }//End of for loop
     

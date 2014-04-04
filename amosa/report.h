@@ -11,7 +11,8 @@ void write_params_to_fly_output_standard(AMOSAType *amosaParams, Input *inp, cha
     
     ptab = inp->tra.array;      // Get the pointer to the 'inp' array.
     
-    // printf("%d\n", amosaParams->i_archivesize);
+    printf("%d\n", amosaParams->i_archivesize);
+    printf("%d\n", amosaParams->i_hardl);
     for(int i=0;i<amosaParams->i_archivesize;i++)
     {
         // printf("%d\n", amosaParams->i_totalno_var);

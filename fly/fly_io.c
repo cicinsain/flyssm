@@ -476,6 +476,7 @@ WriteParameters( char *filename, EqParms * p, char *title, int ndigits, TheProbl
 #if defined(AMOSA) || defined(NSGA2)
         // printf("HI\n");
     sprintf( temp, "%s_parm_%06d.fout", filename, fn_counter);
+    printf("%s\n", temp);
     fn_counter++;
 #else
     temp = strcpy( temp, "parmXXXXXX" );        /* required by mkstemp() */
@@ -483,17 +484,19 @@ WriteParameters( char *filename, EqParms * p, char *title, int ndigits, TheProbl
         error( "WriteParameters: error creating temporary file" );
 #endif
 
-
+    // printf("%s\n", temp);
     tmpfile = fopen( temp, "w" );       /* ... and open it for writing */
     if( !tmpfile )
         error( "WriteParameters: error opening temporary file" );
 
+// #if !(defined(AMOSA) || defined(NSGA2))
     if( FindSection( outfile, title ) ) {       /* erase section if already present */
-        fclose( outfile );      /* this is a little kludgey but */
-        KillSection( filename, title ); /* since KillSection needs to be in */
+        fclose( outfile );                      /* this is a little kludgey but */
+        KillSection( filename, title );         /* since KillSection needs to be in */
         outfile = fopen( filename, "r" );       /* total control of the file */
     }
     rewind( outfile );
+// #endif
 
     /* the following two loops look for the appropriate file position to write */
     /* the eqparms section (alternatives are input and eqparms)                */
@@ -1069,6 +1072,17 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
     if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_arrsize ) ) )  /* read the crossover rate for real variables. */
         error( "ReadTheAMOSAParameters: error reading amosa section (i_arrsize)" );
     // printf("i_arrsize: %d\n", l_amosaParams.i_arrsize);
+    fscanf( fp, "%*s\n" );      /* advance the pointer once more */
+
+    if( 1 != ( fscanf( fp, "%c\n", &l_amosaParams.c_cooling_method ) ) )  /* read the crossover rate for real variables. */
+        error( "ReadTheAMOSAParameters: error reading amosa section (c_cooling_method)" );
+    printf("c_cooling_method: %c\n", l_amosaParams.c_cooling_method);
+    fscanf( fp, "%*s\n" );      /* advance the pointer once more */
+    //TODO: Check if the cooling method is 'd' then the value of d_alpha should be between 0 and 1.
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_amosaParams.i_no_total_iter ) ) )  /* read the crossover rate for real variables. */
+        error( "ReadTheAMOSAParameters: error reading amosa section (i_no_total_iter)" );
+    printf("i_no_total_iter: %d\n", l_amosaParams.i_no_total_iter);
     fscanf( fp, "%*s\n" );      /* advance the pointer once more */
 
 
