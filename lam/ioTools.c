@@ -86,6 +86,8 @@ KillSection( char *filename, char *title ) {
     FILE *fp;                   /* name of file where section needs to be killed */
     FILE *tmpfile;              /* name of temporary file */
 
+    static int fn_counter = 0;
+
 
     fulltitle = ( char * ) calloc( MAX_RECORD, sizeof( char ) );
     temp = ( char * ) calloc( MAX_RECORD, sizeof( char ) );
@@ -94,15 +96,23 @@ KillSection( char *filename, char *title ) {
 
     record_ptr = record;        /* this is to remember record for 'free' */
 
+    // printf("%s\n", filename);
     fp = fopen( filename, "r" );        /* open file for reading */
     if( !fp )
         error( "KillSection: error opening file %s", filename );
 
+#if defined(AMOSA) || defined(NSGA2)
+    sprintf( temp, "%06d.fout", fn_counter);
+    fn_counter++;
+#else
     temp = strcpy( temp, "killXXXXXX" );        /* required by mkstemp() */
     if( mkstemp( temp ) == -1 ) {       /* get unique name for temp file */
         error( "KillSection: error creating temporary file" );
     }
+#endif
+    printf("%s\n", temp);
 
+    // printf("%s\n", temp);
     tmpfile = fopen( temp, "w" );       /* ... and open it for writing */
     if( !tmpfile )
         error( "KillSection: error opening temporary file" );
