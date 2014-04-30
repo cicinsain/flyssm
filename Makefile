@@ -6,8 +6,10 @@ VERSION = 10.0
 
 nsga2Rule=n2
 amosaRule=mo
+ssRule=ssa
 nsga2Folder=nsga2
 amosaFolder=amosa
+ssFolder=ss
 
 ifeq ($(METHOD),-DAMOSA)
 	execFile = fly_amosa
@@ -21,6 +23,12 @@ else ifeq ($(METHOD), -DNSGA2)
 	methodRule=$(nsga2Rule)
 	methodFolder=$(nsga2Folder)
 	methodINCLUDES=-I../nsga2
+else ifeq ($(METHOD), -DSS)
+	execFile = fly_ss
+	FLYEXECS = unfold printscore execFile scramble
+	methodRule=$(ssRule)
+	methodFolder=$(ssFolder)
+	methodINCLUDES=-I../ss
 endif
 
 
@@ -42,6 +50,7 @@ VFLAGS = $(USRFLAG) $(HOSTFLAG) $(COMPFLAG) $(FLAGFLAG) $(VERSFLAG)
 
 AMOSAFLAGS = -DAMOSA
 NSGA2FLAGS = -DNSGA2
+SSFLAGS = -DSS
 
 OSTYPE=linux-gnu
 #ifeq ($(OSTYPE),linux-gnu)
@@ -146,6 +155,7 @@ export FLYEXECS
 
 export NSGA2FLAGS
 export AMOSAFLAGS
+export SSFLAGS
 export METHOD
 export execFile
 
@@ -167,17 +177,19 @@ clean:
 	rm -f core* *.o *.il
 	rm -f */core* */*.o */*.il
 	rm -f fly/unfold fly/printscore fly/scramble
-	rm -f fly/fly_amosa fly/fly_nsga2 #fly/fly_sa.mpi
-	#rm -f amosa/*.o
+	rm -f fly/fly_amosa fly/fly_nsga2 fly/fly_ss #fly/fly_sa.mpi
 
 veryclean:
 	rm -f core* *.o *.il
 	rm -f */core* */*.o */*.il */*.slog */*.pout */*.uout
 	rm -f fly/unfold fly/printscore fly/scramble
-	rm -f fly/fly_amosa fly/fly_nsga2 #fly/fly_sa.mpi
+	rm -f fly/fly_amosa fly/fly_nsga2 fly/fly_ss #fly/fly_sa.mpi
 	rm -f lam/gen_deviates
 	rm -f fly/Makefile
 	rm -f fly/zygotic.cmp.c
+	rm -f amosa/*.o
+	rm -f nsga2/*.o
+	rm -f ss/*.o
 
 help:
 	@echo "make: this is the Makefile for fly code"

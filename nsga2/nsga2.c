@@ -41,11 +41,11 @@ void InitNSGA2(Input *inp, NSGA2Type *nsga2Params, char *inname)
 
     printf("Initialize NSGA2\n");
     
-    char *fpt1_name;    fpt1_name = ( char * ) calloc( 256, sizeof( char ) );
-    char *fpt2_name;    fpt2_name = ( char * ) calloc( 256, sizeof( char ) );
-    char *fpt3_name;    fpt3_name = ( char * ) calloc( 256, sizeof( char ) );
-    char *fpt4_name;    fpt4_name = ( char * ) calloc( 256, sizeof( char ) );
-    char *fpt5_name;    fpt5_name = ( char * ) calloc( 256, sizeof( char ) );
+    char *fpt1_name;    fpt1_name = ( char * ) calloc( MAX_RECORD, sizeof( char ) );
+    char *fpt2_name;    fpt2_name = ( char * ) calloc( MAX_RECORD, sizeof( char ) );
+    char *fpt3_name;    fpt3_name = ( char * ) calloc( MAX_RECORD, sizeof( char ) );
+    char *fpt4_name;    fpt4_name = ( char * ) calloc( MAX_RECORD, sizeof( char ) );
+    char *fpt5_name;    fpt5_name = ( char * ) calloc( MAX_RECORD, sizeof( char ) );
 
     b_name = strrchr(inname, '/');
     sprintf(fpt1_name, "initial_pop_%s.out", &b_name[1]);

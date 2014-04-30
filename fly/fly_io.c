@@ -473,10 +473,10 @@ WriteParameters( char *filename, EqParms * p, char *title, int ndigits, TheProbl
     if( !outfile )              /* sorry for the confusion! */
         error( "WriteParameters: error opening output file" );
 
-#if defined(AMOSA) || defined(NSGA2)
+#if defined(AMOSA) || defined(NSGA2) || defined(SS)
         // printf("HI\n");
     sprintf( temp, "%s_parm_%06d.fout", filename, fn_counter);
-    printf("%s\n", temp);
+    // printf("%s\n", temp);
     fn_counter++;
 #else
     temp = strcpy( temp, "parmXXXXXX" );        /* required by mkstemp() */
@@ -548,7 +548,7 @@ WriteParameters( char *filename, EqParms * p, char *title, int ndigits, TheProbl
     if( -1 == system( shell_cmd ) )
         error( "WriteParameters: error renaming temp file %s" );
 
-#if !(defined(AMOSA) || defined(NSGA2))
+#if !(defined(AMOSA) || defined(NSGA2) || defined(SS))
     if( remove( temp ) )
         warning( "WriteParameters: temp file %s could not be deleted", temp );
 #endif
@@ -1341,6 +1341,275 @@ ReadAMOSAParameters( FILE * fp, Input *inp ) {
 }
 
 #endif
+
+
+#ifdef SS
+
+SSType
+ReadSSParameters( FILE * fp, Input *inp ) {
+
+    SSType l_ssParams;
+
+
+
+   fp = FindSection( fp, "ss" );  /* find ss section */
+    if( !fp )
+        error( "ReadTheSSParameters: cannot locate ss section" );
+    fscanf( fp, "%*s\n" );      /* advance pointer past first text line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.seed ) ) ) /* read the number of paramters */
+    {
+        // error( "ReadTheSSParameters: error reading ss section (seed)" );
+        l_ssParams.seed = rand();
+        fscanf( fp, "%*s\n" );
+    }
+    // printf("seed : %d\n", l_ssParams.seed );
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+   
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.nreal ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (nreal)" );
+    // printf("nreal : %d\n", l_ssParams.nreal );
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+        l_ssParams.nreal = inp->tra.size;
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.ref_set_size ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (ref_set_size)" );
+    // printf("ref_set_size : %d\n", l_ssParams.ref_set_size );
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.max_iter ) ) ) /* read the number of binary parameters, in this case: 0*/
+        error( "ReadTheSSParameters: error reading ss section (max_iter)" );
+    // printf("max_iter: %d\n", l_ssParams.max_iter);
+    fscanf( fp, "%*s\n" );      /* advance the pointer past the second text line */
+
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.step_size ) ) ) /* read the number of objectives, in gene-based version is equal to number of genes. They are defined in problemdef.c [objective_function]*/       
+        error( "ReadTheSSParameters: error reading ss section (step_size)" );
+    // printf("step_size: %lf\n", l_ssParams.step_size);
+    fscanf( fp, "%*s\n" );      /* advance the pointer past the second text line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.max_no_improve ) ) ) /* read the number of constraints, the constraints are defined in problemdef.c [objective_function]*/
+        error( "ReadTheSSParameters: error reading ss section (max_no_improve)" );
+    // printf("max_no_improve: %d\n", l_ssParams.max_no_improve);
+    fscanf( fp, "%*s\n" );      /* next line (ignore comment) */
+
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.diverse_set_size ) ) ) /* read the population size.*/
+        error( "ReadTheSSParameters: error reading ss section (diverse_set_size)" );
+    // printf("diverse_set_size: %d\n", l_ssParams.diverse_set_size);
+    fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.max_elite ) ) ) /* read the population size.*/
+        error( "ReadTheSSParameters: error reading ss section (max_elite)" );
+    // printf("max_elite: %d\n", l_ssParams.max_elite);
+    fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.subsets_list_size ) ) ) /* read the population size.*/
+        error( "ReadTheSSParameters: error reading ss section (subsets_list_size)" );
+    // printf("subsets_list_size: %d\n", l_ssParams.subsets_list_size);
+    fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.pair_size ) ) ) /* read the population size.*/
+        error( "ReadTheSSParameters: error reading ss section (pair_size)" );
+    // printf("pair_size: %d\n", l_ssParams.pair_size);
+    fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.p ) ) )  /* read the crossover rate for real variables. */
+        error( "ReadTheSSParameters: error reading ss section (p)" );
+    // printf("p: %d\n", l_ssParams.p);
+    fscanf( fp, "%*s\n" );      /* advance the pointer once more */
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.local_search_criteria ) ) )  /* read the crossover rate for real variables. */
+        error( "ReadTheSSParameters: error reading ss section (local_search_criteria)" );
+    // printf("local_search_criteria: %lf\n", l_ssParams.local_search_criteria);
+    fscanf( fp, "%*s\n" );      /* advance the pointer once more */
+    //TODO: Check if the cooling method is 'd' then the value of d_alpha should be between 0 and 1.
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.dist_epsilon ) ) )  /* read the crossover rate for real variables. */
+        error( "ReadTheSSParameters: error reading ss section (dist_epsilon)" );
+    // printf("dist_epsilon: %lf\n", l_ssParams.dist_epsilon);
+    fscanf( fp, "%*s\n" );      /* advance the pointer once more */
+
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.fitness_epsilon ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (fitness_epsilon)" );
+    // printf("fitness_epsilon: %lf\n", l_ssParams.fitness_epsilon);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+// /*-->*/    l_ssParams.i_totalno_var = inp->tra.size;     // The number of parameters will be set using the number of parameters that selected for tweaking process.
+            // TODO: Uncomment the line above for production
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.sol ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (sol)" );
+    // printf("sol: %lf\n", l_ssParams.sol);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+// /*-->*/   l_ssParams.sol = inp->zyg.defs.ngenes;
+             // TODO: Uncomment the line above for production
+
+
+
+
+    // if( 1 != ( fscanf( fp, "%ld\n", &l_ssParams.seed ) ) ) /* read the random seed */
+    // {
+    //     // printf("seed: %ld\n", l_ssParams.seed);
+    //     srand(time(NULL));
+    //     l_ssParams.seed = rand();
+    //     fscanf( fp, "%*s\n" );
+    //     // error( "ReadTheSSParameters: error reading amosa section (seed)" );
+    // }
+    // fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */ 
+
+
+    // if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.d_tmax ) ) ) /* read the number of paramters */
+    //     error( "ReadTheSSParameters: error reading amosa section (d_tmax)" );
+    // // printf("d_tmax: %d\n", l_ssParams.d_tmax);
+    // fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    // if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.d_tmin ) ) ) /* read the number of paramters */
+    //     error( "ReadTheSSParameters: error reading amosa section (d_tmin)" );
+    // // printf("d_tmin: %d\n", l_ssParams.d_tmin);
+    // fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    // if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.d_alpha ) ) ) /* read the number of paramters */
+    //     error( "ReadTheSSParameters: error reading amosa section (d_alpha)" );
+    // // printf("d_alpha: %d\n", l_ssParams.d_alpha);
+    // fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+
+    inp->sco.searchspace = InitLimits( fp, inp );               /* Reading the fly variable */
+    Penalty2Limits( inp->sco.searchspace, inp->zyg.defs );      /* convert to explicit limits */
+
+    l_ssParams.min_real_var = (double *)malloc(l_ssParams.nreal * sizeof(double));
+    l_ssParams.max_real_var = (double *)malloc(l_ssParams.nreal * sizeof(double));
+
+
+
+   int n = 0;
+
+    /* Translate the SearchSpace to the amosa propriate range. EqParms{ R, T, E, m, h, d, lambda, tau }    */
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // R
+        if( inp->twe.Rtweak[i] == 1 ){
+            l_ssParams.min_real_var[n]   = inp->sco.searchspace->Rlim[i]->lower;
+            l_ssParams.max_real_var[n++] = inp->sco.searchspace->Rlim[i]->upper;
+            // printf("R: %f,", l_ssParams.min_real_var[n-1]);
+            // printf("%f\n", l_ssParams.max_real_var[n-1]);
+        }
+    }
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // T
+        for (int j = 0; j < inp->zyg.defs.ngenes; ++j){
+            if( inp->twe.Ttweak[( i * inp->zyg.defs.ngenes ) + j] == 1 ) {
+                l_ssParams.min_real_var[n]   = inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->lower / inp->sco.searchspace->pen_vec[j + 2];
+                l_ssParams.max_real_var[n++] = inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->upper / inp->sco.searchspace->pen_vec[j + 2];
+                // printf("T: %f,", l_ssParams.min_real_var[n-1]);
+                // printf("%f\n", l_ssParams.max_real_var[n-1]);
+            }
+        }
+    }
+
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // E
+        for (int j = 0; j < inp->zyg.defs.egenes; ++j){
+            if( inp->twe.Etweak[( i * inp->zyg.defs.egenes ) + j] == 1 ) {
+                l_ssParams.min_real_var[n]   = inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->lower / inp->sco.searchspace->pen_vec[inp->zyg.defs.ngenes + j + 2];
+                l_ssParams.max_real_var[n++] = inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->upper / inp->sco.searchspace->pen_vec[inp->zyg.defs.ngenes + j + 2];
+                // printf("E: %f,", l_ssParams.min_real_var[n-1]);
+                // printf("%f\n", l_ssParams.max_real_var[n-1]);
+            }
+        }
+    }
+
+    // // m, h, d, lambda, tau
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // m
+        if( inp->twe.mtweak[i] == 1 ){
+            l_ssParams.min_real_var[n]   = inp->sco.searchspace->mlim[i]->lower / inp->sco.searchspace->pen_vec[1];
+            l_ssParams.max_real_var[n++] = inp->sco.searchspace->mlim[i]->upper / inp->sco.searchspace->pen_vec[1];
+            // printf("m: %f,", l_ssParams.min_real_var[n-1]);
+            // printf("%f\n", l_ssParams.max_real_var[n-1]);
+        }
+    }
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // h
+        if( inp->twe.htweak[i] == 1 ){
+            l_ssParams.min_real_var[n]   = inp->sco.searchspace->hlim[i]->lower;
+            l_ssParams.max_real_var[n++] = inp->sco.searchspace->hlim[i]->upper;
+            // printf("h: %f,", l_ssParams.min_real_var[n-1]);
+            // printf("%f\n", l_ssParams.max_real_var[n-1]);
+        }
+    }
+
+    // FIXME: Doesn't consider the case where diffusion schedule are A or C.
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // d
+        if( inp->twe.dtweak[i] == 1 ){
+            l_ssParams.min_real_var[n]   = inp->sco.searchspace->dlim[i]->lower;
+            l_ssParams.max_real_var[n++] = inp->sco.searchspace->dlim[i]->upper;
+            // printf("d: %f,", l_ssParams.min_real_var[n-1]);
+            // printf("%f\n", l_ssParams.max_real_var[n-1]);
+        }
+    }
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // lambda
+        if( inp->twe.lambdatweak[i] == 1 ){
+            l_ssParams.min_real_var[n]   = inp->sco.searchspace->lambdalim[i]->lower;
+            l_ssParams.max_real_var[n++] = inp->sco.searchspace->lambdalim[i]->upper;
+            // printf("l: %f,", l_ssParams.min_real_var[n-1]);
+            // printf("%f\n", l_ssParams.max_real_var[n-1]);
+        }
+    }
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // tau
+        if( inp->twe.tautweak[i] == 1 ){
+            l_ssParams.min_real_var[n]   = inp->sco.searchspace->taulim[i]->lower;
+            l_ssParams.max_real_var[n++] = inp->sco.searchspace->taulim[i]->upper;
+            // printf("tau: %f,", l_ssParams.min_real_var[n-1]);
+            // printf("%f\n", l_ssParams.max_real_var[n-1]);
+        }
+    }
+    // ------------------------------------------------------------------------------------
+
+
+
+
+    // l_ssParams.ref_set_size = 20;        // TODO: Check the (ref_set_size < diverse_set_size); otherwise the segmentation will happen
+    // l_ssParams.max_iter = 500;
+    // l_ssParams.step_size = 0.0005;   // TODO: Should be computed using the boundaries of variables
+    // l_ssParams.max_no_improve = 100; 
+    // // l_ssParams.diverse_set_size = 200;
+    // l_ssParams.diverse_set_size = 10 * l_ssParams.ref_set_size;
+    // l_ssParams.max_elite = l_ssParams.ref_set_size / 2;
+    // l_ssParams.pair_size = 2;
+    // l_ssParams.subsets_list_size = 0;
+    // // l_ssParams.p = l_ssParams.ref_set_size / 2;        // (ref_set_size / 2) or (ref_set_size)
+    // l_ssParams.p = 8;        // (ref_set_size / 2) or (ref_set_size)
+    //                         // NOTE: p should not be large otherwise it breaks the balance of the frequency matrix!
+    // l_ssParams.local_search_criteria = 5;
+
+    // l_ssParams.dist_epsilon = 0.0001;
+    // l_ssParams.fitness_epsilon = .00001;
+
+    // l_ssParams.sol = 0.;
+    
+    //     l_ssParams.nreal = 2;
+
+    //         l_ssParams.min_real_var = (double *)malloc(l_ssParams.nreal * sizeof(double));
+    // l_ssParams.max_real_var = (double *)malloc(l_ssParams.nreal * sizeof(double));
+
+
+    // for (int i = 0; i < l_ssParams.nreal; ++i)
+    // {
+    //     l_ssParams.min_real_var[i] = -5; // TODO: It should be -100
+    //     l_ssParams.max_real_var[i] = 5;
+    // } 
+    
+    // l_ssParams.step_size = 0.0005;
+
+    return l_ssParams;
+}
+
+#endif
+
+
 
 /** ReadGenotypes: This function reads all the genotypes in a datafile & 
  *                  returns an SList with genotype number and pointers to 

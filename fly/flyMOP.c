@@ -57,9 +57,9 @@
     #include "amosa.h"
 #elif NSGA2
     #include "nsga2.h"
+#elif SS
+    #include "ss.h"
 #endif
-
-
 
 
 #ifdef MPI
@@ -76,6 +76,10 @@
 
 #ifdef AMOSA
     AMOSAType amosaParams;
+#endif
+
+#ifdef SS
+    SSType ssParams;
 #endif
 
 /*** Constants *************************************************************/
@@ -565,6 +569,10 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
             amosaParams = ReadAMOSAParameters(infile, &inp);
         #endif
 
+        #ifdef SS
+            ssParams = ReadSSParameters(infile, &inp);
+        #endif
+
         i_temp = InitMoves( infile, &inp );     /* set initial temperature and initialize */
         // initialize distribution stuff
         inp.dis = InitDistribution( infile );
@@ -601,6 +609,10 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
         RunAMOSA(&inp, &amosaParams, inname);
     #endif
 
+    #ifdef SS
+        InitSS(&inp, &ssParams, inname);
+        RunSS(&inp, &ssParams, inname);
+    #endif
 
     // Ignore the Score function in order to avoid running the SA
 #if !(defined(NSGA2) || defined(AMOSA))

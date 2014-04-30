@@ -1,0 +1,27 @@
+#include "ss.h"
+#include "time.h"
+
+SSType sample_ssParams;
+FILE *ref_set_history_file;
+FILE *best_sols_history_file;
+FILE *freqs_matrix_file;
+
+int main(int argc, char const *argv[])
+{
+	time_t t;
+	srand((unsigned) time(&t));
+
+	read_input(&sample_ssParams, argc, argv);
+
+	// Initialize the parameters and reference set
+	InitSS(&sample_ssParams);
+
+	// Run the simulations
+	RunSS(&sample_ssParams);
+
+	// free(&sample_ssParams);
+
+	// deallocate_ssParam(&sample_ssParams);
+	return 0;
+}
+

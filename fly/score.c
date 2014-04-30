@@ -783,6 +783,7 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
     // printf("\n%d\n", nbScore);
     
     out->score = chisq;
+    // printf("%lf\n", out->score);
     
     /*=====
         Amir: Declaring the total chisq for each objectives...*/

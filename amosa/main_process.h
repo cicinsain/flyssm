@@ -113,7 +113,10 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
     int t_iter = 0;
     
     
-    FILE *fp;
+    FILE *final_archive_file;
+    FILE *archive_history_file;
+
+    archive_history_file = fopen("amosa_archive_history.out", "w+");
     
     //------------------------------------------------------------------------------------------------------------------
     
@@ -168,7 +171,7 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
 
     for(t = amosaParams->d_tmax; t >= amosaParams->d_tmin; t = tempreture(t_iter++, t, amosaParams))
     {
-        printf("\n ----- ----- ----- temp=%lf",t);
+        printf("\n ----- ----- ----- temp=%lf", t);
         // printf("hi\n");
         
         for(j=1;j<=amosaParams->i_no_ofiter;j++)
@@ -558,26 +561,19 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
                     flag=1;
                     pos=m;
                 }
-                
-                
-                
                 // End of case 2(b):
                 //-----------------------------------------------------------------------------------------------------------------------------------------------------
                 
             }
-            
-            
             // End of case 2:
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
             
-            
         }
-        
-        
         // End of for loop :for(i=0;i<amosaParams->i_no_ofiter;i++)
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------
         
-        
+
+        report_archive(amosaParams, archive_history_file, 'a');
     }
     
     
@@ -585,17 +581,19 @@ void RunAMOSA(Input *inp, AMOSAType *amosaParams, char *inname)
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Open the file to store the resulting point (i.e the parato optimal font)
     
-    fp=fopen("saplot.out","w+");
+    final_archive_file=fopen("amosa_final_archive.out","w+");
     
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
-    for(i=0;i<amosaParams->i_archivesize;i++)
-    {
-        for(h=0;h<amosaParams->i_no_offunc;h++)
-            fprintf(fp, "%f\t", amosaParams->d_func_archive[i][h]);
-        fprintf(fp,"\n");
+    // for(i=0;i<amosaParams->i_archivesize;i++)
+    // {
+    //     for(h=0;h<amosaParams->i_no_offunc;h++)
+    //         fprintf(final_archive, "%f\t", amosaParams->d_func_archive[i][h]);
+    //     fprintf(final_archive,"\n");
         
-    }//End of for loop
+    // }//End of for loop
+    
+    report_archive(amosaParams, final_archive_file, 'w');
     
     // printf("Hi\n");
     write_params_to_fly_output_standard(amosaParams, inp, inname);

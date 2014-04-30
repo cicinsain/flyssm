@@ -18,7 +18,10 @@ void write_params_to_fly_output_standard(AMOSAType *amosaParams, Input *inp, cha
         // printf("%d\n", amosaParams->i_totalno_var);
         for(int h=0;h<amosaParams->i_totalno_var;h++){
         	*( ptab[h].param  ) = amosaParams->d_archive[i][h];
-        	// printf("%lf,", amosaParams->d_archive[i][h]);
+            // printf("%lf,", amosaParams->d_archive[i][h]);
+         //    printf("---%lf", amosaParams->d_func_archive[i][h]);
+        	// printf("---%lf\t", amosaParams->d_solution[i][h]);
+
             // fprintf(fp, "%f\t", amosaParams->d_func_archive[i][h]);
         }
         // printf("\n");
@@ -38,4 +41,26 @@ void write_params_to_fly_output_standard(AMOSAType *amosaParams, Input *inp, cha
     //     WriteParameters(inname, &(inp->zyg.parm), "eqparms", 9, inp->zyg.defs);
     // }
     printf("Done.\n");
+}
+
+void report_archive(AMOSAType *amosaParams, FILE *fp, char mode){
+    if (mode == 'a'){
+        for(int i=0; i < amosaParams->i_archivesize; i++)
+        {
+            for(int h=0; h < amosaParams->i_no_offunc; h++)
+                fprintf(fp, "%f\t", amosaParams->d_func_archive[i][h]);
+
+            fprintf(fp,"\n");
+        }
+        fprintf(fp, "#\n");
+    }
+    else if (mode == 'w'){
+        for(int i=0; i < amosaParams->i_archivesize; i++)
+        {
+            for(int h=0; h < amosaParams->i_no_offunc; h++)
+                fprintf(fp, "%f\t", amosaParams->d_func_archive[i][h]);
+
+            fprintf(fp,"\n");
+        }
+    }
 }

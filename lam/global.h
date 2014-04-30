@@ -38,6 +38,8 @@
 //     #include "amosa.h"
 // #elif NSGA2
 //     #include "nsga2.h"
+// #elif
+//     #include "ss.h"
 // #endif
 
 

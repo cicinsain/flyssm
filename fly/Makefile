@@ -10,11 +10,14 @@ FSOBJ = moves.o ../lam/lsa.o savestate.o flyMOP.o
 
 NSGA2OBJ = ../nsga2/allocate.o ../nsga2/decode.o ../nsga2/fillnds.o ../nsga2/mutation.o ../nsga2/rank.o ../nsga2/auxiliary.o ../nsga2/display.o ../nsga2/initialize.o ../nsga2/nsga2.o ../nsga2/report.o ../nsga2/crossover.o ../nsga2/dominance.o ../nsga2/list.o ../nsga2/problemdef.o ../nsga2/sort.o ../nsga2/crowddist.o ../nsga2/eval.o ../nsga2/merge.o ../nsga2/rand.o ../nsga2/tourselect.o
 AMOSAOBJ = ../amosa/amosa_real.o
+SSOBJ = ../ss/allocate.o ../ss/evaluate.o ../ss/init.o ../ss/input.o ../ss/linkedlist.o ../ss/local_search.o ../ss/problemdef.o ../ss/recombine.o ../ss/refine.o ../ss/report.o ../ss/sort.o ../ss/ss.o ../ss/ssTools.o ../ss/stats.o ../ss/update.o 
 
 ifeq ($(METHOD), -DAMOSA)
 	METHODOBJ = $(AMOSAOBJ)
 else ifeq ($(METHOD), -DNSGA2)
 	METHODOBJ = $(NSGA2OBJ)
+else ifeq ($(METHOD), -DSS)
+	METHODOBJ = $(SSOBJ)
 endif
 
 # parallel code

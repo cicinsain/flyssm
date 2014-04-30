@@ -78,7 +78,10 @@
 #ifndef NSGA2 // To avoid the duplicate key definition
 	#define NSGA2
 #endif
- 
+
+#ifndef SS
+	#define SS
+#endif 
 
 /* STATIC VARIABLES ********************************************************/
 
