@@ -178,3 +178,87 @@ bool is_in_flatzone(SSType *ssParams, Set *set, int set_size, individual *ind){
 }
 
 
+void parse_double_row(SSType *ssParams, char *line, double *row){
+
+    int i = 0;
+    const char* tok;
+    for (tok = strtok(line, "\t"); tok && *tok; i++, tok = strtok(NULL, "\t\n"))
+    {
+        row[i] = atof(tok);
+    }
+}
+
+
+void parse_int_row(SSType *ssParams, char *line, int *row){
+
+    int i = 0;
+    const char* tok;
+    for (tok = strtok(line, "\t"); tok && *tok; i++, tok = strtok(NULL, "\t\n"))
+    {
+        row[i] = atoi(tok);
+    }
+}
+
+void warm_start(SSType *ssParams){
+	int i;
+    char line[4098];
+    printf("Loading the data to perform warm start...\n");
+	
+	// Read refSet
+    FILE* refSetStream = fopen("ref_set_final.csv", "r");
+    ssParams->ref_set = (Set *)malloc(sizeof(Set));
+	allocate_set_memory(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
+ 
+    i = 0;
+    while (fgets(line, 4098, refSetStream) && (i < ssParams->ref_set_size))
+    {
+    	double row[ssParams->nreal + 1];
+        char* tmp = strdup(line);
+        parse_double_row(ssParams, tmp, row);
+        for (int j = 0; j < ssParams->nreal; ++j)
+        {
+        	/* code */
+        	ssParams->ref_set->members[i].params[j] = row[j];
+        }
+        // memcpy(ssParams->ref_set->members[i].params, row, (ssParams->nreal - 1) * sizeof(double));
+        ssParams->ref_set->members[i].cost = row[ssParams->nreal];
+        // ssParams->ref_set->members[i].distance = row[ssParams->nreal - 1];
+        free(tmp);
+        i++;
+    }
+    ssParams->best = (individual *)malloc(sizeof(individual));
+	ssParams->best = &(ssParams->ref_set->members[0]);				// The first members of ref_set is always the best
+
+    // print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
+
+	// Read freqMat
+    FILE* freqMatStream = fopen("freq_mat_final.csv", "r");
+    i = 0;
+    while (fgets(line, 4098, freqMatStream))
+    {
+    	int row[ssParams->p];
+        char* tmp = strdup(line);
+        parse_int_row(ssParams, tmp, row);
+        memcpy(ssParams->freqs_matrix[i], (int*)row, ssParams->p * sizeof(int));
+        free(tmp);
+        i++;
+    }
+    // print_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p);
+
+
+	// Read probMat
+    FILE* probMatStream = fopen("prob_mat_final.csv", "r");
+    i = 0;
+    while (fgets(line, 4098, probMatStream))
+    {
+    	double row[ssParams->p];
+        char* tmp = strdup(line);
+        parse_double_row(ssParams, tmp, row);
+        memcpy(ssParams->probs_matrix[i], row, ssParams->p * sizeof(double));
+        free(tmp);
+        i++;
+    }
+
+    // print_double_matrix(ssParams, ssParams->probs_matrix, ssParams->nreal, ssParams->p);
+
+}

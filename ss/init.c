@@ -6,6 +6,10 @@
  */
 void init_ssParams(SSType *ssParams){
 
+
+	// Estimating the Reference Set Size
+	ssParams->subsets_list_size = (ssParams->ref_set_size * ssParams->ref_set_size);		// Maximum possible size of subsets_list
+	
 	ssParams->n_refinement = 0;
 	ssParams->n_ref_set_update = 0;
 
@@ -37,11 +41,11 @@ void init_ssParams(SSType *ssParams){
 	}
 
 	#ifdef STATS
-		write_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, 0, 'w');
+		write_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, 0, 'w');
 	#endif
 
-	// print_matrix(ssParams, ssParams->min_boundary_matrix, ssParams->nreal, ssParams->p);
-	// print_matrix(ssParams, ssParams->max_boundary_matrix, ssParams->nreal, ssParams->p);
+	// print_double_matrix(ssParams, ssParams->min_boundary_matrix, ssParams->nreal, ssParams->p);
+	// print_double_matrix(ssParams, ssParams->max_boundary_matrix, ssParams->nreal, ssParams->p);
 
 }
 
@@ -107,7 +111,7 @@ void init_scatter_set(SSType *ssParams, Set *set){
 	}	// Scatter Set is now extented to 10*b (b: ref_set_size)
 
 					#ifdef STATS
-						write_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, 0, 'w');
+						write_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, 0, 'w');
 					#endif
 
 	//TODO: Free stuffs
@@ -188,7 +192,7 @@ void init_ref_set(SSType *ssParams){
 	}
 
 	#ifdef STATS
-		write_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, 0, 'w');
+		write_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, 0, 'w');
 	#endif
 
 	free(min_dists);

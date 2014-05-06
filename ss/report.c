@@ -78,12 +78,24 @@ void print_subsets_list(SSType *ssParams){
 	}
 }
 
-void print_matrix(SSType *ssParams, double **matrix, int row, int col){
+void print_double_matrix(SSType *ssParams, double **matrix, int row, int col){
 	for (int r=0; r<row; r++)
 	{
 		printf("%d: ", r);
 	    for(int c=0; c<col; c++)
 	         printf("%.4lf     ", matrix[r][c]);
+	    printf("\n");
+	 }
+	 printf("===========================================\n");
+
+}
+
+void print_int_matrix(SSType *ssParams, int **matrix, int row, int col){
+	for (int r=0; r<row; r++)
+	{
+		printf("%d: ", r);
+	    for(int c=0; c<col; c++)
+	         printf("%d\t", matrix[r][c]);
 	    printf("\n");
 	 }
 	 printf("===========================================\n");
@@ -116,17 +128,31 @@ void loadBar(int x, int n, int r, int w)
     printf("]\n\033[F\033[J");
 }
 
-void write_matrix(SSType *ssParams, int **matrix, int row, int col, FILE *fpt, int iter, char mode){
+void write_int_matrix(SSType *ssParams, int **matrix, int row, int col, FILE *fpt, int iter, char mode){
 
 	for (int r=0; r<row; r++)
 	{
-		fprintf(fpt, "%d", iter);
+		if (iter != -1)
+			fprintf(fpt, "%d", iter);
+		
 	    for(int c=0; c<col; c++)
 	         fprintf(fpt, "\t%d", matrix[r][c]);
 	    fprintf(fpt, "\n");
 	 }
 }
 
+void write_double_matrix(SSType *ssParams, double **matrix, int row, int col, FILE *fpt, int iter, char mode){
+
+	for (int r=0; r<row; r++)
+	{
+		if (iter != -1)
+			fprintf(fpt, "%d", iter);
+		
+	    for(int c=0; c<col; c++)
+	         fprintf(fpt, "\t%lf", matrix[r][c]);
+	    fprintf(fpt, "\n");
+	 }
+}
 
 void write_params_to_fly_output_standard(SSType *ssParams, Input *inp, char *inname){
     int i, j;

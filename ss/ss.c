@@ -3,6 +3,10 @@
 FILE *ref_set_history_file;
 FILE *best_sols_history_file;
 FILE *freqs_matrix_file;
+FILE *freq_mat_final_file;
+FILE *prob_mat_final_file;
+FILE *ref_set_final_file;
+
 ScoreOutput out;
 
 
@@ -28,6 +32,9 @@ void InitSS(Input *inp, SSType *ssParams, char *inname){
 	best_sols_history_file = fopen("best_sols_history_file.out", "w");
 	freqs_matrix_file = fopen("freqs_matrix_history.out", "w");
 
+
+	// FIXME: I am hardcoded!
+
 	// Preparing the output files
 	init_report_files(ssParams);
 
@@ -37,41 +44,46 @@ void InitSS(Input *inp, SSType *ssParams, char *inname){
 	// Allocate memory of ssParams variables
 	init_ssParams(ssParams);
 
-	// Initialize the Diverse Set
-	ssParams->diverse_set = (Set *)malloc(sizeof(Set));
-	allocate_set_memory(ssParams, ssParams->diverse_set, ssParams->diverse_set_size, ssParams->nreal);
+	if ( !ssParams->perform_warm_start )
+	{
+		// Initialize the Diverse Set
+		ssParams->diverse_set = (Set *)malloc(sizeof(Set));
+		allocate_set_memory(ssParams, ssParams->diverse_set, ssParams->diverse_set_size, ssParams->nreal);
 
-	init_scatter_set(ssParams, ssParams->diverse_set);				// Banga version
-	evaluate_set(ssParams, ssParams->diverse_set, ssParams->diverse_set_size, inp, &out);
+		init_scatter_set(ssParams, ssParams->diverse_set);				// Banga version
+		evaluate_set(ssParams, ssParams->diverse_set, ssParams->diverse_set_size, inp, &out);
 
-// print_set(ssParams, ssParams->diverse_set, ssParams->diverse_set_size, ssParams->nreal);
+	// print_set(ssParams, ssParams->diverse_set, ssParams->diverse_set_size, ssParams->nreal);
 
-	// Initialize the Reference Set
-	ssParams->ref_set = (Set *)malloc(sizeof(Set));
-	allocate_set_memory(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
+		// Initialize the Reference Set
+		ssParams->ref_set = (Set *)malloc(sizeof(Set));
+		allocate_set_memory(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 
-	/* Expanding the ref_set by appending solution with least cost
-		and then adding solutions with least distance from max_elite
-	 	selected solutions in ref_set */
-	// It should be sorted since the item added based on the distance are not in the fitness order
-	init_ref_set(ssParams);		// Banga version
-	quick_sort_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');		
-														
-	// Writing the sorted ref_set to the file
+		/* Expanding the ref_set by appending solution with least cost
+			and then adding solutions with least distance from max_elite
+		 	selected solutions in ref_set */
+		// It should be sorted since the item added based on the distance are not in the fitness order
+		init_ref_set(ssParams);		// Banga version
+		quick_sort_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');		
+															
+		// Writing the sorted ref_set to the file
+		
+		// TODO: Now, the diverse set could be freed
+
+		// Initialize the best solution
+		ssParams->best = (individual *)malloc(sizeof(individual));
+		// allocate_ind_memory(ssParams, ssParams->best, ssParams->nreal);	
+
+		// Assigning the best solutions
+		ssParams->best = &(ssParams->ref_set->members[0]);				// The first members of ref_set is always the best
+
+	}else{	// WARM START
+		warm_start(ssParams);
+	}
+
 	write_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal, ref_set_history_file, 0, 'w');
-	
-	// Estimating the Reference Set Size
-	ssParams->subsets_list_size = (ssParams->ref_set_size * ssParams->ref_set_size);		// Maximum possible size of subsets_list
-	
-	// TODO: Now, the diverse set could be freed
-
-	// Initialize the best solution
-	ssParams->best = (individual *)malloc(sizeof(individual));
-	// allocate_ind_memory(ssParams, ssParams->best, ssParams->nreal);	
-
-	// Assigning the best solutions
-	ssParams->best = &(ssParams->ref_set->members[0]);				// The first members of ref_set is always the best
 	write_ind(ssParams, ssParams->best, ssParams->nreal, best_sols_history_file, 0, 'w');
+
 
 }
 
@@ -130,7 +142,7 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		loadBar(iter, ssParams->max_iter, 50, 50);
 
 		#ifdef STATS
-			write_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, iter, 'w');
+			write_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, iter, 'w');
 		#endif		
 
 		printf("Best Solution:\n");
@@ -154,6 +166,18 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 	printf("\nStatistics: \n");
 	printf("Number of substitution in Reference Set: %d\n", ssParams->n_ref_set_update);
 	printf("Number of Local Search Performed: %d\n", ssParams->n_refinement);
+
+
+	printf("\nExporting ref_set_final.csv, freq_mat_final.csv and prob_mat_final.csv for warm start...\n");
+
+	freq_mat_final_file = fopen("freq_mat_final.csv", "w");
+	prob_mat_final_file = fopen("prob_mat_final.csv", "w");
+	ref_set_final_file = fopen("ref_set_final.csv", "w");
+
+	write_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal, ref_set_final_file, -1, 'w');
+	write_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freq_mat_final_file, -1, 'w');
+	write_double_matrix(ssParams, ssParams->probs_matrix, ssParams->nreal, ssParams->p, prob_mat_final_file, -1, 'w');
+
 
 	deallocate_ssParam(ssParams);
 

@@ -21,6 +21,7 @@
 *.fout
 *.out
 *.network
+*.csv
 
 # Media
 *.png

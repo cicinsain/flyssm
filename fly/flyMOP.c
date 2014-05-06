@@ -616,7 +616,7 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
 
     // Ignore the Score function in order to avoid running the SA
 #if !(defined(NSGA2) || defined(AMOSA))
-        printf("Hi\n");
+        // printf("Hi\n");
 //     //In this function all the calculations are made
     Score( &inp, out, jacobian );
 #endif

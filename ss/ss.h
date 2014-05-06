@@ -94,6 +94,15 @@ typedef struct SSType
 
 	double stop_criteria;
 
+	int perform_warm_start;
+	int perform_local_search;
+	int perform_flatzone_detection;
+
+	char *ref_set_final_filename;
+	char *freq_mat_final_filename;
+	char *prob_mat_final_filename;
+
+
 } SSType;
 
 
@@ -103,6 +112,9 @@ typedef struct SSType
 extern FILE *ref_set_history_file;
 extern FILE *best_sols_history_file;
 extern FILE *freqs_matrix_file;
+extern FILE *freq_mat_final_file;
+extern FILE *prob_mat_final_file;
+extern FILE *ref_set_final_file;
 
 /*
 				Functions Prototypes
@@ -179,6 +191,9 @@ double max(const double *arr, int length, int *index);
 void delete_and_shift(SSType *ssParams, Set *set, int set_size, int index_to_delete);
 int closest_member(SSType *ssParams, Set *set, int set_size, individual *ind, int ind_index);
 void copy_ind(SSType *ssParams, individual *src, individual *dest);
+void parse_double_row(SSType *ssParams, char *line, double *row);
+void parse_int_row(SSType *ssParams, char *line, int *row);
+void warm_start(SSType *ssParams);
 
 // report.c
 void init_report_files(SSType *ssParams);
@@ -187,8 +202,10 @@ void write_ind(SSType *ssParams, individual *ind,  int member_length, FILE *fpt,
 void print_set(SSType *ssParams, Set *set, int set_size, int member_length);
 void print_ind(SSType *ssParams, individual *ind, int member_length);
 void print_subsets_list(SSType *ssParams);
-void print_matrix(SSType *ssParams, double **matrix, int row, int col);
-void write_matrix(SSType *ssParams, int **matrix, int row, int col, FILE *ftp, int iter, char mode);
+void print_double_matrix(SSType *ssParams, double **matrix, int row, int col);
+void print_int_matrix(SSType *ssParams, int **matrix, int row, int col);
+void write_int_matrix(SSType *ssParams, int **matrix, int row, int col, FILE *ftp, int iter, char mode);
+void write_double_matrix(SSType *ssParams, double **matrix, int row, int col, FILE *ftp, int iter, char mode);
 void loadBar(int x, int n, int r, int w);
 void write_params_to_fly_output_standard(SSType *ssParams, Input *inp, char *inname);
 

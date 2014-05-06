@@ -1446,6 +1446,37 @@ ReadSSParameters( FILE * fp, Input *inp ) {
 // /*-->*/   l_ssParams.sol = inp->zyg.defs.ngenes;
              // TODO: Uncomment the line above for production
 
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.perform_warm_start ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (perform_warm_start)" );
+    printf("perform_warm_start: %d\n", l_ssParams.perform_warm_start);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    l_ssParams.ref_set_final_filename = (char *)calloc(256,  sizeof(char));
+    l_ssParams.freq_mat_final_filename = (char *)calloc(256,  sizeof(char));
+    l_ssParams.prob_mat_final_filename = (char *)calloc(256,  sizeof(char));
+
+
+    // if( 1 != ( fscanf( fp, "%s\n", &l_ssParams.ref_set_final_filename ) ) ) /* read the number of paramters */
+        // error( "ReadTheSSParameters: error reading ss section (ref_set_final_filename)" );
+    // printf("ref_set_final_filename: %s\n", l_ssParams.ref_set_final_filename);
+    // fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    // if( 1 != ( fscanf( fp, "%s\n", &l_ssParams.freq_mat_final_filename ) ) ) /* read the number of paramters */
+    //     error( "ReadTheSSParameters: error reading ss section (freq_mat_final_filename)" );
+    // printf("freq_mat_final_filename: %s\n", l_ssParams.freq_mat_final_filename);
+    // fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    // if( 1 != ( fscanf( fp, "%s\n", &l_ssParams.prob_mat_final_filename ) ) ) /* read the number of paramters */
+    //     error( "ReadTheSSParameters: error reading ss section (prob_mat_final_filename)" );
+    // printf("prob_mat_final_filename: %s\n", l_ssParams.prob_mat_final_filename);
+    // fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+
+    l_ssParams.ref_set_final_filename = "ref_set_final.csv";
+    l_ssParams.freq_mat_final_filename = "freq_mat_final.csv";
+    l_ssParams.prob_mat_final_filename = "prob_mat_final.csv";
+
+    // FIXME: I am hardcoded
 
 
 
@@ -1567,7 +1598,6 @@ ReadSSParameters( FILE * fp, Input *inp ) {
         }
     }
     // ------------------------------------------------------------------------------------
-
 
 
 

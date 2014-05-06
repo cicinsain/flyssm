@@ -84,8 +84,11 @@ void deallocate_ssParam(SSType *ssParams){
 	free(ssParams->ref_set);
 	deallocate_set_memory(ssParams, ssParams->candidates_set, ssParams->ref_set_size * ssParams->ref_set_size * 4);
 	free(ssParams->candidates_set);
-	deallocate_set_memory(ssParams, ssParams->diverse_set, ssParams->diverse_set_size);
-	free(ssParams->diverse_set);
+	if ( !ssParams->perform_warm_start )
+	{
+		deallocate_set_memory(ssParams, ssParams->diverse_set, ssParams->diverse_set_size);
+		free(ssParams->diverse_set);
+	}
 	deallocate_subsets_list_memory(ssParams);
 	free(ssParams->subsets_list);
 
