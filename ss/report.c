@@ -34,7 +34,10 @@ void write_set(SSType *ssParams, Set *set, int set_size, int member_length, FILE
 
 void write_ind(SSType *ssParams, individual *ind, int member_length, FILE *fpt, int iter, char mode){
 
-	fprintf(fpt, "%d\t", iter);
+	// fprintf(fpt, "%d\t", iter);
+	if (iter != -1)
+		fprintf(fpt, "%d\t", iter);
+	
 	for (int i = 0; i < member_length; ++i)
 	{
 		fprintf(fpt, "%.5lf\t", ind->params[i]);

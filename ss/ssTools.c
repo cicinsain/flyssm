@@ -229,7 +229,7 @@ void warm_start(SSType *ssParams){
     ssParams->best = (individual *)malloc(sizeof(individual));
 	ssParams->best = &(ssParams->ref_set->members[0]);				// The first members of ref_set is always the best
 
-    // print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
+    print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 
 	// Read freqMat
     FILE* freqMatStream = fopen("freq_mat_final.csv", "r");
@@ -243,7 +243,7 @@ void warm_start(SSType *ssParams){
         free(tmp);
         i++;
     }
-    // print_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p);
+    print_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p);
 
 
 	// Read probMat
@@ -259,6 +259,6 @@ void warm_start(SSType *ssParams){
         i++;
     }
 
-    // print_double_matrix(ssParams, ssParams->probs_matrix, ssParams->nreal, ssParams->p);
+    print_double_matrix(ssParams, ssParams->probs_matrix, ssParams->nreal, ssParams->p);
 
 }
