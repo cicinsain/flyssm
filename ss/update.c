@@ -43,8 +43,8 @@ void update_ref_set(SSType *ssParams){
 				   a local minima somewhere
 				   */
 				if ( ssParams->perform_flatzone_detection ){
-					// if ( !is_in_flatzone(ssParams, ssParams->ref_set , ssParams->ref_set_size - 1, &(ssParams->candidates_set->members[i])) )
-					if ( ssParams->candidates_set->members[i].cost < ssParams->ref_set->members[ssParams->ref_set_size -  1].cost * ( 1 - ssParams->fitness_epsilon) )
+					if ( !is_in_flatzone(ssParams, ssParams->ref_set , ssParams->ref_set_size - 1, &(ssParams->candidates_set->members[i])) )
+					// if ( ssParams->candidates_set->members[i].cost < ssParams->ref_set->members[ssParams->ref_set_size -  1].cost * ( 1 - ssParams->fitness_epsilon) )
 					{
 						// TODO: Write a function to do the replacement, with a argument for differnt sort, insertion, bubble, quick
 						replace:
@@ -63,6 +63,7 @@ void update_ref_set(SSType *ssParams){
 			}
 			else
 			{
+				// printf("du\n");
 				/* Check if the candidate has better fitness than the duplicated member; or at least it has reasonable 
 					differences with it (passing the flatzone filter). If yes, then we could replace it.
 				*/

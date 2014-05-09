@@ -142,7 +142,7 @@ nreal:
 ref_set_size:
 40  
 max_iter:
-1000
+5000
 step_size:
 0.0005 
 max_no_improve:
@@ -158,9 +158,9 @@ pair_size:
 p:
 16    
 dist_epsilon:
-0.01
-fitness_epsilon:
 0.001
+fitness_epsilon:
+0.0001
 sol:
 0.
 perform_warm_start:
@@ -170,11 +170,11 @@ perform_local_search:
 local_search_1_filter:
 1
 local_search_f1_criteria:
-6000000
+60
 local_search_2_filter:
 1
 local_search_f2_criteria:
-100
+0.001
 perform_flatzone_detection:
 1
 ref_set_final:

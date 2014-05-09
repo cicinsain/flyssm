@@ -8,8 +8,8 @@
 
 #include "maternal.h"
 
-// #define STATS
-// #define LOG
+#define STATS
+#define LOG
 
 #define eul  2.71828182845905
 #define pi 3.14159265358979

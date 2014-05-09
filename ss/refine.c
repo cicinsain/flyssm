@@ -14,39 +14,55 @@ void refine_subsets_list(SSType *ssParams, char method, Input *inp, ScoreOutput 
 
 void refine_set(SSType *ssParams, Set *set, int set_size, char method, Input *inp, ScoreOutput *out){
 
+	int closest_member_index;
 	for (int i = set_size - 1; i >= 0; --i)
 	{
+		// printf("-%d-", i);
 		/* The local search won't apply on members with bad fitness; larger than ssParams->local_search_f1_criteria * sol */
 		// FIXME: There is a bug here that cause `nan` value as a cost! for some functions!
 		// printf("%lf < %lf\n", fabs(set->members[i].cost - ssParams->sol), ssParams->local_search_f1_criteria);
-		if (ssParams->local_search_1_filter){
+		if (ssParams->local_search_1_filter)
+		{
+			// printf("1");
 			if ( !( ( fabs(set->members[i].cost - ssParams->sol)) > ssParams->local_search_f1_criteria) )
-		// if(0)
 			{
-				// printf("0\n");
-			// If the first filter pass, then we check to see if the area already discovered with
-			// local search procedure or not, by locating the clsest members in refSet with the 
-			// selected memeber, if their fitness don't vary a lot then we perform the local search.
 				second_filter:
-				if (ssParams->local_search_2_filter){
-					if ( ! ((fabs(set->members[i].cost - 
-						set->members[ closest_member(ssParams, set, set_size, &(set->members[i]), i) ].cost)) 
-						< ssParams->local_search_f2_criteria) )
+				{
+					if (ssParams->local_search_2_filter)
 					{
-						local_search:
-						ssParams->n_refinement++;
-						refine_individual(ssParams, set, set_size, &(set->members[i]), method, inp, out);
-						// print_ind(ssParams, &(set->members[i]), ssParams->nreal);
+						// printf("2==\n");
+						closest_member_index = closest_member(ssParams, set, set_size, &(set->members[i]), i);
+						if ( ! ((fabs(set->members[i].cost - set->members[ closest_member_index ].cost)) < ssParams->local_search_f2_criteria) )
+						{
+							// printf("\n---\n");
+							// print_ind(ssParams, &(set->members[i]), ssParams->nreal);
+							// print_ind(ssParams, &(set->members[ closest_member(ssParams, set, set_size, &(set->members[i]), i) ]), ssParams->nreal);
+							
+							// printf("(%lf ==> %lf)\n", set->members[i].cost, set->members[closest_member_index].cost);
+							// printf("(%d ==> %d)\n", i, closest_member_index);
+							local_search:
+							{
+								ssParams->n_refinement++;
+								refine_individual(ssParams, set, set_size, &(set->members[i]), method, inp, out);
+										// print_ind(ssParams, &(set->members[i]), ssParams->nreal);
+							}
+						}
 					}
-				}else{
-					goto local_search;
+					else
+					{
+						goto local_search;
+					}
 				}
 			}
 		}
-		else{
+		else
+		{
 			goto second_filter;
 		}
 	}
+
+
+
 }
 
 

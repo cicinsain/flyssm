@@ -25,9 +25,9 @@ void generate_candiates(SSType *ssParams){
 		/* Generating new candidates */
 		if ( ssParams->subsets_list[i].members[0].cost < mid_cost && ssParams->subsets_list[i].members[1].cost < mid_cost )		// type 1
 		{
-			generate_ind_candidate(ssParams, &(ssParams->subsets_list[i].members[0]), &(ssParams->candidates_set->members[ candidates_count++ ]), dists, '0');
+			// generate_ind_candidate(ssParams, &(ssParams->subsets_list[i].members[0]), &(ssParams->candidates_set->members[ candidates_count++ ]), dists, '0');
 
-			generate_ind_candidate(ssParams, &(ssParams->subsets_list[i].members[1]), &(ssParams->candidates_set->members[ candidates_count++ ]), dists, '0');
+			// generate_ind_candidate(ssParams, &(ssParams->subsets_list[i].members[1]), &(ssParams->candidates_set->members[ candidates_count++ ]), dists, '0');
 
 			generate_ind_candidate(ssParams, &(ssParams->subsets_list[i].members[0]), &(ssParams->candidates_set->members[ candidates_count++ ]), dists, '1');
 			
@@ -40,7 +40,7 @@ void generate_candiates(SSType *ssParams){
 		}else
 		if ( ssParams->subsets_list[i].members[0].cost < mid_cost && ssParams->subsets_list[i].members[1].cost >= mid_cost )	// type 2
 		{
-			generate_ind_candidate(ssParams, &(ssParams->subsets_list[i].members[0]), &(ssParams->candidates_set->members[ candidates_count++ ]), dists, '0');
+			// generate_ind_candidate(ssParams, &(ssParams->subsets_list[i].members[0]), &(ssParams->candidates_set->members[ candidates_count++ ]), dists, '0');
 			
 			generate_ind_candidate(ssParams, &(ssParams->subsets_list[i].members[0]), &(ssParams->candidates_set->members[ candidates_count++ ]), dists, '1');
 

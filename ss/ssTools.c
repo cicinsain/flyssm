@@ -35,19 +35,35 @@ int closest_member(SSType *ssParams, Set *set, int set_size, individual *ind, in
 	double min;
 	int min_index;
 
-	min = euclidean_distance(ssParams, ind, &(set->members[0]));
-	min_index = 0;
-	
-	for (int i = 1; i < set_size; ++i)
+	if (ind_index == set_size - 1 ){
+		min = euclidean_distance(ssParams, ind, &(set->members[set_size - 2]));
+		min_index = set_size - 2;
+	}
+	else if (ind_index == 0){
+		min = euclidean_distance(ssParams, ind, &(set->members[1]));
+		min_index = 1;		
+	}
+	else{
+		min = euclidean_distance(ssParams, ind, &(set->members[ind_index - 1]));
+		min_index = ind_index - 1;		
+	}
+
+
+	for (int i = 0; i < set_size; ++i)
 	{
-		if ( i == ind_index )
-			continue;
-		
-		dist = euclidean_distance(ssParams, ind, &(set->members[i]));
-		if (dist < min ){
-			min = dist;
-			min_index = i;
+		// printf("%d: ", i);
+		// printf("%lf, %d\n", min, min_index);
+		if ( i != ind_index ){
+			// printf("%d++@#\n", ind_index);
+			dist = euclidean_distance(ssParams, ind, &(set->members[i]));
+			if (dist < min ){
+				min = dist;
+				min_index = i;
+			}
+
 		}
+		
+
 	}
 	return min_index;
 }

@@ -153,7 +153,7 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 
 		printf("\nBest Solution:\n");
 		// print_ind(ssParams, ssParams->best, ssParams->nreal);	
-		printf("fitness:%lf\t rms:%lf\n", ssParams->best->cost, sqrt(ssParams->best->cost/1970));
+		printf("rms:%lf\n", ssParams->best->cost);
 		printf("Number of substitution in Reference Set: %d\n", ssParams->n_ref_set_update);
 		printf("Number of Local Search Performed: %d\n", ssParams->n_refinement);
 

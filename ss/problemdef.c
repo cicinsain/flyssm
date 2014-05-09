@@ -164,7 +164,8 @@ double objective_function(double *s, SSType *ssParams, Input *inp, ScoreOutput *
     //     printf("Got it!\n");
     // }
     // printf("%lf\n", out->score);
-    return out->score;
+    return sqrt(out->score/1970);
+    // return out->score;
 
     // Replacing the objectives value with scores from Score()
     // for (g = 0; g < inp->zyg.defs.ngenes; ++g){
