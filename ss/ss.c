@@ -81,9 +81,10 @@ void InitSS(Input *inp, SSType *ssParams, char *inname){
 		warm_start(ssParams);
 	}
 
+#ifdef LOG
 	write_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal, ref_set_history_file, 0, 'w');
 	write_ind(ssParams, ssParams->best, ssParams->nreal, best_sols_history_file, 0, 'w');
-
+#endif
 
 }
 
@@ -105,7 +106,7 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 
 	// Declare the candidate set with the maximum size possible!
 	ssParams->candidates_set = (Set *)malloc(sizeof(Set));
-	allocate_set_memory(ssParams, ssParams->candidates_set, ssParams->ref_set_size * ssParams->ref_set_size * 4, ssParams->nreal);
+	allocate_set_memory(ssParams, ssParams->candidates_set, ssParams->ref_set_size * ssParams->ref_set_size * 6, ssParams->nreal);
 
 
 	// TODO: Add new criteria for the stop, maybe minimum distance to the minumum result
@@ -128,9 +129,12 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		update_ref_set(ssParams);
 
 		// Perform the local_search
-		refine_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 's', inp, &out);
+		if (ssParams->perform_local_search ){
+			refine_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 's', inp, &out);
+		}
 		quick_sort_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');
 
+#ifdef LOG
 		// Append the ref_set to the file
 		write_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal, ref_set_history_file, iter, 'w');
 		fflush(ref_set_history_file);
@@ -138,16 +142,18 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		// Append the best solution to the sol history file
 		write_ind(ssParams, ssParams->best, ssParams->nreal, best_sols_history_file, iter, 'w');
 		fflush(best_sols_history_file);
+#endif
 
+		// print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 		loadBar(iter, ssParams->max_iter, 50, 50);
 
 		#ifdef STATS
 			write_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, iter, 'w');
 		#endif		
 
-		printf("Best Solution:\n");
+		printf("\nBest Solution:\n");
 		// print_ind(ssParams, ssParams->best, ssParams->nreal);	
-		printf("%lf\n", sqrt(ssParams->best->cost/1970));
+		printf("fitness:%lf\t rms:%lf\n", ssParams->best->cost, sqrt(ssParams->best->cost/1970));
 		printf("Number of substitution in Reference Set: %d\n", ssParams->n_ref_set_update);
 		printf("Number of Local Search Performed: %d\n", ssParams->n_refinement);
 

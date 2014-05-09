@@ -8,7 +8,8 @@
 
 #include "maternal.h"
 
-#define STATS
+// #define STATS
+// #define LOG
 
 #define eul  2.71828182845905
 #define pi 3.14159265358979
@@ -90,12 +91,17 @@ typedef struct SSType
 	int **freqs_matrix;
 	double **probs_matrix;
 
-	double local_search_criteria;
-
 	double stop_criteria;
 
 	int perform_warm_start;
 	int perform_local_search;
+
+	int local_search_1_filter;
+	double local_search_f1_criteria;
+	
+	int local_search_2_filter;
+	double local_search_f2_criteria;
+
 	int perform_flatzone_detection;
 
 	char *ref_set_final_filename;
@@ -144,7 +150,7 @@ bool select_best(SSType *ssParams);
 void init_scatter_set(SSType *ssParams, Set *set);
 void init_ref_set(SSType *ssParams);
 void generate_candiates(SSType *ssParams);
-void generate_ind_candidate(SSType *ssParams, individual *base, individual *candidate,  double *steps, char type);
+void generate_ind_candidate(SSType *ssParams, individual *base, individual *candidate,  double *dists, char type);
 
 // refine.c
 bool is_in_flatzone(SSType *ssParams, Set *set, int set_size, individual *ind);

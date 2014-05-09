@@ -234,7 +234,7 @@ void warm_start(SSType *ssParams){
 	// Read freqMat
     FILE* freqMatStream = fopen("freq_mat_final.csv", "r");
     i = 0;
-    while (fgets(line, 4098, freqMatStream))
+    while (fgets(line, 4098, freqMatStream) && (i < ssParams->nreal ))
     {
     	int row[ssParams->p];
         char* tmp = strdup(line);

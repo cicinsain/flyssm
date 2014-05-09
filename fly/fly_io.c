@@ -1363,85 +1363,79 @@ ReadSSParameters( FILE * fp, Input *inp ) {
         l_ssParams.seed = rand();
         fscanf( fp, "%*s\n" );
     }
-    // printf("seed : %d\n", l_ssParams.seed );
+    printf("seed : %d\n", l_ssParams.seed );
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
    
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.nreal ) ) ) /* read the number of paramters */
         error( "ReadTheSSParameters: error reading ss section (nreal)" );
-    // printf("nreal : %d\n", l_ssParams.nreal );
+    printf("nreal : %d\n", l_ssParams.nreal );
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
         l_ssParams.nreal = inp->tra.size;
 
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.ref_set_size ) ) ) /* read the number of paramters */
         error( "ReadTheSSParameters: error reading ss section (ref_set_size)" );
-    // printf("ref_set_size : %d\n", l_ssParams.ref_set_size );
+    printf("ref_set_size : %d\n", l_ssParams.ref_set_size );
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 
 
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.max_iter ) ) ) /* read the number of binary parameters, in this case: 0*/
         error( "ReadTheSSParameters: error reading ss section (max_iter)" );
-    // printf("max_iter: %d\n", l_ssParams.max_iter);
+    printf("max_iter: %d\n", l_ssParams.max_iter);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the second text line */
 
 
     if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.step_size ) ) ) /* read the number of objectives, in gene-based version is equal to number of genes. They are defined in problemdef.c [objective_function]*/       
         error( "ReadTheSSParameters: error reading ss section (step_size)" );
-    // printf("step_size: %lf\n", l_ssParams.step_size);
+    printf("step_size: %lf\n", l_ssParams.step_size);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the second text line */
 
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.max_no_improve ) ) ) /* read the number of constraints, the constraints are defined in problemdef.c [objective_function]*/
         error( "ReadTheSSParameters: error reading ss section (max_no_improve)" );
-    // printf("max_no_improve: %d\n", l_ssParams.max_no_improve);
+    printf("max_no_improve: %d\n", l_ssParams.max_no_improve);
     fscanf( fp, "%*s\n" );      /* next line (ignore comment) */
 
 
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.diverse_set_size ) ) ) /* read the population size.*/
         error( "ReadTheSSParameters: error reading ss section (diverse_set_size)" );
-    // printf("diverse_set_size: %d\n", l_ssParams.diverse_set_size);
+    printf("diverse_set_size: %d\n", l_ssParams.diverse_set_size);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
 
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.max_elite ) ) ) /* read the population size.*/
         error( "ReadTheSSParameters: error reading ss section (max_elite)" );
-    // printf("max_elite: %d\n", l_ssParams.max_elite);
+    printf("max_elite: %d\n", l_ssParams.max_elite);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
 
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.subsets_list_size ) ) ) /* read the population size.*/
         error( "ReadTheSSParameters: error reading ss section (subsets_list_size)" );
-    // printf("subsets_list_size: %d\n", l_ssParams.subsets_list_size);
+    printf("subsets_list_size: %d\n", l_ssParams.subsets_list_size);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
 
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.pair_size ) ) ) /* read the population size.*/
         error( "ReadTheSSParameters: error reading ss section (pair_size)" );
-    // printf("pair_size: %d\n", l_ssParams.pair_size);
+    printf("pair_size: %d\n", l_ssParams.pair_size);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
 
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.p ) ) )  /* read the crossover rate for real variables. */
         error( "ReadTheSSParameters: error reading ss section (p)" );
-    // printf("p: %d\n", l_ssParams.p);
+    printf("p: %d\n", l_ssParams.p);
     fscanf( fp, "%*s\n" );      /* advance the pointer once more */
-
-    if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.local_search_criteria ) ) )  /* read the crossover rate for real variables. */
-        error( "ReadTheSSParameters: error reading ss section (local_search_criteria)" );
-    // printf("local_search_criteria: %lf\n", l_ssParams.local_search_criteria);
-    fscanf( fp, "%*s\n" );      /* advance the pointer once more */
-    //TODO: Check if the cooling method is 'd' then the value of d_alpha should be between 0 and 1.
 
     if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.dist_epsilon ) ) )  /* read the crossover rate for real variables. */
         error( "ReadTheSSParameters: error reading ss section (dist_epsilon)" );
-    // printf("dist_epsilon: %lf\n", l_ssParams.dist_epsilon);
+    printf("dist_epsilon: %lf\n", l_ssParams.dist_epsilon);
     fscanf( fp, "%*s\n" );      /* advance the pointer once more */
 
 
     if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.fitness_epsilon ) ) ) /* read the number of paramters */
         error( "ReadTheSSParameters: error reading ss section (fitness_epsilon)" );
-    // printf("fitness_epsilon: %lf\n", l_ssParams.fitness_epsilon);
+    printf("fitness_epsilon: %lf\n", l_ssParams.fitness_epsilon);
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 // /*-->*/    l_ssParams.i_totalno_var = inp->tra.size;     // The number of parameters will be set using the number of parameters that selected for tweaking process.
             // TODO: Uncomment the line above for production
 
     if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.sol ) ) ) /* read the number of paramters */
         error( "ReadTheSSParameters: error reading ss section (sol)" );
-    // printf("sol: %lf\n", l_ssParams.sol);
+    printf("sol: %lf\n", l_ssParams.sol);
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 // /*-->*/   l_ssParams.sol = inp->zyg.defs.ngenes;
              // TODO: Uncomment the line above for production
@@ -1449,6 +1443,36 @@ ReadSSParameters( FILE * fp, Input *inp ) {
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.perform_warm_start ) ) ) /* read the number of paramters */
         error( "ReadTheSSParameters: error reading ss section (perform_warm_start)" );
     printf("perform_warm_start: %d\n", l_ssParams.perform_warm_start);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.perform_local_search ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (perform_local_search)" );
+    printf("perform_local_search: %d\n", l_ssParams.perform_local_search);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */    
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.local_search_1_filter ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (local_search_1_filter)" );
+    printf("local_search_1_filter: %d\n", l_ssParams.local_search_1_filter);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.local_search_f1_criteria ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (local_search_f1_criteria)" );
+    printf("local_search_f1_criteria: %lf\n", l_ssParams.local_search_f1_criteria);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.local_search_2_filter ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (local_search_2_filter)" );
+    printf("local_search_2_filter: %d\n", l_ssParams.local_search_2_filter);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.local_search_f2_criteria ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (local_search_f2_criteria)" );
+    printf("local_search_f2_criteria: %lf\n", l_ssParams.local_search_f2_criteria);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.perform_flatzone_detection ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (perform_flatzone_detection)" );
+    printf("perform_flatzone_detection: %d\n", l_ssParams.perform_flatzone_detection);
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 
     l_ssParams.ref_set_final_filename = (char *)calloc(256,  sizeof(char));

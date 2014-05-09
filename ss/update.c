@@ -34,6 +34,7 @@ void update_ref_set(SSType *ssParams){
 				in the ref_set as well..
 			 */
 			// We send the `ref_set_size - 1` since we want to avoid the last memeber.
+			// DIVERSITY CHECK
 			int duplicate_index = is_exist(ssParams, ssParams->ref_set, ssParams->ref_set_size - 1, &(ssParams->candidates_set->members[i]));
 			if (-1 == duplicate_index)
 			{
@@ -41,34 +42,45 @@ void update_ref_set(SSType *ssParams){
 				   avoid many duplicate in the scatter search; consequently, less risk to stuck in
 				   a local minima somewhere
 				   */
-				// if ( !is_in_flatzone(ssParams, ssParams->ref_set , ssParams->ref_set_size - 1, &(ssParams->candidates_set->members[i])) )
-				// if ( ssParams->candidates_set->members[i].cost < ssParams->ref_set->members[ssParams->ref_set_size -  1].cost * ( 1 - ssParams->fitness_epsilon) )
-				{
-					copy_ind(ssParams, &(ssParams->ref_set->members[ssParams->ref_set_size - 1]), &(ssParams->candidates_set->members[i]));
-					insertion_sort(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');
+				if ( ssParams->perform_flatzone_detection ){
+					// if ( !is_in_flatzone(ssParams, ssParams->ref_set , ssParams->ref_set_size - 1, &(ssParams->candidates_set->members[i])) )
+					if ( ssParams->candidates_set->members[i].cost < ssParams->ref_set->members[ssParams->ref_set_size -  1].cost * ( 1 - ssParams->fitness_epsilon) )
+					{
+						// TODO: Write a function to do the replacement, with a argument for differnt sort, insertion, bubble, quick
+						replace:
+							copy_ind(ssParams, &(ssParams->ref_set->members[ssParams->ref_set_size - 1]), &(ssParams->candidates_set->members[i]));
+							insertion_sort(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');
 
-					ssParams->n_ref_set_update++;
+							ssParams->n_ref_set_update++;
 
-					#ifdef STATS
-						update_frequency_matrix(ssParams, &(ssParams->candidates_set->members[i]));
-					#endif					
+							#ifdef STATS
+								update_frequency_matrix(ssParams, &(ssParams->candidates_set->members[i]));
+							#endif		
+					}
+				}else{
+					goto replace;
 				}
 			}
-			else{
+			else
+			{
 				/* Check if the candidate has better fitness than the duplicated member; or at least it has reasonable 
 					differences with it (passing the flatzone filter). If yes, then we could replace it.
 				*/
-					if ( ssParams->candidates_set->members[i].cost < ssParams->ref_set->members[duplicate_index].cost * ( 1 - ssParams->fitness_epsilon) )
-					{
-						copy_ind(ssParams, &(ssParams->ref_set->members[duplicate_index]), &(ssParams->candidates_set->members[i]));
-						ssParams->n_ref_set_update++;
-						// TODO: BubbleSort or QuickSort needed! BubbleSort is perfect since the list is already sorted
-						// and one run of BubbleSort will put the replaced member in the right place.
+					// IMP: This makes problem since it replace duplicated ind with candidate although they are not actually the same
+					// 
+					// if ( ssParams->candidates_set->members[i].cost < ssParams->ref_set->members[duplicate_index].cost * ( 1 - ssParams->fitness_epsilon) )
+					// {
+					// 	copy_ind(ssParams, &(ssParams->ref_set->members[duplicate_index]), &(ssParams->candidates_set->members[i]));
+					// 	ssParams->n_ref_set_update++;
+					// 	// TODO: BubbleSort or QuickSort needed! BubbleSort is perfect since the list is already sorted
+					// 	// and one run of BubbleSort will put the replaced member in the right place.
+					// 	// bubble_sort(ssParams, ssParams->ref_set, duplicate_index, 'c');
+					// 	printf("0\n");
 						
-						#ifdef STATS
-							update_frequency_matrix(ssParams, &(ssParams->candidates_set->members[i]));
-						#endif	
-					}
+					// 	#ifdef STATS
+					// 		update_frequency_matrix(ssParams, &(ssParams->candidates_set->members[i]));
+					// 	#endif	
+					// }
 
 				// }
 			}
