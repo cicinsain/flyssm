@@ -179,12 +179,15 @@ bool is_in_flatzone(SSType *ssParams, Set *set, int set_size, individual *ind){
 		The loop doesn't check the last item since it is the best sol and every good solution in
 		comparison to that is in flatzone coverd by that!
 	 */
-	for (int i = set_size - 1; i > 0; --i)	// set: ref_set
+	for (int i = set_size - 1; i >= 0; --i)	// set: ref_set
 	{
 		/* code */
 		// printf("%f, %f, %f\n", ind->cost , set->members[i].cost, set->members[i].cost * ( 1 - ssParams->fitness_epsilon) );
-		if ( ind->cost > set->members[i].cost * ( 1 - ssParams->fitness_epsilon) )
+		// if ( ind->cost > set->members[i].cost * ( 1 - ssParams->fitness_epsilon) )
+		if (ind->cost < set->members[i].cost + ( set->members[i].cost * ssParams->fitness_epsilon) 
+				&& ind->cost > set->members[i].cost - (set->members[i].cost * ssParams->fitness_epsilon))
 		{
+			ssParams->n_flatzone_detected++;
 			isInFlatzone |= 1;
 			break;
 		}

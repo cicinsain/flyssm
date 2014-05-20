@@ -390,6 +390,8 @@ main( int argc, char **argv ) {
     	printf("Starting Non-dominated Sorting Genetic Algorithm\n");
     #elif AMOSA
     	printf("Starting Archived Multi-objective Simulated Annealing\n");
+    #elif SS
+    	printf("Starting Scatter Search Algorithm\n");
     #else
     	printf("Starting Simulated Annealing\n" );
     #endif

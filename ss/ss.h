@@ -87,6 +87,9 @@ typedef struct SSType
 	/* stats */
 	int n_refinement;					// Number of local search performed
 	int n_ref_set_update;				// Number of substitution in refSet
+	int n_duplicates;
+	int n_flatzone_detected;
+	int n_function_evals;
 	
 	int **freqs_matrix;
 	double **probs_matrix;
@@ -121,6 +124,7 @@ extern FILE *freqs_matrix_file;
 extern FILE *freq_mat_final_file;
 extern FILE *prob_mat_final_file;
 extern FILE *ref_set_final_file;
+extern FILE *can_set_history_file;
 
 /*
 				Functions Prototypes
@@ -155,6 +159,7 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
 // refine.c
 bool is_in_flatzone(SSType *ssParams, Set *set, int set_size, individual *ind);
 void update_ref_set(SSType *ssParams);
+void replace(SSType *ssParams, individual *dest, individual *src, char sort_to_perform);
 
 // allocate.c
 void allocate_ind_memory(SSType *ssParams, individual *ind, int member_length);

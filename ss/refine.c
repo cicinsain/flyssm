@@ -24,7 +24,7 @@ void refine_set(SSType *ssParams, Set *set, int set_size, char method, Input *in
 		if (ssParams->local_search_1_filter)
 		{
 			// printf("1");
-			if ( !( ( fabs(set->members[i].cost - ssParams->sol)) > ssParams->local_search_f1_criteria) )
+			if ( ( fabs(set->members[i].cost - ssParams->sol)) < ssParams->local_search_f1_criteria) 
 			{
 				second_filter:
 				{
@@ -32,19 +32,29 @@ void refine_set(SSType *ssParams, Set *set, int set_size, char method, Input *in
 					{
 						// printf("2==\n");
 						closest_member_index = closest_member(ssParams, set, set_size, &(set->members[i]), i);
-						if ( ! ((fabs(set->members[i].cost - set->members[ closest_member_index ].cost)) < ssParams->local_search_f2_criteria) )
-						{
-							// printf("\n---\n");
-							// print_ind(ssParams, &(set->members[i]), ssParams->nreal);
-							// print_ind(ssParams, &(set->members[ closest_member(ssParams, set, set_size, &(set->members[i]), i) ]), ssParams->nreal);
-							
-							// printf("(%lf ==> %lf)\n", set->members[i].cost, set->members[closest_member_index].cost);
-							// printf("(%d ==> %d)\n", i, closest_member_index);
-							local_search:
+						// The idea was to check if the closest member is actually close enough to be a reason to stop the local search
+						// but I guess finding the reasonable value for that (which is '5') might be a bit hard!
+						// if ( euclidean_distance(ssParams, &(set->members[i]), &(set->members[closest_member_index])) < 5 )
+						{	
+							// printf("dist!\n");
+							// if ( ! ((fabs(set->members[i].cost - set->members[ closest_member_index ].cost)) < ssParams->local_search_f2_criteria) )
+							if ( !( set->members[i].cost < set->members[closest_member_index].cost + (ssParams->local_search_f2_criteria * set->members[closest_member_index].cost )
+									&& set->members[i].cost > set->members[closest_member_index].cost - (ssParams->local_search_f2_criteria * set->members[closest_member_index].cost ) ))
 							{
-								ssParams->n_refinement++;
-								refine_individual(ssParams, set, set_size, &(set->members[i]), method, inp, out);
-										// print_ind(ssParams, &(set->members[i]), ssParams->nreal);
+								// printf("!flat\n");
+								goto local_search;
+								// printf("\n---\n");
+								// print_ind(ssParams, &(set->members[i]), ssParams->nreal);
+								// print_ind(ssParams, &(set->members[ closest_member(ssParams, set, set_size, &(set->members[i]), i) ]), ssParams->nreal);
+								
+								// printf("(%lf ==> %lf)\n", set->members[i].cost, set->members[closest_member_index].cost);
+								// printf("(%d ==> %d)\n", i, closest_member_index);
+								local_search:
+								{
+									ssParams->n_refinement++;
+									refine_individual(ssParams, set, set_size, &(set->members[i]), method, inp, out);
+											// print_ind(ssParams, &(set->members[i]), ssParams->nreal);
+								}
 							}
 						}
 					}

@@ -10,8 +10,11 @@ void init_ssParams(SSType *ssParams){
 	// Estimating the Reference Set Size
 	ssParams->subsets_list_size = (ssParams->ref_set_size * ssParams->ref_set_size);		// Maximum possible size of subsets_list
 	
-	ssParams->n_refinement = 0;
-	ssParams->n_ref_set_update = 0;
+	ssParams->n_refinement        = 0;
+	ssParams->n_ref_set_update    = 0;
+	ssParams->n_duplicates        = 0;
+	ssParams->n_flatzone_detected = 0;
+	ssParams->n_function_evals    = 0;
 
 	ssParams->freqs_matrix = (int **)malloc(ssParams->nreal * sizeof(int *));
 	ssParams->probs_matrix = (double **)malloc(ssParams->nreal * sizeof(double *));
@@ -50,7 +53,7 @@ void init_ssParams(SSType *ssParams){
 }
 
 /*
-	Generate Scatter Set based on the Banga instruction.
+	Generate Scatter Set based on the Banga's instruction.
  */
 void init_scatter_set(SSType *ssParams, Set *set){
 
@@ -110,9 +113,9 @@ void init_scatter_set(SSType *ssParams, Set *set){
 
 	}	// Scatter Set is now extented to 10*b (b: ref_set_size)
 
-					#ifdef STATS
-						write_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, 0, 'w');
-					#endif
+	#ifdef STATS
+		write_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, 0, 'w');
+	#endif
 
 	//TODO: Free stuffs
 }

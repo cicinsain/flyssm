@@ -157,6 +157,7 @@ double objective_function(double *s, SSType *ssParams, Input *inp, ScoreOutput *
     // inp->lparm = CopyParm( inp->zyg.parm, &( inp->zyg.defs ) );
     // Computing the out using the inp configuration
     Score( inp, out, 0 );
+    ssParams->n_function_evals++;
     
     // FIXME: Many of the run end up in this situation =>  Fixed by shrinking the range of T, E, and M from (-1, 1) to (-0.1, 0.1)
     // TODO: I can track the FORBIDDEN_MOVE and do something after getting several FORBIDDEN_MOVE in a row like increasing the mutation rate or something else.

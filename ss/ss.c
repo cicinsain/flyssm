@@ -77,6 +77,10 @@ void InitSS(Input *inp, SSType *ssParams, char *inname){
 		// Assigning the best solutions
 		ssParams->best = &(ssParams->ref_set->members[0]);				// The first members of ref_set is always the best
 
+		printf("\nStats - (%d):\n", 0);
+		// print_ind(ssParams, ssParams->best, ssParams->nreal);	
+		printf("\t\tBest RMS: %lf\n", ssParams->best->cost);
+
 	}else{	// WARM START
 		warm_start(ssParams);
 	}
@@ -109,6 +113,11 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 	allocate_set_memory(ssParams, ssParams->candidates_set, ssParams->ref_set_size * ssParams->ref_set_size * 6, ssParams->nreal);
 
 
+	int n_ref_set_update    = 0;
+	int n_refinement        = 0;
+	int n_duplicates        = 0;
+	int n_function_evals    = 0;
+	int n_flatzone_detected = 0;
 	// TODO: Add new criteria for the stop, maybe minimum distance to the minumum result
 	printf("Starting the optimization procedure...\n");
 	for (int iter = 1; iter < ssParams->max_iter; ++iter)
@@ -122,11 +131,17 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		// Generate new candidates
 		generate_candiates(ssParams);
 		evaluate_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, inp, &out);
+		// refine_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, 's', inp, &out);
 		quick_sort_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, 'c');
 
-	
+// printf("candidate set");
+// print_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, ssParams->nreal);
+// printf("refSet:");
+// print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 		// Update refSet by replacing new cadidates
 		update_ref_set(ssParams);
+// printf("=======refSet:");
+// print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 
 		// Perform the local_search
 		if (ssParams->perform_local_search ){
@@ -145,18 +160,27 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 #endif
 
 		// print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
-		loadBar(iter, ssParams->max_iter, 50, 50);
+		// loadBar(iter, ssParams->max_iter, 50, 50);
 
 		#ifdef STATS
 			write_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p, freqs_matrix_file, iter, 'w');
 		#endif		
 
-		printf("\nBest Solution:\n");
+		printf("\nStats - (%d):\n", iter);
 		// print_ind(ssParams, ssParams->best, ssParams->nreal);	
-		printf("rms:%lf\n", ssParams->best->cost);
-		printf("Number of substitution in Reference Set: %d\n", ssParams->n_ref_set_update);
-		printf("Number of Local Search Performed: %d\n", ssParams->n_refinement);
+		printf("\t\tBest RMS: %lf\n", ssParams->best->cost);
+		printf("\t\t# Replacement in Reference Set: %d\n", ssParams->n_ref_set_update - n_ref_set_update);
+		printf("\t\t# of Local Search Performed: %d\n", ssParams->n_refinement - n_refinement);
+		printf("\t\t# Duplicates: %d\n", ssParams->n_duplicates - n_duplicates);
+		printf("\t\t# Flatzone: %d\n", ssParams->n_flatzone_detected - n_flatzone_detected);
+		printf("\t\t================= candidateSetSize: %d\n", ssParams->candidates_set_size);
 
+
+		n_ref_set_update    = ssParams->n_ref_set_update;
+		n_refinement        = ssParams->n_refinement;
+		n_duplicates        = ssParams->n_duplicates;
+		n_function_evals    = ssParams->n_function_evals;
+		n_flatzone_detected = ssParams->n_flatzone_detected;
 	}
 
 	write_params_to_fly_output_standard(ssParams, inp, inname);
@@ -170,8 +194,10 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 
 	printf("====================================\n");
 	printf("\nStatistics: \n");
-	printf("Number of substitution in Reference Set: %d\n", ssParams->n_ref_set_update);
-	printf("Number of Local Search Performed: %d\n", ssParams->n_refinement);
+	printf("# Replacement in Reference Set: %d\n", ssParams->n_ref_set_update);
+	printf("# Local Search Performed: %d\n", ssParams->n_refinement);
+	printf("# Duplicates: %d\n", ssParams->n_duplicates);
+	printf("# Function Evalation: %d\n", ssParams->n_function_evals);
 
 
 	printf("\nExporting ref_set_final.csv, freq_mat_final.csv and prob_mat_final.csv for warm start...\n");
