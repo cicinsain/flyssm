@@ -30,6 +30,27 @@ double euclidean_distance(SSType *ssParams, individual *ind1, individual *ind2){
 
 }
 
+void matrix_product(SSType *ssParams, double **A, int a_row, int a_col, double **B, int b_row, int b_col, double **P, int p_row, int p_col){
+
+	int sum  = 0;
+    for (int i = 0 ; i < a_row ; i++ )
+    {
+      for (int j = 0 ; j < b_col ; j++ )
+      {
+        for (int k = 0 ; k < b_row ; k++ )
+        {
+          sum = sum + A[i][k]*B[k][j];
+        }
+ 
+        P[i][j] = sum;
+        sum = 0;
+      }
+    }
+    p_row = a_row;
+    p_col = b_col;
+
+}
+
 int closest_member(SSType *ssParams, Set *set, int set_size, individual *ind, int ind_index){
 	double dist;
 	double min;
@@ -152,8 +173,21 @@ bool is_subset_exist(SSType *ssParams, Set *subsets_list, int subsets_list_size,
 	return false;
 }
 
-bool is_exist_in_subsets_list(SSType *ssParams, Set *subset){
+bool is_exist_in_subsets_list(SSType *ssParams, individual *ind1, individual* ind2){
+	for (int i = 0; i < ssParams->subsets_list_size; ++i)
+	{
+		if ( (is_equal(ssParams, ind1, &(ssParams->subsets_list[i].members[0]))
+			  	&& is_equal(ssParams, ind2, &(ssParams->subsets_list[i].members[1]))) 
+			 ||
+			 (is_equal(ssParams, ind2, &(ssParams->subsets_list[i].members[0]))
+			  	&& is_equal(ssParams, ind1, &(ssParams->subsets_list[i].members[1])))
+			 )
+		{
+				return true;
+				break;
+		}
 
+	}
 
 	return false;
 }
@@ -218,66 +252,66 @@ void parse_int_row(SSType *ssParams, char *line, int *row){
     }
 }
 
-void warm_start(SSType *ssParams){
-	int i;
-    char line[4098];
-    printf("Loading the data to perform warm start...\n");
+// void warm_start(SSType *ssParams){
+// 	int i;
+//     char line[4098];
+//     printf("Loading the data to perform warm start...\n");
 	
-	// Read refSet
-    FILE* refSetStream = fopen("ref_set_final.csv", "r");
-    ssParams->ref_set = (Set *)malloc(sizeof(Set));
-	allocate_set_memory(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
+// 	// Read refSet
+//     FILE* refSetStream = fopen("ref_set_final.csv", "r");
+//     ssParams->ref_set = (Set *)malloc(sizeof(Set));
+// 	allocate_set_memory(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
  
-    i = 0;
-    while (fgets(line, 4098, refSetStream) && (i < ssParams->ref_set_size))
-    {
-    	double row[ssParams->nreal + 1];
-        char* tmp = strdup(line);
-        parse_double_row(ssParams, tmp, row);
-        for (int j = 0; j < ssParams->nreal; ++j)
-        {
-        	/* code */
-        	ssParams->ref_set->members[i].params[j] = row[j];
-        }
-        // memcpy(ssParams->ref_set->members[i].params, row, (ssParams->nreal - 1) * sizeof(double));
-        ssParams->ref_set->members[i].cost = row[ssParams->nreal];
-        // ssParams->ref_set->members[i].distance = row[ssParams->nreal - 1];
-        free(tmp);
-        i++;
-    }
-    ssParams->best = (individual *)malloc(sizeof(individual));
-	ssParams->best = &(ssParams->ref_set->members[0]);				// The first members of ref_set is always the best
+//     i = 0;
+//     while (fgets(line, 4098, refSetStream) && (i < ssParams->ref_set_size))
+//     {
+//     	double row[ssParams->nreal + 1];
+//         char* tmp = strdup(line);
+//         parse_double_row(ssParams, tmp, row);
+//         for (int j = 0; j < ssParams->nreal; ++j)
+//         {
+//         	/* code */
+//         	ssParams->ref_set->members[i].params[j] = row[j];
+//         }
+//         // memcpy(ssParams->ref_set->members[i].params, row, (ssParams->nreal - 1) * sizeof(double));
+//         ssParams->ref_set->members[i].cost = row[ssParams->nreal];
+//         // ssParams->ref_set->members[i].distance = row[ssParams->nreal - 1];
+//         free(tmp);
+//         i++;
+//     }
+//     ssParams->best = (individual *)malloc(sizeof(individual));
+// 	ssParams->best = &(ssParams->ref_set->members[0]);				// The first members of ref_set is always the best
 
-    print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
+//     print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 
-	// Read freqMat
-    FILE* freqMatStream = fopen("freq_mat_final.csv", "r");
-    i = 0;
-    while (fgets(line, 4098, freqMatStream) && (i < ssParams->nreal ))
-    {
-    	int row[ssParams->p];
-        char* tmp = strdup(line);
-        parse_int_row(ssParams, tmp, row);
-        memcpy(ssParams->freqs_matrix[i], (int*)row, ssParams->p * sizeof(int));
-        free(tmp);
-        i++;
-    }
-    print_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p);
+// 	// Read freqMat
+//     FILE* freqMatStream = fopen("freq_mat_final.csv", "r");
+//     i = 0;
+//     while (fgets(line, 4098, freqMatStream) && (i < ssParams->nreal ))
+//     {
+//     	int row[ssParams->p];
+//         char* tmp = strdup(line);
+//         parse_int_row(ssParams, tmp, row);
+//         memcpy(ssParams->freqs_matrix[i], (int*)row, ssParams->p * sizeof(int));
+//         free(tmp);
+//         i++;
+//     }
+//     print_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p);
 
 
-	// Read probMat
-    FILE* probMatStream = fopen("prob_mat_final.csv", "r");
-    i = 0;
-    while (fgets(line, 4098, probMatStream))
-    {
-    	double row[ssParams->p];
-        char* tmp = strdup(line);
-        parse_double_row(ssParams, tmp, row);
-        memcpy(ssParams->probs_matrix[i], row, ssParams->p * sizeof(double));
-        free(tmp);
-        i++;
-    }
+// 	// Read probMat
+//     FILE* probMatStream = fopen("prob_mat_final.csv", "r");
+//     i = 0;
+//     while (fgets(line, 4098, probMatStream))
+//     {
+//     	double row[ssParams->p];
+//         char* tmp = strdup(line);
+//         parse_double_row(ssParams, tmp, row);
+//         memcpy(ssParams->probs_matrix[i], row, ssParams->p * sizeof(double));
+//         free(tmp);
+//         i++;
+//     }
 
-    print_double_matrix(ssParams, ssParams->probs_matrix, ssParams->nreal, ssParams->p);
+//     print_double_matrix(ssParams, ssParams->probs_matrix, ssParams->nreal, ssParams->p);
 
-}
+// }

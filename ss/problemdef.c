@@ -62,12 +62,12 @@
 
 // void init_sample_params(SSType *ssParams){
 
-// 	ssParams->ref_set_size = 20;		// TODO: Check the (ref_set_size < diverse_set_size); otherwise the segmentation will happen
+// 	ssParams->ref_set_size = 20;		// TODO: Check the (ref_set_size < scatter_set_size); otherwise the segmentation will happen
 // 	ssParams->max_iter = 500;
 // 	ssParams->step_size = 0.0005;	// TODO: Should be computed using the boundaries of variables
 // 	ssParams->max_no_improve = 100;	
-// 	// ssParams->diverse_set_size = 200;
-// 	ssParams->diverse_set_size = 10 * ssParams->ref_set_size;
+// 	// ssParams->scatter_set_size = 200;
+// 	ssParams->scatter_set_size = 10 * ssParams->ref_set_size;
 // 	ssParams->max_elite = ssParams->ref_set_size / 2;
 // 	ssParams->pair_size = 2;
 // 	ssParams->subsets_list_size = 0;

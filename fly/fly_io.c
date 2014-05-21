@@ -1360,6 +1360,7 @@ ReadSSParameters( FILE * fp, Input *inp ) {
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.seed ) ) ) /* read the number of paramters */
     {
         // error( "ReadTheSSParameters: error reading ss section (seed)" );
+        srand(time(NULL));
         l_ssParams.seed = rand();
         fscanf( fp, "%*s\n" );
     }
@@ -1395,9 +1396,9 @@ ReadSSParameters( FILE * fp, Input *inp ) {
     fscanf( fp, "%*s\n" );      /* next line (ignore comment) */
 
 
-    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.diverse_set_size ) ) ) /* read the population size.*/
-        error( "ReadTheSSParameters: error reading ss section (diverse_set_size)" );
-    // printf("diverse_set_size: %d\n", l_ssParams.diverse_set_size);
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.scatter_set_size ) ) ) /* read the population size.*/
+        error( "ReadTheSSParameters: error reading ss section (scatter_set_size)" );
+    // printf("scatter_set_size: %d\n", l_ssParams.scatter_set_size);
     fscanf( fp, "%*s\n" );      /* advance the pointer past the third text line */
 
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.max_elite ) ) ) /* read the population size.*/
@@ -1475,6 +1476,33 @@ ReadSSParameters( FILE * fp, Input *inp ) {
     // printf("perform_flatzone_detection: %d\n", l_ssParams.perform_flatzone_detection);
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.perform_stop_criteria ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (perform_stop_criteria)" );
+    // printf("perform_stop_criteria: %d\n", l_ssParams.perform_stop_criteria);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%lf\n", &l_ssParams.stop_criteria ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (stop_criteria)" );
+    // printf("stop_criteria: %lf\n", l_ssParams.stop_criteria);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.perform_ref_set_regen ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (perform_ref_set_regen)" );
+    // printf("perform_ref_set_regen: %d\n", l_ssParams.perform_ref_set_regen);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.ref_set_regen_freq ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (ref_set_regen_freq)" );
+    // printf("ref_set_regen_freq: %d\n", l_ssParams.ref_set_regen_freq);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.min_distance_for_local_search ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (min_distance_for_local_search)" );
+    // printf("min_distance_for_local_search: %d\n", l_ssParams.min_distance_for_local_search);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
+
+
+
     l_ssParams.ref_set_final_filename = (char *)calloc(256,  sizeof(char));
     l_ssParams.freq_mat_final_filename = (char *)calloc(256,  sizeof(char));
     l_ssParams.prob_mat_final_filename = (char *)calloc(256,  sizeof(char));
@@ -1502,6 +1530,15 @@ ReadSSParameters( FILE * fp, Input *inp ) {
 
     // FIXME: I am hardcoded
 
+    l_ssParams.ref_set_size             = ceil(1.0 + sqrt(1.0 + 40.0 * l_ssParams.nreal) / 2.0);
+    if (l_ssParams.ref_set_size %2 != 0)
+        l_ssParams.ref_set_size++;
+    l_ssParams.ref_set_size             = MAX(l_ssParams.ref_set_size, 20);
+    printf("refSet Size: %d\n", l_ssParams.ref_set_size);
+
+    l_ssParams.max_elite                = l_ssParams.ref_set_size / 2;
+    l_ssParams.scatter_set_size         = MAX(10 * l_ssParams.nreal, 40);
+    printf("scatterSet Size: %d\n", l_ssParams.scatter_set_size);
 
 
     // if( 1 != ( fscanf( fp, "%ld\n", &l_ssParams.seed ) ) ) /* read the random seed */
@@ -1625,12 +1662,12 @@ ReadSSParameters( FILE * fp, Input *inp ) {
 
 
 
-    // l_ssParams.ref_set_size = 20;        // TODO: Check the (ref_set_size < diverse_set_size); otherwise the segmentation will happen
+    // l_ssParams.ref_set_size = 20;        // TODO: Check the (ref_set_size < scatter_set_size); otherwise the segmentation will happen
     // l_ssParams.max_iter = 500;
     // l_ssParams.step_size = 0.0005;   // TODO: Should be computed using the boundaries of variables
     // l_ssParams.max_no_improve = 100; 
-    // // l_ssParams.diverse_set_size = 200;
-    // l_ssParams.diverse_set_size = 10 * l_ssParams.ref_set_size;
+    // // l_ssParams.scatter_set_size = 200;
+    // l_ssParams.scatter_set_size = 10 * l_ssParams.ref_set_size;
     // l_ssParams.max_elite = l_ssParams.ref_set_size / 2;
     // l_ssParams.pair_size = 2;
     // l_ssParams.subsets_list_size = 0;

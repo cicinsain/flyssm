@@ -1,22 +1,6 @@
 #include "ss.h"
 #include "fly_io.h"
 
-void init_report_files(SSType *ssParams){
-
-	ref_set_history_file = fopen("ref_set_history_file.out", "w");
-	best_sols_history_file = fopen("best_sols_history_file.out", "w");
-
-	fprintf(ref_set_history_file, "iter_id\tcost\t");
-	fprintf(best_sols_history_file, "iter_id\tcost\t");
-	for (int i = 0; i < ssParams->nreal; ++i)
-	{
-		fprintf(ref_set_history_file, "parameters[%d]\t", i);
-		fprintf(best_sols_history_file, "parameters[%d]\t", i);
-	}
-	fprintf(ref_set_history_file, "\n");
-	fprintf(best_sols_history_file, "\n");
-
-}	
 
 
 /*
