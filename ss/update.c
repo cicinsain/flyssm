@@ -44,6 +44,11 @@ void update_ref_set(SSType *ssParams){
 		}else
 		{	
 			ssParams->n_duplicates++;
+			if (ssParams->candidates_set->members[i].cost < ssParams->ref_set->members[duplicate_index].cost){
+				replace(ssParams, &(ssParams->ref_set->members[duplicate_index]), &(ssParams->candidates_set->members[i]), 'q');
+				// TODO: The sort could be improved!
+				ssParams->n_duplicate_replaced++;
+			}
 		}
 			/* Check if the candidate has better fitness than the duplicated member; or at least it has reasonable 
 				differences with it (passing the flatzone filter). If yes, then we could replace it.
@@ -111,10 +116,10 @@ void re_gen_ref_set(SSType *ssParams, Set *set, int set_size, char type, Input *
 	// compute_Mt(ssParams, ssParams->ref_set, ssParams->ref_set_size, M, n, h - 2);
 	int m = ssParams->scatter_set_size;
 	init_scatter_set(ssParams, ssParams->scatter_set);
-	if (type == 's'){
-		evaluate_set(ssParams, ssParams->scatter_set, ssParams->scatter_set_size, inp, out);
-		quick_sort_set(ssParams, ssParams->scatter_set, ssParams->scatter_set_size, 'c');
-	}
+	// if (type == 's'){
+	// 	evaluate_set(ssParams, ssParams->scatter_set, ssParams->scatter_set_size, inp, out);
+	// 	quick_sort_set(ssParams, ssParams->scatter_set, ssParams->scatter_set_size, 'c');
+	// }
 
 	double **P = (double **)malloc(m * sizeof(double *));
 	for (int i = 0; i < m; ++i){

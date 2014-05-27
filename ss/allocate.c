@@ -7,7 +7,7 @@ void allocate_ind_memory(SSType *ssParams, individual *ind, int member_length){
 
 	ind->params = (double *)malloc(member_length * sizeof(double));
 	ind->cost = 0;
-	ind->distance = 0;
+	// ind->distance = 0;
 }
 
 void allocate_subset_memory(SSType *ssParams, individual *pair){

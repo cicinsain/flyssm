@@ -13,6 +13,8 @@ void init_ssParams(SSType *ssParams){
 	ssParams->n_flatzone_detected = 0;
 	ssParams->n_function_evals    = 0;
 	ssParams->n_regen			  = 0;
+	ssParams->n_duplicate_replaced = 0;
+	ssParams->n_iter =0;
 
 	// Initialize the Reference Set
 	ssParams->ref_set             = (Set *)malloc(sizeof(Set));
@@ -73,20 +75,24 @@ void init_ssParams(SSType *ssParams){
 
 void init_report_files(SSType *ssParams){
 
-	ref_set_history_file   = fopen("ref_set_history_file.out", "w");
-	best_sols_history_file = fopen("best_sols_history_file.out", "w");
-	freqs_matrix_file      = fopen("freqs_matrix_history.out", "w");
+	char *mode = "w";
+	if (ssParams->perform_warm_start)
+		mode = "a+";
+	ref_set_history_file   = fopen("ref_set_history_file.out", mode);
+	best_sols_history_file = fopen("best_sols_history_file.out", mode);
+	freqs_matrix_file      = fopen("freqs_matrix_history.out", mode);
+	stats_file			   = fopen("stats_file.csv", mode);
 
-	fprintf(ref_set_history_file, "iter_id\tcost\t");
-	fprintf(best_sols_history_file, "iter_id\tcost\t");
+	// fprintf(ref_set_history_file, "iter_id\tcost\t");
+	// fprintf(best_sols_history_file, "iter_id\tcost\t");
 	
-	for (int i = 0; i < ssParams->nreal; ++i){
-		fprintf(ref_set_history_file, "parameters[%d]\t", i);
-		fprintf(best_sols_history_file, "parameters[%d]\t", i);
-	}
+	// for (int i = 0; i < ssParams->nreal; ++i){
+	// 	fprintf(ref_set_history_file, "parameters[%d]\t", i);
+	// 	fprintf(best_sols_history_file, "parameters[%d]\t", i);
+	// }
 
-	fprintf(ref_set_history_file, "\n");
-	fprintf(best_sols_history_file, "\n");
+	// fprintf(ref_set_history_file, "\n");
+	// fprintf(best_sols_history_file, "\n");
 }	
 
 /*

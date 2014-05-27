@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include <math.h>
+#include <string.h>
 
 #include "maternal.h"
 
@@ -33,10 +33,9 @@ typedef enum { false, true } bool;
 
 typedef struct individual
 {
-	// int index;			// The idea is to use this index for sorting purposes
 	double* params;
 	double cost;
-	double distance; 		// The distance of an individual to a set. Only uses in select_ref_set function.
+	// double distance; 		// The distance of an individual to a set. Only uses in select_ref_set function.
 
 } individual;
 
@@ -58,6 +57,7 @@ typedef struct SSType
 	int seed;
 	int max_iter;
 	int max_elite;						// = ref_set_size / 2
+	int n_iter;
 
 	int nreal;
 	double sol;							// Possible guess or information about the value of minima,
@@ -101,6 +101,7 @@ typedef struct SSType
 	int n_flatzone_detected;			// Number of flatzone detected during the updating procedure
 	int n_function_evals;
 	int n_regen;
+	int n_duplicate_replaced;
 	
 	int **freqs_matrix;					// Frequencies of variables being in sub-regions
 	double **probs_matrix;
@@ -122,6 +123,7 @@ typedef struct SSType
 
 	/* Local Search Parameters */
 	int perform_local_search;
+	int local_search_freq;
 	char local_search_method;
 
 	int local_search_1_filter;
@@ -149,6 +151,7 @@ extern FILE *freq_mat_final_file;
 extern FILE *prob_mat_final_file;
 extern FILE *ref_set_final_file;
 extern FILE *can_set_history_file;
+extern FILE *stats_file;
 
 /*
 				Functions Prototypes
@@ -230,7 +233,7 @@ int closest_member(SSType *ssParams, Set *set, int set_size, individual *ind, in
 void copy_ind(SSType *ssParams, individual *src, individual *dest);
 void parse_double_row(SSType *ssParams, char *line, double *row);
 void parse_int_row(SSType *ssParams, char *line, int *row);
-void warm_start(SSType *ssParams);
+void init_warm_start(SSType *ssParams);
 void matrix_product(SSType *ssParams, double **A, int a_row, int a_col, double **B, int b_row, int b_col, double **P, int p_row, int p_col);
 
 // report.c

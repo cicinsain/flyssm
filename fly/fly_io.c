@@ -1451,6 +1451,11 @@ ReadSSParameters( FILE * fp, Input *inp ) {
     // printf("perform_local_search: %d\n", l_ssParams.perform_local_search);
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */    
 
+    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.local_search_freq ) ) ) /* read the number of paramters */
+        error( "ReadTheSSParameters: error reading ss section (local_search_freq)" );
+    // printf("local_search_freq: %d\n", l_ssParams.local_search_freq);
+    fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */    
+
     if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.local_search_1_filter ) ) ) /* read the number of paramters */
         error( "ReadTheSSParameters: error reading ss section (local_search_1_filter)" );
     // printf("local_search_1_filter: %d\n", l_ssParams.local_search_1_filter);

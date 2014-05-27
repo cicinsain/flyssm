@@ -8,19 +8,19 @@ void refine_subsets_list(SSType *ssParams, char method, Input *inp, ScoreOutput 
 	{
 		refine_set(ssParams, &(ssParams->subsets_list[i]), ssParams->pair_size, method, inp, out);
 	}
-
-	// deallocate_ind_memory(ssParams, new_candidate);
 }
 
 void refine_set(SSType *ssParams, Set *set, int set_size, char method, Input *inp, ScoreOutput *out){
 
 	int closest_member_index;
-	for (int i = set_size - 1; i >= 0; --i)
+	for (int i = 0; i < set_size; ++i)
 	{
 		if (ssParams->local_search_1_filter)
 		{
 			if ( ( fabs(set->members[i].cost - ssParams->sol)) < ssParams->local_search_f1_criteria) 
 			{
+				goto second_filter;
+
 				second_filter:
 				{
 					if (ssParams->local_search_2_filter)
@@ -30,26 +30,27 @@ void refine_set(SSType *ssParams, Set *set, int set_size, char method, Input *in
 						 * The idea was to check if the closest member is actually close enough to be a reason to stop the local search
 						 * but I guess finding the reasonable value for that (which is '5') might be a bit hard!
 						 */
-						if ( euclidean_distance(ssParams, &(set->members[i]), &(set->members[closest_member_index])) < ssParams->min_distance_for_local_search )
+						// printf("++%lf\n", euclidean_distance(ssParams, &(set->members[i]), &(set->members[closest_member_index])) );
+						if ( !(euclidean_distance(ssParams, &(set->members[i]), &(set->members[closest_member_index])) < ssParams->min_distance_for_local_search) )
 						{	
 							// if ( ! ((fabs(set->members[i].cost - set->members[ closest_member_index ].cost)) < ssParams->local_search_f2_criteria) )
 							if ( !( set->members[i].cost < set->members[closest_member_index].cost + (ssParams->local_search_f2_criteria * set->members[closest_member_index].cost )
-								&& set->members[i].cost > set->members[closest_member_index].cost - (ssParams->local_search_f2_criteria * set->members[closest_member_index].cost ) ))
+									&& set->members[i].cost > set->members[closest_member_index].cost - (ssParams->local_search_f2_criteria * set->members[closest_member_index].cost ) ) )
 								// Will check if the new candidate is in flatzone with radius of local_search_f2_criteria
 							{
-								goto local_search;
+								// goto local_search;
 
-								local_search:
-								{
+								// local_search:
+								// {
 									refine_individual(ssParams, set, set_size, &(set->members[i]), method, inp, out);
-									ssParams->n_refinement++;
-								}
+								// 	ssParams->n_refinement++;
+								// }
 							}
 						}
 					}
 					else
 					{
-						goto local_search;
+						refine_individual(ssParams, set, set_size, &(set->members[i]), method, inp, out);
 					}
 				}
 			}
@@ -113,6 +114,7 @@ individual new_candidate;
 			}
 	}
 
+	ssParams->n_refinement++;
 	free(new_params);
 
 	// deallocate_ind_memory(ssParams, new_candidate);

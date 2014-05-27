@@ -6,15 +6,15 @@
 /*
 	Compute the distance of a member from all the members of set
  */
-void distance_to_set(SSType *ssParams, Set *set, int set_size, individual *ind){
+// void distance_to_set(SSType *ssParams, Set *set, int set_size, individual *ind){
 
-	double dist = 0;
-	for (int i = 0; i < set_size; ++i)
-	{
-		dist += euclidean_distance(ssParams, &(set->members[i]), ind);
-	}
-	ind->distance = dist;
-}
+// 	double dist = 0;
+// 	for (int i = 0; i < set_size; ++i)
+// 	{
+// 		dist += euclidean_distance(ssParams, &(set->members[i]), ind);
+// 	}
+// 	ind->distance = dist;
+// }
 
 /*
 	Compute the Eculidean Distance between two individuals
@@ -86,16 +86,10 @@ int closest_member(SSType *ssParams, Set *set, int set_size, individual *ind, in
 		
 
 	}
+	// printf("====%d\n", min_index);
 	return min_index;
 }
 
-/*
-	Update the best set, containing all the best solution during the optimizations.
- */
-void update_bestSet(SSType *ssParams, individual *best){
-
-
-}
 
 /*
 	Return minimum value of an array with its `index`
@@ -199,7 +193,7 @@ bool is_exist_in_subsets_list(SSType *ssParams, individual *ind1, individual* in
 void copy_ind(SSType *ssParams, individual *dest, individual *src){
 	memcpy(dest->params, src->params, ssParams->nreal*sizeof(double));
 	dest->cost =  src->cost;
-	dest->distance = src->distance;
+	// dest->distance = src->distance;
 }
 
 /*
@@ -213,7 +207,7 @@ bool is_in_flatzone(SSType *ssParams, Set *set, int set_size, individual *ind){
 		The loop doesn't check the last item since it is the best sol and every good solution in
 		comparison to that is in flatzone coverd by that!
 	 */
-	for (int i = set_size - 1; i >= 0; --i)	// set: ref_set
+	for (int i = 0; i < set_size; ++i)	// set: ref_set
 	{
 		/* code */
 		// printf("%f, %f, %f\n", ind->cost , set->members[i].cost, set->members[i].cost * ( 1 - ssParams->fitness_epsilon) );
@@ -251,67 +245,3 @@ void parse_int_row(SSType *ssParams, char *line, int *row){
         row[i] = atoi(tok);
     }
 }
-
-// void warm_start(SSType *ssParams){
-// 	int i;
-//     char line[4098];
-//     printf("Loading the data to perform warm start...\n");
-	
-// 	// Read refSet
-//     FILE* refSetStream = fopen("ref_set_final.csv", "r");
-//     ssParams->ref_set = (Set *)malloc(sizeof(Set));
-// 	allocate_set_memory(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
- 
-//     i = 0;
-//     while (fgets(line, 4098, refSetStream) && (i < ssParams->ref_set_size))
-//     {
-//     	double row[ssParams->nreal + 1];
-//         char* tmp = strdup(line);
-//         parse_double_row(ssParams, tmp, row);
-//         for (int j = 0; j < ssParams->nreal; ++j)
-//         {
-//         	/* code */
-//         	ssParams->ref_set->members[i].params[j] = row[j];
-//         }
-//         // memcpy(ssParams->ref_set->members[i].params, row, (ssParams->nreal - 1) * sizeof(double));
-//         ssParams->ref_set->members[i].cost = row[ssParams->nreal];
-//         // ssParams->ref_set->members[i].distance = row[ssParams->nreal - 1];
-//         free(tmp);
-//         i++;
-//     }
-//     ssParams->best = (individual *)malloc(sizeof(individual));
-// 	ssParams->best = &(ssParams->ref_set->members[0]);				// The first members of ref_set is always the best
-
-//     print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
-
-// 	// Read freqMat
-//     FILE* freqMatStream = fopen("freq_mat_final.csv", "r");
-//     i = 0;
-//     while (fgets(line, 4098, freqMatStream) && (i < ssParams->nreal ))
-//     {
-//     	int row[ssParams->p];
-//         char* tmp = strdup(line);
-//         parse_int_row(ssParams, tmp, row);
-//         memcpy(ssParams->freqs_matrix[i], (int*)row, ssParams->p * sizeof(int));
-//         free(tmp);
-//         i++;
-//     }
-//     print_int_matrix(ssParams, ssParams->freqs_matrix, ssParams->nreal, ssParams->p);
-
-
-// 	// Read probMat
-//     FILE* probMatStream = fopen("prob_mat_final.csv", "r");
-//     i = 0;
-//     while (fgets(line, 4098, probMatStream))
-//     {
-//     	double row[ssParams->p];
-//         char* tmp = strdup(line);
-//         parse_double_row(ssParams, tmp, row);
-//         memcpy(ssParams->probs_matrix[i], row, ssParams->p * sizeof(double));
-//         free(tmp);
-//         i++;
-//     }
-
-//     print_double_matrix(ssParams, ssParams->probs_matrix, ssParams->nreal, ssParams->p);
-
-// }

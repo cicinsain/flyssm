@@ -14,8 +14,8 @@ void quick_sort_set(SSType *ssParams, Set *set, int set_size, char key){
 	{
 		if (key == 'c')
 			numbers[i] = set->members[i].cost;
-		else if (key == 'd')
-			numbers[i] = set->members[i].distance;
+		// else if (key == 'd')
+		// 	numbers[i] = set->members[i].distance;
 	}
 
 	quick_sort(ssParams, set, set_size, numbers, 0, set_size - 1);

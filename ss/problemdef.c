@@ -143,6 +143,8 @@
 
 // }
 
+#include "score.h"
+#include "zygotic.h"
 
 
 double objective_function(double *s, SSType *ssParams, Input *inp, ScoreOutput *out){
