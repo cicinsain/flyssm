@@ -92,21 +92,21 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		// Generate new candidates
 		generate_candiates(ssParams);
 		evaluate_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, inp, &out);
-		if (ssParams->perform_local_search && (iter % ssParams->local_search_freq == 0)  ){
-			printf("%s", KGRN);
-			printf("-");
-			printf("%s", KNRM);
-			refine_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, 's', inp, &out);
-		}
+		// if (ssParams->perform_local_search && (iter % ssParams->local_search_freq == 0)  ){
+		// 	printf("%s", KGRN);
+		// 	printf("-");
+		// 	printf("%s", KNRM);
+		// 	refine_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, 's', inp, &out);
+		// }
 		// Update refSet by replacing new cadidates
 		update_ref_set(ssParams);
 		// print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 		// print_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, ssParams->nreal);
 
 		// Perform the local_search
-		// if (ssParams->perform_local_search ){
-		// 	refine_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 's', inp, &out);
-		// }
+		if (ssParams->perform_local_search && (iter % ssParams->local_search_freq == 0)  ){
+			refine_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 's', inp, &out);
+		}
 		quick_sort_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');
 		
 		// Append the ref_set to the file
