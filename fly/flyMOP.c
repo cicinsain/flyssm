@@ -59,6 +59,8 @@
     #include "nsga2.h"
 #elif SS
     #include "ss.h"
+#elif ESS
+    #include "ess.h"
 #endif
 
 
@@ -80,6 +82,10 @@
 
 #ifdef SS
     SSType ssParams;
+#endif
+
+#ifdef ESS
+    eSSType essParams;
 #endif
 
 /*** Constants *************************************************************/
@@ -573,6 +579,11 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
             ssParams = ReadSSParameters(infile, &inp);
         #endif
 
+        #ifdef ESS
+            init_defaultSettings(&essParams);
+            essParams = ReadeSSParameters(infile, &inp);
+        #endif
+
         i_temp = InitMoves( infile, &inp );     /* set initial temperature and initialize */
         // initialize distribution stuff
         inp.dis = InitDistribution( infile );
@@ -610,8 +621,20 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
     #endif
 
     #ifdef SS
+
         InitSS(&inp, &ssParams, inname);
         RunSS(&inp, &ssParams, inname);
+    #endif
+
+    #ifdef ESS
+        // ScoreOutput out;
+        out->score          = 1e38;           // start with a very large number
+        out->penalty        = 0;
+        out->size_resid_arr = 0;
+        out->jacobian       = NULL;
+        out->residuals      = NULL;
+        init_eSS( &essParams, &inp, out);
+        run_eSS( &essParams, &inp, out);
     #endif
 
     // Ignore the Score function in order to avoid running the SA

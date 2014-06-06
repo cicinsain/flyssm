@@ -1706,6 +1706,227 @@ ReadSSParameters( FILE * fp, Input *inp ) {
 #endif
 
 
+#ifdef ESS
+eSSType
+ReadeSSParameters( FILE * fp, Input *inp ) {
+
+
+    eSSType l_eSSParams;
+
+
+                l_eSSParams.n_Params = inp->tra.size;
+                l_eSSParams.sol = 10;
+                // printf("%s", KCYN);
+                // printf("\n---------------------------------");
+                // printf("\n %s:", (const char*)TEST_PROBLEM);
+                // printf("\n Analytic Solution: %lf \n", (double)SOL);
+                // printf("---------------------------------\n\n");
+                // printf("%s", KNRM);
+
+                /**
+                 * User Options
+                 */
+                l_eSSParams.logBound = 0;
+                // l_eSSParams.maxeval;
+                // l_eSSParams.maxtime;
+                // l_eSSParams.iterprint;
+                // l_eSSParams.plot;
+                // l_eSSParams.weight;
+                // l_eSSParams.tolc;
+                // l_eSSParams.prob_bound;
+                // l_eSSParams.strategy;
+                l_eSSParams.inter_save = 1;
+                l_eSSParams.warmStart = 0;
+                l_eSSParams.perform_refSet_randomization = 1;
+
+                l_eSSParams.goBeyond_Freqs = 10;
+
+                l_eSSParams.n_archiveSet = 100;
+
+                l_eSSParams.set_std_Tol = 1e-3;
+
+                l_eSSParams.equality_type = 0;
+                // l_eSSParams.user_guesses = 1;
+
+                /**
+                 * Global Options
+                 */
+                // l_eSSParams.n_Params = 2;
+
+                // if (l_eSSParams.maxiter == 0)
+                    l_eSSParams.maxiter = 200;
+                
+                l_eSSParams.maxStuck = 20;
+
+            // essParams = ReadeSSParameters(infile, &inp);
+
+
+            //     l_eSSParams.min_real_var = (double *)malloc(l_eSSParams.n_Params * sizeof(double));
+            //     l_eSSParams.max_real_var = (double *)malloc(l_eSSParams.n_Params * sizeof(double));
+            //     for (int i = 0; i < l_eSSParams.n_Params; ++i)
+            //     {
+            //         l_eSSParams.min_real_var[i] = 0;
+            //         l_eSSParams.max_real_var[i] = 0;
+            //     }
+
+            // #ifdef TEST_PROBLEM
+            //     bounds(l_eSSParams.min_real_var, l_eSSParams.max_real_var);
+            // #endif
+                
+                l_eSSParams.n_refSet = ceil(1.0 + sqrt(1.0 + 40.0 * l_eSSParams.n_Params) / 2.0);
+                if (l_eSSParams.n_refSet %2 != 0)
+                    l_eSSParams.n_refSet++;
+                l_eSSParams.n_refSet = MAX(l_eSSParams.n_refSet, 20);
+
+                l_eSSParams.n_subRegions = MIN(4, l_eSSParams.n_Params);
+
+                l_eSSParams.n_scatterSet = MAX(10 * l_eSSParams.n_Params, 40);
+
+                l_eSSParams.n_childsSet = l_eSSParams.n_refSet;
+
+                l_eSSParams.n_candidateSet = l_eSSParams.n_refSet -1 ;
+
+                // l_eSSParams.init_RefSet_Type;
+                // l_eSSParams.combination_Type;
+                // l_eSSParams.regeneration_Type;
+                l_eSSParams.n_delete = l_eSSParams.n_refSet / 4;
+                // l_eSSParams.intensification_Freqs;
+                // l_eSSParams.diversification_Type;
+                l_eSSParams.perform_cost_tol_stopping = 0;
+                l_eSSParams.cost_Tol = 1e-3;
+                l_eSSParams.dist_Tol= 1e-3;
+                l_eSSParams.param_Tol = 1e-4;
+                // l_eSSParams.stuck_Tol;
+                l_eSSParams.perform_refSet_convergence_stopping = 0;
+                l_eSSParams.refSet_convergence_Tol = 1e-4;
+
+                /**
+                 * Local Search Options
+                 */
+                l_eSSParams.perform_LocalSearch = 0;
+                if (l_eSSParams.local_method == '0') l_eSSParams.local_method = 'n';
+                l_eSSParams.local_min_criteria = 20 ;
+                l_eSSParams.local_maxIter = 500; 
+                // l_eSSParams.local_Freqs;
+                // l_eSSParams.local_SolverMethod;
+                l_eSSParams.local_Tol = 1e-3;
+                // l_eSSParams.local_IterPrint;
+                l_eSSParams.local_N1 = 50;
+                l_eSSParams.local_N2 = 25;
+                // l_eSSParams.local_Balance;
+                l_eSSParams.local_atEnd = 1;
+                l_eSSParams.local_onBest_Only = 0;
+                // l_eSSParams.local_merit_Filter;
+                // l_eSSParams.local_distance_Filter;
+                // l_eSSParams.local_th_merit_Factor;
+                // l_eSSParams.local_max_distance_Factor;
+                // l_eSSParams.local_wait_maxDist_limit;
+                // l_eSSParams.local_wait_th_limit;
+
+                l_eSSParams.compute_Ind_Stats = 0;
+                l_eSSParams.compute_Set_Stats = 0;   
+
+
+    inp->sco.searchspace = InitLimits( fp, inp );               /* Reading the fly variable */
+    Penalty2Limits( inp->sco.searchspace, inp->zyg.defs );      /* convert to explicit limits */
+
+    l_eSSParams.min_real_var = (double *)malloc(l_eSSParams.n_Params * sizeof(double));
+    l_eSSParams.max_real_var = (double *)malloc(l_eSSParams.n_Params * sizeof(double));
+
+
+
+   int n = 0;
+
+    /* Translate the SearchSpace to the amosa propriate range. EqParms{ R, T, E, m, h, d, lambda, tau }    */
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // R
+        if( inp->twe.Rtweak[i] == 1 ){
+            l_eSSParams.min_real_var[n]   = inp->sco.searchspace->Rlim[i]->lower;
+            l_eSSParams.max_real_var[n++] = inp->sco.searchspace->Rlim[i]->upper;
+            printf("R: %f,", l_eSSParams.min_real_var[n-1]);
+            printf("%f\n", l_eSSParams.max_real_var[n-1]);
+        }
+    }
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // T
+        for (int j = 0; j < inp->zyg.defs.ngenes; ++j){
+            if( inp->twe.Ttweak[( i * inp->zyg.defs.ngenes ) + j] == 1 ) {
+                l_eSSParams.min_real_var[n]   = inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->lower / inp->sco.searchspace->pen_vec[j + 2];
+                l_eSSParams.max_real_var[n++] = inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->upper / inp->sco.searchspace->pen_vec[j + 2];
+                printf("T: %f,", l_eSSParams.min_real_var[n-1]);
+                printf("%f\n", l_eSSParams.max_real_var[n-1]);
+            }
+        }
+    }
+
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // E
+        for (int j = 0; j < inp->zyg.defs.egenes; ++j){
+            if( inp->twe.Etweak[( i * inp->zyg.defs.egenes ) + j] == 1 ) {
+                l_eSSParams.min_real_var[n]   = inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->lower / inp->sco.searchspace->pen_vec[inp->zyg.defs.ngenes + j + 2];
+                l_eSSParams.max_real_var[n++] = inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->upper / inp->sco.searchspace->pen_vec[inp->zyg.defs.ngenes + j + 2];
+                printf("E: %f,", l_eSSParams.min_real_var[n-1]);
+                printf("%f\n", l_eSSParams.max_real_var[n-1]);
+            }
+        }
+    }
+
+    // // m, h, d, lambda, tau
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // m
+        if( inp->twe.mtweak[i] == 1 ){
+            l_eSSParams.min_real_var[n]   = inp->sco.searchspace->mlim[i]->lower / inp->sco.searchspace->pen_vec[1];
+            l_eSSParams.max_real_var[n++] = inp->sco.searchspace->mlim[i]->upper / inp->sco.searchspace->pen_vec[1];
+            printf("m: %f,", l_eSSParams.min_real_var[n-1]);
+            printf("%f\n", l_eSSParams.max_real_var[n-1]);
+        }
+    }
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // h
+        if( inp->twe.htweak[i] == 1 ){
+            l_eSSParams.min_real_var[n]   = inp->sco.searchspace->hlim[i]->lower;
+            l_eSSParams.max_real_var[n++] = inp->sco.searchspace->hlim[i]->upper;
+            printf("h: %f,", l_eSSParams.min_real_var[n-1]);
+            printf("%f\n", l_eSSParams.max_real_var[n-1]);
+        }
+    }
+
+    // FIXME: Doesn't consider the case where diffusion schedule are A or C.
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // d
+        if( inp->twe.dtweak[i] == 1 ){
+            l_eSSParams.min_real_var[n]   = inp->sco.searchspace->dlim[i]->lower;
+            l_eSSParams.max_real_var[n++] = inp->sco.searchspace->dlim[i]->upper;
+            printf("d: %f,", l_eSSParams.min_real_var[n-1]);
+            printf("%f\n", l_eSSParams.max_real_var[n-1]);
+        }
+    }
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // lambda
+        if( inp->twe.lambdatweak[i] == 1 ){
+            l_eSSParams.min_real_var[n]   = inp->sco.searchspace->lambdalim[i]->lower;
+            l_eSSParams.max_real_var[n++] = inp->sco.searchspace->lambdalim[i]->upper;
+            printf("l: %f,", l_eSSParams.min_real_var[n-1]);
+            printf("%f\n", l_eSSParams.max_real_var[n-1]);
+        }
+    }
+
+    for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // tau
+        if( inp->twe.tautweak[i] == 1 ){
+            l_eSSParams.min_real_var[n]   = inp->sco.searchspace->taulim[i]->lower;
+            l_eSSParams.max_real_var[n++] = inp->sco.searchspace->taulim[i]->upper;
+            printf("tau: %f,", l_eSSParams.min_real_var[n-1]);
+            printf("%f\n", l_eSSParams.max_real_var[n-1]);
+        }
+    }
+
+
+    return l_eSSParams;
+
+}
+
+
+#endif
+
+
 
 /** ReadGenotypes: This function reads all the genotypes in a datafile & 
  *                  returns an SList with genotype number and pointers to 

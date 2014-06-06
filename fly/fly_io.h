@@ -30,6 +30,8 @@
     #include "nsga2.h"
 #elif SS
     #include "ss.h"
+#elif ESS
+    #include "ess.h"
 #endif
 
 
@@ -39,6 +41,8 @@
     AMOSAType ReadAMOSAParameters (FILE *fp, Input *inp);
 #elif SS
     SSType ReadSSParameters( FILE * fp, Input *inp );
+#elif ESS
+    eSSType ReadeSSParameters( FILE * fp, Input *inp );
 #endif
 
 

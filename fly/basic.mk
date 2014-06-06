@@ -12,12 +12,16 @@ NSGA2OBJ = ../nsga2/allocate.o ../nsga2/decode.o ../nsga2/fillnds.o ../nsga2/mut
 AMOSAOBJ = ../amosa/amosa_real.o
 SSOBJ = ../ss/allocate.o ../ss/evaluate.o ../ss/init.o ../ss/input.o ../ss/linkedlist.o ../ss/local_search.o ../ss/problemdef.o ../ss/recombine.o ../ss/refine.o ../ss/report.o ../ss/sort.o ../ss/ss.o ../ss/ssTools.o ../ss/stats.o ../ss/update.o 
 
+ESSOBJ = ../ess/ess.o ../ess/essAllocate.o ../ess/essEvaluate.o ../ess/essGoBeyond.o ../ess/essIO.o ../ess/essInit.o ../ess/essLocalSearch.o ../ess/essProblem.o ../ess/essRand.o ../ess/essRecombine.o ../ess/essSort.o ../ess/essStats.o ../ess/essTools.o
+
 ifeq ($(METHOD), -DAMOSA)
 	METHODOBJ = $(AMOSAOBJ)
 else ifeq ($(METHOD), -DNSGA2)
 	METHODOBJ = $(NSGA2OBJ)
 else ifeq ($(METHOD), -DSS)
 	METHODOBJ = $(SSOBJ)
+else ifeq ($(METHOD), -DESS)
+	METHODOBJ = $(ESSOBJ)
 endif
 
 # parallel code

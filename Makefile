@@ -7,9 +7,11 @@ VERSION = 10.0
 nsga2Rule=n2
 amosaRule=mo
 ssRule=ssa
+essRule=essa
 nsga2Folder=nsga2
 amosaFolder=amosa
 ssFolder=ss
+essFolder=ess
 
 ifeq ($(METHOD),-DAMOSA)
 	execFile = fly_amosa
@@ -29,6 +31,12 @@ else ifeq ($(METHOD), -DSS)
 	methodRule=$(ssRule)
 	methodFolder=$(ssFolder)
 	methodINCLUDES=-I../ss
+else ifeq ($(METHOD), -DESS)
+	execFile = fly_ess
+	FLYEXECS = unfold printscore execFile scramble
+	methodRule=$(essRule)
+	methodFolder=$(essFolder)
+	methodINCLUDES=-I../ess
 endif
 
 
@@ -51,6 +59,7 @@ VFLAGS = $(USRFLAG) $(HOSTFLAG) $(COMPFLAG) $(FLAGFLAG) $(VERSFLAG)
 AMOSAFLAGS = -DAMOSA
 NSGA2FLAGS = -DNSGA2
 SSFLAGS = -DSS
+ESSFLAGS = -DESS
 
 OSTYPE=linux-gnu
 #ifeq ($(OSTYPE),linux-gnu)
@@ -156,6 +165,7 @@ export FLYEXECS
 export NSGA2FLAGS
 export AMOSAFLAGS
 export SSFLAGS
+export ESSFLAGS
 export METHOD
 export execFile
 
@@ -190,6 +200,7 @@ veryclean:
 	rm -f amosa/*.o
 	rm -f nsga2/*.o
 	rm -f ss/*.o
+	rm -r ess/*.o
 
 help:
 	@echo "make: this is the Makefile for fly code"

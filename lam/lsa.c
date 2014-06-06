@@ -83,6 +83,10 @@
 	#define SS
 #endif 
 
+#ifndef ESS
+	#define ESS
+#endif 
+
 /* STATIC VARIABLES ********************************************************/
 
 static Files files;
