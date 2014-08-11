@@ -1,0 +1,222 @@
+\hypertarget{zygotic_8c}{
+\section{fly/zygotic.c File Reference}
+\label{zygotic_8c}\index{fly/zygotic.c@{fly/zygotic.c}}
+}
+
+
+Implementation of functions that deal with the right hand side of the ODEs.  
+{\ttfamily \#include $<$ctype.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include \char`\"{}error.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}maternal.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}solvers.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}integrate.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}zygotic.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}fly\_\-io.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}ioTools.h\char`\"{}}\par
+{\ttfamily \#include $<$sys/time.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structZygote}{Zygote} \hyperlink{zygotic_8c_a51b8854c17cf11efbf976d8fed0c49f8}{InitZygote} (FILE $\ast$fp, void($\ast$pd)(double $\ast$, double, double $\ast$, int, \hyperlink{structSolverInput}{SolverInput} $\ast$, \hyperlink{structInput}{Input} $\ast$), void($\ast$pj)(double, double $\ast$, double $\ast$, double $\ast$$\ast$, int, \hyperlink{structSolverInput}{SolverInput} $\ast$, \hyperlink{structInput}{Input} $\ast$), \hyperlink{structInput}{Input} $\ast$inp, char $\ast$section\_\-title)
+\item 
+void \hyperlink{zygotic_8c_a243c923eea0f89e5f8be8f2b31f1afb9}{FreeZygote} (void)
+\item 
+void \hyperlink{zygotic_8c_a7e6158d9db30f2a22c463061ec918613}{FreeMutant} (\hyperlink{structEqParms}{EqParms} lparm)
+\item 
+void \hyperlink{zygotic_8c_a81ad330f8a7c751a3bf72e684f2a367d}{DvdtOrig} (double $\ast$v, double t, double $\ast$vdot, int n, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{zygotic_8c_a375e1b4d71b324b472cc778feb7d06ab}{JacobnOrig} (double t, double $\ast$v, double $\ast$dfdt, double $\ast$$\ast$jac, int n, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+int \hyperlink{zygotic_8c_a83cb2493f3b650fea0e3ec30f764ce6e}{CalcGuts} (int gindex, char $\ast$gtype, \hyperlink{structInterpObject}{InterpObject} $\ast$hist\_\-interrp, \hyperlink{structInterpObject}{InterpObject} $\ast$extinp\_\-interrp, \hyperlink{structNArrPtr}{NArrPtr} table, \hyperlink{structNArrPtr}{NArrPtr} $\ast$gtable, char $\ast$gutsdefs, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{zygotic_8c_ad6bffd94588e1b58deca6607c19ba465}{CalcRhs} (double $\ast$v, double t, double $\ast$guts, int n, int gn, int numguts, int which, unsigned long $\ast$gutcomps, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+int \hyperlink{zygotic_8c_aae15698bb19d2c5656285c791f80bb1e}{ParseString} (char $\ast$v, char $\ast$$\ast$arginp)
+\item 
+char $\ast$ \hyperlink{zygotic_8c_ab0fd52538b9e31be1d96e9528fe396f5}{GetGutsComps} (char $\ast$geneidstring, char $\ast$egeneidstring, char $\ast$$\ast$specsin, unsigned long $\ast$specsout)
+\item 
+\hyperlink{structEqParms}{EqParms} \hyperlink{zygotic_8c_ac7c469642b1a7bfd8f8f486749496ac4}{Mutate} (char $\ast$g\_\-type, \hyperlink{structEqParms}{EqParms} parm, \hyperlink{structTheProblem}{TheProblem} $\ast$defs)
+\item 
+void \hyperlink{zygotic_8c_a52842c41493dce05964b94ce36549c7d}{T\_\-Mutate} (int gene, int ngenes, \hyperlink{structEqParms}{EqParms} $\ast$lparm)
+\item 
+void \hyperlink{zygotic_8c_ab56da71245f1a26c00423c46fee25893}{R\_\-Mutate} (int gene, \hyperlink{structEqParms}{EqParms} $\ast$lparm)
+\item 
+void \hyperlink{zygotic_8c_a624b2071d076d091282fefbebd812959}{RT\_\-Mutate} (int gene, int ngenes, \hyperlink{structEqParms}{EqParms} $\ast$lparm)
+\item 
+\hyperlink{structEqParms}{EqParms} \hyperlink{zygotic_8c_a6941502a487cf6d5a47999f4ea26da58}{CopyParm} (\hyperlink{structEqParms}{EqParms} orig\_\-parm, \hyperlink{structTheProblem}{TheProblem} $\ast$defs)
+\item 
+double \hyperlink{zygotic_8c_afaa4a3a698870ae8b5bf16b12f1b3b58}{tvsub} (struct rusage a, struct rusage b)
+\item 
+void \hyperlink{zygotic_8c_a969cb4e0f8a2f417f22bce6303eae43f}{DvdtDelay} (double $\ast$v, double $\ast$$\ast$vd, double t, double $\ast$vdot, int n, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{zygotic_8c_a01b37b344536f8982ddefbf262d3502c}{Dvdt\_\-sqrt} (double $\ast$v, double t, double $\ast$vdot, int n, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{zygotic_8c_ae945f06de2bcb6ebd7aab6d415e0a7ed}{Dvdt\_\-production} (double $\ast$v, double t, double $\ast$vdot, int n, double $\ast$v\_\-ext, \hyperlink{structDArrPtr}{DArrPtr} bcd, int MM, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{zygotic_8c_ae55ede3ac862a2495baae7f76e2c3c8b}{Dvdt\_\-degradation} (double $\ast$v, double t, double $\ast$vdot, int n, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{zygotic_8c_a66b238b41da8a35248d0ced31ab8dd90}{Dvdt\_\-diffusion} (double $\ast$v, double t, double $\ast$vdot, int n, int MM, double $\ast$D, \hyperlink{structInput}{Input} $\ast$inp)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{zygotic_8c_a7ab59805f7a1819164bc301293db600d}{
+struct timeval start {\bfseries end}}
+\label{zygotic_8c_a7ab59805f7a1819164bc301293db600d}
+
+\item 
+\hypertarget{zygotic_8c_a016eff132555c3445ec568538dadebdb}{
+const int {\bfseries INTERPHASE} = 0}
+\label{zygotic_8c_a016eff132555c3445ec568538dadebdb}
+
+\item 
+\hypertarget{zygotic_8c_a19400c218ec184ad08cc92980f509ed2}{
+const int {\bfseries MITOSIS} = 1}
+\label{zygotic_8c_a19400c218ec184ad08cc92980f509ed2}
+
+\item 
+\hypertarget{zygotic_8c_a77c01690987a4a5e27ee4a0123b5c4cb}{
+double $\ast$ {\bfseries vinput}}
+\label{zygotic_8c_a77c01690987a4a5e27ee4a0123b5c4cb}
+
+\item 
+\hypertarget{zygotic_8c_ad2096e21cc41acc99c79f88a2d8ae042}{
+double $\ast$ {\bfseries bot2}}
+\label{zygotic_8c_ad2096e21cc41acc99c79f88a2d8ae042}
+
+\item 
+\hypertarget{zygotic_8c_a01dace6e6d12c19224c75ddb0a7c11bd}{
+double $\ast$ {\bfseries bot}}
+\label{zygotic_8c_a01dace6e6d12c19224c75ddb0a7c11bd}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of functions that deal with the right hand side of the ODEs. \begin{DoxyAuthor}{Authors}
+JR, modified by Yoginho, additional g(u)'s by Yousong Wang in Feb 2002, guts code by Manu in June/July 2002
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+We have an initializing function called InitZygote that reads parameters, defs data and search space limits from a data file and installs a couple of things like the solver and temporary arrays for the dvdt function. Then we have the DvdtOrig's, which represent the inner loop of the model. Each of these derivative functions calculates the derivatives of a particular right-\/hand-\/side at a given time point. They are called by the solver and need to know if we're in mitosis or interphase, since the equations differ in each case. Last but not least, we have a few mutator functions in this file. They change the local lparm EqParm struct. 
+
+\subsection{Function Documentation}
+\hypertarget{zygotic_8c_a83cb2493f3b650fea0e3ec30f764ce6e}{
+\index{zygotic.c@{zygotic.c}!CalcGuts@{CalcGuts}}
+\index{CalcGuts@{CalcGuts}!zygotic.c@{zygotic.c}}
+\subsubsection[{CalcGuts}]{\setlength{\rightskip}{0pt plus 5cm}int CalcGuts (int {\em gindex}, \/  char $\ast$ {\em gtype}, \/  {\bf InterpObject} $\ast$ {\em hist\_\-interrp}, \/  {\bf InterpObject} $\ast$ {\em extinp\_\-interrp}, \/  {\bf NArrPtr} {\em table}, \/  {\bf NArrPtr} $\ast$ {\em gtable}, \/  char $\ast$ {\em gutsdefs}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{zygotic_8c_a83cb2493f3b650fea0e3ec30f764ce6e}
+CalcGuts: calculates guts for genotpye 'gtype' using unfold output in 'table' and the guts string 'gutsdefs'; it returns the num-\/ ber of columns we'll need to print and the guts table in 'gtable' \hypertarget{zygotic_8c_ad6bffd94588e1b58deca6607c19ba465}{
+\index{zygotic.c@{zygotic.c}!CalcRhs@{CalcRhs}}
+\index{CalcRhs@{CalcRhs}!zygotic.c@{zygotic.c}}
+\subsubsection[{CalcRhs}]{\setlength{\rightskip}{0pt plus 5cm}void CalcRhs (double $\ast$ {\em v}, \/  double {\em t}, \/  double $\ast$ {\em guts}, \/  int {\em n}, \/  int {\em gn}, \/  int {\em numguts}, \/  int {\em which}, \/  unsigned long $\ast$ {\em gutcomps}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{zygotic_8c_ad6bffd94588e1b58deca6607c19ba465}
+CalcRhs: calculates the components of the right-\/hand-\/side (RHS) of the equatiion which make up guts (e.g. regulatory contribu-\/ tions of specific genes, diffusion or protein decay); this function makes use of the derivative function and calculates everything outside g(u) in reverse, i.e. starting from the derivative and calculating the desired gut properties back-\/ wards from there; everything within g(u) is simply recon-\/ structed from concentrations and parameters \hypertarget{zygotic_8c_a6941502a487cf6d5a47999f4ea26da58}{
+\index{zygotic.c@{zygotic.c}!CopyParm@{CopyParm}}
+\index{CopyParm@{CopyParm}!zygotic.c@{zygotic.c}}
+\subsubsection[{CopyParm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf EqParms} CopyParm ({\bf EqParms} {\em orig\_\-parm}, \/  {\bf TheProblem} $\ast$ {\em defs})}}
+\label{zygotic_8c_a6941502a487cf6d5a47999f4ea26da58}
+CopyParm: copies all the parameters into the lparm struct \hypertarget{zygotic_8c_ae55ede3ac862a2495baae7f76e2c3c8b}{
+\index{zygotic.c@{zygotic.c}!Dvdt\_\-degradation@{Dvdt\_\-degradation}}
+\index{Dvdt\_\-degradation@{Dvdt\_\-degradation}!zygotic.c@{zygotic.c}}
+\subsubsection[{Dvdt\_\-degradation}]{\setlength{\rightskip}{0pt plus 5cm}void Dvdt\_\-degradation (double $\ast$ {\em v}, \/  double {\em t}, \/  double $\ast$ {\em vdot}, \/  int {\em n}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{zygotic_8c_ae55ede3ac862a2495baae7f76e2c3c8b}
+subfunction for the degradation \hypertarget{zygotic_8c_a66b238b41da8a35248d0ced31ab8dd90}{
+\index{zygotic.c@{zygotic.c}!Dvdt\_\-diffusion@{Dvdt\_\-diffusion}}
+\index{Dvdt\_\-diffusion@{Dvdt\_\-diffusion}!zygotic.c@{zygotic.c}}
+\subsubsection[{Dvdt\_\-diffusion}]{\setlength{\rightskip}{0pt plus 5cm}void Dvdt\_\-diffusion (double $\ast$ {\em v}, \/  double {\em t}, \/  double $\ast$ {\em vdot}, \/  int {\em n}, \/  int {\em MM}, \/  double $\ast$ {\em D}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{zygotic_8c_a66b238b41da8a35248d0ced31ab8dd90}
+subfunction doing the diffusion \hypertarget{zygotic_8c_ae945f06de2bcb6ebd7aab6d415e0a7ed}{
+\index{zygotic.c@{zygotic.c}!Dvdt\_\-production@{Dvdt\_\-production}}
+\index{Dvdt\_\-production@{Dvdt\_\-production}!zygotic.c@{zygotic.c}}
+\subsubsection[{Dvdt\_\-production}]{\setlength{\rightskip}{0pt plus 5cm}void Dvdt\_\-production (double $\ast$ {\em v}, \/  double {\em t}, \/  double $\ast$ {\em vdot}, \/  int {\em n}, \/  double $\ast$ {\em v\_\-ext}, \/  {\bf DArrPtr} {\em bcd}, \/  int {\em MM}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{zygotic_8c_ae945f06de2bcb6ebd7aab6d415e0a7ed}
+subfunction for (regulated) production \hypertarget{zygotic_8c_a01b37b344536f8982ddefbf262d3502c}{
+\index{zygotic.c@{zygotic.c}!Dvdt\_\-sqrt@{Dvdt\_\-sqrt}}
+\index{Dvdt\_\-sqrt@{Dvdt\_\-sqrt}!zygotic.c@{zygotic.c}}
+\subsubsection[{Dvdt\_\-sqrt}]{\setlength{\rightskip}{0pt plus 5cm}void Dvdt\_\-sqrt (double $\ast$ {\em v}, \/  double {\em t}, \/  double $\ast$ {\em vdot}, \/  int {\em n}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{zygotic_8c_a01b37b344536f8982ddefbf262d3502c}
+Dvdt\_\-sqrt: reimplementation of part of DvdtOrig that should make the maintenance easier and gave a small speed up ($\sim$12\%). The function is now subdivided into 3 subfunctions that allow easy reuse with the krylov preconditioner. \hypertarget{zygotic_8c_a969cb4e0f8a2f417f22bce6303eae43f}{
+\index{zygotic.c@{zygotic.c}!DvdtDelay@{DvdtDelay}}
+\index{DvdtDelay@{DvdtDelay}!zygotic.c@{zygotic.c}}
+\subsubsection[{DvdtDelay}]{\setlength{\rightskip}{0pt plus 5cm}void DvdtDelay (double $\ast$ {\em v}, \/  double $\ast$$\ast$ {\em vd}, \/  double {\em t}, \/  double $\ast$ {\em vdot}, \/  int {\em n}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{zygotic_8c_a969cb4e0f8a2f417f22bce6303eae43f}
+DvdtDelay: the delay derivative function; implements the equations as discussed in the delay report, plus different g(u) functions. \hypertarget{zygotic_8c_a81ad330f8a7c751a3bf72e684f2a367d}{
+\index{zygotic.c@{zygotic.c}!DvdtOrig@{DvdtOrig}}
+\index{DvdtOrig@{DvdtOrig}!zygotic.c@{zygotic.c}}
+\subsubsection[{DvdtOrig}]{\setlength{\rightskip}{0pt plus 5cm}void DvdtOrig (double $\ast$ {\em v}, \/  double {\em t}, \/  double $\ast$ {\em vdot}, \/  int {\em n}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{zygotic_8c_a81ad330f8a7c751a3bf72e684f2a367d}
+DvdtOrig: the original derivative function; implements the equations as published in Reinitz \& Sharp (1995), Mech Dev 49, 133-\/58 plus different g(u) functions as used by Yousong Wang in spring 2002. \hypertarget{zygotic_8c_a7e6158d9db30f2a22c463061ec918613}{
+\index{zygotic.c@{zygotic.c}!FreeMutant@{FreeMutant}}
+\index{FreeMutant@{FreeMutant}!zygotic.c@{zygotic.c}}
+\subsubsection[{FreeMutant}]{\setlength{\rightskip}{0pt plus 5cm}void FreeMutant ({\bf EqParms} {\em lparm})}}
+\label{zygotic_8c_a7e6158d9db30f2a22c463061ec918613}
+FreeMutant: frees mutated parameter struct \hypertarget{zygotic_8c_a243c923eea0f89e5f8be8f2b31f1afb9}{
+\index{zygotic.c@{zygotic.c}!FreeZygote@{FreeZygote}}
+\index{FreeZygote@{FreeZygote}!zygotic.c@{zygotic.c}}
+\subsubsection[{FreeZygote}]{\setlength{\rightskip}{0pt plus 5cm}void FreeZygote (void)}}
+\label{zygotic_8c_a243c923eea0f89e5f8be8f2b31f1afb9}
+FreeZygote: frees memory for D \hypertarget{zygotic_8c_ab0fd52538b9e31be1d96e9528fe396f5}{
+\index{zygotic.c@{zygotic.c}!GetGutsComps@{GetGutsComps}}
+\index{GetGutsComps@{GetGutsComps}!zygotic.c@{zygotic.c}}
+\subsubsection[{GetGutsComps}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ GetGutsComps (char $\ast$ {\em geneidstring}, \/  char $\ast$ {\em egeneidstring}, \/  char $\ast$$\ast$ {\em specsin}, \/  unsigned long $\ast$ {\em specsout})}}
+\label{zygotic_8c_ab0fd52538b9e31be1d96e9528fe396f5}
+GetGutsComps: takes a geneID string and an array of ID strings; then returns an array of long ints with bit flags set that tell \hyperlink{zygotic_8c_a83cb2493f3b650fea0e3ec30f764ce6e}{CalcGuts()} what to calculate for each column of guts output; this function also returns a pointer to the current gene in the gene ID string \hypertarget{zygotic_8c_a51b8854c17cf11efbf976d8fed0c49f8}{
+\index{zygotic.c@{zygotic.c}!InitZygote@{InitZygote}}
+\index{InitZygote@{InitZygote}!zygotic.c@{zygotic.c}}
+\subsubsection[{InitZygote}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Zygote} InitZygote (FILE $\ast$ {\em fp}, \/  void($\ast$)(double $\ast$, double, double $\ast$, int, {\bf SolverInput} $\ast$, {\bf Input} $\ast$) {\em pd}, \/  void($\ast$)(double, double $\ast$, double $\ast$, double $\ast$$\ast$, int, {\bf SolverInput} $\ast$, {\bf Input} $\ast$) {\em pj}, \/  {\bf Input} $\ast$ {\em inp}, \/  char $\ast$ {\em section\_\-title})}}
+\label{zygotic_8c_a51b8854c17cf11efbf976d8fed0c49f8}
+InitZygote: makes pm and pd visible to all functions in \hyperlink{zygotic_8c}{zygotic.c} and reads \hyperlink{structEqParms}{EqParms} and \hyperlink{structTheProblem}{TheProblem}; it then initializes bicoid and bias (including BTimes) in \hyperlink{maternal_8c}{maternal.c}; lastly, it allocates memory for structures used by the derivative functions \hypertarget{zygotic_8c_a375e1b4d71b324b472cc778feb7d06ab}{
+\index{zygotic.c@{zygotic.c}!JacobnOrig@{JacobnOrig}}
+\index{JacobnOrig@{JacobnOrig}!zygotic.c@{zygotic.c}}
+\subsubsection[{JacobnOrig}]{\setlength{\rightskip}{0pt plus 5cm}void JacobnOrig (double {\em t}, \/  double $\ast$ {\em v}, \/  double $\ast$ {\em dfdt}, \/  double $\ast$$\ast$ {\em jac}, \/  int {\em n}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{zygotic_8c_a375e1b4d71b324b472cc778feb7d06ab}
+JacobnOrig: Jacobian function for the DvdtOrig model; calculates the Jacobian matrix (matrix of partial derivatives) for the equations at a give time t; input concentrations come in v (of size n), the Jacobian is returned in jac; note that all dfdt's are zero in our case since our equations are autonomous (i.e. have no explicit t in them)
+
+The Equation: dv/dx = Rg(u) + D() + lambda()
+
+The Jacobian: (in this example: nnucs = 3, ngenes = 3
+
+i = 1 i = 2 i = 3 b = 1 2 3 1 2 3 1 2 3
+
+a = 1 X11 Y12 Y13 D1 0 0 0 0 0 i = 1 a = 2 Y21 X22 Y23 0 D2 0 0 0 0 a = 3 Y31 Y32 X33 0 0 D3 0 0 0
+
+a = 1 D1 0 0 X11 Y12 Y13 D1 0 0 i = 2 a = 2 0 D2 0 Y21 X22 Y23 0 D2 0 a = 3 0 0 D3 Y31 Y32 X33 0 0 D3
+
+a = 1 0 0 0 D1 0 0 X11 Y12 Y13 i = 3 a = 2 0 0 0 0 D2 0 Y21 X22 Y23 a = 3 0 0 0 0 0 0 Y31 Y32 Y33
+
+Where: Xab = Rg'(u) -\/ 2D\{a\} -\/ lambda\{a\} Yab = Rg'(u) Da = D\{a\} \hypertarget{zygotic_8c_ac7c469642b1a7bfd8f8f486749496ac4}{
+\index{zygotic.c@{zygotic.c}!Mutate@{Mutate}}
+\index{Mutate@{Mutate}!zygotic.c@{zygotic.c}}
+\subsubsection[{Mutate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf EqParms} Mutate (char $\ast$ {\em g\_\-type}, \/  {\bf EqParms} {\em parm}, \/  {\bf TheProblem} $\ast$ {\em defs})}}
+\label{zygotic_8c_ac7c469642b1a7bfd8f8f486749496ac4}
+Mutate: calls mutator functions according to genotype string \hypertarget{zygotic_8c_aae15698bb19d2c5656285c791f80bb1e}{
+\index{zygotic.c@{zygotic.c}!ParseString@{ParseString}}
+\index{ParseString@{ParseString}!zygotic.c@{zygotic.c}}
+\subsubsection[{ParseString}]{\setlength{\rightskip}{0pt plus 5cm}int ParseString (char $\ast$ {\em v}, \/  char $\ast$$\ast$ {\em arginp})}}
+\label{zygotic_8c_aae15698bb19d2c5656285c791f80bb1e}
+ParseString: parses a line of the \$gutsdefs section (dataformatX.X has the details); this function then returns two things: 1) the number of 'words' separated by whitespace in that string is the function's return value 2) the 'words' themselves are returned in arginp \hypertarget{zygotic_8c_ab56da71245f1a26c00423c46fee25893}{
+\index{zygotic.c@{zygotic.c}!R\_\-Mutate@{R\_\-Mutate}}
+\index{R\_\-Mutate@{R\_\-Mutate}!zygotic.c@{zygotic.c}}
+\subsubsection[{R\_\-Mutate}]{\setlength{\rightskip}{0pt plus 5cm}void R\_\-Mutate (int {\em gene}, \/  {\bf EqParms} $\ast$ {\em lparm})}}
+\label{zygotic_8c_ab56da71245f1a26c00423c46fee25893}
+R\_\-Mutate: mutates genes by setting their promotor strength R to zero, so there will be no transcription at all anymore. Used to simulate mutants that don't pro-\/ duce any protein anymore. \hypertarget{zygotic_8c_a624b2071d076d091282fefbebd812959}{
+\index{zygotic.c@{zygotic.c}!RT\_\-Mutate@{RT\_\-Mutate}}
+\index{RT\_\-Mutate@{RT\_\-Mutate}!zygotic.c@{zygotic.c}}
+\subsubsection[{RT\_\-Mutate}]{\setlength{\rightskip}{0pt plus 5cm}void RT\_\-Mutate (int {\em gene}, \/  int {\em ngenes}, \/  {\bf EqParms} $\ast$ {\em lparm})}}
+\label{zygotic_8c_a624b2071d076d091282fefbebd812959}
+RT\_\-Mutate: mutates gene by setting both promoter strength R and T matrix entries to zero. Useful, if you want to be really sure that there is NO protein pro-\/ duction and that maternal contribution also don't contribute anything to gene interactions. \hypertarget{zygotic_8c_a52842c41493dce05964b94ce36549c7d}{
+\index{zygotic.c@{zygotic.c}!T\_\-Mutate@{T\_\-Mutate}}
+\index{T\_\-Mutate@{T\_\-Mutate}!zygotic.c@{zygotic.c}}
+\subsubsection[{T\_\-Mutate}]{\setlength{\rightskip}{0pt plus 5cm}void T\_\-Mutate (int {\em gene}, \/  int {\em ngenes}, \/  {\bf EqParms} $\ast$ {\em lparm})}}
+\label{zygotic_8c_a52842c41493dce05964b94ce36549c7d}
+T\_\-Mutate: mutates genes by setting all their T matrix entries to zero. Used to simulate mutants that express a non-\/functional protein. \hypertarget{zygotic_8c_afaa4a3a698870ae8b5bf16b12f1b3b58}{
+\index{zygotic.c@{zygotic.c}!tvsub@{tvsub}}
+\index{tvsub@{tvsub}!zygotic.c@{zygotic.c}}
+\subsubsection[{tvsub}]{\setlength{\rightskip}{0pt plus 5cm}double tvsub (struct rusage {\em a}, \/  struct rusage {\em b})}}
+\label{zygotic_8c_afaa4a3a698870ae8b5bf16b12f1b3b58}
+Function given the starting (fb) and ending (fa) time structures, calculates the use cpu time in seconds 

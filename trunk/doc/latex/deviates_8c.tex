@@ -1,0 +1,74 @@
+\hypertarget{deviates_8c}{
+\section{lam/deviates.c File Reference}
+\label{deviates_8c}\index{lam/deviates.c@{lam/deviates.c}}
+}
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$float.h$>$}\par
+{\ttfamily \#include $<$limits.h$>$}\par
+{\ttfamily \#include \char`\"{}distributions.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}error.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}random.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{deviates_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{deviates_8c_a58c7f82460d1c601a93389d8eaafa37b}{BYTESIZE} = 8
+\item 
+const int \hyperlink{deviates_8c_a5c6b552b88b723ce1a985066e16a8046}{LOWBITS} = 0x330E
+\item 
+const int \hyperlink{deviates_8c_ab8b764097b0f861ad9adc095a88e6edb}{MAX\_\-PRECISION} = 16
+\item 
+const double \hyperlink{deviates_8c_a634312c07b9e2c66592be1878b5a6564}{FORBIDDEN\_\-MOVE} = DBL\_\-MAX
+\item 
+const int \hyperlink{deviates_8c_ac0856e3e4744f90264ff7477676c2e7b}{OUT\_\-OF\_\-BOUND} = -\/1
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Created 5-\/02 by: Lorraine Greenwald Main wrapper for program that generates basic deviates for plotting and sanity checks. This program uses exact files and routines from the simulated annealing code. \hyperlink{structFiles}{Files} \hyperlink{distributions_8c}{distributions.c} and \hyperlink{distributions_8h}{distributions.h} which are stored in the lam area on CVS.
+
+takes distribution type, q value and theta\_\-bar on command line USAGE: gen\_\-deviates distribution qvalue theta\_\-bar dist\_\-deviate\_\-output\_\-file\_\-name
+
+Copyright (C) 1989-\/2003 John Reinitz the full GPL copyright notice can be found in \hyperlink{lsa_8c}{lsa.c} 
+
+\subsection{Function Documentation}
+\hypertarget{deviates_8c_a3c04138a5bfe5d72780bb7e82a18e627}{
+\index{deviates.c@{deviates.c}!main@{main}}
+\index{main@{main}!deviates.c@{deviates.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
+\label{deviates_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+This is main for the deviate generation code LG 05-\/02 
+
+\subsection{Variable Documentation}
+\hypertarget{deviates_8c_a58c7f82460d1c601a93389d8eaafa37b}{
+\index{deviates.c@{deviates.c}!BYTESIZE@{BYTESIZE}}
+\index{BYTESIZE@{BYTESIZE}!deviates.c@{deviates.c}}
+\subsubsection[{BYTESIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf BYTESIZE} = 8}}
+\label{deviates_8c_a58c7f82460d1c601a93389d8eaafa37b}
+erand conversion \hypertarget{deviates_8c_a634312c07b9e2c66592be1878b5a6564}{
+\index{deviates.c@{deviates.c}!FORBIDDEN\_\-MOVE@{FORBIDDEN\_\-MOVE}}
+\index{FORBIDDEN\_\-MOVE@{FORBIDDEN\_\-MOVE}!deviates.c@{deviates.c}}
+\subsubsection[{FORBIDDEN\_\-MOVE}]{\setlength{\rightskip}{0pt plus 5cm}const double {\bf FORBIDDEN\_\-MOVE} = DBL\_\-MAX}}
+\label{deviates_8c_a634312c07b9e2c66592be1878b5a6564}
+the following constant as a score tells the annealer to reject a move, no matter what. It had better not be a number that could actually be a score. \hypertarget{deviates_8c_a5c6b552b88b723ce1a985066e16a8046}{
+\index{deviates.c@{deviates.c}!LOWBITS@{LOWBITS}}
+\index{LOWBITS@{LOWBITS}!deviates.c@{deviates.c}}
+\subsubsection[{LOWBITS}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf LOWBITS} = 0x330E}}
+\label{deviates_8c_a5c6b552b88b723ce1a985066e16a8046}
+following two are for drand to \hypertarget{deviates_8c_ab8b764097b0f861ad9adc095a88e6edb}{
+\index{deviates.c@{deviates.c}!MAX\_\-PRECISION@{MAX\_\-PRECISION}}
+\index{MAX\_\-PRECISION@{MAX\_\-PRECISION}!deviates.c@{deviates.c}}
+\subsubsection[{MAX\_\-PRECISION}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf MAX\_\-PRECISION} = 16}}
+\label{deviates_8c_ab8b764097b0f861ad9adc095a88e6edb}
+The following defines the maximum float precision that is supported by the code. \hypertarget{deviates_8c_ac0856e3e4744f90264ff7477676c2e7b}{
+\index{deviates.c@{deviates.c}!OUT\_\-OF\_\-BOUND@{OUT\_\-OF\_\-BOUND}}
+\index{OUT\_\-OF\_\-BOUND@{OUT\_\-OF\_\-BOUND}!deviates.c@{deviates.c}}
+\subsubsection[{OUT\_\-OF\_\-BOUND}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf OUT\_\-OF\_\-BOUND} = -\/1}}
+\label{deviates_8c_ac0856e3e4744f90264ff7477676c2e7b}
+out of bound control in score 

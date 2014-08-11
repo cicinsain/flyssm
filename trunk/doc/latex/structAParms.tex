@@ -1,0 +1,65 @@
+\hypertarget{structAParms}{
+\section{AParms Struct Reference}
+\label{structAParms}\index{AParms@{AParms}}
+}
+
+
+Annealing parameters that are not specific to the Lam algorithm.  
+
+
+{\ttfamily \#include $<$moves.h$>$}\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+long \hyperlink{structAParms_a7d69899585ac92b3045262f10cf3ed31}{seed}
+\item 
+double \hyperlink{structAParms_a012f0843a73cde4e53d40656ac280276}{start\_\-tempr}
+\item 
+double \hyperlink{structAParms_a6a943f20f9124e8ce88d43c80fab2ed2}{gain}
+\item 
+double \hyperlink{structAParms_a9ddd20061cfb023dc042adcc611c26cf}{stop\_\-energy}
+\item 
+int \hyperlink{structAParms_a48486c83137ebc42a2970b33a84cbfc6}{max\_\-count}
+\item 
+int \hyperlink{structAParms_a625153becccab120e5f0518ac2a855f4}{interval}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Annealing parameters that are not specific to the Lam algorithm. In general the parameters should be used in \hyperlink{moves_8c}{moves.c} or \hyperlink{fly__sa_8c}{fly\_\-sa.c} but {\itshape not\/} in \hyperlink{lsa_8c}{lsa.c}. In the data file, the members of the struct labeled RO are read from the \$annealing\_\-input section. They are used for initial conditions of the annealer and do not change during a run. Members labeled OUT are written to the \$annealing\_\-output section upon completion of a run. 
+
+\subsection{Member Data Documentation}
+\hypertarget{structAParms_a6a943f20f9124e8ce88d43c80fab2ed2}{
+\index{AParms@{AParms}!gain@{gain}}
+\index{gain@{gain}!AParms@{AParms}}
+\subsubsection[{gain}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf AParms::gain}}}
+\label{structAParms_a6a943f20f9124e8ce88d43c80fab2ed2}
+gain for proportional control of move size RO \hypertarget{structAParms_a625153becccab120e5f0518ac2a855f4}{
+\index{AParms@{AParms}!interval@{interval}}
+\index{interval@{interval}!AParms@{AParms}}
+\subsubsection[{interval}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf AParms::interval}}}
+\label{structAParms_a625153becccab120e5f0518ac2a855f4}
+number of sweeps between updating theta\_\-bar RO \hypertarget{structAParms_a48486c83137ebc42a2970b33a84cbfc6}{
+\index{AParms@{AParms}!max\_\-count@{max\_\-count}}
+\index{max\_\-count@{max\_\-count}!AParms@{AParms}}
+\subsubsection[{max\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf AParms::max\_\-count}}}
+\label{structAParms_a48486c83137ebc42a2970b33a84cbfc6}
+total number of iterations OUT \hypertarget{structAParms_a7d69899585ac92b3045262f10cf3ed31}{
+\index{AParms@{AParms}!seed@{seed}}
+\index{seed@{seed}!AParms@{AParms}}
+\subsubsection[{seed}]{\setlength{\rightskip}{0pt plus 5cm}long {\bf AParms::seed}}}
+\label{structAParms_a7d69899585ac92b3045262f10cf3ed31}
+seed for random number generator RO \hypertarget{structAParms_a012f0843a73cde4e53d40656ac280276}{
+\index{AParms@{AParms}!start\_\-tempr@{start\_\-tempr}}
+\index{start\_\-tempr@{start\_\-tempr}!AParms@{AParms}}
+\subsubsection[{start\_\-tempr}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf AParms::start\_\-tempr}}}
+\label{structAParms_a012f0843a73cde4e53d40656ac280276}
+the initial equilibration temperature RO \hypertarget{structAParms_a9ddd20061cfb023dc042adcc611c26cf}{
+\index{AParms@{AParms}!stop\_\-energy@{stop\_\-energy}}
+\index{stop\_\-energy@{stop\_\-energy}!AParms@{AParms}}
+\subsubsection[{stop\_\-energy}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf AParms::stop\_\-energy}}}
+\label{structAParms_a9ddd20061cfb023dc042adcc611c26cf}
+the final energy of the answer OUT 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+fly/\hyperlink{moves_8h}{moves.h}\end{DoxyCompactItemize}

@@ -1,0 +1,275 @@
+\hypertarget{score_8h}{
+\section{fly/score.h File Reference}
+\label{score_8h}\index{fly/score.h@{fly/score.h}}
+}
+
+
+Stuff that is needed for reading and defining facts and limits, and for scoring functions.  
+{\ttfamily \#include \char`\"{}maternal.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}fly\_\-io.h\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structGutInfo}{GutInfo}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structScoring}{Scoring} \hyperlink{score_8h_aa8cf2f048908ec245bd5832dfb76e5ae}{InitScoring} (FILE $\ast$fp, int method, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+\hyperlink{structTweak}{Tweak} \hyperlink{score_8h_a5062990a4365a5c5e5f4926691177e3c}{InitTweak} (FILE $\ast$fp, int $\ast$mask, \hyperlink{structTheProblem}{TheProblem} defs)
+\item 
+\hyperlink{structFacts}{Facts} \hyperlink{score_8h_a5a0111317ff208d650540857c1cc1675}{InitFacts} (FILE $\ast$fp, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+\hyperlink{structWeights}{Weights} \hyperlink{score_8h_a76abc0d14c58dd765039064041f0b62c}{InitWeights} (FILE $\ast$fp, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+\hyperlink{structDataTable}{DataTable} \hyperlink{score_8h_a99d47fb9d05f4c80bee60a346c47ffdc}{getFact} (int i, \hyperlink{structGenoType}{GenoType} $\ast$facttype)
+\item 
+\hyperlink{structSearchSpace}{SearchSpace} $\ast$ \hyperlink{score_8h_ac18ceed02482a28f43930a03215db36d}{InitLimits} (FILE $\ast$fp, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{score_8h_acaca067ab7508371af477ba56c97e3e9}{InitPenalty} (FILE $\ast$fp, \hyperlink{structTheProblem}{TheProblem} defs, \hyperlink{structSearchSpace}{SearchSpace} $\ast$limits)
+\item 
+\hyperlink{structGenoType}{GenoType} $\ast$ \hyperlink{score_8h_a5a290e43263ee3160e54556fa9c7af4e}{InitTTs} (\hyperlink{structGenoType}{GenoType} $\ast$facttype, int nalleles)
+\item 
+\hyperlink{structStep__Acc}{Step\_\-Acc} \hyperlink{score_8h_aa6bbbd741a4f53e33d44dfb000a0b0ca}{InitStepsize} (double step, double accuracy, FILE $\ast$slog, char $\ast$infile)
+\item 
+\hypertarget{score_8h_aba5aad0fd45974f832eb06d9401f48d0}{
+double {\bfseries checkBound} (\hyperlink{structTheProblem}{TheProblem} defs, \hyperlink{structSearchSpace}{SearchSpace} limits)}
+\label{score_8h_aba5aad0fd45974f832eb06d9401f48d0}
+
+\item 
+void \hyperlink{score_8h_a14f9123a0d3de0c891e5a5af2470cfcc}{Score} (\hyperlink{structInput}{Input} $\ast$inp, \hyperlink{structScoreOutput}{ScoreOutput} $\ast$out, int jacobian)
+\item 
+\hypertarget{score_8h_a92fdb8d69426ac579ff2b630ce06656a}{
+double {\bfseries ScoreNoCheck} (void)}
+\label{score_8h_a92fdb8d69426ac579ff2b630ce06656a}
+
+\item 
+void \hyperlink{score_8h_a5782665132610077c6b091d5a8869d3a}{Eval} (\hyperlink{structScoreEval}{ScoreEval} $\ast$eval, \hyperlink{structNArrPtr}{NArrPtr} $\ast$Solution, int gindex, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{score_8h_af1adae4c482c5bb0e181f123de58eee2}{SetGuts} (int srsflag, int ndigits)
+\item 
+void \hyperlink{score_8h_ae4aef5ccbf247bf86ed151b857301081}{GutEval} (\hyperlink{structScoreEval}{ScoreEval} $\ast$eval, \hyperlink{structNArrPtr}{NArrPtr} $\ast$Solution, int gindex, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+\hyperlink{structDArrPtr}{DArrPtr} \hyperlink{score_8h_aaac2a98db2957d030ccec3f03d3294f5}{GetTTimes} (char $\ast$genotype)
+\item 
+\hyperlink{structSearchSpace}{SearchSpace} $\ast$ \hyperlink{score_8h_a4971dd36e85ae350f1a33c89140c7199}{GetLimits} (\hyperlink{structInput}{Input} $\ast$inp)
+\item 
+double \hyperlink{score_8h_a005757d24b460021d7e4cf78de912cd8}{GetPenalty} (\hyperlink{structInput}{Input} $\ast$inp, \hyperlink{structSearchSpace}{SearchSpace} $\ast$limits)
+\item 
+\hypertarget{score_8h_ab71ab5f8d94daf7d25e2ab467ed3b4b6}{
+double {\bfseries GetCurPenalty} (void)}
+\label{score_8h_ab71ab5f8d94daf7d25e2ab467ed3b4b6}
+
+\item 
+void \hyperlink{score_8h_a597f62551b43cb9ef705f68989dc6a5b}{Penalty2Limits} (\hyperlink{structSearchSpace}{SearchSpace} $\ast$limits, \hyperlink{structTheProblem}{TheProblem} defs)
+\item 
+\hyperlink{structDataTable}{DataTable} $\ast$ \hyperlink{score_8h_a537940a0eef76df989fc35314ceb4ff6}{List2Facts} (\hyperlink{structDlist}{Dlist} $\ast$inlist, int ngenes)
+\item 
+double $\ast$ \hyperlink{score_8h_afdcbcfae750035eb2ea8a0142b6f390c}{getMediansFromDataTable} (\hyperlink{structDataTable}{DataTable} $\ast$data, int ngenes)
+\item 
+void \hyperlink{score_8h_ae3804784c7b8995f852f3066129b0284}{Rescale} (\hyperlink{structDataTable}{DataTable} $\ast$data, double $\ast$multipliers, int ngenes)
+\item 
+\hypertarget{score_8h_ac1bd4656a3cbbeb7937007f604465850}{
+int {\bfseries isResComp} ()}
+\label{score_8h_ac1bd4656a3cbbeb7937007f604465850}
+
+\item 
+\hypertarget{score_8h_a18847630cf9b4c6b53488ba080870334}{
+void {\bfseries setCostType} (char $\ast$cost)}
+\label{score_8h_a18847630cf9b4c6b53488ba080870334}
+
+\item 
+\hypertarget{score_8h_a75dee82870c2d4b8703d48b113ac051f}{
+void {\bfseries PrintFacts} (FILE $\ast$fp, int ndigits, int columns)}
+\label{score_8h_a75dee82870c2d4b8703d48b113ac051f}
+
+\item 
+\hypertarget{score_8h_aba799916ac5d673b7a764673ed6aafe0}{
+void {\bfseries initResComp} (\hyperlink{structNArrPtr}{NArrPtr} Solution)}
+\label{score_8h_aba799916ac5d673b7a764673ed6aafe0}
+
+\item 
+void \hyperlink{score_8h_a0de4c8704919aa70f8657b2073a0ef14}{FreeFacts} (\hyperlink{structDataTable}{DataTable} $\ast$D)
+\item 
+\hyperlink{structInterpObject}{InterpObject} $\ast$ \hyperlink{score_8h_a72a51a0c1ac5b405e85ec70432687325}{InitHistory} (FILE $\ast$fp, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+\hypertarget{score_8h_a2a3c67fbfa03e0c395046436f0d37c23}{
+\hyperlink{structInterpObject}{InterpObject} $\ast$ {\bfseries InitExternalInputs} (FILE $\ast$fp, \hyperlink{structInput}{Input} $\ast$inp)}
+\label{score_8h_a2a3c67fbfa03e0c395046436f0d37c23}
+
+\item 
+\hypertarget{score_8h_a01fa6c9543763a97497d3cc1b5256dba}{
+void {\bfseries GetInterp} (FILE $\ast$fp, char $\ast$title, \hyperlink{structInput}{Input} $\ast$inp, int num\_\-genes, \hyperlink{structDataTable}{DataTable} $\ast$$\ast$interp\_\-tables)}
+\label{score_8h_a01fa6c9543763a97497d3cc1b5256dba}
+
+\item 
+\hypertarget{score_8h_aada84dacfd72b84ae781672218208662}{
+void {\bfseries FreeHistory} (int nalleles, \hyperlink{structInterpObject}{InterpObject} $\ast$polations)}
+\label{score_8h_aada84dacfd72b84ae781672218208662}
+
+\item 
+\hypertarget{score_8h_a1f6e120054b9f3a361ed43e89dff1a4b}{
+void {\bfseries FreeExternalInputs} (int nalleles, \hyperlink{structInterpObject}{InterpObject} $\ast$extinp\_\-polations)}
+\label{score_8h_a1f6e120054b9f3a361ed43e89dff1a4b}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{score_8h_aee3dc5358037a9ee4c1be8f0d07dbd09}{
+const int {\bfseries SLEEP\_\-LGTH}}
+\label{score_8h_aee3dc5358037a9ee4c1be8f0d07dbd09}
+
+\item 
+\hypertarget{score_8h_a94087ddaa6251837c08fcfd59a4ded74}{
+const int {\bfseries NPOINTS}}
+\label{score_8h_a94087ddaa6251837c08fcfd59a4ded74}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Stuff that is needed for reading and defining facts and limits, and for scoring functions. \begin{DoxyAuthor}{Author}
+JR, modified by Yoginho
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+The functions declared here initialize or manipulate facts or data time tables, read and initialize limits and penalty (if needed and do the actual scoring. It should be included in code that does scoring (e.g. printscore or annealing code).
+
+The following describes the search space to the scoring function. There are two ways to specify limits. Lambda, R, and d always get a range for each variable-\/-\/-\/an upper \& lower limit. Elements of T, h and m that contribute to u in g(u) can be given a range. This is probably the way to go as it definitely results in an ergodic search space. However, as I write this code (10/95) we have only one set of runs using this method. The alternative, which has been mostly used, is to treat T, h and m with a penalty function on u of the form:
+
+$|$ 0 if exp(Lambda$\ast$((T$^\wedge$ij)v\_\-max\_\-j)$^\wedge$2 + h$^\wedge$2 + $|$ (m\_\-i mmax)$^\wedge$2 -\/ 1 $<$ 0 penalty = $|$ $|$ exp(Lambda$\ast$((T$^\wedge$ij)v\_\-max\_\-j)$^\wedge$2 + h$^\wedge$2 +(m\_\-i mmax)$^\wedge$2 $|$ otherwise
+
+where vmax\_\-i is the highest level of gene i in the data, similarly for mmax and bcd. This method can be non-\/ergodic if h and T or m are being altered and variables change one at a time. In any case, one scheme or the other must be used and the programmer must insure that one or another set of pointers (see below) are NULL.
+
+NOTE: -\/ Lambda is NOT the same stuff as lambda in equation params or the lambda of the Lam schedule (don't get confused!) 
+
+\subsection{Function Documentation}
+\hypertarget{score_8h_a5782665132610077c6b091d5a8869d3a}{
+\index{score.h@{score.h}!Eval@{Eval}}
+\index{Eval@{Eval}!score.h@{score.h}}
+\subsubsection[{Eval}]{\setlength{\rightskip}{0pt plus 5cm}void Eval ({\bf ScoreEval} $\ast$ {\em eval}, \/  {\bf NArrPtr} $\ast$ {\em Solution}, \/  int {\em gindex}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{score_8h_a5782665132610077c6b091d5a8869d3a}
+Eval: scores the summed squared differences between equation solution and data. Because the times for states written to the Solution structure are read out of the data file itself, we do not check for consistency of times in this function-\/-\/-\/all times with data will be in the table, but the table may also contain additional times. \hypertarget{score_8h_a0de4c8704919aa70f8657b2073a0ef14}{
+\index{score.h@{score.h}!FreeFacts@{FreeFacts}}
+\index{FreeFacts@{FreeFacts}!score.h@{score.h}}
+\subsubsection[{FreeFacts}]{\setlength{\rightskip}{0pt plus 5cm}void FreeFacts ({\bf DataTable} $\ast$ {\em D})}}
+\label{score_8h_a0de4c8704919aa70f8657b2073a0ef14}
+FreeFacts: Function to fre tha \hyperlink{structDataTable}{DataTable} object \hypertarget{score_8h_a99d47fb9d05f4c80bee60a346c47ffdc}{
+\index{score.h@{score.h}!getFact@{getFact}}
+\index{getFact@{getFact}!score.h@{score.h}}
+\subsubsection[{getFact}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DataTable} getFact (int {\em i}, \/  {\bf GenoType} $\ast$ {\em facttype})}}
+\label{score_8h_a99d47fb9d05f4c80bee60a346c47ffdc}
+getFacts: gets facts records from the appropriate \hyperlink{structDataTable}{DataTable}. Returns a pointer to a \hyperlink{structFacts}{Facts} structure, which contains a \hyperlink{structDataTable}{DataTable}, which in turn points to a sized array of DataRecords, one for each time step. \hypertarget{score_8h_a4971dd36e85ae350f1a33c89140c7199}{
+\index{score.h@{score.h}!GetLimits@{GetLimits}}
+\index{GetLimits@{GetLimits}!score.h@{score.h}}
+\subsubsection[{GetLimits}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SearchSpace}$\ast$ GetLimits ({\bf Input} $\ast$ {\em inp})}}
+\label{score_8h_a4971dd36e85ae350f1a33c89140c7199}
+GetLimits: returns a pointer to the static limits struct in \hyperlink{score_8c}{score.c} CAUTION: InitScoring must be called first! \hypertarget{score_8h_afdcbcfae750035eb2ea8a0142b6f390c}{
+\index{score.h@{score.h}!getMediansFromDataTable@{getMediansFromDataTable}}
+\index{getMediansFromDataTable@{getMediansFromDataTable}!score.h@{score.h}}
+\subsubsection[{getMediansFromDataTable}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ getMediansFromDataTable ({\bf DataTable} $\ast$ {\em data}, \/  int {\em ngenes})}}
+\label{score_8h_afdcbcfae750035eb2ea8a0142b6f390c}
+getMediansFromDataTable: Function to calculate medians per gene from data \hypertarget{score_8h_a005757d24b460021d7e4cf78de912cd8}{
+\index{score.h@{score.h}!GetPenalty@{GetPenalty}}
+\index{GetPenalty@{GetPenalty}!score.h@{score.h}}
+\subsubsection[{GetPenalty}]{\setlength{\rightskip}{0pt plus 5cm}double GetPenalty ({\bf Input} $\ast$ {\em inp}, \/  {\bf SearchSpace} $\ast$ {\em limits})}}
+\label{score_8h_a005757d24b460021d7e4cf78de912cd8}
+GetPenalty: calculates penalty from static limits, vmax and mmax CAUTION: InitPenalty must be called first! \hypertarget{score_8h_aaac2a98db2957d030ccec3f03d3294f5}{
+\index{score.h@{score.h}!GetTTimes@{GetTTimes}}
+\index{GetTTimes@{GetTTimes}!score.h@{score.h}}
+\subsubsection[{GetTTimes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DArrPtr} GetTTimes (char $\ast$ {\em genotype})}}
+\label{score_8h_aaac2a98db2957d030ccec3f03d3294f5}
+GetTTimes: this function returns the times for which there's data for a given genotype CAUTION: InitTTs has to be called first! \hypertarget{score_8h_ae4aef5ccbf247bf86ed151b857301081}{
+\index{score.h@{score.h}!GutEval@{GutEval}}
+\index{GutEval@{GutEval}!score.h@{score.h}}
+\subsubsection[{GutEval}]{\setlength{\rightskip}{0pt plus 5cm}void GutEval ({\bf ScoreEval} $\ast$ {\em eval}, \/  {\bf NArrPtr} $\ast$ {\em Solution}, \/  int {\em gindex}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{score_8h_ae4aef5ccbf247bf86ed151b857301081}
+GutEval: this is the same as Eval, i.e it calculates the summed squa-\/ red differences between equation solution and data, with the addition that individual squared differences between data-\/ points are written to STDOUT in the unfold output format \hypertarget{score_8h_a5a0111317ff208d650540857c1cc1675}{
+\index{score.h@{score.h}!InitFacts@{InitFacts}}
+\index{InitFacts@{InitFacts}!score.h@{score.h}}
+\subsubsection[{InitFacts}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Facts} InitFacts (FILE $\ast$ {\em fp}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{score_8h_a5a0111317ff208d650540857c1cc1675}
+InitFacts: puts facts records into the appropriate \hyperlink{structDataTable}{DataTable}. Returns a pointer to a \hyperlink{structFacts}{Facts} struture, which contains a Datatable, which in turn points to a sized array of DataRecords, one for each time step. \hypertarget{score_8h_a72a51a0c1ac5b405e85ec70432687325}{
+\index{score.h@{score.h}!InitHistory@{InitHistory}}
+\index{InitHistory@{InitHistory}!score.h@{score.h}}
+\subsubsection[{InitHistory}]{\setlength{\rightskip}{0pt plus 5cm}{\bf InterpObject}$\ast$ InitHistory (FILE $\ast$ {\em fp}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{score_8h_a72a51a0c1ac5b405e85ec70432687325}
+InitHistory: Initializing the full set of nuclei based on the lineages of the history, please make sure that all of the alleles' lineages are the same \hypertarget{score_8h_ac18ceed02482a28f43930a03215db36d}{
+\index{score.h@{score.h}!InitLimits@{InitLimits}}
+\index{InitLimits@{InitLimits}!score.h@{score.h}}
+\subsubsection[{InitLimits}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SearchSpace}$\ast$ InitLimits (FILE $\ast$ {\em fp}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{score_8h_ac18ceed02482a28f43930a03215db36d}
+InitLimits: reads limits section from the data file into the struct limits, which is static to \hyperlink{score_8c}{score.c}. Then, it initializes the penalty function if necessary. NOTE: lambda limits are stored as protein half lives in the data file and therefore get converted upon reading \hypertarget{score_8h_acaca067ab7508371af477ba56c97e3e9}{
+\index{score.h@{score.h}!InitPenalty@{InitPenalty}}
+\index{InitPenalty@{InitPenalty}!score.h@{score.h}}
+\subsubsection[{InitPenalty}]{\setlength{\rightskip}{0pt plus 5cm}void InitPenalty (FILE $\ast$ {\em fp}, \/  {\bf TheProblem} {\em defs}, \/  {\bf SearchSpace} $\ast$ {\em limits})}}
+\label{score_8h_acaca067ab7508371af477ba56c97e3e9}
+InitPenalty: initializes vmax\mbox{[}\mbox{]} and mmax static to \hyperlink{score_8c}{score.c}; these variables are used to calculate the penalty function for scoring. NOTE: Should only get called, if penalty function is used \hypertarget{score_8h_aa8cf2f048908ec245bd5832dfb76e5ae}{
+\index{score.h@{score.h}!InitScoring@{InitScoring}}
+\index{InitScoring@{InitScoring}!score.h@{score.h}}
+\subsubsection[{InitScoring}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scoring} InitScoring (FILE $\ast$ {\em fp}, \/  int {\em method}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{score_8h_aa8cf2f048908ec245bd5832dfb76e5ae}
+InitScoring: intializes a) facts-\/related structs and TTimes and b) parameter ranges for the Score function. \hypertarget{score_8h_aa6bbbd741a4f53e33d44dfb000a0b0ca}{
+\index{score.h@{score.h}!InitStepsize@{InitStepsize}}
+\index{InitStepsize@{InitStepsize}!score.h@{score.h}}
+\subsubsection[{InitStepsize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Step\_\-Acc} InitStepsize (double {\em step}, \/  double {\em acc}, \/  FILE $\ast$ {\em slog}, \/  char $\ast$ {\em infile})}}
+\label{score_8h_aa6bbbd741a4f53e33d44dfb000a0b0ca}
+InitStepsize: the only thing this function does is putting stepsize and accuracy in a structure to be passed to the solver by the \hyperlink{score_8c_a14f9123a0d3de0c891e5a5af2470cfcc}{Score()} function \hypertarget{score_8h_a5a290e43263ee3160e54556fa9c7af4e}{
+\index{score.h@{score.h}!InitTTs@{InitTTs}}
+\index{InitTTs@{InitTTs}!score.h@{score.h}}
+\subsubsection[{InitTTs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf GenoType}$\ast$ InitTTs ({\bf GenoType} $\ast$ {\em facttype}, \/  int {\em nalleles})}}
+\label{score_8h_a5a290e43263ee3160e54556fa9c7af4e}
+InitTTs: Initializes the time points for which we need model output i.e. the time points for which we have data. NOTE: we do not allow data at t=0 but it still gets included into TTs \hypertarget{score_8h_a5062990a4365a5c5e5f4926691177e3c}{
+\index{score.h@{score.h}!InitTweak@{InitTweak}}
+\index{InitTweak@{InitTweak}!score.h@{score.h}}
+\subsubsection[{InitTweak}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tweak} InitTweak (FILE $\ast$ {\em fp}, \/  int $\ast$ {\em mask}, \/  {\bf TheProblem} {\em defs})}}
+\label{score_8h_a5062990a4365a5c5e5f4926691177e3c}
+InitTweak: installs tweak as a static variable in \hyperlink{translate_8c}{translate.c}; tweak is read from the \$tweak section in newstyle data files \hypertarget{score_8h_a76abc0d14c58dd765039064041f0b62c}{
+\index{score.h@{score.h}!InitWeights@{InitWeights}}
+\index{InitWeights@{InitWeights}!score.h@{score.h}}
+\subsubsection[{InitWeights}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Weights} InitWeights (FILE $\ast$ {\em fp}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{score_8h_a76abc0d14c58dd765039064041f0b62c}
+InitWeights: puts facts records into the appropriate \hyperlink{structDataTable}{DataTable}. Returns a pointer to a \hyperlink{structDataTable}{DataTable}, which in turn points to a sized array of DataRecords \hypertarget{score_8h_a537940a0eef76df989fc35314ceb4ff6}{
+\index{score.h@{score.h}!List2Facts@{List2Facts}}
+\index{List2Facts@{List2Facts}!score.h@{score.h}}
+\subsubsection[{List2Facts}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DataTable}$\ast$ List2Facts ({\bf Dlist} $\ast$ {\em inlist}, \/  int {\em ngenes})}}
+\label{score_8h_a537940a0eef76df989fc35314ceb4ff6}
+Takes a \hyperlink{structDlist}{Dlist} and returns the corresponding \hyperlink{structDataTable}{DataTable} structure we use for facts data.
+
+An extensive comment about indices: (by JJ)
+
+All data points with -\/1 as a value are NOT read from the data file. The difference between such ignored and zero values is crucial: -\/1 data points WILL NOT BE COMPARED TO simulation data, whereas 0 means NO PROTEIN AT THAT TIME IN THAT NUCLEUS. Index numbers help maintain the integrity of the data. An index number is defined as the array index at which a protein concentration would be if the data was complete, i.e. available for all nuclei at all times. In this way a sparse set of data can be compared to a complete set of simulation output. Thus, indices are defined as starting from 1 for each \hyperlink{structDataRecord}{DataRecord} (each time step) and increase by one for each gene in each nucleus in the order predefined by JR.
+
+List2Facts: takes a \hyperlink{structDlist}{Dlist} and returns the corresponding \hyperlink{structDataTable}{DataTable} structure we use for facts data.
+
+An extensive comment about indices: (by JJ)
+
+All data points with -\/1 as a value are NOT read from the data file. The difference between such ignored and zero values is crucial: -\/1 data points WILL NOT BE COMPARED TO simulation data, whereas 0 means NO PROTEIN AT THAT TIME IN THAT NUCLEUS. Index numbers help maintain the integrity of the data. An index number is defined as the array index at which a protein concentration would be if the data was complete, i.e. available for all nuclei at all times. In this way a sparse set of data can be compared to a complete set of simulation output. Thus, indices are defined as starting from 1 for each \hyperlink{structDataRecord}{DataRecord} (each time step) and increase by one for each gene in each nucleus in the order predefined by JR. \hypertarget{score_8h_a597f62551b43cb9ef705f68989dc6a5b}{
+\index{score.h@{score.h}!Penalty2Limits@{Penalty2Limits}}
+\index{Penalty2Limits@{Penalty2Limits}!score.h@{score.h}}
+\subsubsection[{Penalty2Limits}]{\setlength{\rightskip}{0pt plus 5cm}void Penalty2Limits ({\bf SearchSpace} $\ast$ {\em limits}, \/  {\bf TheProblem} {\em defs})}}
+\label{score_8h_a597f62551b43cb9ef705f68989dc6a5b}
+Penalty2Limits: uses the inverse function of g(u) to calculate upper and lower limits for T, m and h using the penalty lambda parameter; these limits can only be an appro-\/ ximation, since all T, m and h are added up to yield u for g(u); we try to compensate for this summation dividing the limits by sqrt(n); this function then sets the penalty vector to NULL and supplies explicit limits for T, m and h, which can be used for scram-\/ bling parameters and such CAUTION: this func DOES NOT RESET pen\_\-vec, caller must do this
+
+A short comment on penalty limits (JJ, Aug 7, 2001):
+
+In order to produce random values of T, m and h that are within reasonable limits when no explicit limits are used for them, we do the following approximation:
+
+First, we determine the limits of u in g(u) within which there is no penalty assigned. This is true for all g(u) be-\/ tween Lambda and (1-\/Lambda). Therefore, we calculate the in-\/ verse function of g(u) for those to values to get upper and lower limits for u (based on ideas by Eric Mjolsness). Since we need to sum up all T $\ast$ vmax, m $\ast$ mmax and h to get u, we'll compensate by dividing the limits by the sqrt of the number of genes in the problem. This way we think, we'll get reasonable limits for single parameters (idea by JR). All the above happens in the Penalty2Limits function in sco-\/ re.c. When comparing parameters to limits, don't forget to multiply Ts with vmax and ms with mmax. This happens in main of scramble below. hs are compared as they are. See JJs lab notes for further detail on g(u)-\/inverse and such. \hypertarget{score_8h_ae3804784c7b8995f852f3066129b0284}{
+\index{score.h@{score.h}!Rescale@{Rescale}}
+\index{Rescale@{Rescale}!score.h@{score.h}}
+\subsubsection[{Rescale}]{\setlength{\rightskip}{0pt plus 5cm}void Rescale ({\bf DataTable} $\ast$ {\em data}, \/  double $\ast$ {\em multipliers}, \/  int {\em ngenes})}}
+\label{score_8h_ae3804784c7b8995f852f3066129b0284}
+Rescale: Function to rescale data -\/ for every gene multiply data per previously calculated multiplier \hypertarget{score_8h_a14f9123a0d3de0c891e5a5af2470cfcc}{
+\index{score.h@{score.h}!Score@{Score}}
+\index{Score@{Score}!score.h@{score.h}}
+\subsubsection[{Score}]{\setlength{\rightskip}{0pt plus 5cm}void Score ({\bf Input} $\ast$ {\em inp}, \/  {\bf ScoreOutput} $\ast$ {\em out}, \/  int {\em jacobian})}}
+\label{score_8h_a14f9123a0d3de0c891e5a5af2470cfcc}
+Score: as the name says, score runs the simulation, gets a solution and then compares it to the data using the Eval least squares function NOTE: both InitZygote and InitScoring have to be called first! \hypertarget{score_8h_af1adae4c482c5bb0e181f123de58eee2}{
+\index{score.h@{score.h}!SetGuts@{SetGuts}}
+\index{SetGuts@{SetGuts}!score.h@{score.h}}
+\subsubsection[{SetGuts}]{\setlength{\rightskip}{0pt plus 5cm}void SetGuts (int {\em gutflag}, \/  int {\em ndigits})}}
+\label{score_8h_af1adae4c482c5bb0e181f123de58eee2}
+SetGuts: sets the gut info in \hyperlink{score_8c}{score.c} for printing out guts 

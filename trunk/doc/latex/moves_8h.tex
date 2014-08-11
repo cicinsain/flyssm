@@ -1,0 +1,206 @@
+\hypertarget{moves_8h}{
+\section{fly/moves.h File Reference}
+\label{moves_8h}\index{fly/moves.h@{fly/moves.h}}
+}
+
+
+Problem-\/specific stuff for the Lam annealer.  
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$global.h$>$}\par
+{\ttfamily \#include $<$sa.h$>$}\par
+{\ttfamily \#include $<$maternal.h$>$}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structAParms}{AParms}
+\begin{DoxyCompactList}\small\item\em Annealing parameters that are not specific to the Lam algorithm. \item\end{DoxyCompactList}\item 
+struct \hyperlink{structAccStats}{AccStats}
+\begin{DoxyCompactList}\small\item\em Acceptance statistics are used for keeping the acceptance ratio for each parameter as close as possible to 0.44. \item\end{DoxyCompactList}\item 
+struct \hyperlink{structMoveState}{MoveState}
+\begin{DoxyCompactList}\small\item\em Contains copies of the static variables of \hyperlink{moves_8c}{moves.c} and the values of parameters undergoing annealing. \item\end{DoxyCompactList}\item 
+struct \hyperlink{structOpts}{Opts}
+\begin{DoxyCompactList}\small\item\em Saving command line options in \hyperlink{savestate_8c}{savestate.c}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structAParms}{AParms} \hyperlink{moves_8h_af3286b9a5a6281c8097ed44254e640c4}{ReadAParameters} (FILE $\ast$fp)
+\item 
+void \hyperlink{moves_8h_a84f1db9b0dd02782be364c0e9f4af1d9}{WriteEquil} (char $\ast$filename, double $\ast$equil\_\-var)
+\item 
+void \hyperlink{moves_8h_a290721f9cc1d315d6a81fd4827c8f15d}{PrintEquil} (FILE $\ast$fp, double $\ast$equil\_\-var, char $\ast$title)
+\item 
+void \hyperlink{moves_8h_ac6223b082e7ad89ec847a437c2683eb0}{PrintTimes} (FILE $\ast$fp, double $\ast$delta)
+\item 
+\hyperlink{structOpts}{Opts} $\ast$ \hyperlink{moves_8h_a015b18ef05bf09796eb7c6572ac2c843}{GetOptions} (void)
+\item 
+void \hyperlink{moves_8h_a603709c1fa1952f3bbb5def09e72963d}{RestoreOptions} (\hyperlink{structOpts}{Opts} $\ast$options)
+\item 
+\hyperlink{structPArrPtr}{PArrPtr} \hyperlink{moves_8h_a8634ba41e683bd542126615880dbbdfb}{Translate} (\hyperlink{structInput}{Input} $\ast$inp)
+\begin{DoxyCompactList}\small\item\em Creates an array of pointers that point to the parameters to be tweaked. \item\end{DoxyCompactList}\item 
+double \hyperlink{moves_8h_a1f685653c42ef5907da979d719978aa9}{InitMoves} (FILE $\ast$fp, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{moves_8h_a2c96b26687c1f70d9c0a58fbfcca007b}{RestoreMoves} (\hyperlink{structMoveState}{MoveState} $\ast$MovePtr)
+\item 
+void \hyperlink{moves_8h_a580ac430db77feabda1e70856d997eb9}{RestoreProlix} (char $\ast$prolixfile)
+\item 
+\hyperlink{structAParms}{AParms} \hyperlink{moves_8h_a56cd6394ef9d4f2f873270438ca10de2}{GetFinalInfo} (void)
+\item 
+void \hyperlink{moves_8h_a505dd9b92f717104bc77c685860e0e43}{Move} (\hyperlink{structFiles}{Files} $\ast$files, \hyperlink{structmy__distrib}{DistParms} $\ast$DistP)
+\item 
+void \hyperlink{moves_8h_aec3936bd73396a7fbbbb0f51d518ae24}{UpdateControl} (\hyperlink{structFiles}{Files} $\ast$files)
+\item 
+char $\ast$ \hyperlink{moves_8h_a7f2684030318dd3ccf42ed882bbbdbac}{SetProlix} (int value, char $\ast$file, int init\_\-flag)
+\item 
+\hyperlink{structMoveState}{MoveState} $\ast$ \hyperlink{moves_8h_a5d83124b2ed5a2bbed01f2ebe602e95e}{MoveSave} (void)
+\item 
+void \hyperlink{moves_8h_a0247a880ca3577c056dc562efba6cad7}{StateRead} (char $\ast$statefile, \hyperlink{structOpts}{Opts} $\ast$options, \hyperlink{structMoveState}{MoveState} $\ast$move\_\-ptr, double $\ast$stats, char $\ast$rand, double $\ast$times)
+\item 
+void \hyperlink{moves_8h_a0cc99406abfc909bc33fcc43e4086d72}{StateRm} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{moves_8h_a6b76c77a872c1dfe8e58ba53e022251e}{THETA\_\-MIN}
+\item 
+const double \hyperlink{moves_8h_ad9ed638111111c030aaf2d9742237774}{THETA\_\-INIT}
+\item 
+const int \hyperlink{moves_8h_a5c6b552b88b723ce1a985066e16a8046}{LOWBITS}
+\item 
+const int \hyperlink{moves_8h_a58c7f82460d1c601a93389d8eaafa37b}{BYTESIZE}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Problem-\/specific stuff for the Lam annealer. \begin{DoxyAuthor}{Authors}
+JR, modified by Yoginho
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+There are functions for move generation and translation of model data structures into annealing parameter arrays. Moreover there are a couple of functions that read annealing and tune parameters and the tweak table from the data file. 
+
+\subsection{Function Documentation}
+\hypertarget{moves_8h_a56cd6394ef9d4f2f873270438ca10de2}{
+\index{moves.h@{moves.h}!GetFinalInfo@{GetFinalInfo}}
+\index{GetFinalInfo@{GetFinalInfo}!moves.h@{moves.h}}
+\subsubsection[{GetFinalInfo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AParms} GetFinalInfo (void)}}
+\label{moves_8h_a56cd6394ef9d4f2f873270438ca10de2}
+GetFinalInfo: collects stop energy and final count for output to the data file \hypertarget{moves_8h_a015b18ef05bf09796eb7c6572ac2c843}{
+\index{moves.h@{moves.h}!GetOptions@{GetOptions}}
+\index{GetOptions@{GetOptions}!moves.h@{moves.h}}
+\subsubsection[{GetOptions}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Opts}$\ast$ GetOptions (void)}}
+\label{moves_8h_a015b18ef05bf09796eb7c6572ac2c843}
+GetOptions: returns command line options to \hyperlink{savestate_8c}{savestate.c} for the detailed meaning of all these options see Parse-\/ CommandLine() above); \hyperlink{structOpts}{Opts} struct defined in \hyperlink{moves_8h}{moves.h} \hypertarget{moves_8h_a1f685653c42ef5907da979d719978aa9}{
+\index{moves.h@{moves.h}!InitMoves@{InitMoves}}
+\index{InitMoves@{InitMoves}!moves.h@{moves.h}}
+\subsubsection[{InitMoves}]{\setlength{\rightskip}{0pt plus 5cm}double InitMoves (FILE $\ast$ {\em fp}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{moves_8h_a1f685653c42ef5907da979d719978aa9}
+InitMoves: initializes the following \hyperlink{moves_8c}{moves.c}-\/specific stuff:
+\begin{DoxyItemize}
+\item static annealing parameter struct (ap)
+\item static tweak struct (tweak) in \hyperlink{translate_8c}{translate.c}
+\item initializes random number generator in \hyperlink{lsa_8c}{lsa.c}
+\item receives parameter list from Translate, stores nparams
+\item initializes acc\_\-tab for acceptance statistics
+\item set mixing interval in \hyperlink{lsa_8c}{lsa.c} (parallel code only)
+\end{DoxyItemize}
+
+it then returns the initial temperature to the caller \hypertarget{moves_8h_a505dd9b92f717104bc77c685860e0e43}{
+\index{moves.h@{moves.h}!Move@{Move}}
+\index{Move@{Move}!moves.h@{moves.h}}
+\subsubsection[{Move}]{\setlength{\rightskip}{0pt plus 5cm}void Move ({\bf Files} $\ast$ {\em files}, \/  {\bf DistParms} $\ast$ {\em DistP})}}
+\label{moves_8h_a505dd9b92f717104bc77c685860e0e43}
+Move: tweaks the parameter-\/to-\/be-\/tweaked according to the current value of index; also calls UpdateControl if necessary \hypertarget{moves_8h_a5d83124b2ed5a2bbed01f2ebe602e95e}{
+\index{moves.h@{moves.h}!MoveSave@{MoveSave}}
+\index{MoveSave@{MoveSave}!moves.h@{moves.h}}
+\subsubsection[{MoveSave}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MoveState}$\ast$ MoveSave (void)}}
+\label{moves_8h_a5d83124b2ed5a2bbed01f2ebe602e95e}
+MoveSave: returns a \hyperlink{structMoveState}{MoveState} struct in which the current state of moves is saved; use for writing state file \hypertarget{moves_8h_a290721f9cc1d315d6a81fd4827c8f15d}{
+\index{moves.h@{moves.h}!PrintEquil@{PrintEquil}}
+\index{PrintEquil@{PrintEquil}!moves.h@{moves.h}}
+\subsubsection[{PrintEquil}]{\setlength{\rightskip}{0pt plus 5cm}void PrintEquil (FILE $\ast$ {\em fp}, \/  double $\ast$ {\em equil\_\-var}, \/  char $\ast$ {\em title})}}
+\label{moves_8h_a290721f9cc1d315d6a81fd4827c8f15d}
+PrintEquil: writes an 'equilibrate\_\-variance' section with 'title' to the stream specified by fp \hypertarget{moves_8h_ac6223b082e7ad89ec847a437c2683eb0}{
+\index{moves.h@{moves.h}!PrintTimes@{PrintTimes}}
+\index{PrintTimes@{PrintTimes}!moves.h@{moves.h}}
+\subsubsection[{PrintTimes}]{\setlength{\rightskip}{0pt plus 5cm}void PrintTimes (FILE $\ast$ {\em fp}, \/  double $\ast$ {\em times})}}
+\label{moves_8h_ac6223b082e7ad89ec847a437c2683eb0}
+PrintTimes: writes two (parallel: three) times sections \hypertarget{moves_8h_af3286b9a5a6281c8097ed44254e640c4}{
+\index{moves.h@{moves.h}!ReadAParameters@{ReadAParameters}}
+\index{ReadAParameters@{ReadAParameters}!moves.h@{moves.h}}
+\subsubsection[{ReadAParameters}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AParms} ReadAParameters (FILE $\ast$ {\em fp})}}
+\label{moves_8h_af3286b9a5a6281c8097ed44254e640c4}
+ReadAParameters: reads the AParm struct from an annealing\_\-input sec-\/ tion; these are the annealing parameters that are not Lam-\/specific (and should NOT go into \hyperlink{lsa_8c}{lsa.c} \hypertarget{moves_8h_a2c96b26687c1f70d9c0a58fbfcca007b}{
+\index{moves.h@{moves.h}!RestoreMoves@{RestoreMoves}}
+\index{RestoreMoves@{RestoreMoves}!moves.h@{moves.h}}
+\subsubsection[{RestoreMoves}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreMoves ({\bf MoveState} $\ast$ {\em MovePtr})}}
+\label{moves_8h_a2c96b26687c1f70d9c0a58fbfcca007b}
+RestoreMoves: restores move generator from state file NOTE: InitMoves will be called before this function during a restore \hypertarget{moves_8h_a603709c1fa1952f3bbb5def09e72963d}{
+\index{moves.h@{moves.h}!RestoreOptions@{RestoreOptions}}
+\index{RestoreOptions@{RestoreOptions}!moves.h@{moves.h}}
+\subsubsection[{RestoreOptions}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreOptions ({\bf Opts} $\ast$ {\em options})}}
+\label{moves_8h_a603709c1fa1952f3bbb5def09e72963d}
+RestoreOptions: restores the values of the command line opt variables from the \hyperlink{structOpts}{Opts} struct (used for restoring a run) \hypertarget{moves_8h_a580ac430db77feabda1e70856d997eb9}{
+\index{moves.h@{moves.h}!RestoreProlix@{RestoreProlix}}
+\index{RestoreProlix@{RestoreProlix}!moves.h@{moves.h}}
+\subsubsection[{RestoreProlix}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreProlix (char $\ast$ {\em prolixfile})}}
+\label{moves_8h_a580ac430db77feabda1e70856d997eb9}
+RestoreProlix: restores prolix file after a run has been interrupted \hypertarget{moves_8h_a7f2684030318dd3ccf42ed882bbbdbac}{
+\index{moves.h@{moves.h}!SetProlix@{SetProlix}}
+\index{SetProlix@{SetProlix}!moves.h@{moves.h}}
+\subsubsection[{SetProlix}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ SetProlix (int {\em value}, \/  char $\ast$ {\em file}, \/  int {\em init\_\-flag})}}
+\label{moves_8h_a7f2684030318dd3ccf42ed882bbbdbac}
+SetProlix: sets flag for printing prolix output on acceptance stats and initializes the prolix file if required \hypertarget{moves_8h_a0247a880ca3577c056dc562efba6cad7}{
+\index{moves.h@{moves.h}!StateRead@{StateRead}}
+\index{StateRead@{StateRead}!moves.h@{moves.h}}
+\subsubsection[{StateRead}]{\setlength{\rightskip}{0pt plus 5cm}void StateRead (char $\ast$ {\em statefile}, \/  {\bf Opts} $\ast$ {\em options}, \/  {\bf MoveState} $\ast$ {\em move\_\-ptr}, \/  double $\ast$ {\em stats}, \/  char $\ast$ {\em rand}, \/  double $\ast$ {\em delta})}}
+\label{moves_8h_a0247a880ca3577c056dc562efba6cad7}
+StateRead: reads Lam statistics, move state and erand state from a state file and restores the annealer's state to the same state it was in before it got interrupted CAUTION: InitMoves must be called before calling StateRead! \hypertarget{moves_8h_a0cc99406abfc909bc33fcc43e4086d72}{
+\index{moves.h@{moves.h}!StateRm@{StateRm}}
+\index{StateRm@{StateRm}!moves.h@{moves.h}}
+\subsubsection[{StateRm}]{\setlength{\rightskip}{0pt plus 5cm}void StateRm (void)}}
+\label{moves_8h_a0cc99406abfc909bc33fcc43e4086d72}
+StateRm: removes the state file after the run has been completed; unless we're tuning in parallel, only the root node needs to delete a state file \hypertarget{moves_8h_a8634ba41e683bd542126615880dbbdfb}{
+\index{moves.h@{moves.h}!Translate@{Translate}}
+\index{Translate@{Translate}!moves.h@{moves.h}}
+\subsubsection[{Translate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PArrPtr} Translate ({\bf Input} $\ast$ {\em inp})}}
+\label{moves_8h_a8634ba41e683bd542126615880dbbdfb}
+
+
+Creates an array of pointers that point to the parameters to be tweaked. Translate: creates an array of pointers that point to the parameters to be tweaked; the \hyperlink{structPArrPtr}{PArrPtr} that is returned also includes pointers to the corresponding parameter ranges for each parameter, although this feature is not yet used anywhere in the annealing code CAUTION: InitZygote and InitScoring have to be called first!
+
+The \hyperlink{structPArrPtr}{PArrPtr} that is returned also includes pointers to the corresponding parameter ranges for each parameter, although this feature is not yet used anywhere in the annealing code
+
+CAUTION: InitZygote and InitScoring have to be called first! \hypertarget{moves_8h_aec3936bd73396a7fbbbb0f51d518ae24}{
+\index{moves.h@{moves.h}!UpdateControl@{UpdateControl}}
+\index{UpdateControl@{UpdateControl}!moves.h@{moves.h}}
+\subsubsection[{UpdateControl}]{\setlength{\rightskip}{0pt plus 5cm}void UpdateControl ({\bf Files} $\ast$ {\em files})}}
+\label{moves_8h_aec3936bd73396a7fbbbb0f51d518ae24}
+UpdateControl: each interval number of steps, acceptance stats are dated here; this function also prints prolix stuff, if required. \hypertarget{moves_8h_a84f1db9b0dd02782be364c0e9f4af1d9}{
+\index{moves.h@{moves.h}!WriteEquil@{WriteEquil}}
+\index{WriteEquil@{WriteEquil}!moves.h@{moves.h}}
+\subsubsection[{WriteEquil}]{\setlength{\rightskip}{0pt plus 5cm}void WriteEquil (char $\ast$ {\em filename}, \/  double $\ast$ {\em equil\_\-var})}}
+\label{moves_8h_a84f1db9b0dd02782be364c0e9f4af1d9}
+WriteEquil: writes the equilibrate\_\-variance section to the data file right after the \$equilibrate section 
+
+\subsection{Variable Documentation}
+\hypertarget{moves_8h_a58c7f82460d1c601a93389d8eaafa37b}{
+\index{moves.h@{moves.h}!BYTESIZE@{BYTESIZE}}
+\index{BYTESIZE@{BYTESIZE}!moves.h@{moves.h}}
+\subsubsection[{BYTESIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf BYTESIZE}}}
+\label{moves_8h_a58c7f82460d1c601a93389d8eaafa37b}
+erand conversion \hypertarget{moves_8h_a5c6b552b88b723ce1a985066e16a8046}{
+\index{moves.h@{moves.h}!LOWBITS@{LOWBITS}}
+\index{LOWBITS@{LOWBITS}!moves.h@{moves.h}}
+\subsubsection[{LOWBITS}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf LOWBITS}}}
+\label{moves_8h_a5c6b552b88b723ce1a985066e16a8046}
+following two are for drand to \hypertarget{moves_8h_ad9ed638111111c030aaf2d9742237774}{
+\index{moves.h@{moves.h}!THETA\_\-INIT@{THETA\_\-INIT}}
+\index{THETA\_\-INIT@{THETA\_\-INIT}!moves.h@{moves.h}}
+\subsubsection[{THETA\_\-INIT}]{\setlength{\rightskip}{0pt plus 5cm}const double {\bf THETA\_\-INIT}}}
+\label{moves_8h_ad9ed638111111c030aaf2d9742237774}
+initial value for all theta\_\-bar (move size) \hypertarget{moves_8h_a6b76c77a872c1dfe8e58ba53e022251e}{
+\index{moves.h@{moves.h}!THETA\_\-MIN@{THETA\_\-MIN}}
+\index{THETA\_\-MIN@{THETA\_\-MIN}!moves.h@{moves.h}}
+\subsubsection[{THETA\_\-MIN}]{\setlength{\rightskip}{0pt plus 5cm}const double {\bf THETA\_\-MIN}}}
+\label{moves_8h_a6b76c77a872c1dfe8e58ba53e022251e}
+minimum value of theta\_\-bar (move size) 

@@ -1,0 +1,51 @@
+\hypertarget{random_8h}{
+\section{lam/random.h File Reference}
+\label{random_8h}\index{lam/random.h@{lam/random.h}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{random_8h_a60fbabc843ca6b192e1b75aba4af1f06}{InitRand} (int seed)
+\item 
+void \hyperlink{random_8h_a9bc7105cec686724bb983a8291ee1237}{RestoreRand} (char $\ast$restored)
+\item 
+double \hyperlink{random_8h_a366247890473de118f84ba9bb20cf467}{RandomReal} (void)
+\item 
+int \hyperlink{random_8h_ac46ec4a8515ceccca7c472ee3687b83f}{RandomInt} (int max)
+\item 
+char $\ast$ \hyperlink{random_8h_a243fd3dff8ea1429cdd09e578252e51e}{GetDSFMTState} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+written by Yoginho
+
+functions for initializing and running dSFMT() random number generator 
+
+\subsection{Function Documentation}
+\hypertarget{random_8h_a243fd3dff8ea1429cdd09e578252e51e}{
+\index{random.h@{random.h}!GetDSFMTState@{GetDSFMTState}}
+\index{GetDSFMTState@{GetDSFMTState}!random.h@{random.h}}
+\subsubsection[{GetDSFMTState}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ GetDSFMTState (void)}}
+\label{random_8h_a243fd3dff8ea1429cdd09e578252e51e}
+GetDSFMTState: returns the dSFMT state as a string, whish is used to initialize dSFMT(); used for saving the dSFMT state in a state file \hypertarget{random_8h_a60fbabc843ca6b192e1b75aba4af1f06}{
+\index{random.h@{random.h}!InitRand@{InitRand}}
+\index{InitRand@{InitRand}!random.h@{random.h}}
+\subsubsection[{InitRand}]{\setlength{\rightskip}{0pt plus 5cm}void InitRand (int {\em seed})}}
+\label{random_8h_a60fbabc843ca6b192e1b75aba4af1f06}
+InitRand: initializes dSFMT random number generator by making seed static to \hyperlink{random_8c}{random.c} \hypertarget{random_8h_ac46ec4a8515ceccca7c472ee3687b83f}{
+\index{random.h@{random.h}!RandomInt@{RandomInt}}
+\index{RandomInt@{RandomInt}!random.h@{random.h}}
+\subsubsection[{RandomInt}]{\setlength{\rightskip}{0pt plus 5cm}int RandomInt (int {\em max})}}
+\label{random_8h_ac46ec4a8515ceccca7c472ee3687b83f}
+RandomInt: returns a random integer between 0 and max using the random number generator of choice \hypertarget{random_8h_a366247890473de118f84ba9bb20cf467}{
+\index{random.h@{random.h}!RandomReal@{RandomReal}}
+\index{RandomReal@{RandomReal}!random.h@{random.h}}
+\subsubsection[{RandomReal}]{\setlength{\rightskip}{0pt plus 5cm}double RandomReal (void)}}
+\label{random_8h_a366247890473de118f84ba9bb20cf467}
+RandomReal: returns a random real number between 0 and 1 using the random number generator of choice \hypertarget{random_8h_a9bc7105cec686724bb983a8291ee1237}{
+\index{random.h@{random.h}!RestoreRand@{RestoreRand}}
+\index{RestoreRand@{RestoreRand}!random.h@{random.h}}
+\subsubsection[{RestoreRand}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreRand (char $\ast$ {\em restored})}}
+\label{random_8h_a9bc7105cec686724bb983a8291ee1237}
+RestoreRand: restores dSFMT random number generator state by making seed static to \hyperlink{random_8c}{random.c} 

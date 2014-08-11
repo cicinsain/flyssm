@@ -1,0 +1,487 @@
+\hypertarget{solvers_8c}{
+\section{fly/solvers.c File Reference}
+\label{solvers_8c}\index{fly/solvers.c@{fly/solvers.c}}
+}
+
+
+Contains the solver function implementations (can be toggled by -\/s option) that propagate the equations.  
+{\ttfamily \#include $<$float.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$limits.h$>$}\par
+{\ttfamily \#include $<$error.h$>$}\par
+{\ttfamily \#include $<$solvers.h$>$}\par
+{\ttfamily \#include $<$maternal.h$>$}\par
+{\ttfamily \#include $<$zygotic.h$>$}\par
+{\ttfamily \#include $<$integrate.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{solvers_8c_aa3c80caa06171d7fad9ab72cb3c9cd5b}{
+\#define {\bfseries DSQR}(a)~((dqrarg=(a)) == 0.0 ? 0.0 : dqrarg$\ast$dqrarg)}
+\label{solvers_8c_aa3c80caa06171d7fad9ab72cb3c9cd5b}
+
+\item 
+\#define {\bfseries DMAX}(a, b)
+\item 
+\#define {\bfseries DMIN}(a, b)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{solvers_8c_ae8016a49c971f7f973663bcfd6921dbb}{Euler} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_a270ab0adff5052cf4e1da796c23d99c4}{Meuler} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_a97e03e6ff4dc28c1fa9882e09b30d59c}{Heun} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_aa769d6b7f7c138e8c659a7e7b1a256da}{Rk2} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_af811314e3f811a04f9dfc54a3368d359}{Rk4} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_a22d1585560a34951ee703468643de616}{Rkck} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_a6087b8c0ab5c1170a4e3000289f7e7ea}{Rkf} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_a38d2c4e212d863c00c4275a5867287aa}{Milne} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_aa20e5e9f5c0b7807c310cbe0444e96f7}{Adams} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_a5135579c74007c279b00970d4bf23a01}{BuSt} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_ac9521dec953badfb45f871e51fd8cb21}{bsstep} (double $\ast$v, double $\ast$deriv, int n, double $\ast$t, double htry, double accuracy, double $\ast$hdid, double $\ast$hnext, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_ab7e5ce78d2e46e527abbbfcfbddef1a0}{pzextr} (int iest, double hest, double $\ast$vest, double $\ast$vout, double $\ast$dv, int n, const int KMAXX)
+\item 
+void \hyperlink{solvers_8c_afc6326c0188c57c40b82a8e8977ba3d9}{mmid} (double $\ast$vin, double $\ast$vout, double $\ast$deriv, double tin, double htot, int nstep, int n, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_a121e2c55a5a00a0ad9b953ee654cde08}{BaDe} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_a84cf8f0168e075e49d7d383ffd9efc1e}{stifbs} (double $\ast$v, double $\ast$deriv, int n, double $\ast$t, double htry, double accuracy, double $\ast$hdid, double $\ast$hnext, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_a2704a4f583549482cb8f64b9b5b9897d}{simpr} (double $\ast$vin, double $\ast$vout, double $\ast$deriv, double $\ast$dfdt, double $\ast$$\ast$jac, double tin, double htot, int nstep, int n, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8c_aec72c11d5bed935ceab70026dabea1ac}{ludcmp} (double $\ast$$\ast$a, int n, int $\ast$indx, double $\ast$d)
+\item 
+void \hyperlink{solvers_8c_a2f383ce6542557020a572bac16e77055}{lubksb} (double $\ast$$\ast$a, int n, int $\ast$indx, double $\ast$b)
+\item 
+void \hyperlink{solvers_8c_aa9f4951e44339690c0b36fcb131e25d6}{WriteSolvLog} (char $\ast$solver, double tin, double tout, double h, int n, int nderivs, FILE $\ast$slog)
+\item 
+void \hyperlink{solvers_8c_a4a45ad1ee998bd642e3adf4ae72f5f1c}{SoDe} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+\hypertarget{solvers_8c_a0ba009b4c4a756295032d2d2c629846e}{
+int {\bfseries compare} (double $\ast$x, double $\ast$y)}
+\label{solvers_8c_a0ba009b4c4a756295032d2d2c629846e}
+
+\item 
+\hypertarget{solvers_8c_a25482a4d9598a01c466c4656cc05ce4c}{
+double $\ast$ {\bfseries Construct\_\-Discont\_\-Array} (double range, double $\ast$taus, int n, double $\ast$starts, int sn, int $\ast$disc\_\-size)}
+\label{solvers_8c_a25482a4d9598a01c466c4656cc05ce4c}
+
+\item 
+\hypertarget{solvers_8c_a2e284fa03cc0d813a3817fce38b3767d}{
+void {\bfseries CE} (double t, double $\ast$vans, double tbegin, double $\ast$v\_\-at\_\-tbegin, double ech, double $\ast$d1, double $\ast$d2, double $\ast$d3, double $\ast$d4, int n)}
+\label{solvers_8c_a2e284fa03cc0d813a3817fce38b3767d}
+
+\item 
+\hypertarget{solvers_8c_aac12e37840909f894220d2cd7e3c96e9}{
+int {\bfseries y\_\-delayed} (double $\ast$$\ast$$\ast$vd, int n, double $\ast$rktimes, double $\ast$tau, double $\ast$grid, double $\ast$$\ast$vdone, double $\ast$$\ast$deriv1, double $\ast$$\ast$deriv2, double $\ast$$\ast$deriv3, double $\ast$$\ast$deriv4, int gridsize, double accu, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)}
+\label{solvers_8c_aac12e37840909f894220d2cd7e3c96e9}
+
+\item 
+void \hyperlink{solvers_8c_a4be37b339afa64593767489d8d46c746}{DCERk32} (double $\ast$$\ast$vatt, int n, double $\ast$tarray, int tpoints, double $\ast$darray, int dpoints, double stephint, double accuracy, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+\hypertarget{solvers_8c_a62c54ac649fb756dfe1449fe97997ea4}{
+void {\bfseries FreeDelaySolver} (void)}
+\label{solvers_8c_a62c54ac649fb756dfe1449fe97997ea4}
+
+\item 
+\hypertarget{solvers_8c_a28d5f0f1bac4fe188f5162c736d1cfff}{
+void {\bfseries InitDelaySolver} (void)}
+\label{solvers_8c_a28d5f0f1bac4fe188f5162c736d1cfff}
+
+\item 
+\hypertarget{solvers_8c_a283a82ba094e935a7df59ab28372d64e}{
+void {\bfseries DivideHistory} (double t1, double t2, \hyperlink{structZygote}{Zygote} $\ast$zyg)}
+\label{solvers_8c_a283a82ba094e935a7df59ab28372d64e}
+
+\item 
+int \hyperlink{solvers_8c_a0adb937524dd2a86627683c4eb9681df}{InitKrylovVariables} (double $\ast$vin, int n)
+\item 
+\hypertarget{solvers_8c_a7b2523b3f0a227d17e730290afde692f}{
+int {\bfseries CheckFlag} (void $\ast$flagvalue, char $\ast$funcname, int opt)}
+\label{solvers_8c_a7b2523b3f0a227d17e730290afde692f}
+
+\item 
+void \hyperlink{solvers_8c_af374eadd949ee5ba6cad68118524867f}{Krylov} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$sinput, \hyperlink{structInput}{Input} $\ast$input)
+\item 
+int \hyperlink{solvers_8c_aea41aa29042230e96f756b96180271cd}{my\_\-f\_\-band} (realtype t, N\_\-Vector y, N\_\-Vector ydot, void $\ast$extra\_\-data)
+\item 
+\hypertarget{solvers_8c_a655b3c9db3a10fcc5997e7e858d8f41d}{
+int {\bfseries InitBandSolver} (realtype tzero, double stephint, double rel\_\-tol, double abs\_\-tol)}
+\label{solvers_8c_a655b3c9db3a10fcc5997e7e858d8f41d}
+
+\item 
+\hypertarget{solvers_8c_a605fb06d99c427905ed98deb79d19618}{
+void {\bfseries FreeBandSolver} (void)}
+\label{solvers_8c_a605fb06d99c427905ed98deb79d19618}
+
+\item 
+void \hyperlink{solvers_8c_ae5bd7dd5efc4acce68f8b2adb32ec6d4}{writeInfo} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{solvers_8c_ae6261d15419eb591b3f65c5f8cd7b8cb}{
+double $\ast$ {\bfseries d}}
+\label{solvers_8c_ae6261d15419eb591b3f65c5f8cd7b8cb}
+
+\item 
+\hypertarget{solvers_8c_a312c83bcf7a6bf886904f0edc0ceced0}{
+double $\ast$ {\bfseries hpoints}}
+\label{solvers_8c_a312c83bcf7a6bf886904f0edc0ceced0}
+
+\item 
+\hypertarget{solvers_8c_a128c54b7f4edabe013eaef729c0f0a21}{
+double {\bfseries maxdel}}
+\label{solvers_8c_a128c54b7f4edabe013eaef729c0f0a21}
+
+\item 
+\hypertarget{solvers_8c_a4254f455868d4946f1b13de21452ec4d}{
+double {\bfseries mindel}}
+\label{solvers_8c_a4254f455868d4946f1b13de21452ec4d}
+
+\item 
+\hypertarget{solvers_8c_a8048c2b1bbb551e65dd36304ccfbb311}{
+int {\bfseries numdel}}
+\label{solvers_8c_a8048c2b1bbb551e65dd36304ccfbb311}
+
+\item 
+\hypertarget{solvers_8c_ab002e689b75fd56a1df4e6573f596237}{
+int {\bfseries gridstart}}
+\label{solvers_8c_ab002e689b75fd56a1df4e6573f596237}
+
+\item 
+\hypertarget{solvers_8c_a692f69dfdc1f1e6215e6c447d7a8623e}{
+double $\ast$ {\bfseries delay}}
+\label{solvers_8c_a692f69dfdc1f1e6215e6c447d7a8623e}
+
+\item 
+\hypertarget{solvers_8c_a7d1a83459345b13e5e76fe3fe247d3e1}{
+int {\bfseries gridpos}}
+\label{solvers_8c_a7d1a83459345b13e5e76fe3fe247d3e1}
+
+\item 
+\hypertarget{solvers_8c_aba42da318b9d388e73f1095675933a2d}{
+double $\ast$ {\bfseries tdone}}
+\label{solvers_8c_aba42da318b9d388e73f1095675933a2d}
+
+\item 
+\hypertarget{solvers_8c_a78d912f6bd315c74b89a55eeaf0224fe}{
+double $\ast$$\ast$ {\bfseries derivv1}}
+\label{solvers_8c_a78d912f6bd315c74b89a55eeaf0224fe}
+
+\item 
+\hypertarget{solvers_8c_ab8c0159a6419e422738055e0dcfbaede}{
+double $\ast$$\ast$ {\bfseries derivv2}}
+\label{solvers_8c_ab8c0159a6419e422738055e0dcfbaede}
+
+\item 
+\hypertarget{solvers_8c_ae9d2eb64f571f82d95fb3ce54cfe2909}{
+double $\ast$$\ast$ {\bfseries derivv3}}
+\label{solvers_8c_ae9d2eb64f571f82d95fb3ce54cfe2909}
+
+\item 
+\hypertarget{solvers_8c_a9de08945b3b017f399f3513d4cba218c}{
+double $\ast$$\ast$ {\bfseries derivv4}}
+\label{solvers_8c_a9de08945b3b017f399f3513d4cba218c}
+
+\item 
+\hypertarget{solvers_8c_a91158b5f3384965c57166629f062e96f}{
+double $\ast$$\ast$ {\bfseries vdonne}}
+\label{solvers_8c_a91158b5f3384965c57166629f062e96f}
+
+\item 
+\hypertarget{solvers_8c_a2df434836dc68419371bf9bd2a830e88}{
+double {\bfseries dqrarg}}
+\label{solvers_8c_a2df434836dc68419371bf9bd2a830e88}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains the solver function implementations (can be toggled by -\/s option) that propagate the equations. \begin{DoxyAuthor}{Author}
+JR, modified by Yoginho, Additional solvers by: Joel Linton (Rk4), Johannes Jaeger (Rk2, Meuler, Heun), Konstantin Kozlov (Milne, Adams), Marcel Wolf (Rkck, Rkf), Manu (Adams, BuSt), Anton Crombach (Krylov)
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+\begin{DoxyNote}{Note}
+{\itshape ONLY\/} general solvers allowed here; they {\itshape MUST\/} comply to the generic solver interface
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+The functions in this file return vin and vout unchanged iff stepsize = 0. It is the responsibility of the calling function to be sure that this is not a problem.
+\end{DoxyWarning}
+\begin{DoxyParagraph}{Usage:}
+
+\end{DoxyParagraph}
+All solvers adhere to the same interface:
+
+Solver(double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n);
+
+Arguments:
+
+
+\begin{DoxyItemize}
+\item vin array of dependent variables at 'tin' (start)
+\item vout array of dependent variables at 'tout' (end); this is what's returned by the solver
+\item tin time at start
+\item tout time at end
+\item stephint suggested stepsize for fixed stepsize solvers; see extensive comment below; the embedded Rk solvers (Rkck, Rkf) take stephint as their ini-\/ tial stepsize
+\item accuracy accuracy for adaptive stepsize solvers; accuracy is always relative, i.e. 0.1 means 10\% of the actual v we've evaluated
+\item n size of vin and vout arrays; the user is respon-\/ sible for checking that the number of elements does not change in the model between vin/vout
+\end{DoxyItemize}
+
+Note that if tin = tout the solvers will just returns with-\/ out doing anything. The caller is responsible for handling such a situation.
+
+\begin{DoxyParagraph}{Solver Naming Conventions: }
+
+\end{DoxyParagraph}
+There are various contradictory solver nomenclatures in the literature. If not stated otherwise, we use the ones from the following two books, on which most of our solvers are based:
+
+Press, Teukolsky, Vetterling \& Flannery (1992). Numerical Recipes in C. Cambridge University Press, Cambridge, U.K.
+
+Burden \& Faires (1993). Numerical Analysis, 5th Edition. PWS Publishing Co., Boston MA, U.S.A.
+
+\begin{DoxyParagraph}{Important Comment: }
+
+\end{DoxyParagraph}
+stephint and the stepsize of fixed-\/stepsize solvers:
+
+The stepsize which is passed to a fixed-\/stepsize solvers is actually a stephint, i.e. only an approximation to the actual stepsize which depends on the length of the interval over which the equations are propagated:
+
+if the remainder of (deltat div stephint) is:
+
+0 stepsize = stephint $>$ 0 \&\& $<$ stephint/2 stepsize $>$ stephint $>$= stephint/2 \&\& $<$ stephint stepsize $<$ stephint
+
+The exact amount of the difference between stepsize and step-\/ hint depends on the size of deltat and stephint:
+\begin{DoxyItemize}
+\item the larger deltat, the smaller the maximum possible diffe-\/ rence for a given stephint
+\item the larger stephint, the larger the maximum possible di-\/ fference for a given stephint
+\end{DoxyItemize}
+
+Since mitoses only last about 3-\/5 minutes, these differences are quite significant for large stepsizes ( $>$ 0.1 ). For the 4div schedule (newstyle datafiles) we have maximum relative differences between stephint and actual stepsize of about:
+
+stephint max. rel. difference
+
+1.0 10.0\% 0.5 5.8\% 0.3 4.3\% 0.1 1.0\%
+
+See ../doc/step4div.ps for more details. 
+
+\subsection{Define Documentation}
+\hypertarget{solvers_8c_a336369f90a614345170f9eb3d4ef59e6}{
+\index{solvers.c@{solvers.c}!DMAX@{DMAX}}
+\index{DMAX@{DMAX}!solvers.c@{solvers.c}}
+\subsubsection[{DMAX}]{\setlength{\rightskip}{0pt plus 5cm}\#define DMAX(a, \/  b)}}
+\label{solvers_8c_a336369f90a614345170f9eb3d4ef59e6}
+{\bfseries Value:}
+\begin{DoxyCode}
+(dmaxarg1 = (a), dmaxarg2 = (b), (dmaxarg1) > \
+(dmaxarg2) ?  (dmaxarg1) : (dmaxarg2))
+\end{DoxyCode}
+\hypertarget{solvers_8c_af9a0a96e48b21c87d05acd4ed5117ba0}{
+\index{solvers.c@{solvers.c}!DMIN@{DMIN}}
+\index{DMIN@{DMIN}!solvers.c@{solvers.c}}
+\subsubsection[{DMIN}]{\setlength{\rightskip}{0pt plus 5cm}\#define DMIN(a, \/  b)}}
+\label{solvers_8c_af9a0a96e48b21c87d05acd4ed5117ba0}
+{\bfseries Value:}
+\begin{DoxyCode}
+(dminarg1 = (a), dminarg2 = (b), (dminarg1) < \
+(dminarg2) ?  (dminarg1) : (dminarg2))
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\hypertarget{solvers_8c_aa20e5e9f5c0b7807c310cbe0444e96f7}{
+\index{solvers.c@{solvers.c}!Adams@{Adams}}
+\index{Adams@{Adams}!solvers.c@{solvers.c}}
+\subsubsection[{Adams}]{\setlength{\rightskip}{0pt plus 5cm}void Adams (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_aa20e5e9f5c0b7807c310cbe0444e96f7}
+Adams: propagates vin (of size n) from tin to tout by Adams-\/Moulton which is an implicit predictor-\/corrector method of second order; the result is returned by vout
+
+This solver was implemented by Konstantin Koslov, Spring 2002 Slightly modified by Manu, July 2002 \hypertarget{solvers_8c_a121e2c55a5a00a0ad9b953ee654cde08}{
+\index{solvers.c@{solvers.c}!BaDe@{BaDe}}
+\index{BaDe@{BaDe}!solvers.c@{solvers.c}}
+\subsubsection[{BaDe}]{\setlength{\rightskip}{0pt plus 5cm}void BaDe (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a121e2c55a5a00a0ad9b953ee654cde08}
+BaDe: propagates v(t) from t1 to t2 by Bader-\/Deuflhard; this method uses Richardson extrapolation to estimate v's at a hypothe-\/ tical stepsize of 0; the extrapolation also yields an error estimate, which is used to adapt stepsize and change the or-\/ der of the method as required; the result is returned by vout
+
+This solver was implemented by Yogi, based on BuSt, Aug 2002 \hypertarget{solvers_8c_ac9521dec953badfb45f871e51fd8cb21}{
+\index{solvers.c@{solvers.c}!bsstep@{bsstep}}
+\index{bsstep@{bsstep}!solvers.c@{solvers.c}}
+\subsubsection[{bsstep}]{\setlength{\rightskip}{0pt plus 5cm}void bsstep (double $\ast$ {\em v}, \/  double $\ast$ {\em deriv}, \/  int {\em n}, \/  double $\ast$ {\em t}, \/  double {\em htry}, \/  double {\em accuracy}, \/  double $\ast$ {\em hdid}, \/  double $\ast$ {\em hnext}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_ac9521dec953badfb45f871e51fd8cb21}
+bsstep: this is the Bulirsch-\/Stoer stepper function; it propagates the equations at a given overall stepsize and order, then evaluates the error and repeats the step with increased order if necessary, until the required accuracy is achieved; its arguments are:
+\begin{DoxyItemize}
+\item v: input and output v's over a give total stepsize
+\item deriv: array of initial derivatives (at tin)
+\item n: size of v and deriv
+\item t: pointer to the current time
+\item htry: initial stepsize to be tried
+\item accuracy: relative accuracy to be achieved
+\item hdid: returns the stepsize of the step we just did
+\item hnext: returns the stepsize of the next step to be done 
+\end{DoxyItemize}\hypertarget{solvers_8c_a5135579c74007c279b00970d4bf23a01}{
+\index{solvers.c@{solvers.c}!BuSt@{BuSt}}
+\index{BuSt@{BuSt}!solvers.c@{solvers.c}}
+\subsubsection[{BuSt}]{\setlength{\rightskip}{0pt plus 5cm}void BuSt (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a5135579c74007c279b00970d4bf23a01}
+BuSt: propagates v(t) from t1 to t2 by Bulirsch-\/Stoer; this method uses Richardson extrapolation to estimate v's at a hypothe-\/ tical stepsize of 0; the extrapolation also yields an error estimate, which is used to adapt stepsize and change the or-\/ der of the method as required; the result is returned by vout
+
+This solver was implemented by Manu, July 2002 \hypertarget{solvers_8c_a4be37b339afa64593767489d8d46c746}{
+\index{solvers.c@{solvers.c}!DCERk32@{DCERk32}}
+\index{DCERk32@{DCERk32}!solvers.c@{solvers.c}}
+\subsubsection[{DCERk32}]{\setlength{\rightskip}{0pt plus 5cm}void DCERk32 (double $\ast$$\ast$ {\em vatt}, \/  int {\em n}, \/  double $\ast$ {\em tarray}, \/  int {\em tpoints}, \/  double $\ast$ {\em darray}, \/  int {\em dpoints}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a4be37b339afa64593767489d8d46c746}
+DCERk3(2): propagates v\mbox{[}0\mbox{]} (of size n) according to tarray by the Runge-\/Kutta 3(2) pair with continuous extension storing the result in vatt. Initial conditions are specified in vatt\mbox{[}0\mbox{]}, corresponding to tarray\mbox{[}0\mbox{]} 
+
+used for storing intermediate steps \hypertarget{solvers_8c_ae8016a49c971f7f973663bcfd6921dbb}{
+\index{solvers.c@{solvers.c}!Euler@{Euler}}
+\index{Euler@{Euler}!solvers.c@{solvers.c}}
+\subsubsection[{Euler}]{\setlength{\rightskip}{0pt plus 5cm}void Euler (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_ae8016a49c971f7f973663bcfd6921dbb}
+Euler: propagates vin (of size n) from tin to tout by the Euler method; the result is returned by vout \hypertarget{solvers_8c_a97e03e6ff4dc28c1fa9882e09b30d59c}{
+\index{solvers.c@{solvers.c}!Heun@{Heun}}
+\index{Heun@{Heun}!solvers.c@{solvers.c}}
+\subsubsection[{Heun}]{\setlength{\rightskip}{0pt plus 5cm}void Heun (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a97e03e6ff4dc28c1fa9882e09b30d59c}
+Heun: propagates vin (of size n) from tin to tout by Heun's method the result is returned by vout \hypertarget{solvers_8c_a0adb937524dd2a86627683c4eb9681df}{
+\index{solvers.c@{solvers.c}!InitKrylovVariables@{InitKrylovVariables}}
+\index{InitKrylovVariables@{InitKrylovVariables}!solvers.c@{solvers.c}}
+\subsubsection[{InitKrylovVariables}]{\setlength{\rightskip}{0pt plus 5cm}int InitKrylovVariables (double $\ast$ {\em vin}, \/  int {\em n})}}
+\label{solvers_8c_a0adb937524dd2a86627683c4eb9681df}
+Krylov: propagates vin (of size n) from tin to tout by BDF (Backward $\ast$ Differential Formulas and use of a Newton-\/Krylov method with $\ast$ preconditioning to avoid the costly computation of the $\ast$ jacobian. $\ast$
+
+$\ast$ This solver was written by Anton Crombach, October 2010 $\ast$ $\ast$ \hypertarget{solvers_8c_af374eadd949ee5ba6cad68118524867f}{
+\index{solvers.c@{solvers.c}!Krylov@{Krylov}}
+\index{Krylov@{Krylov}!solvers.c@{solvers.c}}
+\subsubsection[{Krylov}]{\setlength{\rightskip}{0pt plus 5cm}void Krylov (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em sinput}, \/  {\bf Input} $\ast$ {\em input})}}
+\label{solvers_8c_af374eadd949ee5ba6cad68118524867f}
+Krylov: propagates vin (of size n) from tin to tout by BDF (Backward Differential Formulas and use of a Newton-\/Krylov method with preconditioning to avoid the costly computation of the jacobian.
+
+This solver was written by Anton Crombach, October 2010
+
+I realised I cannot evaluate only part of the derivative (f.i. only the production/decay part)... so let's see what happens if I evaluate the full derivative for preconditioning. That actually works better.
+
+This is actually the Krylov Band solver. \hypertarget{solvers_8c_a2f383ce6542557020a572bac16e77055}{
+\index{solvers.c@{solvers.c}!lubksb@{lubksb}}
+\index{lubksb@{lubksb}!solvers.c@{solvers.c}}
+\subsubsection[{lubksb}]{\setlength{\rightskip}{0pt plus 5cm}void lubksb (double $\ast$$\ast$ {\em a}, \/  int {\em n}, \/  int $\ast$ {\em indx}, \/  double $\ast$ {\em b})}}
+\label{solvers_8c_a2f383ce6542557020a572bac16e77055}
+lubksb: does forward and backsubstitution of matrix a; in fact, a is not passed in its original form but as the LU decomposition of a rowwise permutation of a as returned by the function \hyperlink{solvers_8c_aec72c11d5bed935ceab70026dabea1ac}{ludcmp()}; the right hand side vector is called b, which also returns the solution vector to the calling function; indx is a vector that indicates the order of rows in the permutated matrix; n is the dimension of the matrix a (as in n x n). \hypertarget{solvers_8c_aec72c11d5bed935ceab70026dabea1ac}{
+\index{solvers.c@{solvers.c}!ludcmp@{ludcmp}}
+\index{ludcmp@{ludcmp}!solvers.c@{solvers.c}}
+\subsubsection[{ludcmp}]{\setlength{\rightskip}{0pt plus 5cm}void ludcmp (double $\ast$$\ast$ {\em a}, \/  int {\em n}, \/  int $\ast$ {\em indx}, \/  double $\ast$ {\em d})}}
+\label{solvers_8c_aec72c11d5bed935ceab70026dabea1ac}
+ludcmp: does an LU decomposition of matrix a, which is needed for in-\/ verting the matrix; LU decomposition dissects the matrix into a lower and an upper triangular matrix that when multiplied, equal matrix a again; this function uses Crout's algorithm for the decomposition; the result is returned in a and con-\/ tains the LU decomposition of a rowwise permutation of a; indx returns the order of the permutated rows; n is the size of matrix a (as in n x n); d returns +1 if number of row in-\/ terchanges was even, -\/1 if odd. \hypertarget{solvers_8c_a270ab0adff5052cf4e1da796c23d99c4}{
+\index{solvers.c@{solvers.c}!Meuler@{Meuler}}
+\index{Meuler@{Meuler}!solvers.c@{solvers.c}}
+\subsubsection[{Meuler}]{\setlength{\rightskip}{0pt plus 5cm}void Meuler (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a270ab0adff5052cf4e1da796c23d99c4}
+Meuler: propagates vin (of size n) from tin to tout by the Modified Euler method (this is NOT the midpoint method, see \hyperlink{solvers_8c_aa769d6b7f7c138e8c659a7e7b1a256da}{Rk2()}); the result is returned by vout \hypertarget{solvers_8c_a38d2c4e212d863c00c4275a5867287aa}{
+\index{solvers.c@{solvers.c}!Milne@{Milne}}
+\index{Milne@{Milne}!solvers.c@{solvers.c}}
+\subsubsection[{Milne}]{\setlength{\rightskip}{0pt plus 5cm}void Milne (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a38d2c4e212d863c00c4275a5867287aa}
+Milne: propagates vin (of size n) from tin to tout by Milne-\/Simpson which is a predictor-\/corrector method; the result is retur-\/ ned by vout
+
+This solver was implemented by Konstantin Koslov, Dec 2001/Jan 2002
+
+THIS SOLVER SEEMS TO BE BUGGY FOR SOME REASON, DO NOT USE IT!!!!! \hypertarget{solvers_8c_afc6326c0188c57c40b82a8e8977ba3d9}{
+\index{solvers.c@{solvers.c}!mmid@{mmid}}
+\index{mmid@{mmid}!solvers.c@{solvers.c}}
+\subsubsection[{mmid}]{\setlength{\rightskip}{0pt plus 5cm}void mmid (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double $\ast$ {\em deriv}, \/  double {\em tin}, \/  double {\em htot}, \/  int {\em nstep}, \/  int {\em n}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_afc6326c0188c57c40b82a8e8977ba3d9}
+mmid: implements the modified midpoint method used by BuSt; it subdi-\/ vides a large step (htot) into nstep intervals and uses a mid-\/ point method over the whole of htot, with a stepsize of 2$\ast$h except for the first and the last step, hence $\ast$modified$\ast$ mid-\/ point method); the nice thing about this method is that the error follows a power law depending on the stepsize, i.e. its error converges to zero really fast as h is diminished; this allows for good extrapolation to h=0 (see \hyperlink{solvers_8c_ab7e5ce78d2e46e527abbbfcfbddef1a0}{pzextr()} above) \hypertarget{solvers_8c_aea41aa29042230e96f756b96180271cd}{
+\index{solvers.c@{solvers.c}!my\_\-f\_\-band@{my\_\-f\_\-band}}
+\index{my\_\-f\_\-band@{my\_\-f\_\-band}!solvers.c@{solvers.c}}
+\subsubsection[{my\_\-f\_\-band}]{\setlength{\rightskip}{0pt plus 5cm}int my\_\-f\_\-band (realtype {\em t}, \/  N\_\-Vector {\em y}, \/  N\_\-Vector {\em ydot}, \/  void $\ast$ {\em extra\_\-data})}}
+\label{solvers_8c_aea41aa29042230e96f756b96180271cd}
+wrapper function -\/ to call the derivative \hypertarget{solvers_8c_ab7e5ce78d2e46e527abbbfcfbddef1a0}{
+\index{solvers.c@{solvers.c}!pzextr@{pzextr}}
+\index{pzextr@{pzextr}!solvers.c@{solvers.c}}
+\subsubsection[{pzextr}]{\setlength{\rightskip}{0pt plus 5cm}void pzextr (int {\em iest}, \/  double {\em hest}, \/  double $\ast$ {\em vest}, \/  double $\ast$ {\em vout}, \/  double $\ast$ {\em dv}, \/  int {\em n}, \/  const int {\em KMAXX})}}
+\label{solvers_8c_ab7e5ce78d2e46e527abbbfcfbddef1a0}
+pzextr: uses polynomial extrapolation (Neville's algorithm) to evalu-\/ ate v's at a the hypothetical stepsize 0; this is called Ri-\/ chardson extrapolation; the arguments are:
+\begin{DoxyItemize}
+\item iest: how many steps have we done already before?
+\item hest: current stepsize h
+\item vest: v's obtained using current stepsize h
+\item vout: extrapolated v's that will be returned
+\item dv: array of error estimates to be returned
+\item n: size of verst, vout and dv arrays Neville's algorithm uses a recursive approach to determine a suitable Lagrange polynomial for extrapolation by traversing a tableau of differences between Lagrange polynomials of in-\/ creasing order; these differences are called C and D below (see Numerical Recipes in C, Chapter 3.1 for details) 
+\end{DoxyItemize}\hypertarget{solvers_8c_aa769d6b7f7c138e8c659a7e7b1a256da}{
+\index{solvers.c@{solvers.c}!Rk2@{Rk2}}
+\index{Rk2@{Rk2}!solvers.c@{solvers.c}}
+\subsubsection[{Rk2}]{\setlength{\rightskip}{0pt plus 5cm}void Rk2 (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_aa769d6b7f7c138e8c659a7e7b1a256da}
+Rk2: propagates vin (of size n) from tin to tout by the Midpoint or Second-\/Order Runge-\/Kutta method; the result is returned by vout \hypertarget{solvers_8c_af811314e3f811a04f9dfc54a3368d359}{
+\index{solvers.c@{solvers.c}!Rk4@{Rk4}}
+\index{Rk4@{Rk4}!solvers.c@{solvers.c}}
+\subsubsection[{Rk4}]{\setlength{\rightskip}{0pt plus 5cm}void Rk4 (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_af811314e3f811a04f9dfc54a3368d359}
+Rk4: propagates vin (of size n) from tin to tout by the Fourth-\/Order Runge-\/Kutta method; the result is returned by vout
+
+written by Joel Linton (somewhere around 1998) fixed and modified by Yoginho (somewhere around 2001) \hypertarget{solvers_8c_a22d1585560a34951ee703468643de616}{
+\index{solvers.c@{solvers.c}!Rkck@{Rkck}}
+\index{Rkck@{Rkck}!solvers.c@{solvers.c}}
+\subsubsection[{Rkck}]{\setlength{\rightskip}{0pt plus 5cm}void Rkck (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a22d1585560a34951ee703468643de616}
+Rkck: propagates vin (of size n) from tin to tout by the Runge-\/Kutta Cash-\/Karp method, which is an adaptive-\/stepsize Rk method; it uses a fifth-\/order Rk formula with an embedded forth-\/oder for-\/ mula for calucalting the error; its result is returned by vout
+
+This solver was written by Marcel Wolf, Spring 2002. 
+
+used for storing intermediate steps \hypertarget{solvers_8c_a6087b8c0ab5c1170a4e3000289f7e7ea}{
+\index{solvers.c@{solvers.c}!Rkf@{Rkf}}
+\index{Rkf@{Rkf}!solvers.c@{solvers.c}}
+\subsubsection[{Rkf}]{\setlength{\rightskip}{0pt plus 5cm}void Rkf (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a6087b8c0ab5c1170a4e3000289f7e7ea}
+Rkf: propagates vin (of size n) from tin to tout by the Runge-\/Kutta Fehlberg method, which is a the original adaptive-\/stepsize Rk method (Cash-\/Karp is an improved version of this); it uses a fifth-\/order Rk formula with an embedded forth-\/oder formula for calucalting the error; its result is returned by vout
+
+This solver was written by Marcel Wolf, Spring 2002. \hypertarget{solvers_8c_a2704a4f583549482cb8f64b9b5b9897d}{
+\index{solvers.c@{solvers.c}!simpr@{simpr}}
+\index{simpr@{simpr}!solvers.c@{solvers.c}}
+\subsubsection[{simpr}]{\setlength{\rightskip}{0pt plus 5cm}void simpr (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double $\ast$ {\em deriv}, \/  double $\ast$ {\em dfdt}, \/  double $\ast$$\ast$ {\em jac}, \/  double {\em tin}, \/  double {\em htot}, \/  int {\em nstep}, \/  int {\em n}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a2704a4f583549482cb8f64b9b5b9897d}
+simpr: implements the semi-\/implicit midpoint rule used by BaDe; it subdivides a large step (htot) into nstep intervals and uses a semi-\/implicit midpoint rule over the whole of htot, with a stepsize of 2$\ast$h except for the first and the last step; the nice thing about this method is that the error follows a power law depending on the stepsize, i.e. its error converges to 0 really fast as h is diminished; this allows for good extrapo-\/ lation to h=0 (see \hyperlink{solvers_8c_ab7e5ce78d2e46e527abbbfcfbddef1a0}{pzextr()} above) \hypertarget{solvers_8c_a4a45ad1ee998bd642e3adf4ae72f5f1c}{
+\index{solvers.c@{solvers.c}!SoDe@{SoDe}}
+\index{SoDe@{SoDe}!solvers.c@{solvers.c}}
+\subsubsection[{SoDe}]{\setlength{\rightskip}{0pt plus 5cm}void SoDe (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a4a45ad1ee998bd642e3adf4ae72f5f1c}
+Delay solver -\/ by Manu? \hypertarget{solvers_8c_a84cf8f0168e075e49d7d383ffd9efc1e}{
+\index{solvers.c@{solvers.c}!stifbs@{stifbs}}
+\index{stifbs@{stifbs}!solvers.c@{solvers.c}}
+\subsubsection[{stifbs}]{\setlength{\rightskip}{0pt plus 5cm}void stifbs (double $\ast$ {\em v}, \/  double $\ast$ {\em deriv}, \/  int {\em n}, \/  double $\ast$ {\em t}, \/  double {\em htry}, \/  double {\em accuracy}, \/  double $\ast$ {\em hdid}, \/  double $\ast$ {\em hnext}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8c_a84cf8f0168e075e49d7d383ffd9efc1e}
+stifbs: this is the Bader-\/Deuflhard stepper function; it propagates the equations at a given overall stepsize and order, then evaluates the error and repeats the step with increased order if necessary, until the required accuracy is achieved; its arguments are:
+\begin{DoxyItemize}
+\item v: input and output v's over a give total stepsize
+\item deriv: array of initial derivatives (at tin)
+\item n: size of v and deriv
+\item t: pointer to the current time
+\item htry: initial stepsize to be tried
+\item accuracy: relative accuracy to be achieved
+\item hdid: returns the stepsize of the step we just did
+\item hnext: returns the stepsize of the next step to be done 
+\end{DoxyItemize}\hypertarget{solvers_8c_ae5bd7dd5efc4acce68f8b2adb32ec6d4}{
+\index{solvers.c@{solvers.c}!writeInfo@{writeInfo}}
+\index{writeInfo@{writeInfo}!solvers.c@{solvers.c}}
+\subsubsection[{writeInfo}]{\setlength{\rightskip}{0pt plus 5cm}void writeInfo ()}}
+\label{solvers_8c_ae5bd7dd5efc4acce68f8b2adb32ec6d4}
+get some info and write it out \hypertarget{solvers_8c_aa9f4951e44339690c0b36fcb131e25d6}{
+\index{solvers.c@{solvers.c}!WriteSolvLog@{WriteSolvLog}}
+\index{WriteSolvLog@{WriteSolvLog}!solvers.c@{solvers.c}}
+\subsubsection[{WriteSolvLog}]{\setlength{\rightskip}{0pt plus 5cm}void WriteSolvLog (char $\ast$ {\em solver}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em h}, \/  int {\em n}, \/  int {\em nderivs}, \/  FILE $\ast$ {\em slog})}}
+\label{solvers_8c_aa9f4951e44339690c0b36fcb131e25d6}
+WriteSolvLog: write to solver log file 

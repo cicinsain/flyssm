@@ -1,0 +1,206 @@
+\hypertarget{moves_8c}{
+\section{fly/moves.c File Reference}
+\label{moves_8c}\index{fly/moves.c@{fly/moves.c}}
+}
+
+
+Function implementation for the move generation of the Lam-\/schedule annealer.  
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$error.h$>$}\par
+{\ttfamily \#include $<$moves.h$>$}\par
+{\ttfamily \#include $<$random.h$>$}\par
+{\ttfamily \#include $<$fly\_\-io.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{moves_8c_a1f685653c42ef5907da979d719978aa9}{InitMoves} (FILE $\ast$fp, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{moves_8c_a2c96b26687c1f70d9c0a58fbfcca007b}{RestoreMoves} (\hyperlink{structMoveState}{MoveState} $\ast$MovePtr)
+\item 
+\hyperlink{structAParms}{AParms} \hyperlink{moves_8c_a56cd6394ef9d4f2f873270438ca10de2}{GetFinalInfo} (void)
+\item 
+double \hyperlink{moves_8c_abe3c6eeab616b246b71d1d6c4ccb6b2a}{GenerateMove} (\hyperlink{structFiles}{Files} $\ast$files, \hyperlink{structmy__distrib}{DistParms} $\ast$distp, \hyperlink{structScoreOutput}{ScoreOutput} $\ast$out)
+\item 
+void \hyperlink{moves_8c_aaea2b0879c86a8061d1945be263527c9}{AcceptMove} (void)
+\item 
+void \hyperlink{moves_8c_ac3f79f3030139da1f82173200306cbc4}{RejectMove} (void)
+\item 
+void \hyperlink{moves_8c_a505dd9b92f717104bc77c685860e0e43}{Move} (\hyperlink{structFiles}{Files} $\ast$files, \hyperlink{structmy__distrib}{DistParms} $\ast$DistP)
+\item 
+void \hyperlink{moves_8c_aec3936bd73396a7fbbbb0f51d518ae24}{UpdateControl} (\hyperlink{structFiles}{Files} $\ast$files)
+\item 
+char $\ast$ \hyperlink{moves_8c_a7f2684030318dd3ccf42ed882bbbdbac}{SetProlix} (int value, char $\ast$file, int init\_\-flag)
+\item 
+void \hyperlink{moves_8c_a580ac430db77feabda1e70856d997eb9}{RestoreProlix} (char $\ast$prolixfile)
+\item 
+\hyperlink{structMoveState}{MoveState} $\ast$ \hyperlink{moves_8c_a5d83124b2ed5a2bbed01f2ebe602e95e}{MoveSave} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{moves_8c_a6b76c77a872c1dfe8e58ba53e022251e}{THETA\_\-MIN} = 0
+\item 
+const double \hyperlink{moves_8c_ad9ed638111111c030aaf2d9742237774}{THETA\_\-INIT} = 5.0
+\item 
+const int \hyperlink{moves_8c_a5c6b552b88b723ce1a985066e16a8046}{LOWBITS} = 0x330E
+\item 
+const int \hyperlink{moves_8c_a58c7f82460d1c601a93389d8eaafa37b}{BYTESIZE} = 8
+\item 
+\hypertarget{moves_8c_a7ccf5ca8365f654fddefa09cb83bd212}{
+\hyperlink{structAParms}{AParms} {\bfseries ap}}
+\label{moves_8c_a7ccf5ca8365f654fddefa09cb83bd212}
+
+\item 
+\hypertarget{moves_8c_a9fd79bba6d886cf8e69d3af3ba3b9a8a}{
+\hyperlink{structParamList}{ParamList} $\ast$ {\bfseries ptab}}
+\label{moves_8c_a9fd79bba6d886cf8e69d3af3ba3b9a8a}
+
+\item 
+\hypertarget{moves_8c_a08e167df0215aeec3eab16df41c21f60}{
+\hyperlink{structAccStats}{AccStats} $\ast$ {\bfseries acc\_\-tab}}
+\label{moves_8c_a08e167df0215aeec3eab16df41c21f60}
+
+\item 
+\hypertarget{moves_8c_a1e866939b0089a5b6c072a3df4265c7f}{
+int {\bfseries nparams}}
+\label{moves_8c_a1e866939b0089a5b6c072a3df4265c7f}
+
+\item 
+\hypertarget{moves_8c_ae40354a1051342eb5a9db005715dcfa9}{
+int {\bfseries idx}}
+\label{moves_8c_ae40354a1051342eb5a9db005715dcfa9}
+
+\item 
+\hypertarget{moves_8c_a02269d22c317acd63d55ac0b2c329f1f}{
+int {\bfseries nhits}}
+\label{moves_8c_a02269d22c317acd63d55ac0b2c329f1f}
+
+\item 
+\hypertarget{moves_8c_a9a452a7c7f328069f0cfcb506e7ae176}{
+int {\bfseries nsweeps}}
+\label{moves_8c_a9a452a7c7f328069f0cfcb506e7ae176}
+
+\item 
+\hypertarget{moves_8c_a9b52d5070d999ce10f194951c2080913}{
+double {\bfseries pretweak}}
+\label{moves_8c_a9b52d5070d999ce10f194951c2080913}
+
+\item 
+\hypertarget{moves_8c_a94b72ea30a063e07a5ff31d51fa8961a}{
+double {\bfseries old\_\-energy} = -\/999.}
+\label{moves_8c_a94b72ea30a063e07a5ff31d51fa8961a}
+
+\item 
+\hypertarget{moves_8c_a9304b76255aaa841daab166913730d1d}{
+double {\bfseries new\_\-energy}}
+\label{moves_8c_a9304b76255aaa841daab166913730d1d}
+
+\item 
+\hypertarget{moves_8c_ad2a836f149219bd7bbe38b34b72e92d6}{
+\hyperlink{structScoreOutput}{ScoreOutput} {\bfseries out\_\-local}}
+\label{moves_8c_ad2a836f149219bd7bbe38b34b72e92d6}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Function implementation for the move generation of the Lam-\/schedule annealer. \begin{DoxyAuthor}{Authors}
+JR, modified by Yoginho
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+All this stuff is problem-\/dependent, but you shouldn't have to worry about the actual structure of the data in the model to be scored. That is why \hyperlink{moves_8c}{moves.c} communicates with model-\/specific stuff via \hyperlink{translate_8c}{translate.c}. Funcs in this file also shouldn't use any Lam-\/specific stuff like {\ttfamily \hyperlink{structSAType}{SAType}} structs and such. 
+
+\subsection{Function Documentation}
+\hypertarget{moves_8c_aaea2b0879c86a8061d1945be263527c9}{
+\index{moves.c@{moves.c}!AcceptMove@{AcceptMove}}
+\index{AcceptMove@{AcceptMove}!moves.c@{moves.c}}
+\subsubsection[{AcceptMove}]{\setlength{\rightskip}{0pt plus 5cm}void AcceptMove (void)}}
+\label{moves_8c_aaea2b0879c86a8061d1945be263527c9}
+AcceptMove: sets new energy as the old energy for the next step and keeps track of the number of successful moves \hypertarget{moves_8c_abe3c6eeab616b246b71d1d6c4ccb6b2a}{
+\index{moves.c@{moves.c}!GenerateMove@{GenerateMove}}
+\index{GenerateMove@{GenerateMove}!moves.c@{moves.c}}
+\subsubsection[{GenerateMove}]{\setlength{\rightskip}{0pt plus 5cm}double GenerateMove ({\bf Files} $\ast$ {\em files}, \/  {\bf DistParms} $\ast$ {\em distp}, \/  {\bf ScoreOutput} $\ast$ {\em out})}}
+\label{moves_8c_abe3c6eeab616b246b71d1d6c4ccb6b2a}
+GenerateMove: evaluates the old energy, changes a parameter, then eval-\/ uates the new energy; returns the difference between old and new energy to the caller \hypertarget{moves_8c_a56cd6394ef9d4f2f873270438ca10de2}{
+\index{moves.c@{moves.c}!GetFinalInfo@{GetFinalInfo}}
+\index{GetFinalInfo@{GetFinalInfo}!moves.c@{moves.c}}
+\subsubsection[{GetFinalInfo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AParms} GetFinalInfo (void)}}
+\label{moves_8c_a56cd6394ef9d4f2f873270438ca10de2}
+GetFinalInfo: collects stop energy and final count for output to the data file \hypertarget{moves_8c_a1f685653c42ef5907da979d719978aa9}{
+\index{moves.c@{moves.c}!InitMoves@{InitMoves}}
+\index{InitMoves@{InitMoves}!moves.c@{moves.c}}
+\subsubsection[{InitMoves}]{\setlength{\rightskip}{0pt plus 5cm}double InitMoves (FILE $\ast$ {\em fp}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{moves_8c_a1f685653c42ef5907da979d719978aa9}
+InitMoves: initializes the following \hyperlink{moves_8c}{moves.c}-\/specific stuff:
+\begin{DoxyItemize}
+\item static annealing parameter struct (ap)
+\item static tweak struct (tweak) in \hyperlink{translate_8c}{translate.c}
+\item initializes random number generator in \hyperlink{lsa_8c}{lsa.c}
+\item receives parameter list from Translate, stores nparams
+\item initializes acc\_\-tab for acceptance statistics
+\item set mixing interval in \hyperlink{lsa_8c}{lsa.c} (parallel code only)
+\end{DoxyItemize}
+
+it then returns the initial temperature to the caller \hypertarget{moves_8c_a505dd9b92f717104bc77c685860e0e43}{
+\index{moves.c@{moves.c}!Move@{Move}}
+\index{Move@{Move}!moves.c@{moves.c}}
+\subsubsection[{Move}]{\setlength{\rightskip}{0pt plus 5cm}void Move ({\bf Files} $\ast$ {\em files}, \/  {\bf DistParms} $\ast$ {\em DistP})}}
+\label{moves_8c_a505dd9b92f717104bc77c685860e0e43}
+Move: tweaks the parameter-\/to-\/be-\/tweaked according to the current value of index; also calls UpdateControl if necessary \hypertarget{moves_8c_a5d83124b2ed5a2bbed01f2ebe602e95e}{
+\index{moves.c@{moves.c}!MoveSave@{MoveSave}}
+\index{MoveSave@{MoveSave}!moves.c@{moves.c}}
+\subsubsection[{MoveSave}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MoveState}$\ast$ MoveSave (void)}}
+\label{moves_8c_a5d83124b2ed5a2bbed01f2ebe602e95e}
+MoveSave: returns a \hyperlink{structMoveState}{MoveState} struct in which the current state of moves is saved; use for writing state file \hypertarget{moves_8c_ac3f79f3030139da1f82173200306cbc4}{
+\index{moves.c@{moves.c}!RejectMove@{RejectMove}}
+\index{RejectMove@{RejectMove}!moves.c@{moves.c}}
+\subsubsection[{RejectMove}]{\setlength{\rightskip}{0pt plus 5cm}void RejectMove (void)}}
+\label{moves_8c_ac3f79f3030139da1f82173200306cbc4}
+RejectMove: simply resets the tweaked parameter to the pretweak value \hypertarget{moves_8c_a2c96b26687c1f70d9c0a58fbfcca007b}{
+\index{moves.c@{moves.c}!RestoreMoves@{RestoreMoves}}
+\index{RestoreMoves@{RestoreMoves}!moves.c@{moves.c}}
+\subsubsection[{RestoreMoves}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreMoves ({\bf MoveState} $\ast$ {\em MovePtr})}}
+\label{moves_8c_a2c96b26687c1f70d9c0a58fbfcca007b}
+RestoreMoves: restores move generator from state file NOTE: InitMoves will be called before this function during a restore \hypertarget{moves_8c_a580ac430db77feabda1e70856d997eb9}{
+\index{moves.c@{moves.c}!RestoreProlix@{RestoreProlix}}
+\index{RestoreProlix@{RestoreProlix}!moves.c@{moves.c}}
+\subsubsection[{RestoreProlix}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreProlix (char $\ast$ {\em prolixfile})}}
+\label{moves_8c_a580ac430db77feabda1e70856d997eb9}
+RestoreProlix: restores prolix file after a run has been interrupted \hypertarget{moves_8c_a7f2684030318dd3ccf42ed882bbbdbac}{
+\index{moves.c@{moves.c}!SetProlix@{SetProlix}}
+\index{SetProlix@{SetProlix}!moves.c@{moves.c}}
+\subsubsection[{SetProlix}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ SetProlix (int {\em value}, \/  char $\ast$ {\em file}, \/  int {\em init\_\-flag})}}
+\label{moves_8c_a7f2684030318dd3ccf42ed882bbbdbac}
+SetProlix: sets flag for printing prolix output on acceptance stats and initializes the prolix file if required \hypertarget{moves_8c_aec3936bd73396a7fbbbb0f51d518ae24}{
+\index{moves.c@{moves.c}!UpdateControl@{UpdateControl}}
+\index{UpdateControl@{UpdateControl}!moves.c@{moves.c}}
+\subsubsection[{UpdateControl}]{\setlength{\rightskip}{0pt plus 5cm}void UpdateControl ({\bf Files} $\ast$ {\em files})}}
+\label{moves_8c_aec3936bd73396a7fbbbb0f51d518ae24}
+UpdateControl: each interval number of steps, acceptance stats are dated here; this function also prints prolix stuff, if required. 
+
+\subsection{Variable Documentation}
+\hypertarget{moves_8c_a58c7f82460d1c601a93389d8eaafa37b}{
+\index{moves.c@{moves.c}!BYTESIZE@{BYTESIZE}}
+\index{BYTESIZE@{BYTESIZE}!moves.c@{moves.c}}
+\subsubsection[{BYTESIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf BYTESIZE} = 8}}
+\label{moves_8c_a58c7f82460d1c601a93389d8eaafa37b}
+erand conversion \hypertarget{moves_8c_a5c6b552b88b723ce1a985066e16a8046}{
+\index{moves.c@{moves.c}!LOWBITS@{LOWBITS}}
+\index{LOWBITS@{LOWBITS}!moves.c@{moves.c}}
+\subsubsection[{LOWBITS}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf LOWBITS} = 0x330E}}
+\label{moves_8c_a5c6b552b88b723ce1a985066e16a8046}
+following two are for drand to \hypertarget{moves_8c_ad9ed638111111c030aaf2d9742237774}{
+\index{moves.c@{moves.c}!THETA\_\-INIT@{THETA\_\-INIT}}
+\index{THETA\_\-INIT@{THETA\_\-INIT}!moves.c@{moves.c}}
+\subsubsection[{THETA\_\-INIT}]{\setlength{\rightskip}{0pt plus 5cm}const double {\bf THETA\_\-INIT} = 5.0}}
+\label{moves_8c_ad9ed638111111c030aaf2d9742237774}
+initial value for all theta\_\-bar (move size) \hypertarget{moves_8c_a6b76c77a872c1dfe8e58ba53e022251e}{
+\index{moves.c@{moves.c}!THETA\_\-MIN@{THETA\_\-MIN}}
+\index{THETA\_\-MIN@{THETA\_\-MIN}!moves.c@{moves.c}}
+\subsubsection[{THETA\_\-MIN}]{\setlength{\rightskip}{0pt plus 5cm}const double {\bf THETA\_\-MIN} = 0}}
+\label{moves_8c_a6b76c77a872c1dfe8e58ba53e022251e}
+minimum value of theta\_\-bar (move size) 

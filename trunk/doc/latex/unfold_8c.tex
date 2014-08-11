@@ -1,0 +1,78 @@
+\hypertarget{unfold_8c}{
+\section{fly/unfold.c File Reference}
+\label{unfold_8c}\index{fly/unfold.c@{fly/unfold.c}}
+}
+
+
+Runs the fly model once (unfolding of development).  
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$time.h$>$}\par
+{\ttfamily \#include $<$sys/resource.h$>$}\par
+{\ttfamily \#include $<$error.h$>$}\par
+{\ttfamily \#include $<$integrate.h$>$}\par
+{\ttfamily \#include $<$maternal.h$>$}\par
+{\ttfamily \#include $<$solvers.h$>$}\par
+{\ttfamily \#include $<$zygotic.h$>$}\par
+{\ttfamily \#include $<$score.h$>$}\par
+{\ttfamily \#include $<$fly\_\-io.h$>$}\par
+{\ttfamily \#include $<$moves.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{unfold_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{unfold_8c_a5fb0ca78952ca848cfe3297722726aae}{
+const char $\ast$ {\bfseries OPTS} = \char`\"{}:a:Df:g:Ghi:j:op:r:s:t:vx:z:\char`\"{}}
+\label{unfold_8c_a5fb0ca78952ca848cfe3297722726aae}
+
+\item 
+const int \hyperlink{unfold_8c_ab8b764097b0f861ad9adc095a88e6edb}{MAX\_\-PRECISION} = 16
+\item 
+const double \hyperlink{unfold_8c_a634312c07b9e2c66592be1878b5a6564}{FORBIDDEN\_\-MOVE} = DBL\_\-MAX
+\item 
+const int \hyperlink{unfold_8c_ac0856e3e4744f90264ff7477676c2e7b}{OUT\_\-OF\_\-BOUND} = -\/1
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Runs the fly model once (unfolding of development). \begin{DoxyVersion}{Version}
+9.3.2 (obsolete numbering) 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+JR, modified by Yoginho, {\ttfamily -\/g} option by Yousong Wang in Feb 2002, {\ttfamily -\/a} option by Marcel Wolf in Apr 2002, {\ttfamily -\/G} (guts) option by Manu in June 2002
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+It uses the parameters and the maternal contributions stored for the specified genotype in the data file specified by a filename. 
+
+\subsection{Function Documentation}
+\hypertarget{unfold_8c_a3c04138a5bfe5d72780bb7e82a18e627}{
+\index{unfold.c@{unfold.c}!main@{main}}
+\index{main@{main}!unfold.c@{unfold.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
+\label{unfold_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+\hyperlink{unfold_8c}{unfold.c} main function 
+
+\subsection{Variable Documentation}
+\hypertarget{unfold_8c_a634312c07b9e2c66592be1878b5a6564}{
+\index{unfold.c@{unfold.c}!FORBIDDEN\_\-MOVE@{FORBIDDEN\_\-MOVE}}
+\index{FORBIDDEN\_\-MOVE@{FORBIDDEN\_\-MOVE}!unfold.c@{unfold.c}}
+\subsubsection[{FORBIDDEN\_\-MOVE}]{\setlength{\rightskip}{0pt plus 5cm}const double {\bf FORBIDDEN\_\-MOVE} = DBL\_\-MAX}}
+\label{unfold_8c_a634312c07b9e2c66592be1878b5a6564}
+the following constant as a score tells the annealer to reject a move, no matter what. It had better not be a number that could actually be a score. \hypertarget{unfold_8c_ab8b764097b0f861ad9adc095a88e6edb}{
+\index{unfold.c@{unfold.c}!MAX\_\-PRECISION@{MAX\_\-PRECISION}}
+\index{MAX\_\-PRECISION@{MAX\_\-PRECISION}!unfold.c@{unfold.c}}
+\subsubsection[{MAX\_\-PRECISION}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf MAX\_\-PRECISION} = 16}}
+\label{unfold_8c_ab8b764097b0f861ad9adc095a88e6edb}
+The following defines the maximum float precision that is supported by the code. \hypertarget{unfold_8c_ac0856e3e4744f90264ff7477676c2e7b}{
+\index{unfold.c@{unfold.c}!OUT\_\-OF\_\-BOUND@{OUT\_\-OF\_\-BOUND}}
+\index{OUT\_\-OF\_\-BOUND@{OUT\_\-OF\_\-BOUND}!unfold.c@{unfold.c}}
+\subsubsection[{OUT\_\-OF\_\-BOUND}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf OUT\_\-OF\_\-BOUND} = -\/1}}
+\label{unfold_8c_ac0856e3e4744f90264ff7477676c2e7b}
+out of bound control in score 

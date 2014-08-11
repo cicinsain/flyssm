@@ -1,0 +1,908 @@
+FLYCODE: DATA FORMAT CONVENTIONS
+--------------------------------
+
+Written by Yoginho, Apr-Nov 2001
+last updated: 08/01/2002
+gutsdefs section by Manu, June 2002
+
+
+This document contains a complete definition of the fly code data
+format.
+
+Oldstyle problems refer to gene circuits published in (and the older
+dataformat they were using):
+
+Reinitz et al. (1995). J Exp Zool 271: 47.
+Reinitz & Sharp (1995). Mech Dev 49: 133.
+Reinitz et al. (1998). Dev Gen 23: 11.
+Sharp & Reinitz (1998). Biosystems 47: 79.
+
+Newstyle problems refer to gene circuits starting with the following
+publications:
+
+Jaeger et al. (2004). Genetics, submitted.
+Jaeger et al. (2004). Nature, submitted.
+
+Example data files can be found in the ../datafiles folder.
+
+g14           artificial 2-gene gap gene circuit for annealer testing
+gap2_4div_04  oldstyle eve gene circuit (see Reinitz & Sharp 1995)
+gn58c13_28008 newstyle gap gene circuit (see Jaeger et al 2004a,b)    
+
+Send requests, comments, suggestions and bug reports to:
+
+yoginho@usa.net
+
+Thanks and don't get too bored reading this...
+
+ 
+
+BASIC DATAFILE DEFINITION (ALMOST PROBLEM-INDEPENDENT)
+------------------------------------------------------
+
+Sections
+--------
+
+Each data file is divided into sections. Each sections starts with a
+'$' followed by its section title. Sections end with a '$$'. 
+
+Section title and '$$' are called section delimiters.
+
+The actual order of the sections in a data file is not important. The
+reading functions are smart enough to find the appropriate sections
+anywhere in the data file.
+
+
+SECTION DELIMITERS:
+
+Section delimiters start with a '$' at the very beginning of the
+line. Section titles MUST be unique and should only contain
+alphanumeric characters, dashes, underscores and periods.
+
+Sections end with a line that contains nothing but '$$'.
+
+
+
+GENERAL FORMAT:
+
+$section_title
+
+...
+
+<everything in between is either empty, data or comments>
+
+...
+
+$$
+
+
+Whitespace
+----------
+
+General rule: 
+
+White space is ignored in data, bias and bcd sections. Empty lines
+should not appear anywhere else within sections.
+
+Usually, white space at the beginning of a line is ignored. Only in
+the genotype section, the lines MUST begin with a character.
+
+To be on the save side, just stick with the format given in the temp-
+late file.
+
+
+Comments
+--------
+
+Comments are allowed in all bias, bicoid and facts session plus in
+the parameter and tweak sections. In these sections, all lines that 
+start with a character other than a digit, a decimal point or a minus 
+sign will be treated as comment by the reading functions.
+
+Note: if you have general comments on the data file, they should go into
+the $comment section.
+
+
+
+FLY DATA FILES
+--------------
+
+Data Files: Overview
+--------------------
+
+Each valid data file MUST contain the following sections:
+
+- $problem          contains number of genes, number of nuclear divisions, 
+                    number of nuclei at cleavage cycle 14 and the
+                    diffusion schedule
+
+- $genotypes        points to bias, facts and bicoid sections for each
+                    genotype in the data file; also contains the genotype
+                    string, which determines what is mutated in which way
+
+- bias section(s)   contain data for maternal contributions of genes that 
+                    are also zygotic (initial conditions for hb and cad)
+                    can also be used for 'experimental perturbation' within
+                    simulation runs (e.g. simulating heat shocks)
+
+- facts section(s)  contain the actual gene expression data
+
+- bicoid (bcd)      contain the maternal bicoid gradient; note that bicoid
+  section(s)        is the only gene that does not have any zygotic compo-
+                    nent 
+
+The following sections are required for calculating gene circuit scores:
+
+- $limits           contains ranges for equation parameters and/or the 
+                    definition of a penalty function
+
+If you use a penalty function the file can also contain the following sec-
+tions, which are used on top of the normal facts and bcd sections to de-
+termine vmax and mmax; this is useful if you want to keep your search space
+exactly the same while varying the regions of the embryo you're annealing on.
+
+- penalty data:     additional data used to calculate vmax[]
+
+- maternal penalty  additional data used to calculate mmax
+  data: 
+
+If we calculate guts (i.e. if we analyze the dynamics of a circuit graphically), 
+there should be the following section:
+
+- $gutsdefs         contains one or several lines of guts to be evaluated;
+                    guts are parts of the model equations that can be eval-
+                    uated for any gene in the model; each gut line starts 
+                    with a gene identifier and then contains symbols for the
+                    parts of the equation to be calculated; each line of 
+                    guts will be output to a different output file section
+
+If (and only if) you intend to run annealing software on the file, you need 
+the following additional sections:
+
+- $input            section for the initial parameters that go into the
+                    annealer; the structure of this section is identical 
+                    to the $eqparm section
+
+- $annealing_input: contains seed for the random number generator,
+                    (originally taken from a 5 dollar bill in John's 
+                    wallet), initial temperature, gain for proportional 
+                    jump size control and the definition of the interval
+                    at which acceptance statistics are updated
+
+- $tune_parameters: contains Lam stuff, like the (Lam) lambda 
+                    parameter and parameters specifying the way Lam-
+	            statistics are collected; also contains the 
+                    number of initializing (randomizing) steps, the 
+                    size of the tau interval, at which Lam statistics
+                    are collected and the stopping criterion
+                    files used with parallel code need an additional entry
+                    for the mixing interval (M)
+
+- $tweak            section that tells the annealer which parameters can
+                    be modified and which not; the structure of this sec-
+                    tion is identical to the $input or $eqparms section but
+                    only contains values of 1 (yes, tweak me!) and 0 (don't
+                    even think about tweaking me!); since it might not al-
+                    ways be evident why we tweak the way we tweak, you are
+                    free to place comments on any line within this section.
+
+After the annealer was run on a data file or the file was converted with the
+conv script, there will be an additional section on top of the data file and
+some annealing output sections:
+
+- $version:         contains version info like information on the annealer 
+                    and converter if applicable
+
+- $eqparms:         equation parameter section for parameters as found by the
+                    annealer
+
+- $annealing_output section written by the annealer; contains final energy
+                    and the number of moves needed to get there
+
+For equilibration funs you need the following section:
+
+- $equilibrate      contains the equilibration temperature; the annealer 
+                    will run till it reaches this temperature; then it will
+                    keep the temperature fixed, do a couple of initializing 
+                    moves to allow the system to settle to the equilibrium
+                    (defined by the second entry of $equilibrate) and lastly
+                    it will do equilibration moves (as indicated by the third
+                    entry to $equilibrate) to collect statistics.
+                    
+In addition to all the above, data files may contain 'comment' sections
+for general comments and any number of custom sections that the user 
+might find useful (these sections are, of course, ignored by the annealer 
+and should be used sparingly).
+
+
+
+Version Section (Title: $version)
+---------------------------------
+
+This section contains:
+
+1. First line: version of the annealer that was used on the file as well 
+   as time and date of the annealing run 
+2. On a second line, the annealer writes the complete command line used 
+   to invoke it
+3. Version of the converter that was used to convert and ol style file
+   at an indicated time and date; this line is, of course, optional
+
+
+FORMAT:
+
+$version
+ line 1: annealer version, annealing date and time
+ line 2: command line (annealer)
+[line 3: converter version, conversion date and time]
+$$
+
+
+
+Comment Section (Title: $comment)
+---------------------------------
+
+This is a good place to put information about who created the data file to 
+what end and when. It's also a good place for further comments on the problem
+at hand, complications encountered with the file or the nature of the lunch 
+you've just had.
+
+
+FORMAT:
+
+$comment
+whatever
+$$
+
+
+
+Problem Section (Title: $problem)
+---------------------------------
+
+CAUTION: No comments or empty lines are allowed in the problem 
+         section!!!!
+
+NUMBER OF GENES:
+
+Contains the number of genes in the problem.
+
+GENE ID STRING:
+
+This string is a list of one-letter abbreviations of the genes in each
+column in bcd, bias and facts sections. Here's the complete list of 
+abbreviations currently used for fly stuff (by Dave Kosman):
+
+	B	bicoid		bcd
+	C	caudal		cad
+	E	even-skipped	eve
+	F	fushi tarazu	ftz
+	G	giant		gt
+	H	hunchback	hb
+	I	hairy		h
+	K	Kruppel		Kr
+	N	knirps		kni
+	O	odd-paired	odd
+	P	paired		prd
+	R	runt		run
+	S	sloppy-paired	slp
+	T	tailless	tll
+
+So the gene ID string will look something like this:
+
+CHKGNT:       6-gene problem: cad, hb, Kr, gt, kni, tll (gap gene circuits)
+KHNGE:        5-gene problem: Kr, hb, kni, gt and eve (oldstyle eve circuit)
+KH:           2-gene problem: (hypothetical) Kr and hb (annealer test files)
+CHKGNTEIRFPO: 12-gene mother data file with all 12 genes in it
+
+NUMBER OF NUCLEAR DIVISIONS:
+
+All oldstyle problems had three divisions and started at cleavage
+cycle 11, but new data can include cleavage cycle 10 and therefore,
+can have any number of up to four nuclear divisions.
+
+NUMBER OF NUCLEI AT CLEAVAGE CYCLE 14:
+
+We need this for consistency checks in Perl and C code and for the 
+possible case where we have neither bicoid nor other data for cycle 14.
+
+DIFFUSION SCHEDULES:
+
+The diffusion schedule indicates how things diffuse throughout the
+embryo. We consider a one dimensional row of nuclei separated by a
+distance l which is halved each division. Mostly schedules A (Reinitz 
+et al. 1995; Sharp & Reinitz 1998, 2-gene test problems) and B (Reinitz 
+& Sharp, 1995; Reinitz et al. 1998) have been used. B and C depend on n, 
+the number of divisions. E depends explicitly on time t in that diffusion 
+suddenly stops 12 min before gastrulation. Schedules that depend on t 
+rather that n (e.g. E) are now supported by the code (9.2 and higher).
+
+A:   all proteins diffuse at an identical rate throughout the embryo
+     and the diffusion parameter does not change over time
+B:   each protein has a different diffusion parameter and diffusion 
+     quadruples each nuclear division because the nuclei are twice
+     as close (n.b. this is a one dimensional situation)
+C:   all proteins diffuse at an identical rate throughout the embyro
+     and the diffusion parameter  and diffusion 
+     quadruples each nuclear division because the nuclei are twice
+     as close (n.b. this is a one dimensional situation)
+D:   each protein has a different diffusion parameter and diffusion
+     parameters do not change after nuclear divisions.
+E:   same as B with cutoff at gastrulation time - 12 mins., where all 
+     diffusion stops suddenly (probably wrong, see JR comments in code)
+
+FORMAT:
+
+$problem
+number_of_genes:
+<#_of_genes>
+gene_IDs:
+<string_of_gene_IDs>
+number_of_nuclear_divisions:
+<#_of_nuc_divs>
+numbers_of_nuclei_at_cycle_14:
+<#_of_nucs>
+diffusion_schedule:
+<A|B|C|D|E>
+$$
+
+
+
+Genotypes Section (Title: $genotypes)
+-------------------------------------
+
+One line for each genotype in the data file.
+
+CAUTION: No comments or empty lines are allowed in the genotype 
+         section!!!!
+         NO WHITE SPACE IS ALLOWED AT THE BEGINNING OF THE LINE!!!
+
+FORMAT:
+
+$genotypes
+ <bias_sect> <facts_sect> <bcd_sect> <genotype_string>
+[<bias_sect> <facts_sect> <bcd_sect> <genotype_string>]
+[<bias_sect> <facts_sect> <bcd_sect> <genotype_string>]
+
+                        etc.
+$$
+
+Where:
+
+- bias_sect:       title of the bias section for this genotype
+- facts_sect:      title of the facts section for this genotype
+- bcd_sect:        title of the bcd section for this genotype
+
+NOTE: All these titles DO NOT include the preceding '$'!!!
+
+- genotype_string: each gene in the simulation is represented by one 
+                   letter in this string; the order of the genes   
+                   corresponds exactly to the geneID string in the 
+                   $problem section (see above).
+
+                   The letters represent the allele of the gene:
+
+                   -W    is wild type
+                   -R    R=0, i.e. promoter is dead, no transcription
+                   -S    R=0, all Ts on other genes = 0, i.e. no trans-
+                         cription AND no regulatory function
+                   -T    Ts on other genes = 0, i.e. the gene is still
+                         transcribed, but has no regulatory function
+
+                   E.g. for a typical oldstyle 5 gene problem with
+                   Kr (K), hb (H), kni (N), gt(G) and eve (E) we have
+                   a gene ID string of:
+
+                   KHNGE
+
+                   We could have the following genotypes:
+
+                   WWWWW  completely wild type
+                   WWWWT  no eve function (T=0), gap genes wt
+                   WSWWR  no hb zygotic transcription or function, no
+                          eve function, other genes wt
+  
+
+
+Input and Eqparms Sections (Title: $input / $eqparms )
+------------------------------------------------------
+
+$input contains the equation parameters used to seed the annealer.
+
+$eqparms contains the equation parameters as they come out of the annealer.
+
+PARAMETER FORMAT:
+
+- R, T, m, h, d:   must be in the format used by the code:
+
+u, as in g(u), is dimensionless. Hence h is dimensionless. T and m have 
+units of inverse concentration. Of course, lacking a real standardization 
+for the v's, we *regard* them as dimensionless, which gives R and lambda 
+the dimensions given below. Related to this is the fact that we now have 
+two scales for 'arbitrary' units: old data was (about) 0-10; new data 
+*exactly* 0-255. Thus:
+
+   - T, m and h    if negative -> repression
+                   if positive -> activation
+
+                   T and m should be about 25 times smaller in new files
+                   than in old files, due to the new range (0-255)
+
+   - R and d:      are in minutes^(-1)
+
+		   Rs need to be about 25 times larger in new files than
+                   in old files, due to the new range (0-255)
+
+   - lambda:       saved as protein half lives (hl) defined by
+
+                          hl = ( log 2 ) / lambda
+
+                   protein half lives must be in minutes.
+
+                   Half lives get converted into real lambdas by the fun- 
+                   ctions that read data files into the scoring/annealing 
+                   code.
+
+NOTE: comments can be inserted into this section at any place, but they 
+      have to be on their own line and start with anything but a digit,
+      '-' or '.'. White space at the beginning of the line is ignored.
+
+FORMAT:  (N is the number of genes)
+
+$eqparms (or $input)
+promoter_strengths:
+ <R1>  <R2>  [<R3>]  ... [<RN>]
+genetic_interconnect_matrix:
+ <T11> <T12> [<T13>] ... [<T1N>]
+            ...
+ <TN1> <TN2> [<TN3>] ... [<TNN>]
+maternal_connection_strengths:
+ <m1>  <m2>  [<m3>]  ... [<mN>]
+promoter_thresholds:
+ <h1>  <h2>  [<h3>]  ... [<hN>]
+diffusion_parameter(s):
+ <d1> [<d2>] [<d3>]  ... [<dN>]
+protein_half_lives:
+ <hl1> <hl2> [<hl3>] ... [<hl4>]
+$$
+
+
+
+Guts Definition Section (Title: $gutsdefs)
+------------------------------------------
+
+CAUTION: The guts code uses the GENE ID STRING in the $problem
+section to identify the genes, and so the $gutsdefs section must 
+agree with it. 
+
+unfold, if run with the -G flag looks in this section for the
+definition of what contributions of the RHS of the model ("guts") are
+required to be calculated.
+
+It calculates both contributions of different genes to u
+(T(a,b)*v(b)) (contribution of gene b to a), and also the decay,
+diffusion, synthesis and the derivative terms in the RHS.
+
+Both the target gene (for which the guts is required) and the genes
+whose contributions to u (in g(u)) are to be calculated are specified 
+by letters of the gene ID string (see the problem definition
+section):
+
+	B	bicoid				bcd
+	C	caudal				cad
+	E	even-skipped		        eve
+	F	fushi tarazu		        ftz
+	G	giant				gt
+	H	hunchback			hb
+	I	hairy				h
+	K	Kruppel				Kr
+	N	knirps				kni
+	O	odd-paired			odd
+	P	paired				prd
+	R	runt				run
+	S	sloppy-paired		        slp
+	T	tailless			tll
+
+The other contributions are specified as:
+
+	A	Threshold term in u, h(a)
+	U	u
+	Z	g(u)
+	J	Synthesis, R(a)*g(u)
+	L 	Decay term, -Lambda(a)*v(a)
+	X	Left Diffusion D(a)*(v(a,i-1) - v(a,i))
+	Y	Right Diffusion D(a)*(v(a,i+1) - v(a,i))
+	D	The derivative i.e. the whole RHS
+
+The first character in the line is the target gene. After it
+seperated by spaces or tabs follow the contributions that are required
+to be calculated. If two or more contribution terms are placed together
+without space between them, the sum of these contributions is
+calculated.
+
+For example, if one wants the combined contribution of Kruppel and
+Sloppy-Paired to Tailless, and also the derivative, one would add 
+this line to the gutsdefs section:
+
+T KS D
+
+One may specify any number contribution terms as long as one
+definition line remains less than 255 characters (anything more than
+that is ignored). However, one may have any number of such lines
+with any other or the same target gene. White space is ignored.
+
+Each line's output is put in a section in the output file with each
+contribution in a column.
+
+
+
+Data Sections: Bias, Facts and Bicoid (Titles as defined in $genotypes)
+-----------------------------------------------------------------------
+
+Lines of data MUST begin with a number, '-', '.' or '-.'. Preceding
+white space is ignored.
+
+Lines that start with a letter or punctuation characters other than
+'-' or '.' are treated as comments. 
+
+CAUTION: when '$$' is missing, the following section title will also 
+         be treated as a comment. 
+
+Data must be in columns separated with any amount of white space.
+
+Lineage numbers and times MUST be in the right increasing order. The
+reading functions do not check this again and will be confused about
+data, which is not consecutive.
+
+
+SECTION FORMATS:
+
+$<title>
+
+lines of data (see below)
+
+$$
+
+NOTE: for data and bias it's nice to include column headers before 
+      the data starts; such headers are ignored by the code and make
+      it a lot easier to read the data files for humans.
+
+      the bicoid section should contain blocks of data for each cleavage
+      cycle; it is important that bcd information is complete for all
+      cleavage cycles!
+
+
+DATA FORMATS:  (N = number of genes)
+
+Bias and Facts: <Lineage Number> <Time> <Conc1> <Conc2> ... <ConcN>
+Bicoid:         <Lineage Number> <BCDConc>
+
+
+LINEAGE NUMBERS: (see Mjolsness et al. (1991); JTB 152: 429)
+
+Lineage numbers (LN) are defined by the following formula:
+
+          LN = X + 2 ^ DIV
+
+where:    X    is the relative position (0 for most anterior) of the nucleus 
+               along the AP axis in the embryo 
+
+          DIV  is the number of nuclear divisions that have already occurred
+               e.g. DIV = 13 for cleavage cycle 14
+
+Therefore, we have the following ranges of lineage numbers:
+
+NOTE: only cleavage cycles 10-14 are supported by the code!
+
+Cleavage Cycle              Lineage Numbers
+--------------              ---------------
+
+10                              512 -  1023
+11                             1024 -  2047
+12                             2048 -  4095
+13                             4096 -  8191
+14                             8192 - 16383
+
+This lineage number format is inspired by the AAPPAAP (etc) notation
+used by the C. elegans community to describe cell lineage (see sketch
+below, (c) JR).
+
+            nuc                  12
+           / |
+          /  |
+         /   |
+        /    |
+       /     |
+      /      |
+     nuc     nuc     nuc    nuc  13
+    / |     / |     / |     / | 
+   /  |    /  |    /  |    /  | 
+  A   P   A<->P   A   P   A---P  14A
+            |___________________________lscale.
+
+
+The mother of each cell can be determined by integer division of the
+cell's lineage number:
+
+         MLN = LN div 2
+
+where    MLN   is the lineage number of the mother cell
+
+Daughters of each cell i have lineage numbers i*2 (anterior) and i*2+1
+(posterior daughter cell).
+
+
+TIMES:
+
+Time is measured in minutes after the start of cleavage cycle 11 (for
+problems with 3 nuclear divisions) or after 1 minute into cleavage cycle
+10 (when nuclei arrive at surface, for problems with 4 nuclear divisions,
+see Foe and Alberts, 1983 for a justification of this).
+
+
+CONCENTRATIONS:
+
+Concentrations are in relative units. A concentration of -1 in the
+facts section tells the code that there is no data available for this
+gene at this particular time. This is different from a value of 0,
+which means that there was a measurement but no protein is
+present. This difference is important for evaluating the time points
+the simulation should return.
+
+IMPORTANT: old data had relative concentrations between 0 and roughly 
+10 (actually more like 12). New data has different relative concentra-
+tions between exactly 0 and 255.   
+
+
+
+Annealing Input Section (Title: $annealing_input)
+-------------------------------------------------
+
+This sections contains annealing parameters which are NOT specific to
+the Lam annealing schedule. This includes the seed for the random num-
+ber generator, the start temperature and two parameters for move ge-
+neration.
+
+SEED FOR RANDOM NUMBER GENERATOR
+
+Value used to seed the random number generator used by the annealer 
+(currently erand48, for those who are interested). The number origi-
+nally comes from a serial number on a dollar bill in John's wallet.
+The seed can be in decimal, octal or hexadecimal. For the latter two
+use the standard C prefixes 0 and 0x.
+
+START TEMPERATURE
+
+Temperature at which the annealer starts. In Simulated Annealing, the
+temperature, which controls move size, is gradually lowered over time.
+This way, move sizes get smaller as we approach the global minimum of 
+the cost function and run less danger of getting trapped in a local
+minimum.
+
+GAIN FOR JUMP SIZE CONTROL
+
+This is a parameter used to control the move size according to the 
+current move statistics.
+
+INTERVAL
+
+Number of steps that pass between calculation of the acceptance sta-
+tistics that keep the acceptance ratio as close to 0.44 as possible.
+These statistics are then used in move generation.
+
+FORMAT:
+
+$annealing_input
+seed_for_random_number_generator:
+<seed>
+start_temperature:
+<start_temp>
+gain_for_jump_size_control:
+<gain>
+interval:
+<interval>
+$$
+
+
+
+Tune Parameters Section (Title: $tune_parameters)
+-------------------------------------------------
+
+This section contains the parameters specific to the Lam adaptive 
+annealing schedule. 
+
+LAMBDA AND SUCH
+
+The Lam parameter lambda is the quality factor that defines the overall 
+precision of the Lam annealing schedule. Smaller lambdas give better 
+answers but take longer to calculate.
+
+The other three parameters on this line are used to specify the way Lam
+statistics are collected for calculating the estimators for energy (E)
+and variance (sigma). The control parameter on this line was used by 
+Lam for move control, which is now done in the $annealing_input section.
+
+INIT MOVES, TAU, FREEZE COUNT AND SSKIP
+
+The numbers on this line mean the following:
+
+- initmoves:   # of moves for randominzing and collecting statistics
+- tau:         interval, at which Lam statistics are collected and 
+               energies are pooled in the parallel code
+- freezecount: # of times the system has to be frozen before printing
+               the answer
+- Sskip:       # of iterations between changing the temperature
+
+CRITERION
+
+This is important for continuous problems, since it specifies the limit of
+how much the system is allowed to vary and still be considered frozen. Just
+as Lam-lambda, this is a quality factor for the annealing run, since the 
+annealing outcome depends on both lambda and the criterion.
+
+MIXING INTERVAL
+
+This is M, the mixing interval for parallel code. It is not required for
+serial code.
+
+
+FORMAT:
+
+$tune_parameters
+lambda__lambdamemu_lambdamemv_control:
+<lambda> <lambda_mem_length_u> <lambda_mem_length_v> <control>
+initmoves_tau_freezecount_Sskip:
+<initmoves> <tau> <freezecount> <Sskip>
+criterion:
+<criterion>
+[mixing_interval:] (*)
+[<mixing_interval>] (*)
+$$
+
+(*) required for parallel code only, ignored by serial code if present
+
+ 
+
+Annealing Output Section (Title: $annealing_output)
+---------------------------------------------------
+
+Small section that is written by the annealer. Contains the follwoing two
+things:
+
+FINAL ENERGY
+
+Energy at which the annealer stopped according to the stopping criterion.
+
+MAX COUNT
+
+Number of moves the annealer needed to get to the above energy.
+
+
+FORMAT:
+
+$annealing_output
+energy:
+<final_energy>
+max_count:
+<maximum_count>
+$$
+
+
+
+Tweak Section (Title: $tweak)
+-----------------------------
+
+This section corresponds to the format of the 'input' section. Each para-
+meter in the 'input' section is assigned a 1 or a 0. 1 means 'tweak me', 
+0 means 'do not even think about tweaking me'.
+
+NOTE: comments can be inserted into this section at any place, but they 
+      have to be on their own line and start with anything but a digit.
+
+
+FORMAT:
+
+$tweak
+Parameters correspond to eqparms: 1 means tweak, 0 means don't.
+promoter_strengths:
+ <0|1> <0|1> ... <0|1>
+genetic_interconnect_matrix:
+ <0|1> <0|1> ... <0|1>
+
+             ...
+
+ <0|1> <0|1> ... <0|1>
+maternal_connection_strengths:
+ <0|1> <0|1> ... <0|1>
+promoter_thresholds:
+ <0|1> <0|1> ... <0|1>
+diffusion_parameters:
+ <0|1> <0|1> ... <0|1>
+protein_half_lives:
+ <0|1> <0|1> ... <0|1>
+$$
+
+
+
+Limits Section (Title: $limits)
+-------------------------------
+
+Contains the limits and penalty function parameter Lambda for search
+space control. The limits must be in the same order and units as the 
+parameters in the $eqparms and $input sections (see there).
+
+The format of the section differs depending on the mode of search space
+control. For direct control i.e. using explicit limits, any value outside 
+the ranges produces an impossible move for the annealer. For the penalty 
+function, the regulatory output u is used to define a penalty function 
+that add exponentially increasing penalties to the score, when parameters 
+lie outside reasonable bounds (see Reinitz & Sharp, 1995 or Chu et. al, 
+1999 for details). The penalty function is defined by its parameter Lambda 
+(in the limits section) and the maximum concentration for each gene and 
+bcd from the penalty section of the data file (see below).
+
+IMPORTANT: the limits for R, T and m need to be adjusted for new data. R
+will be about 25 times larger, T and m will be about 25 times smaller than
+in new files!!!! The other parameters should stay the same.
+
+FORMAT FOR DIRECT CONTROL/EXPLICIT LIMITS:  ( N = number of genes )
+
+$limits
+promoter_strength_ranges:
+(Rmin1 ,Rmax1)  (Rmin2, Rmax2)  [(Rmin3, Rmax3)]  ... [(RminN, RmaxN)]
+interconnect_matrix_ranges:  
+(Tmin11,Tmax11) (Tmin12,Tmax12) [(Tmin13,Tmax13)] ... [(Tmin1N,Tmax1N)]
+                                 ...
+(TminN1,TmaxN1) (TminN2,TmaxN2) [(TminN3,TmaxN3)] ... [(TminNN,TmaxNN)]
+maternal_connection_ranges:
+(mmin1, mmax1)  (mmin2, mmax2)  [(mmin3, mmax3)]  ... [(mminN, mmaxN)]
+promoter_threshold_ranges:
+(hmin1, hmax1)  (hmin2, hmax2)  [(hmin3, hmax3)]  ... [(hminN, hmaxN)]
+diffusion_parameter_range(s):
+(dmin1, dmax1) [(dmin2, dmax2)] [(dmin3, dmax3)]  ... [(dminN, dmaxN)]
+protein_half_life_ranges:
+(hlmin1,hlmax1) (hlmin2,hlmax2) [(hlmin3,hlmax3)] ... [(hlminN,hlmaxN)]
+Lambda_for_penalty:
+N/A
+$$
+
+
+FORMAT FOR PENALTY FUNCTION:  ( N = number of genes )
+
+$limits
+promoter_strength_ranges:
+(Rmin1 ,Rmax1)  (Rmin2, Rmax2)  [(Rmin3, Rmax3)]  ... [(RminN, RmaxN)]
+interconnect_matrix_ranges:  
+N/A
+maternal_connection_ranges:
+N/A
+promoter_threshold_ranges:
+N/A
+diffusion_parameter_range(s):
+(dmin1, dmax1) [(dmin2, dmax2)] [(dmin3, dmax3)]  ... [(dminN, dmaxN)]
+protein_half_life_ranges:
+(hlmin1,hlmax1) (hlmin2,hlmax2) [(hlmin3,hlmax3)] ... [(hlminN,hlmaxN)]
+Lambda_for_penalty:
+<Lambda>
+$$
+
+
+
+Penalty Sections (Title: see below for definition)
+--------------------------------------------------
+
+If a penalty function is used for search space control, there can be
+penalty data (maternal as well as zygotic) for certain genotypes
+in the data file. This data is simply used in addition to the normal
+data to calculate maximum concentrations for each gene (vmax[]) and 
+for bcd (mmax), which are then used to calculate the penalty. Penalty 
+sections have the same format as normal data sections (see there). 
+
+These sections are useful to keep the search space exactly the same 
+while annealing on different regions of the embryo.
+
+SECTION TITLES:
+
+Penalty section titles MUST follow the format:
+
+$penalty_data.<genotype_string>          for penalty facts
+$maternal_penalty_data.<genotype_string> for maternal penalty data

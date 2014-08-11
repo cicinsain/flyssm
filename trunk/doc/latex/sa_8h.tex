@@ -1,0 +1,360 @@
+\hypertarget{sa_8h}{
+\section{lam/sa.h File Reference}
+\label{sa_8h}\index{lam/sa.h@{lam/sa.h}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$global.h$>$}\par
+{\ttfamily \#include $<$distributions.h$>$}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structFiles}{Files}
+\item 
+struct \hyperlink{structSAType}{SAType}
+\item 
+struct \hyperlink{structNucStateType}{NucStateType}
+\item 
+struct \hyperlink{structChuParam}{ChuParam}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{sa_8h_aec8469019ea70f726df69142c8b42c6a}{
+typedef struct \hyperlink{structNucStateType}{NucStateType} $\ast$ {\bfseries NucStatePtr}}
+\label{sa_8h_aec8469019ea70f726df69142c8b42c6a}
+
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{sa_8h_a6342f2cfe7bf17936624248b72b6ccb9}{StopStyle} \{ {\bfseries proportional\_\-freeze}, 
+{\bfseries absolute\_\-freeze}, 
+{\bfseries absolute\_\-energy}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{sa_8h_a98f8ef9313691be2823b678050cf41ae}{Initialize} (int argc, char $\ast$$\ast$argv)
+\item 
+void \hyperlink{sa_8h_a29ace73bf86acc89685ac790663260be}{InitFilenames} (\hyperlink{structFiles}{Files} $\ast$files)
+\item 
+void \hyperlink{sa_8h_ac7b75e6e07185445d2cca5b3531c82b1}{InitialLoop} (void)
+\item 
+void \hyperlink{sa_8h_ae10c4c8f9a418b3936a83312162c8894}{InitializeParameter} (void)
+\item 
+void \hyperlink{sa_8h_a9c04d1f899ab7d94678c92af91aa5d8e}{InitializeWeights} (void)
+\item 
+void \hyperlink{sa_8h_a3d44ba75fca31cf103092e6b7a604dcf}{Loop} (void)
+\item 
+void \hyperlink{sa_8h_afa56aa04d2b65406905685c3a86c37d9}{UpdateS} (void)
+\item 
+void \hyperlink{sa_8h_a6fbfe227a3d23a2cc0fde42be52e9dd1}{UpdateStats} (int i)
+\item 
+void \hyperlink{sa_8h_ab19b9c7ff28b4c66da90a3557eff33ea}{UpdateParameter} (void)
+\item 
+int \hyperlink{sa_8h_af1f7f727fc1eb8fadaf6771b9c16e977}{Frozen} (void)
+\item 
+void \hyperlink{sa_8h_ae56852702f23eab04eecd25bf09406e5}{FixTLoop} (void)
+\item 
+void \hyperlink{sa_8h_afcd9faeb0e89612337adc262aa8ada76}{GetEquil} (double $\ast$equil\_\-var)
+\item 
+void \hyperlink{sa_8h_a58d451ed22a1cef60419ddd598695004}{SetEquilibrate} (\hyperlink{structChuParam}{ChuParam} ep)
+\item 
+double $\ast$ \hyperlink{sa_8h_a97015221283e0ba21a0678b889fa9d85}{GetLamstats} (void)
+\item 
+double $\ast$ \hyperlink{sa_8h_a96e2c37e58948ed0de40f3a214ca2c9a}{GetTimes} (void)
+\item 
+void \hyperlink{sa_8h_a767f7f6771bbc70aa83ac12af17c4504}{SetOutname} (char $\ast$outname)
+\item 
+void \hyperlink{sa_8h_a9980c5df8e4bcab0280121ff628e0a90}{RestoreLamstats} (double $\ast$stats)
+\item 
+void \hyperlink{sa_8h_a02d325f210ffdd19fec3a4f97f5b81d9}{RestoreLog} (void)
+\item 
+void \hyperlink{sa_8h_a1a48e7d336940bbe4a41bd20405a6fc5}{RestoreTimes} (double $\ast$delta)
+\item 
+void \hyperlink{sa_8h_af2626ed486292b9cf0a251e7081c5c7d}{WriteLandscape} (char $\ast$landfile, int iteration, double delta\_\-energy)
+\item 
+void \hyperlink{sa_8h_ad28f23592af10fe367b042d101d20d2c}{InitLandscape} (int value, char $\ast$file)
+\item 
+void \hyperlink{sa_8h_a910ffcd2147f517747e6f5274f75e377}{WriteLog} (void)
+\item 
+void \hyperlink{sa_8h_ab9e433e1288e54e255cd1bd7dd4edbc5}{PrintLog} (FILE $\ast$outptr, int local\_\-flag)
+\item 
+int \hyperlink{sa_8h_a26853a88f50f5f82cca810ea51bdd049}{ParseCommandLine} (int argc, char $\ast$$\ast$argv)
+\item 
+double \hyperlink{sa_8h_abd595e298b75c7ef53412df7b3d4ccf6}{MoveSA} (\hyperlink{structNucStateType}{NucStatePtr} state\_\-ptr, \hyperlink{structmy__distrib}{DistParms} $\ast$distp, \hyperlink{structScoreOutput}{ScoreOutput} $\ast$out, \hyperlink{structFiles}{Files} $\ast$files, int init, int jacobian)
+\item 
+void \hyperlink{sa_8h_a4cdbbbb8ebb7753c6132f6a3218a2ac1}{RestoreState} (\hyperlink{structNucStateType}{NucStatePtr} state\_\-ptr, \hyperlink{structmy__distrib}{DistParms} $\ast$distp, \hyperlink{structFiles}{Files} $\ast$files)
+\item 
+void \hyperlink{sa_8h_a45d1a324699c442834c5196d02f8124d}{FinalMove} (void)
+\item 
+void \hyperlink{sa_8h_ab167d096961551e35a5c33d7fe725502}{WriteTimes} (double $\ast$times)
+\item 
+double \hyperlink{sa_8h_abe3c6eeab616b246b71d1d6c4ccb6b2a}{GenerateMove} (\hyperlink{structFiles}{Files} $\ast$files, \hyperlink{structmy__distrib}{DistParms} $\ast$distp, \hyperlink{structScoreOutput}{ScoreOutput} $\ast$out)
+\item 
+void \hyperlink{sa_8h_aaea2b0879c86a8061d1945be263527c9}{AcceptMove} (void)
+\item 
+void \hyperlink{sa_8h_ac3f79f3030139da1f82173200306cbc4}{RejectMove} (void)
+\item 
+void \hyperlink{sa_8h_afaac54a6336c9cb91c2f5c2048ae7a42}{StateWrite} (char $\ast$infile)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{sa_8h_a477085dedf21d4d933faec815ecdf78e}{
+const int {\bfseries MIN\_\-DELTA}}
+\label{sa_8h_a477085dedf21d4d933faec815ecdf78e}
+
+\item 
+\hypertarget{sa_8h_ae4ff83f48c5262bd360fc3f8abab2b8a}{
+\hyperlink{structNucStateType}{NucStatePtr} {\bfseries state}}
+\label{sa_8h_ae4ff83f48c5262bd360fc3f8abab2b8a}
+
+\item 
+\hypertarget{sa_8h_a5c4654c68c75adabfd712b487b832d7a}{
+\hyperlink{sa_8h_a6342f2cfe7bf17936624248b72b6ccb9}{StopStyle} {\bfseries stop\_\-flag}}
+\label{sa_8h_a5c4654c68c75adabfd712b487b832d7a}
+
+\item 
+\hypertarget{sa_8h_a38ccdf3249306f23bc68d35abc72d00c}{
+int {\bfseries time\_\-flag}}
+\label{sa_8h_a38ccdf3249306f23bc68d35abc72d00c}
+
+\item 
+\hypertarget{sa_8h_a08b47532b8c6eebbeb8ec4ac73fe096a}{
+int {\bfseries log\_\-flag}}
+\label{sa_8h_a08b47532b8c6eebbeb8ec4ac73fe096a}
+
+\item 
+\hypertarget{sa_8h_ad993ce1b46b69bdcf9b5fac950d995a9}{
+int {\bfseries nofile\_\-flag}}
+\label{sa_8h_ad993ce1b46b69bdcf9b5fac950d995a9}
+
+\item 
+\hypertarget{sa_8h_af52c204ddde8f50ff7a37c089f465f12}{
+long {\bfseries state\_\-write}}
+\label{sa_8h_af52c204ddde8f50ff7a37c089f465f12}
+
+\item 
+\hypertarget{sa_8h_ae91f767f7d23a0de1760ddd3ae485d59}{
+long {\bfseries print\_\-freq}}
+\label{sa_8h_ae91f767f7d23a0de1760ddd3ae485d59}
+
+\item 
+\hypertarget{sa_8h_a654519657a08e14f09e3aa751b3f9cb7}{
+long {\bfseries captions}}
+\label{sa_8h_a654519657a08e14f09e3aa751b3f9cb7}
+
+\item 
+\hypertarget{sa_8h_ab5fc4a700bd55aca5215c055634a0cc1}{
+int {\bfseries bench}}
+\label{sa_8h_ab5fc4a700bd55aca5215c055634a0cc1}
+
+\item 
+\hypertarget{sa_8h_a4e3c60401c315337b8441115cb376037}{
+int {\bfseries equil}}
+\label{sa_8h_a4e3c60401c315337b8441115cb376037}
+
+\item 
+\hypertarget{sa_8h_ab13a34167f184f9b4a290210123fa474}{
+int {\bfseries quenchit}}
+\label{sa_8h_ab13a34167f184f9b4a290210123fa474}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+written by Jimmy Lam and Dan Greening modified by John Reinitz and Johannes Jaeger
+
+see ../doc/prog\_\-man.ps for details of how this works
+
+IMPORTANT: IF YOU EVER CHANGE ANYTHING IN THIS FILE, LET ALL YOUR FELLOW PROGRAMMERS KNOW WELL IN ADVANCE AND CONSULT WITH THEM IF THEY AGREE ON YOUR CHANGES!!
+
+The following came with \hyperlink{lsa_8c}{lsa.c}, obtained from Dan Greening, who got it from Jimmy Lam. It is probably copyright Jimmy Lam 1988, with modifications by Greening. We (JR \& JJ) have mostly modified it by adding some comments and restructuring the code to make it more easily understandable. JR has added the criterion for continous search spaces and separated Lam statistics from move acceptance statistics. King-\/Wai Chu has written the equilibration code.
+
+NOTE: this header only contains prototypes for functions used for serial annealing code; all prototypes that are spe-\/ cific to parallel code need to go into \hyperlink{MPI_8h}{MPI.h} 
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{sa_8h_a6342f2cfe7bf17936624248b72b6ccb9}{
+\index{sa.h@{sa.h}!StopStyle@{StopStyle}}
+\index{StopStyle@{StopStyle}!sa.h@{sa.h}}
+\subsubsection[{StopStyle}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf StopStyle}}}
+\label{sa_8h_a6342f2cfe7bf17936624248b72b6ccb9}
+Flag for type of stopping criterion (added by JR)
+
+'criterion' sets the limit within which the following must lie for 'freeze\_\-count' number of times:
+
+proportional freeze: (mean -\/ old\_\-mean)/mean absolute freeze: mean -\/ old\_\-mean absolute energy: mean 
+
+\subsection{Function Documentation}
+\hypertarget{sa_8h_aaea2b0879c86a8061d1945be263527c9}{
+\index{sa.h@{sa.h}!AcceptMove@{AcceptMove}}
+\index{AcceptMove@{AcceptMove}!sa.h@{sa.h}}
+\subsubsection[{AcceptMove}]{\setlength{\rightskip}{0pt plus 5cm}void AcceptMove (void)}}
+\label{sa_8h_aaea2b0879c86a8061d1945be263527c9}
+AcceptMove: sets new energy as the old energy for the next step and keeps track of the number of successful moves \hypertarget{sa_8h_a45d1a324699c442834c5196d02f8124d}{
+\index{sa.h@{sa.h}!FinalMove@{FinalMove}}
+\index{FinalMove@{FinalMove}!sa.h@{sa.h}}
+\subsubsection[{FinalMove}]{\setlength{\rightskip}{0pt plus 5cm}void FinalMove (void)}}
+\label{sa_8h_a45d1a324699c442834c5196d02f8124d}
+FinalMove: determines the final energy and move count and then prints those to wherever they need to be printed to; also should do the cleaning up, i.e freeing stuff and such after a run \hypertarget{sa_8h_ae56852702f23eab04eecd25bf09406e5}{
+\index{sa.h@{sa.h}!FixTLoop@{FixTLoop}}
+\index{FixTLoop@{FixTLoop}!sa.h@{sa.h}}
+\subsubsection[{FixTLoop}]{\setlength{\rightskip}{0pt plus 5cm}void FixTLoop (void)}}
+\label{sa_8h_ae56852702f23eab04eecd25bf09406e5}
+FixTLoop: loops (making moves, updating stats etc.) keeping the temp-\/ erature fixed for an equilibration run \hypertarget{sa_8h_af1f7f727fc1eb8fadaf6771b9c16e977}{
+\index{sa.h@{sa.h}!Frozen@{Frozen}}
+\index{Frozen@{Frozen}!sa.h@{sa.h}}
+\subsubsection[{Frozen}]{\setlength{\rightskip}{0pt plus 5cm}int Frozen (void)}}
+\label{sa_8h_af1f7f727fc1eb8fadaf6771b9c16e977}
+Frozen: returns TRUE if frozen, FALSE otherwise; 'frozen' is defined by 'freeze\_\-count', 'stop\_\-flag' and 'criterion' (see also \hyperlink{sa_8h}{sa.h} for a more extensive comment on this) \hypertarget{sa_8h_abe3c6eeab616b246b71d1d6c4ccb6b2a}{
+\index{sa.h@{sa.h}!GenerateMove@{GenerateMove}}
+\index{GenerateMove@{GenerateMove}!sa.h@{sa.h}}
+\subsubsection[{GenerateMove}]{\setlength{\rightskip}{0pt plus 5cm}double GenerateMove ({\bf Files} $\ast$ {\em files}, \/  {\bf DistParms} $\ast$ {\em distp}, \/  {\bf ScoreOutput} $\ast$ {\em out})}}
+\label{sa_8h_abe3c6eeab616b246b71d1d6c4ccb6b2a}
+GenerateMove: evaluates the old energy, changes a parameter, then eval-\/ uates the new energy; returns the difference between old and new energy to the caller \hypertarget{sa_8h_afcd9faeb0e89612337adc262aa8ada76}{
+\index{sa.h@{sa.h}!GetEquil@{GetEquil}}
+\index{GetEquil@{GetEquil}!sa.h@{sa.h}}
+\subsubsection[{GetEquil}]{\setlength{\rightskip}{0pt plus 5cm}void GetEquil (double $\ast$ {\em equil\_\-var})}}
+\label{sa_8h_afcd9faeb0e89612337adc262aa8ada76}
+GetEquil: returns the results of an equilibration run \hypertarget{sa_8h_a97015221283e0ba21a0678b889fa9d85}{
+\index{sa.h@{sa.h}!GetLamstats@{GetLamstats}}
+\index{GetLamstats@{GetLamstats}!sa.h@{sa.h}}
+\subsubsection[{GetLamstats}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ GetLamstats (void)}}
+\label{sa_8h_a97015221283e0ba21a0678b889fa9d85}
+GetLamstats: returns Lam statistics in an array of doubles; used to store Lam statistics in a state file \hypertarget{sa_8h_a96e2c37e58948ed0de40f3a214ca2c9a}{
+\index{sa.h@{sa.h}!GetTimes@{GetTimes}}
+\index{GetTimes@{GetTimes}!sa.h@{sa.h}}
+\subsubsection[{GetTimes}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ GetTimes (void)}}
+\label{sa_8h_a96e2c37e58948ed0de40f3a214ca2c9a}
+GetTimes: returns a two-\/element array with the current wallclock and user time to be saved in the state file; for parallel code we average the times for all processes \hypertarget{sa_8h_a29ace73bf86acc89685ac790663260be}{
+\index{sa.h@{sa.h}!InitFilenames@{InitFilenames}}
+\index{InitFilenames@{InitFilenames}!sa.h@{sa.h}}
+\subsubsection[{InitFilenames}]{\setlength{\rightskip}{0pt plus 5cm}void InitFilenames ({\bf Files} $\ast$ {\em files})}}
+\label{sa_8h_a29ace73bf86acc89685ac790663260be}
+InitFilenames: initializes static file names that depend on the out-\/ put file name (i.e. this $\ast$must$\ast$ be called after we have called \hyperlink{fly__sa_8c_a4cdbbbb8ebb7753c6132f6a3218a2ac1}{RestoreState()}) \hypertarget{sa_8h_a98f8ef9313691be2823b678050cf41ae}{
+\index{sa.h@{sa.h}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!sa.h@{sa.h}}
+\subsubsection[{Initialize}]{\setlength{\rightskip}{0pt plus 5cm}void Initialize (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
+\label{sa_8h_a98f8ef9313691be2823b678050cf41ae}
+Initialize: calls ParseCommandLine first; then does either initial randomization and collecting Lam stats or restores state of the annealer as saved in the state file \hypertarget{sa_8h_ae10c4c8f9a418b3936a83312162c8894}{
+\index{sa.h@{sa.h}!InitializeParameter@{InitializeParameter}}
+\index{InitializeParameter@{InitializeParameter}!sa.h@{sa.h}}
+\subsubsection[{InitializeParameter}]{\setlength{\rightskip}{0pt plus 5cm}void InitializeParameter (void)}}
+\label{sa_8h_ae10c4c8f9a418b3936a83312162c8894}
+InitializeParameter: initializes variables for Lam annealing: this is executed after doing the initial steps; the local parameters only need to be set for tu-\/ ning code \hypertarget{sa_8h_a9c04d1f899ab7d94678c92af91aa5d8e}{
+\index{sa.h@{sa.h}!InitializeWeights@{InitializeWeights}}
+\index{InitializeWeights@{InitializeWeights}!sa.h@{sa.h}}
+\subsubsection[{InitializeWeights}]{\setlength{\rightskip}{0pt plus 5cm}void InitializeWeights (void)}}
+\label{sa_8h_a9c04d1f899ab7d94678c92af91aa5d8e}
+InitializeWeights: initialize weights a and b for calculating Lam estimators; these weights are computed from the lambda memory length products \hypertarget{sa_8h_ac7b75e6e07185445d2cca5b3531c82b1}{
+\index{sa.h@{sa.h}!InitialLoop@{InitialLoop}}
+\index{InitialLoop@{InitialLoop}!sa.h@{sa.h}}
+\subsubsection[{InitialLoop}]{\setlength{\rightskip}{0pt plus 5cm}void InitialLoop (void)}}
+\label{sa_8h_ac7b75e6e07185445d2cca5b3531c82b1}
+InitialLoop: performs the two sets of initial moves: 1. randomizing moves (not parallelized) 2. loop for initial collection of statistics \hypertarget{sa_8h_ad28f23592af10fe367b042d101d20d2c}{
+\index{sa.h@{sa.h}!InitLandscape@{InitLandscape}}
+\index{InitLandscape@{InitLandscape}!sa.h@{sa.h}}
+\subsubsection[{InitLandscape}]{\setlength{\rightskip}{0pt plus 5cm}void InitLandscape (int {\em value}, \/  char $\ast$ {\em file})}}
+\label{sa_8h_ad28f23592af10fe367b042d101d20d2c}
+InitLandscape: sets flag for printing landscape output and acceptance landscape and initializes the landscape file names called from xxx\_\-sa.c to make filenames static and set landscape flag \hypertarget{sa_8h_a3d44ba75fca31cf103092e6b7a604dcf}{
+\index{sa.h@{sa.h}!Loop@{Loop}}
+\index{Loop@{Loop}!sa.h@{sa.h}}
+\subsubsection[{Loop}]{\setlength{\rightskip}{0pt plus 5cm}void Loop (void)}}
+\label{sa_8h_a3d44ba75fca31cf103092e6b7a604dcf}
+Loop: loops (making moves, updating stats etc.) until the system is considered frozen according to the stop criterion \hypertarget{sa_8h_abd595e298b75c7ef53412df7b3d4ccf6}{
+\index{sa.h@{sa.h}!MoveSA@{MoveSA}}
+\index{MoveSA@{MoveSA}!sa.h@{sa.h}}
+\subsubsection[{MoveSA}]{\setlength{\rightskip}{0pt plus 5cm}double MoveSA ({\bf NucStatePtr} {\em state\_\-ptr}, \/  {\bf DistParms} $\ast$ {\em distp}, \/  {\bf ScoreOutput} $\ast$ {\em out}, \/  {\bf Files} $\ast$ {\em files}, \/  int {\em init}, \/  int {\em jacobian})}}
+\label{sa_8h_abd595e298b75c7ef53412df7b3d4ccf6}
+MoveSA: This function actually does almost everything. First it creates a static \hyperlink{structInput}{Input} structure 'inp', where it puts all the information from the input file. This part is executed only once (when init == 1). Then it creates a \hyperlink{structScoreOutput}{ScoreOutput} structure 'out' where the score, penalty and residual vectors will be stored. At the end it runs the score function, where all the calculation is done. \hypertarget{sa_8h_a26853a88f50f5f82cca810ea51bdd049}{
+\index{sa.h@{sa.h}!ParseCommandLine@{ParseCommandLine}}
+\index{ParseCommandLine@{ParseCommandLine}!sa.h@{sa.h}}
+\subsubsection[{ParseCommandLine}]{\setlength{\rightskip}{0pt plus 5cm}int ParseCommandLine (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
+\label{sa_8h_a26853a88f50f5f82cca810ea51bdd049}
+ParseCommandLine: well, parses the command line and returns an index to the 1st argument after the command line options \hypertarget{sa_8h_ab9e433e1288e54e255cd1bd7dd4edbc5}{
+\index{sa.h@{sa.h}!PrintLog@{PrintLog}}
+\index{PrintLog@{PrintLog}!sa.h@{sa.h}}
+\subsubsection[{PrintLog}]{\setlength{\rightskip}{0pt plus 5cm}void PrintLog (FILE $\ast$ {\em outptr}, \/  int {\em local\_\-flag})}}
+\label{sa_8h_ab9e433e1288e54e255cd1bd7dd4edbc5}
+PrintLog: actually prints the log to wherever it needs to be printed \hypertarget{sa_8h_ac3f79f3030139da1f82173200306cbc4}{
+\index{sa.h@{sa.h}!RejectMove@{RejectMove}}
+\index{RejectMove@{RejectMove}!sa.h@{sa.h}}
+\subsubsection[{RejectMove}]{\setlength{\rightskip}{0pt plus 5cm}void RejectMove (void)}}
+\label{sa_8h_ac3f79f3030139da1f82173200306cbc4}
+RejectMove: simply resets the tweaked parameter to the pretweak value \hypertarget{sa_8h_a9980c5df8e4bcab0280121ff628e0a90}{
+\index{sa.h@{sa.h}!RestoreLamstats@{RestoreLamstats}}
+\index{RestoreLamstats@{RestoreLamstats}!sa.h@{sa.h}}
+\subsubsection[{RestoreLamstats}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreLamstats (double $\ast$ {\em stats})}}
+\label{sa_8h_a9980c5df8e4bcab0280121ff628e0a90}
+RestoreLamstats: restores static Lam statistics in \hyperlink{lsa_8c}{lsa.c} from an array of doubles; used to restore runs from a state file. \hypertarget{sa_8h_a02d325f210ffdd19fec3a4f97f5b81d9}{
+\index{sa.h@{sa.h}!RestoreLog@{RestoreLog}}
+\index{RestoreLog@{RestoreLog}!sa.h@{sa.h}}
+\subsubsection[{RestoreLog}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreLog (void)}}
+\label{sa_8h_a02d325f210ffdd19fec3a4f97f5b81d9}
+RestoreLog: restores the .log (and the .llog files) upon restart \hypertarget{sa_8h_a4cdbbbb8ebb7753c6132f6a3218a2ac1}{
+\index{sa.h@{sa.h}!RestoreState@{RestoreState}}
+\index{RestoreState@{RestoreState}!sa.h@{sa.h}}
+\subsubsection[{RestoreState}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreState ({\bf NucStatePtr} {\em state\_\-ptr}, \/  {\bf DistParms} $\ast$ {\em distp}, \/  {\bf Files} $\ast$ {\em files})}}
+\label{sa_8h_a4cdbbbb8ebb7753c6132f6a3218a2ac1}
+RestoreState: called when an interrupted run is restored; does the following:
+\begin{DoxyItemize}
+\item stores various static things for filenames and such
+\item initializes Lam parameters for \hyperlink{lsa_8c}{lsa.c}
+\item initializes model and scoring funcs \& solver stepsize
+\item initializes move generation in \hyperlink{moves_8c}{moves.c}
+\item restores state at which previous run was interrupted according to state file
+\end{DoxyItemize}
+
+Comment by JR: RestoreState was originally going to be implemented with branches in InitialMove. That won't work because when when this func. returns, control should go right to \hyperlink{lsa_8c_a3d44ba75fca31cf103092e6b7a604dcf}{Loop()}, skipping all the initiali-\/ zation stuff in Initialize. Hence most of the code in InitialMove is just repeated here. \hypertarget{sa_8h_a1a48e7d336940bbe4a41bd20405a6fc5}{
+\index{sa.h@{sa.h}!RestoreTimes@{RestoreTimes}}
+\index{RestoreTimes@{RestoreTimes}!sa.h@{sa.h}}
+\subsubsection[{RestoreTimes}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreTimes (double $\ast$ {\em delta})}}
+\label{sa_8h_a1a48e7d336940bbe4a41bd20405a6fc5}
+RestoreTimes: restores the wallclock and user times if -\/t is used \hypertarget{sa_8h_a58d451ed22a1cef60419ddd598695004}{
+\index{sa.h@{sa.h}!SetEquilibrate@{SetEquilibrate}}
+\index{SetEquilibrate@{SetEquilibrate}!sa.h@{sa.h}}
+\subsubsection[{SetEquilibrate}]{\setlength{\rightskip}{0pt plus 5cm}void SetEquilibrate ({\bf ChuParam} {\em ep})}}
+\label{sa_8h_a58d451ed22a1cef60419ddd598695004}
+SetEquilibrate: simply makes the equil\_\-param struct static to \hyperlink{lsa_8c}{lsa.c} \hypertarget{sa_8h_a767f7f6771bbc70aa83ac12af17c4504}{
+\index{sa.h@{sa.h}!SetOutname@{SetOutname}}
+\index{SetOutname@{SetOutname}!sa.h@{sa.h}}
+\subsubsection[{SetOutname}]{\setlength{\rightskip}{0pt plus 5cm}void SetOutname (char $\ast$ {\em outname})}}
+\label{sa_8h_a767f7f6771bbc70aa83ac12af17c4504}
+SetOutname: sets the output filename in \hyperlink{lsa_8c}{lsa.c}; this is necessary to have the diverse .log and .ac and .mb etc files have the name of the output file if -\/w is chosen \hypertarget{sa_8h_afaac54a6336c9cb91c2f5c2048ae7a42}{
+\index{sa.h@{sa.h}!StateWrite@{StateWrite}}
+\index{StateWrite@{StateWrite}!sa.h@{sa.h}}
+\subsubsection[{StateWrite}]{\setlength{\rightskip}{0pt plus 5cm}void StateWrite (char $\ast$ {\em statefile})}}
+\label{sa_8h_afaac54a6336c9cb91c2f5c2048ae7a42}
+StateWrite: collects Lam statistics, move state and the state of the erand48 random number generator and writes all that into the state file, which can then be used to restore the run in case it gets interrupted \hypertarget{sa_8h_ab19b9c7ff28b4c66da90a3557eff33ea}{
+\index{sa.h@{sa.h}!UpdateParameter@{UpdateParameter}}
+\index{UpdateParameter@{UpdateParameter}!sa.h@{sa.h}}
+\subsubsection[{UpdateParameter}]{\setlength{\rightskip}{0pt plus 5cm}void UpdateParameter (void)}}
+\label{sa_8h_ab19b9c7ff28b4c66da90a3557eff33ea}
+UpdateParameter: update parameters A, B, D and E and the estimators for mean and standard deviation for the current S \hypertarget{sa_8h_afa56aa04d2b65406905685c3a86c37d9}{
+\index{sa.h@{sa.h}!UpdateS@{UpdateS}}
+\index{UpdateS@{UpdateS}!sa.h@{sa.h}}
+\subsubsection[{UpdateS}]{\setlength{\rightskip}{0pt plus 5cm}void UpdateS (void)}}
+\label{sa_8h_afa56aa04d2b65406905685c3a86c37d9}
+UpdateS: update inverse temperature S at every Sskip step \hypertarget{sa_8h_a6fbfe227a3d23a2cc0fde42be52e9dd1}{
+\index{sa.h@{sa.h}!UpdateStats@{UpdateStats}}
+\index{UpdateStats@{UpdateStats}!sa.h@{sa.h}}
+\subsubsection[{UpdateStats}]{\setlength{\rightskip}{0pt plus 5cm}void UpdateStats (int {\em i})}}
+\label{sa_8h_a6fbfe227a3d23a2cc0fde42be52e9dd1}
+UpdateStats: updates mean, variance and acc\_\-ratio after tau moves it needs i to do sanity check in parallel code \hypertarget{sa_8h_af2626ed486292b9cf0a251e7081c5c7d}{
+\index{sa.h@{sa.h}!WriteLandscape@{WriteLandscape}}
+\index{WriteLandscape@{WriteLandscape}!sa.h@{sa.h}}
+\subsubsection[{WriteLandscape}]{\setlength{\rightskip}{0pt plus 5cm}void WriteLandscape (char $\ast$ {\em landfile}, \/  int {\em iteration}, \/  double {\em delta\_\-energy})}}
+\label{sa_8h_af2626ed486292b9cf0a251e7081c5c7d}
+WriteLandscape: write iterations, temperature, dS/S, energy, delta\_\-energy, mean, std deviation, estimate\_\-mean, estimate\_\-sd, acceptance ratio to look at the landscape of the problem Will be either the entire landscape or only the accepted landscape \hypertarget{sa_8h_a910ffcd2147f517747e6f5274f75e377}{
+\index{sa.h@{sa.h}!WriteLog@{WriteLog}}
+\index{WriteLog@{WriteLog}!sa.h@{sa.h}}
+\subsubsection[{WriteLog}]{\setlength{\rightskip}{0pt plus 5cm}void WriteLog (void)}}
+\label{sa_8h_a910ffcd2147f517747e6f5274f75e377}
+WriteLog: writes things like mean and variation, Lam estimators, dS, alpha and acceptance ratio to the log files and to stdout (if -\/l is chosen). \hypertarget{sa_8h_ab167d096961551e35a5c33d7fe725502}{
+\index{sa.h@{sa.h}!WriteTimes@{WriteTimes}}
+\index{WriteTimes@{WriteTimes}!sa.h@{sa.h}}
+\subsubsection[{WriteTimes}]{\setlength{\rightskip}{0pt plus 5cm}void WriteTimes (double $\ast$ {\em times})}}
+\label{sa_8h_ab167d096961551e35a5c33d7fe725502}
+WriteTimes: writes the timing information to wherever it needs to be written to at the end of a run 

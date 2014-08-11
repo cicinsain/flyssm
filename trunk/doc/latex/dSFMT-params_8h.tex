@@ -1,0 +1,32 @@
+\hypertarget{dSFMT-params_8h}{
+\section{lam/dSFMT-\/params.h File Reference}
+\label{dSFMT-params_8h}\index{lam/dSFMT-\/params.h@{lam/dSFMT-\/params.h}}
+}
+{\ttfamily \#include \char`\"{}dSFMT.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{dSFMT-params_8h_a57989a561514d3856d95cc1482420325}{DSFMT\_\-LOW\_\-MASK}~UINT64\_\-C(0x000FFFFFFFFFFFFF)
+\item 
+\hypertarget{dSFMT-params_8h_aee5e164dcb918963608d48e61a827e5c}{
+\#define {\bfseries DSFMT\_\-HIGH\_\-CONST}~UINT64\_\-C(0x3FF0000000000000)}
+\label{dSFMT-params_8h_aee5e164dcb918963608d48e61a827e5c}
+
+\item 
+\hypertarget{dSFMT-params_8h_a11b3082d55b2a939a40d1cb3f5cbba5f}{
+\#define {\bfseries DSFMT\_\-SR}~12}
+\label{dSFMT-params_8h_a11b3082d55b2a939a40d1cb3f5cbba5f}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Define Documentation}
+\hypertarget{dSFMT-params_8h_a57989a561514d3856d95cc1482420325}{
+\index{dSFMT-\/params.h@{dSFMT-\/params.h}!DSFMT\_\-LOW\_\-MASK@{DSFMT\_\-LOW\_\-MASK}}
+\index{DSFMT\_\-LOW\_\-MASK@{DSFMT\_\-LOW\_\-MASK}!dSFMT-params.h@{dSFMT-\/params.h}}
+\subsubsection[{DSFMT\_\-LOW\_\-MASK}]{\setlength{\rightskip}{0pt plus 5cm}\#define DSFMT\_\-LOW\_\-MASK~UINT64\_\-C(0x000FFFFFFFFFFFFF)}}
+\label{dSFMT-params_8h_a57989a561514d3856d95cc1482420325}
+the pick up position of the array. define DSFMT\_\-POS1 122 the parameter of shift left as four 32-\/bit registers. define DSFMT\_\-SL1 18 the parameter of shift right as four 32-\/bit registers. define DSFMT\_\-SR1 12 A bitmask, used in the recursion. These parameters are introduced to break symmetry of SIMD. define DSFMT\_\-MSK1 (uint64\_\-t)0xdfffffefULL define DSFMT\_\-MSK2 (uint64\_\-t)0xddfecb7fULL These definitions are part of a 128-\/bit period certification vector. define DSFMT\_\-PCV1 UINT64\_\-C(0x00000001) define DSFMT\_\-PCV2 UINT64\_\-C(0x00000000) 

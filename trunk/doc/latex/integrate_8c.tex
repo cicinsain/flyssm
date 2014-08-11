@@ -1,0 +1,219 @@
+\hypertarget{integrate_8c}{
+\section{fly/integrate.c File Reference}
+\label{integrate_8c}\index{fly/integrate.c@{fly/integrate.c}}
+}
+
+
+Implementation of functions needed for the right hand side of ODEs.  
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$float.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$sys/times.h$>$}\par
+{\ttfamily \#include \char`\"{}error.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}maternal.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}integrate.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}solvers.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}zygotic.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}score.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structNArrPtr}{NArrPtr} \hyperlink{integrate_8c_a3677aab63d5dee8dfb44fba8291b5546}{Blastoderm} (int genindex, char $\ast$genotype, \hyperlink{structInput}{Input} $\ast$inp, FILE $\ast$slog)
+\item 
+void \hyperlink{integrate_8c_aa97e5202d0bd89ea84250a4e81f987a8}{FreeSolution} (\hyperlink{structNArrPtr}{NArrPtr} $\ast$solution)
+\item 
+\hyperlink{structNArrPtr}{NArrPtr} \hyperlink{integrate_8c_ac74d23b01a9489cb47e4e851bef02503}{ConvertAnswer} (\hyperlink{structNArrPtr}{NArrPtr} answer, \hyperlink{structDArrPtr}{DArrPtr} tabtimes)
+\item 
+\hyperlink{structTList}{TList} $\ast$ \hyperlink{integrate_8c_adb01d39e6270bd0c9ec419834d20c2e9}{InitTList} (\hyperlink{structZygote}{Zygote} $\ast$zyg, int $\ast$nnucs)
+\item 
+\hyperlink{structTList}{TList} $\ast$ \hyperlink{integrate_8c_ab8e766736826dd19d1d305218f93619c}{InsertTList} (\hyperlink{structZygote}{Zygote} $\ast$zyg, \hyperlink{structTList}{TList} $\ast$first, double time, int op)
+\item 
+int \hyperlink{integrate_8c_a2b29a09cdddb18b20bfe30aadc4f6c05}{CountEntries} (\hyperlink{structTList}{TList} $\ast$first)
+\item 
+void \hyperlink{integrate_8c_a516ce51207d1d98bdb67651371bb2a73}{FreeTList} (\hyperlink{structTList}{TList} $\ast$first)
+\item 
+\hypertarget{integrate_8c_aa51a0d020467f448fc7ada0d28c2416b}{
+double $\ast$ {\bfseries GetFactDiscons} (int $\ast$sss, \hyperlink{structFactDiscons}{FactDiscons} fd)}
+\label{integrate_8c_aa51a0d020467f448fc7ada0d28c2416b}
+
+\item 
+\hyperlink{structNArrPtr}{NArrPtr} \hyperlink{integrate_8c_af61c43b7cf24b1e3745e7c896c57b3a9}{Dat2NArrPtr} (\hyperlink{structDataTable}{DataTable} $\ast$table, int $\ast$maxind)
+\item 
+void \hyperlink{integrate_8c_a668512ba5dba4fccc22178a3a2d7464e}{DoInterp} (\hyperlink{structDataTable}{DataTable} $\ast$interp\_\-dat, \hyperlink{structInterpObject}{InterpObject} $\ast$interp\_\-res, int num\_\-genes, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+\hyperlink{structFactDiscons}{FactDiscons} \hyperlink{integrate_8c_a8e0fda8042a33597860d376c7a698f16}{SetFactDiscons} (\hyperlink{structInterpObject}{InterpObject} $\ast$hist\_\-interp\_\-object, \hyperlink{structInterpObject}{InterpObject} $\ast$extinp\_\-interp\_\-object)
+\item 
+void \hyperlink{integrate_8c_a78f5ef0bbb5b038bbeaa6b5943ac4b11}{FreeFactDiscons} (double $\ast$fact\_\-discons)
+\item 
+\hypertarget{integrate_8c_a0640d9e8223a6edc38c428009046e7e3}{
+void {\bfseries History} (double t, double t\_\-size, double $\ast$yd, int n, \hyperlink{structInterpObject}{InterpObject} hist\_\-interp\_\-object, int ngenes, \hyperlink{structZygote}{Zygote} $\ast$zyg)}
+\label{integrate_8c_a0640d9e8223a6edc38c428009046e7e3}
+
+\item 
+\hypertarget{integrate_8c_a8b205aee4458f4a3d4fd0b1349f5d5b6}{
+void {\bfseries ExternalInputs} (double t, double t\_\-size, double $\ast$yd, int n, \hyperlink{structInterpObject}{InterpObject} extinp\_\-interp\_\-object, int egenes, \hyperlink{structZygote}{Zygote} $\ast$zyg)}
+\label{integrate_8c_a8b205aee4458f4a3d4fd0b1349f5d5b6}
+
+\item 
+\hypertarget{integrate_8c_a75c36719445fbc0fbf11bbbc8233bf81}{
+void {\bfseries FreeInterpObject} (\hyperlink{structInterpObject}{InterpObject} $\ast$interp\_\-obj)}
+\label{integrate_8c_a75c36719445fbc0fbf11bbbc8233bf81}
+
+\item 
+\hypertarget{integrate_8c_a300203035ae4dbcb490d22cdab7a621b}{
+void {\bfseries Go\_\-Forward} (double $\ast$output, double $\ast$input, int output\_\-ind, int input\_\-ind, \hyperlink{structZygote}{Zygote} $\ast$zyg, int num\_\-genes)}
+\label{integrate_8c_a300203035ae4dbcb490d22cdab7a621b}
+
+\item 
+\hypertarget{integrate_8c_a01e6f39cc1d0c9cb75218f6690ed3906}{
+void {\bfseries Go\_\-Backward} (double $\ast$output, double $\ast$input, int output\_\-ind, int input\_\-ind, \hyperlink{structZygote}{Zygote} $\ast$zyg, int num\_\-genes)}
+\label{integrate_8c_a01e6f39cc1d0c9cb75218f6690ed3906}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{integrate_8c_a13d5d211fc59519cb46d74ef1808b128}{
+const double {\bfseries BIG\_\-EPSILON} = ( EPSILON $\ast$ 1000. )}
+\label{integrate_8c_a13d5d211fc59519cb46d74ef1808b128}
+
+\item 
+\hypertarget{integrate_8c_a87da412f00e80b09c5fa4afc6c5c74b2}{
+const double {\bfseries HALF\_\-EPSILON} = ( EPSILON $\ast$ .5 )}
+\label{integrate_8c_a87da412f00e80b09c5fa4afc6c5c74b2}
+
+\item 
+\hypertarget{integrate_8c_aa9c5901f898e4fa1d4ce5b09f79bc84f}{
+const int {\bfseries ADD\_\-BIAS} = 1}
+\label{integrate_8c_aa9c5901f898e4fa1d4ce5b09f79bc84f}
+
+\item 
+\hypertarget{integrate_8c_a8a826dbcbaa2be746d18973cbbaff33d}{
+const int {\bfseries NO\_\-OP} = 2}
+\label{integrate_8c_a8a826dbcbaa2be746d18973cbbaff33d}
+
+\item 
+\hypertarget{integrate_8c_a0074d90ea5e2ebd02aaac9aa61f3893b}{
+const int {\bfseries DIVIDE} = 4}
+\label{integrate_8c_a0074d90ea5e2ebd02aaac9aa61f3893b}
+
+\item 
+\hypertarget{integrate_8c_ad8006844334b66af2737b348cd7a964a}{
+const int {\bfseries PROPAGATE} = 8}
+\label{integrate_8c_ad8006844334b66af2737b348cd7a964a}
+
+\item 
+\hypertarget{integrate_8c_a0522c88b0d3ba570e3b6520ea63e2c5f}{
+const int {\bfseries MITOTATE} = 16}
+\label{integrate_8c_a0522c88b0d3ba570e3b6520ea63e2c5f}
+
+\item 
+\hypertarget{integrate_8c_af7edc29979577e113ff69b38ecc1fd0f}{
+const char {\bfseries Jerry} \mbox{[}$\,$\mbox{]} = \char`\"{}@(\#) In Memoriam Jerome John Garcia, 8/1/42-\/8/9/95\char`\"{}}
+\label{integrate_8c_af7edc29979577e113ff69b38ecc1fd0f}
+
+\item 
+\hypertarget{integrate_8c_a1309cc93fe5b8289b2db47dd00f32f82}{
+int {\bfseries jacSize}}
+\label{integrate_8c_a1309cc93fe5b8289b2db47dd00f32f82}
+
+\item 
+\hypertarget{integrate_8c_a45314566a84a31f43e6435d1eb24d4ec}{
+double {\bfseries start}}
+\label{integrate_8c_a45314566a84a31f43e6435d1eb24d4ec}
+
+\item 
+\hypertarget{integrate_8c_a12f06c556fdca0c8cf4df6748f9ba5a2}{
+double {\bfseries finish}}
+\label{integrate_8c_a12f06c556fdca0c8cf4df6748f9ba5a2}
+
+\item 
+\hypertarget{integrate_8c_adba299992bde9ee33c7833f9eeb112c3}{
+struct tms $\ast$ {\bfseries cpu\_\-start}}
+\label{integrate_8c_adba299992bde9ee33c7833f9eeb112c3}
+
+\item 
+\hypertarget{integrate_8c_a71563deaefbf84eba1ab46d70d7ab91e}{
+struct tms $\ast$ {\bfseries cpu\_\-finish}}
+\label{integrate_8c_a71563deaefbf84eba1ab46d70d7ab91e}
+
+\item 
+\hypertarget{integrate_8c_a4c023c62527fde52fd8ac2ca593e1483}{
+double $\ast$ {\bfseries delta}}
+\label{integrate_8c_a4c023c62527fde52fd8ac2ca593e1483}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of functions needed for the right hand side of ODEs. \begin{DoxyAuthor}{Author}
+JR, modified by Yoginho
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+The function Blastoderm runs the fly model and calls the appropriate solver for propagating the equations. PrintBlastoderm formats and prints the output of the Blasto-\/ derm function and FreeSolution frees the solution allocated by Blastoderm. \hyperlink{integrate_8h}{integrate.h} also comes with a few utility functions for TLists which are linked lists used to initia-\/ lize the time/mode table for Blastoderm.
+
+\begin{DoxyNote}{Note}
+all right-\/hand-\/of-\/ODE-\/specific stuff is in \hyperlink{zygotic_8h}{zygotic.h} 
+\end{DoxyNote}
+
+
+\subsection{Function Documentation}
+\hypertarget{integrate_8c_a3677aab63d5dee8dfb44fba8291b5546}{
+\index{integrate.c@{integrate.c}!Blastoderm@{Blastoderm}}
+\index{Blastoderm@{Blastoderm}!integrate.c@{integrate.c}}
+\subsubsection[{Blastoderm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf NArrPtr} Blastoderm (int {\em genindex}, \/  char $\ast$ {\em genotype}, \/  {\bf Input} $\ast$ {\em inp}, \/  FILE $\ast$ {\em slog})}}
+\label{integrate_8c_a3677aab63d5dee8dfb44fba8291b5546}
+Blastoderm: runs embryo model and returns an array of concentration arrays for each requested time (given by TabTimes) using stephint as a suggested stepsize and accuracy as the re-\/ quired numerical accuracy (in case of adaptive stepsize solvers or global stepsize control) for the solver. NOTE: TabTimes $\ast$must$\ast$ start from 0 and have increasing times. It includes times when bias is added, cell division times and times for which we have data and ends with the time of gastrulation. \hypertarget{integrate_8c_ac74d23b01a9489cb47e4e851bef02503}{
+\index{integrate.c@{integrate.c}!ConvertAnswer@{ConvertAnswer}}
+\index{ConvertAnswer@{ConvertAnswer}!integrate.c@{integrate.c}}
+\subsubsection[{ConvertAnswer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf NArrPtr} ConvertAnswer ({\bf NArrPtr} {\em answer}, \/  {\bf DArrPtr} {\em tabtimes})}}
+\label{integrate_8c_ac74d23b01a9489cb47e4e851bef02503}
+ConvertAnswer: little function that gets rid of bias times, division times and such and only returns the times in the tab-\/ times struct as its output; this is used to produce unfold output that contains only the requested times; it also makes sure that we return the right solution at cell division, i.e. the solution right $\ast$after$\ast$ the cells have divided \hypertarget{integrate_8c_a2b29a09cdddb18b20bfe30aadc4f6c05}{
+\index{integrate.c@{integrate.c}!CountEntries@{CountEntries}}
+\index{CountEntries@{CountEntries}!integrate.c@{integrate.c}}
+\subsubsection[{CountEntries}]{\setlength{\rightskip}{0pt plus 5cm}int CountEntries ({\bf TList} $\ast$ {\em first})}}
+\label{integrate_8c_a2b29a09cdddb18b20bfe30aadc4f6c05}
+CountEntries: counts how many entries we have in a \hyperlink{structTList}{TList} \hypertarget{integrate_8c_af61c43b7cf24b1e3745e7c896c57b3a9}{
+\index{integrate.c@{integrate.c}!Dat2NArrPtr@{Dat2NArrPtr}}
+\index{Dat2NArrPtr@{Dat2NArrPtr}!integrate.c@{integrate.c}}
+\subsubsection[{Dat2NArrPtr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf NArrPtr} Dat2NArrPtr ({\bf DataTable} $\ast$ {\em table}, \/  int $\ast$ {\em maxind})}}
+\label{integrate_8c_af61c43b7cf24b1e3745e7c896c57b3a9}
+Dat2NArrPtr: Converts a data table into NarrPtr and also returns the index when the number of nuclei is maximum \hypertarget{integrate_8c_a668512ba5dba4fccc22178a3a2d7464e}{
+\index{integrate.c@{integrate.c}!DoInterp@{DoInterp}}
+\index{DoInterp@{DoInterp}!integrate.c@{integrate.c}}
+\subsubsection[{DoInterp}]{\setlength{\rightskip}{0pt plus 5cm}void DoInterp ({\bf DataTable} $\ast$ {\em interp\_\-dat}, \/  {\bf InterpObject} $\ast$ {\em interp\_\-res}, \/  int {\em num\_\-genes}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{integrate_8c_a668512ba5dba4fccc22178a3a2d7464e}
+DoInterp: Sets up the interpolation functions for the lineage that has most nuclei, these functions will be used later in conjunction with Go\_\-Backward to return history for particular times \hypertarget{integrate_8c_a78f5ef0bbb5b038bbeaa6b5943ac4b11}{
+\index{integrate.c@{integrate.c}!FreeFactDiscons@{FreeFactDiscons}}
+\index{FreeFactDiscons@{FreeFactDiscons}!integrate.c@{integrate.c}}
+\subsubsection[{FreeFactDiscons}]{\setlength{\rightskip}{0pt plus 5cm}void FreeFactDiscons (double $\ast$ {\em fact\_\-discons})}}
+\label{integrate_8c_a78f5ef0bbb5b038bbeaa6b5943ac4b11}
+FreeFactDiscons: free \hyperlink{structFactDiscons}{FactDiscons} object. \hyperlink{structFactDiscons}{FactDiscons} object is made from History and ExternalInputs \hypertarget{integrate_8c_aa97e5202d0bd89ea84250a4e81f987a8}{
+\index{integrate.c@{integrate.c}!FreeSolution@{FreeSolution}}
+\index{FreeSolution@{FreeSolution}!integrate.c@{integrate.c}}
+\subsubsection[{FreeSolution}]{\setlength{\rightskip}{0pt plus 5cm}void FreeSolution ({\bf NArrPtr} $\ast$ {\em solution})}}
+\label{integrate_8c_aa97e5202d0bd89ea84250a4e81f987a8}
+FreeSolution: frees memory of the solution structure created by \hyperlink{integrate_8c_a3677aab63d5dee8dfb44fba8291b5546}{Blastoderm()} or gut functions \hypertarget{integrate_8c_a516ce51207d1d98bdb67651371bb2a73}{
+\index{integrate.c@{integrate.c}!FreeTList@{FreeTList}}
+\index{FreeTList@{FreeTList}!integrate.c@{integrate.c}}
+\subsubsection[{FreeTList}]{\setlength{\rightskip}{0pt plus 5cm}void FreeTList ({\bf TList} $\ast$ {\em first})}}
+\label{integrate_8c_a516ce51207d1d98bdb67651371bb2a73}
+FreeTList: frees the memory of a \hyperlink{structTList}{TList} \hypertarget{integrate_8c_adb01d39e6270bd0c9ec419834d20c2e9}{
+\index{integrate.c@{integrate.c}!InitTList@{InitTList}}
+\index{InitTList@{InitTList}!integrate.c@{integrate.c}}
+\subsubsection[{InitTList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TList}$\ast$ InitTList ({\bf Zygote} $\ast$ {\em zyg}, \/  int $\ast$ {\em nnucs})}}
+\label{integrate_8c_adb01d39e6270bd0c9ec419834d20c2e9}
+InitTList: initializes \hyperlink{structTList}{TList} and adds first (t=0) and last (t=gastrulation) element of Tlist. \hypertarget{integrate_8c_ab8e766736826dd19d1d305218f93619c}{
+\index{integrate.c@{integrate.c}!InsertTList@{InsertTList}}
+\index{InsertTList@{InsertTList}!integrate.c@{integrate.c}}
+\subsubsection[{InsertTList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TList}$\ast$ InsertTList ({\bf Zygote} $\ast$ {\em zyg}, \/  {\bf TList} $\ast$ {\em first}, \/  double {\em time}, \/  int {\em op})}}
+\label{integrate_8c_ab8e766736826dd19d1d305218f93619c}
+InsertTList: takes pointer to first element of \hyperlink{structTList}{TList} plus time and desired op for new \hyperlink{structTList}{TList} element and inserts a new \hyperlink{structTList}{TList} element for time at the appropriate place within the linked list. This function returns a pointer to the first element of the \hyperlink{structTList}{TList} if insertion worked out fine. \hypertarget{integrate_8c_a8e0fda8042a33597860d376c7a698f16}{
+\index{integrate.c@{integrate.c}!SetFactDiscons@{SetFactDiscons}}
+\index{SetFactDiscons@{SetFactDiscons}!integrate.c@{integrate.c}}
+\subsubsection[{SetFactDiscons}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FactDiscons} SetFactDiscons ({\bf InterpObject} $\ast$ {\em hist\_\-interp\_\-object}, \/  {\bf InterpObject} $\ast$ {\em extinp\_\-interp\_\-object})}}
+\label{integrate_8c_a8e0fda8042a33597860d376c7a698f16}
+SetFactDiscons: make one object from History and ExternalInputs 

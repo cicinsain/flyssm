@@ -1,0 +1,152 @@
+\hypertarget{mathLib_8h}{
+\section{lam/mathLib.h File Reference}
+\label{mathLib_8h}\index{lam/mathLib.h@{lam/mathLib.h}}
+}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mathLib_8h_a598a3330b3c21701223ee0ca14316eca}{
+\#define {\bfseries PI}~3.14159265358979323846264338327950288}
+\label{mathLib_8h_a598a3330b3c21701223ee0ca14316eca}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{mathLib_8h_a57c6ec10f3b0d8bf2011d57098c77abe}{Trunc} (double x, int n)
+\item 
+\hypertarget{mathLib_8h_a3d3e61cbd91a07f7b299e4b784306bec}{
+double {\bfseries AbsDiff} (double x, double y)}
+\label{mathLib_8h_a3d3e61cbd91a07f7b299e4b784306bec}
+
+\item 
+\hypertarget{mathLib_8h_a0536e017c9737c1956668d02a273ca93}{
+double {\bfseries SqrDiff} (double x, double y)}
+\label{mathLib_8h_a0536e017c9737c1956668d02a273ca93}
+
+\item 
+char $\ast$ \hyperlink{mathLib_8h_a4d3019d5c81a7b449e97def97b9c02b4}{AllocChar1D} (int)
+\item 
+char $\ast$ \hyperlink{mathLib_8h_a7767b76a1646c22ffa503af65ffc07aa}{ReallocChar1D} (char $\ast$, int)
+\item 
+void \hyperlink{mathLib_8h_a3dce3f82d2f751bbd7d545ca550228db}{FreeChar1D} (char $\ast$)
+\item 
+char $\ast$$\ast$ \hyperlink{mathLib_8h_a7c5de37b1bb780a635f3e39b23728b27}{AllocChar2D} (int, int)
+\item 
+char $\ast$$\ast$ \hyperlink{mathLib_8h_ae889095dd6068aa3c3ff700f42f2e186}{ReallocChar2D} (char $\ast$$\ast$, int, int)
+\item 
+void \hyperlink{mathLib_8h_a1ee63675ff2b98ffbccd8fa68075d790}{FreeChar2D} (char $\ast$$\ast$, int)
+\item 
+int $\ast$ \hyperlink{mathLib_8h_a114de9da9cf4dfef626fcfdc37bd2bb1}{AllocInt1D} (int)
+\item 
+void \hyperlink{mathLib_8h_a907d505aa081c93afc46f49ee22d08a0}{FreeInt1D} (int $\ast$)
+\item 
+double $\ast$ \hyperlink{mathLib_8h_a310e4ea30d4a852cc27dd6f75c8dddc8}{AllocDbl1D} (int)
+\item 
+void \hyperlink{mathLib_8h_a11c10668b9cd7f022c2998a5e1011f44}{FreeDbl1D} (double $\ast$)
+\item 
+double $\ast$$\ast$ \hyperlink{mathLib_8h_a76b8e13a170c7c773c96dc8ececdbd19}{AllocDbl2D} (int, int)
+\item 
+void \hyperlink{mathLib_8h_a67f374bd4420bb37529e59898a7c996b}{FreeDbl2D} (double $\ast$$\ast$, int)
+\item 
+double $\ast$$\ast$$\ast$ \hyperlink{mathLib_8h_a98a1db57d69ef4402fece6988ef348dd}{AllocDbl3D} (int, int, int)
+\item 
+void \hyperlink{mathLib_8h_aa969234f4f364f1152f5785ed29a1922}{FreeDbl3D} (double $\ast$$\ast$$\ast$, int, int)
+\item 
+int \hyperlink{mathLib_8h_a43b863dbe61e847f010f875787165f58}{IsZero} (double)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mathLib_8h_a4c4ce5bfe2ffa0eadd1c5119f8076ec0}{
+const int {\bfseries MAX\_\-RECORD}}
+\label{mathLib_8h_a4c4ce5bfe2ffa0eadd1c5119f8076ec0}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{mathLib_8h_a4d3019d5c81a7b449e97def97b9c02b4}{
+\index{mathLib.h@{mathLib.h}!AllocChar1D@{AllocChar1D}}
+\index{AllocChar1D@{AllocChar1D}!mathLib.h@{mathLib.h}}
+\subsubsection[{AllocChar1D}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ AllocChar1D (int)}}
+\label{mathLib_8h_a4d3019d5c81a7b449e97def97b9c02b4}
+to malloc memories AllocChar1D(size): size$\ast$char \hypertarget{mathLib_8h_a7c5de37b1bb780a635f3e39b23728b27}{
+\index{mathLib.h@{mathLib.h}!AllocChar2D@{AllocChar2D}}
+\index{AllocChar2D@{AllocChar2D}!mathLib.h@{mathLib.h}}
+\subsubsection[{AllocChar2D}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$$\ast$ AllocChar2D (int, \/  int)}}
+\label{mathLib_8h_a7c5de37b1bb780a635f3e39b23728b27}
+to malloc memories AllocChar2D(size1, size2): size1$\ast$(char$\ast$), size2$\ast$char \hypertarget{mathLib_8h_a310e4ea30d4a852cc27dd6f75c8dddc8}{
+\index{mathLib.h@{mathLib.h}!AllocDbl1D@{AllocDbl1D}}
+\index{AllocDbl1D@{AllocDbl1D}!mathLib.h@{mathLib.h}}
+\subsubsection[{AllocDbl1D}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ AllocDbl1D (int)}}
+\label{mathLib_8h_a310e4ea30d4a852cc27dd6f75c8dddc8}
+to malloc memories AllocDbl1D(size): size$\ast$double \hypertarget{mathLib_8h_a76b8e13a170c7c773c96dc8ececdbd19}{
+\index{mathLib.h@{mathLib.h}!AllocDbl2D@{AllocDbl2D}}
+\index{AllocDbl2D@{AllocDbl2D}!mathLib.h@{mathLib.h}}
+\subsubsection[{AllocDbl2D}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$$\ast$ AllocDbl2D (int, \/  int)}}
+\label{mathLib_8h_a76b8e13a170c7c773c96dc8ececdbd19}
+to malloc memories AllocDbl2D(size1, size2) \hypertarget{mathLib_8h_a98a1db57d69ef4402fece6988ef348dd}{
+\index{mathLib.h@{mathLib.h}!AllocDbl3D@{AllocDbl3D}}
+\index{AllocDbl3D@{AllocDbl3D}!mathLib.h@{mathLib.h}}
+\subsubsection[{AllocDbl3D}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$$\ast$$\ast$ AllocDbl3D (int, \/  int, \/  int)}}
+\label{mathLib_8h_a98a1db57d69ef4402fece6988ef348dd}
+to malloc memories AllocDbl3D(size1, size2, siez3) \hypertarget{mathLib_8h_a114de9da9cf4dfef626fcfdc37bd2bb1}{
+\index{mathLib.h@{mathLib.h}!AllocInt1D@{AllocInt1D}}
+\index{AllocInt1D@{AllocInt1D}!mathLib.h@{mathLib.h}}
+\subsubsection[{AllocInt1D}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ AllocInt1D (int)}}
+\label{mathLib_8h_a114de9da9cf4dfef626fcfdc37bd2bb1}
+to malloc memories AllocInt1D(size): size$\ast$int \hypertarget{mathLib_8h_a3dce3f82d2f751bbd7d545ca550228db}{
+\index{mathLib.h@{mathLib.h}!FreeChar1D@{FreeChar1D}}
+\index{FreeChar1D@{FreeChar1D}!mathLib.h@{mathLib.h}}
+\subsubsection[{FreeChar1D}]{\setlength{\rightskip}{0pt plus 5cm}void FreeChar1D (char $\ast$)}}
+\label{mathLib_8h_a3dce3f82d2f751bbd7d545ca550228db}
+to free memories FreeChar1D(s) \hypertarget{mathLib_8h_a1ee63675ff2b98ffbccd8fa68075d790}{
+\index{mathLib.h@{mathLib.h}!FreeChar2D@{FreeChar2D}}
+\index{FreeChar2D@{FreeChar2D}!mathLib.h@{mathLib.h}}
+\subsubsection[{FreeChar2D}]{\setlength{\rightskip}{0pt plus 5cm}void FreeChar2D (char $\ast$$\ast$, \/  int)}}
+\label{mathLib_8h_a1ee63675ff2b98ffbccd8fa68075d790}
+to free memories FreeChar2D(s, size) \hypertarget{mathLib_8h_a11c10668b9cd7f022c2998a5e1011f44}{
+\index{mathLib.h@{mathLib.h}!FreeDbl1D@{FreeDbl1D}}
+\index{FreeDbl1D@{FreeDbl1D}!mathLib.h@{mathLib.h}}
+\subsubsection[{FreeDbl1D}]{\setlength{\rightskip}{0pt plus 5cm}void FreeDbl1D (double $\ast$)}}
+\label{mathLib_8h_a11c10668b9cd7f022c2998a5e1011f44}
+to free memories FreeDbl1D(s) \hypertarget{mathLib_8h_a67f374bd4420bb37529e59898a7c996b}{
+\index{mathLib.h@{mathLib.h}!FreeDbl2D@{FreeDbl2D}}
+\index{FreeDbl2D@{FreeDbl2D}!mathLib.h@{mathLib.h}}
+\subsubsection[{FreeDbl2D}]{\setlength{\rightskip}{0pt plus 5cm}void FreeDbl2D (double $\ast$$\ast$, \/  int)}}
+\label{mathLib_8h_a67f374bd4420bb37529e59898a7c996b}
+to free memories FreeDbl2D(s, size) \hypertarget{mathLib_8h_aa969234f4f364f1152f5785ed29a1922}{
+\index{mathLib.h@{mathLib.h}!FreeDbl3D@{FreeDbl3D}}
+\index{FreeDbl3D@{FreeDbl3D}!mathLib.h@{mathLib.h}}
+\subsubsection[{FreeDbl3D}]{\setlength{\rightskip}{0pt plus 5cm}void FreeDbl3D (double $\ast$$\ast$$\ast$, \/  int, \/  int)}}
+\label{mathLib_8h_aa969234f4f364f1152f5785ed29a1922}
+to free memories FreeDbl3D(s, size1, size2) \hypertarget{mathLib_8h_a907d505aa081c93afc46f49ee22d08a0}{
+\index{mathLib.h@{mathLib.h}!FreeInt1D@{FreeInt1D}}
+\index{FreeInt1D@{FreeInt1D}!mathLib.h@{mathLib.h}}
+\subsubsection[{FreeInt1D}]{\setlength{\rightskip}{0pt plus 5cm}void FreeInt1D (int $\ast$)}}
+\label{mathLib_8h_a907d505aa081c93afc46f49ee22d08a0}
+to free memories FreeInt1D(s) \hypertarget{mathLib_8h_a43b863dbe61e847f010f875787165f58}{
+\index{mathLib.h@{mathLib.h}!IsZero@{IsZero}}
+\index{IsZero@{IsZero}!mathLib.h@{mathLib.h}}
+\subsubsection[{IsZero}]{\setlength{\rightskip}{0pt plus 5cm}int IsZero (double)}}
+\label{mathLib_8h_a43b863dbe61e847f010f875787165f58}
+to check if it's equal to zero if(x$<$min) return true true=BoolTrue=1, false=BoolFalse=0 \hypertarget{mathLib_8h_a7767b76a1646c22ffa503af65ffc07aa}{
+\index{mathLib.h@{mathLib.h}!ReallocChar1D@{ReallocChar1D}}
+\index{ReallocChar1D@{ReallocChar1D}!mathLib.h@{mathLib.h}}
+\subsubsection[{ReallocChar1D}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ ReallocChar1D (char $\ast$, \/  int)}}
+\label{mathLib_8h_a7767b76a1646c22ffa503af65ffc07aa}
+to realloc memories ReallocChar1D(s, size) \hypertarget{mathLib_8h_ae889095dd6068aa3c3ff700f42f2e186}{
+\index{mathLib.h@{mathLib.h}!ReallocChar2D@{ReallocChar2D}}
+\index{ReallocChar2D@{ReallocChar2D}!mathLib.h@{mathLib.h}}
+\subsubsection[{ReallocChar2D}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$$\ast$ ReallocChar2D (char $\ast$$\ast$, \/  int, \/  int)}}
+\label{mathLib_8h_ae889095dd6068aa3c3ff700f42f2e186}
+to realloc memories ReallocChar2D(s, size1, size2) \hypertarget{mathLib_8h_a57c6ec10f3b0d8bf2011d57098c77abe}{
+\index{mathLib.h@{mathLib.h}!Trunc@{Trunc}}
+\index{Trunc@{Trunc}!mathLib.h@{mathLib.h}}
+\subsubsection[{Trunc}]{\setlength{\rightskip}{0pt plus 5cm}double Trunc (double {\em x}, \/  int {\em n})}}
+\label{mathLib_8h_a57c6ec10f3b0d8bf2011d57098c77abe}
+trunc x to n decimals 

@@ -1,0 +1,50 @@
+\hypertarget{translate_8c}{
+\section{fly/translate.c File Reference}
+\label{translate_8c}\index{fly/translate.c@{fly/translate.c}}
+}
+
+
+Makes the list of pointers that the annealer uses to make moves.  
+{\ttfamily \#include $<$ctype.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include \char`\"{}error.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}maternal.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}score.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}zygotic.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}ioTools.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}fly\_\-io.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structPArrPtr}{PArrPtr} \hyperlink{translate_8c_a8634ba41e683bd542126615880dbbdfb}{Translate} (\hyperlink{structInput}{Input} $\ast$inp)
+\begin{DoxyCompactList}\small\item\em Creates an array of pointers that point to the parameters to be tweaked. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Makes the list of pointers that the annealer uses to make moves. \begin{DoxyAuthor}{Author}
+JR, modified by Yoginho
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+SENDING PARAMATERS TO THE ANNEALER
+
+The idea is to conceal as much problem specific details as possible from the annealer. Some of the more general ways of doing this must wait for future code. e.g., when there are multiple possible right hand-\/side-\/ of-\/the-\/ODE derivative functions, each of these must have a translation function, and possibly a small family of other functions as well. These would need to be handled as arrays of pointers to functions for each choice, etc. Also, the \hyperlink{structParamList}{ParamList} structure now has ranges, because it may be important in some contexts for the annealer to know the limits of the search space. If penalty funcs are being used (pen\_\-vec != NULL), a little more work is required, and the coder might, say, write a function that goes in this file which calculates the effective range (say for penalty $<$= 10000) of one param while asuming the values of the others to be fixed.
+
+SPECIFYING WHICH PARAMETERS ARE ANNEALED, WHICH HELD CONSTANT
+
+Parameters are specified as fixed one by one in the parameter file, by setting their entries in the \$tweak section to zero. this entry is then used to construct the array of pointers to the parameters that are to be tweaked.
+
+The full GPL copyright notice can be found in \hyperlink{lsa_8c}{lsa.c} 
+
+\subsection{Function Documentation}
+\hypertarget{translate_8c_a8634ba41e683bd542126615880dbbdfb}{
+\index{translate.c@{translate.c}!Translate@{Translate}}
+\index{Translate@{Translate}!translate.c@{translate.c}}
+\subsubsection[{Translate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PArrPtr} Translate ({\bf Input} $\ast$ {\em inp})}}
+\label{translate_8c_a8634ba41e683bd542126615880dbbdfb}
+
+
+Creates an array of pointers that point to the parameters to be tweaked. The \hyperlink{structPArrPtr}{PArrPtr} that is returned also includes pointers to the corresponding parameter ranges for each parameter, although this feature is not yet used anywhere in the annealing code
+
+CAUTION: InitZygote and InitScoring have to be called first! 

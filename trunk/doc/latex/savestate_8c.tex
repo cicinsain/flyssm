@@ -1,0 +1,49 @@
+\hypertarget{savestate_8c}{
+\section{fly/savestate.c File Reference}
+\label{savestate_8c}\index{fly/savestate.c@{fly/savestate.c}}
+}
+
+
+Three function implementations that read, write and remove the state file for an annealing run.  
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$error.h$>$}\par
+{\ttfamily \#include $<$moves.h$>$}\par
+{\ttfamily \#include $<$random.h$>$}\par
+{\ttfamily \#include $<$sa.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{savestate_8c_ad82a8380f455d35b2c65a62b8c49ba73}{StateRead} (char $\ast$statefile, \hyperlink{structOpts}{Opts} $\ast$options, \hyperlink{structMoveState}{MoveState} $\ast$move\_\-ptr, double $\ast$stats, char $\ast$rand, double $\ast$delta)
+\item 
+void \hyperlink{savestate_8c_af03e11f6bb2f0e5a18fa3610f68c45d7}{StateWrite} (char $\ast$statefile)
+\item 
+void \hyperlink{savestate_8c_a0cc99406abfc909bc33fcc43e4086d72}{StateRm} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Three function implementations that read, write and remove the state file for an annealing run. Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+The frequency with which state are saved can be chosen by the command line op-\/ tion -\/b (for backup stepsize). The state file is very useful for the case when long annealing runs have to be interrupted or crash for some reason or another. The run can then be re-\/ sumed by indicating the state file as an additional argument to fly\_\-sa. 
+
+\subsection{Function Documentation}
+\hypertarget{savestate_8c_ad82a8380f455d35b2c65a62b8c49ba73}{
+\index{savestate.c@{savestate.c}!StateRead@{StateRead}}
+\index{StateRead@{StateRead}!savestate.c@{savestate.c}}
+\subsubsection[{StateRead}]{\setlength{\rightskip}{0pt plus 5cm}void StateRead (char $\ast$ {\em statefile}, \/  {\bf Opts} $\ast$ {\em options}, \/  {\bf MoveState} $\ast$ {\em move\_\-ptr}, \/  double $\ast$ {\em stats}, \/  char $\ast$ {\em rand}, \/  double $\ast$ {\em delta})}}
+\label{savestate_8c_ad82a8380f455d35b2c65a62b8c49ba73}
+StateRead: reads Lam statistics, move state and erand state from a state file and restores the annealer's state to the same state it was in before it got interrupted CAUTION: InitMoves must be called before calling StateRead! \hypertarget{savestate_8c_a0cc99406abfc909bc33fcc43e4086d72}{
+\index{savestate.c@{savestate.c}!StateRm@{StateRm}}
+\index{StateRm@{StateRm}!savestate.c@{savestate.c}}
+\subsubsection[{StateRm}]{\setlength{\rightskip}{0pt plus 5cm}void StateRm (void)}}
+\label{savestate_8c_a0cc99406abfc909bc33fcc43e4086d72}
+StateRm: removes the state file after the run has been completed; unless we're tuning in parallel, only the root node needs to delete a state file \hypertarget{savestate_8c_af03e11f6bb2f0e5a18fa3610f68c45d7}{
+\index{savestate.c@{savestate.c}!StateWrite@{StateWrite}}
+\index{StateWrite@{StateWrite}!savestate.c@{savestate.c}}
+\subsubsection[{StateWrite}]{\setlength{\rightskip}{0pt plus 5cm}void StateWrite (char $\ast$ {\em statefile})}}
+\label{savestate_8c_af03e11f6bb2f0e5a18fa3610f68c45d7}
+StateWrite: collects Lam statistics, move state and the state of the erand48 random number generator and writes all that into the state file, which can then be used to restore the run in case it gets interrupted 

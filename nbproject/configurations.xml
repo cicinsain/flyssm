@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="89">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="fly"
+                   displayName="fly"
+                   projectFiles="true"
+                   root="trunk/fly">
+      <itemPath>trunk/fly/fly_io.c</itemPath>
+      <itemPath>trunk/fly/fly_io.h</itemPath>
+      <itemPath>trunk/fly/fly_sa.c</itemPath>
+      <itemPath>trunk/fly/fly_sa.h</itemPath>
+      <itemPath>trunk/fly/integrate.c</itemPath>
+      <itemPath>trunk/fly/integrate.h</itemPath>
+      <itemPath>trunk/fly/maternal.c</itemPath>
+      <itemPath>trunk/fly/maternal.h</itemPath>
+      <itemPath>trunk/fly/printscore.c</itemPath>
+      <itemPath>trunk/fly/savestate.c</itemPath>
+      <itemPath>trunk/fly/score.c</itemPath>
+      <itemPath>trunk/fly/score.h</itemPath>
+      <itemPath>trunk/fly/scramble.c</itemPath>
+      <itemPath>trunk/fly/solvers.c</itemPath>
+      <itemPath>trunk/fly/solvers.h</itemPath>
+      <itemPath>trunk/fly/translate.c</itemPath>
+      <itemPath>trunk/fly/unfold.c</itemPath>
+      <itemPath>trunk/fly/zygotic.c</itemPath>
+      <itemPath>trunk/fly/zygotic.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="trunk"
+                   displayName="trunk"
+                   projectFiles="true"
+                   root="trunk">
+      <itemPath>trunk/RootOfAllEvol.c</itemPath>
+      <itemPath>trunk/RootOfAllEvol.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="util"
+                   displayName="util"
+                   projectFiles="true"
+                   root="trunk/util">
+      <itemPath>trunk/util/MPI.h</itemPath>
+      <itemPath>trunk/util/dSFMT-common.h</itemPath>
+      <itemPath>trunk/util/dSFMT-params.h</itemPath>
+      <itemPath>trunk/util/dSFMT-params19937.h</itemPath>
+      <itemPath>trunk/util/dSFMT.c</itemPath>
+      <itemPath>trunk/util/dSFMT.h</itemPath>
+      <itemPath>trunk/util/dSFMT_str_state.c</itemPath>
+      <itemPath>trunk/util/dSFMT_str_state.h</itemPath>
+      <itemPath>trunk/util/deviates.c</itemPath>
+      <itemPath>trunk/util/distributions.c</itemPath>
+      <itemPath>trunk/util/distributions.h</itemPath>
+      <itemPath>trunk/util/error.c</itemPath>
+      <itemPath>trunk/util/error.h</itemPath>
+      <itemPath>trunk/util/global.h</itemPath>
+      <itemPath>trunk/util/ioTools.c</itemPath>
+      <itemPath>trunk/util/ioTools.h</itemPath>
+      <itemPath>trunk/util/mathLib.c</itemPath>
+      <itemPath>trunk/util/mathLib.h</itemPath>
+      <itemPath>trunk/util/random.c</itemPath>
+      <itemPath>trunk/util/random.h</itemPath>
+      <itemPath>trunk/util/sa.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>SimAnn-Makefile.mk</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>trunk</Elem>
+  </sourceRootList>
+  <projectmakefile>SimAnn-Makefile.mk</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>trunk</buildCommandWorkingDir>
+          <buildCommand>${MAKE}</buildCommand>
+          <cleanCommand>${MAKE} clean</cleanCommand>
+          <executablePath>trunk/fly/fly_sa</executablePath>
+          <cTool>
+            <incDir>
+              <pElem>trunk/fly</pElem>
+              <pElem>trunk/util</pElem>
+            </incDir>
+          </cTool>
+        </makeTool>
+      </makefileType>
+      <folder path="fly">
+        <cTool>
+          <incDir>
+            <pElem>../../My/lib32/sundials-2.5.0/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>HAVE_SSE2</Elem>
+            <Elem>PIC</Elem>
+          </preprocessorList>
+        </cTool>
+      </folder>
+      <folder path="trunk">
+        <cTool>
+          <incDir>
+            <pElem>trunk</pElem>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>../../My/lib32/sundials-2.5.0/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>MATLAB_MEX_FILE</Elem>
+            <Elem>MX_COMPAT_32</Elem>
+            <Elem>_GNU_SOURCE</Elem>
+          </preprocessorList>
+        </cTool>
+      </folder>
+      <folder path="util">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>HAVE_SSE2</Elem>
+            <Elem>PIC</Elem>
+          </preprocessorList>
+        </cTool>
+      </folder>
+      <item path="trunk/RootOfAllEvol.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="trunk/RootOfAllEvol.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/fly/fly_io.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/fly/fly_io.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/fly/fly_sa.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>COMPILER="gcc"</Elem>
+            <Elem>FLAGS="optimized"</Elem>
+            <Elem>MACHINE=""</Elem>
+            <Elem>USR="dcicin"</Elem>
+            <Elem>VERS="10.0"</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="trunk/fly/fly_sa.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/fly/integrate.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/fly/integrate.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/fly/maternal.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/fly/maternal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/fly/printscore.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+          <preprocessorList>
+            <Elem>COMPILER="gcc"</Elem>
+            <Elem>FLAGS="optimized"</Elem>
+            <Elem>MACHINE=""</Elem>
+            <Elem>USR="dcicin"</Elem>
+            <Elem>VERS="10.0"</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="trunk/fly/savestate.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/fly/score.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/fly/score.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/fly/scramble.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+          <incDir>
+            <pElem>../../local/include</pElem>
+            <pElem>trunk/lam</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>COMPILER="gcc"</Elem>
+            <Elem>FLAGS="optimized"</Elem>
+            <Elem>MACHINE=""</Elem>
+            <Elem>USR="dcicin"</Elem>
+            <Elem>VERS="10.0"</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="trunk/fly/solvers.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/fly/solvers.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/fly/translate.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/fly/unfold.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>../../My/lib32/sundials-2.5.0/include/cvode</pElem>
+            <pElem>/usr/include/gsl</pElem>
+            <pElem>../../My/lib32/sundials-2.5.0/include/sundials</pElem>
+            <pElem>../../My/lib32/sundials-2.5.0/include/nvector</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>COMPILER="gcc"</Elem>
+            <Elem>FLAGS="optimized"</Elem>
+            <Elem>HAVE_SSE2=1</Elem>
+            <Elem>MACHINE=""</Elem>
+            <Elem>PIC=1</Elem>
+            <Elem>USR="dcicin"</Elem>
+            <Elem>VERS="10.0"</Elem>
+            <Elem>__GNUC_STDC_INLINE__=1</Elem>
+            <Elem>__PIC__=2</Elem>
+            <Elem>__REGISTER_PREFIX__=</Elem>
+            <Elem>__STDC_VERSION__=199901L</Elem>
+            <Elem>__USER_LABEL_PREFIX__=</Elem>
+            <Elem>__pic__=2</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="trunk/fly/zygotic.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/MATLAB/R2011a/extern/include</pElem>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/fly/zygotic.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/util/dSFMT.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>../../My/lib/sundials-2.5.0/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__STDC_VERSION__=199901L</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="trunk/util/dSFMT_str_state.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>../../My/lib/sundials-2.5.0/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__STDC_VERSION__=199901L</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="trunk/util/deviates.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="trunk/util/distributions.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>../../My/lib/sundials-2.5.0/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__STDC_VERSION__=199901L</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="trunk/util/error.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>../../My/lib32/sundials-2.5.0/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/util/error.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/util/global.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/util/ioTools.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>../../My/lib32/sundials-2.5.0/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/util/ioTools.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/util/mathLib.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <incDir>
+            <pElem>../../My/lib32/sundials-2.5.0/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="trunk/util/mathLib.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/util/random.c" ex="false" tool="0" flavor2="3">
+        <cTool>
+          <incDir>
+            <pElem>../../My/lib/sundials-2.5.0/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__STDC_VERSION__=199901L</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="trunk/util/random.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="trunk/util/sa.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

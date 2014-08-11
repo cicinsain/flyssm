@@ -1,0 +1,270 @@
+\hypertarget{fly__io_8h}{
+\section{fly/fly\_\-io.h File Reference}
+\label{fly__io_8h}\index{fly/fly\_\-io.h@{fly/fly\_\-io.h}}
+}
+
+
+I/O functions for the SimAnn code.  
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$ctype.h$>$}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}ioTools.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}distributions.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}moves.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structEqParms}{EqParms} \hyperlink{fly__io_8h_a6818af3ca600f1901ed2b52fd4cc5116}{ReadParameters} (FILE $\ast$fp, \hyperlink{structTheProblem}{TheProblem} defs, char $\ast$section\_\-title)
+\item 
+\hyperlink{structEqParms}{EqParms} \hyperlink{fly__io_8h_a4f4d8e689ea93e8bf7209c92f21024a8}{ReadParametersX} (double $\ast$x, \hyperlink{structTheProblem}{TheProblem} defs)
+\item 
+\hyperlink{structTimes}{Times} \hyperlink{fly__io_8h_a63b33c6b8a5cfb369bdb2ed868ec483c}{ReadDivTimes} (FILE $\ast$fp, \hyperlink{structTheProblem}{TheProblem} defs)
+\begin{DoxyCompactList}\small\item\em ReadDivTimes: reead divison times from file. \item\end{DoxyCompactList}\item 
+void \hyperlink{fly__io_8h_aeb1b11d076e2aa741be5d3c65d380e6d}{WriteParameters} (char $\ast$filename, \hyperlink{structEqParms}{EqParms} $\ast$p, char $\ast$title, int ndigits, \hyperlink{structTheProblem}{TheProblem} defs)
+\begin{DoxyCompactList}\small\item\em A function that writes parameters into the data file. \item\end{DoxyCompactList}\item 
+void \hyperlink{fly__io_8h_aee009555c023c88df98bef434ecd1ab0}{PrintParameters} (FILE $\ast$fp, \hyperlink{structEqParms}{EqParms} $\ast$p, char $\ast$title, int ndigits, \hyperlink{structTheProblem}{TheProblem} defs)
+\item 
+\hyperlink{structAParms}{AParms} \hyperlink{fly__io_8h_af3286b9a5a6281c8097ed44254e640c4}{ReadAParameters} (FILE $\ast$fp)
+\item 
+void \hyperlink{fly__io_8h_aae1a24a3973ff3c69173bb47278cf12d}{WriteAParameters} (char $\ast$filename, \hyperlink{structAParms}{AParms} aparm)
+\item 
+void \hyperlink{fly__io_8h_a77b65a0c72ef21754bea57ad2353fb52}{PrintAParameters} (FILE $\ast$fp, \hyperlink{structAParms}{AParms} aparm, char $\ast$title)
+\item 
+char $\ast$$\ast$ \hyperlink{fly__io_8h_ab1da9255ee23bd4029071d26e4bff6fd}{ReadGuts} (FILE $\ast$fp)
+\item 
+\hyperlink{structDlist}{Dlist} $\ast$ \hyperlink{fly__io_8h_aceeae39c092b6931d97202da1fc401c0}{ReadData} (FILE $\ast$fp, char $\ast$section, int $\ast$ndp, \hyperlink{structTheProblem}{TheProblem} $\ast$defs)
+\item 
+\hyperlink{structDlist}{Dlist} $\ast$ \hyperlink{fly__io_8h_af4e1bb936ce8d6c50802221c7bb56492}{ReadInterpData} (FILE $\ast$fp, char $\ast$section, int num\_\-genes, int $\ast$ndp)
+\item 
+\hyperlink{structDArrPtr}{DArrPtr} \hyperlink{fly__io_8h_a4fec517f28c1bba80a1cbc7197932574}{ReadTimes} (char $\ast$timefile, \hyperlink{structZygote}{Zygote} zyg)
+\item 
+\hyperlink{structTheProblem}{TheProblem} \hyperlink{fly__io_8h_a28f0642d9c19c2ed3ee57e35d4f1a66d}{ReadTheProblem} (FILE $\ast$fp)
+\item 
+\hyperlink{structSlist}{Slist} $\ast$ \hyperlink{fly__io_8h_adadb82ba181120a71fe0558a31f228d1}{ReadGenotypes} (FILE $\ast$fp, int ngenes)
+\item 
+\hyperlink{structBlist}{Blist} $\ast$ \hyperlink{fly__io_8h_a782d45a9c51dba5ea50bf577f840beb5}{ReadBicoid} (FILE $\ast$fp, char $\ast$section)
+\item 
+\hyperlink{structSearchSpace}{SearchSpace} $\ast$ \hyperlink{fly__io_8h_a7ed0a9633890f0194268ff7a6b60a902}{ReadLimits} (FILE $\ast$fp, \hyperlink{structTheProblem}{TheProblem} defs)
+\item 
+\hyperlink{structTweak}{Tweak} \hyperlink{fly__io_8h_a2666597c863bb95a1adf74c4ade02e01}{ReadTweak} (FILE $\ast$fp, int $\ast$mask, \hyperlink{structTheProblem}{TheProblem} defs)
+\item 
+\hyperlink{structSAType}{SAType} \hyperlink{fly__io_8h_a2ce8b335ef14fc2c4d2b64abc402e3d6}{ReadSATune} (FILE $\ast$fp)
+\item 
+\hyperlink{structmy__distrib}{DistParms} \hyperlink{fly__io_8h_afd72a5a42f8d6d3839f774a4a1a99b3f}{InitDistribution} (FILE $\ast$fp)
+\item 
+\hyperlink{structChuParam}{ChuParam} \hyperlink{fly__io_8h_a6deacb341d40a2c1b5693ebf05311156}{InitEquilibrate} (FILE $\ast$fp)
+\item 
+void \hyperlink{fly__io_8h_a046953585adc191345abd1d0b58ca674}{PrintBlastoderm} (FILE $\ast$fp, \hyperlink{structNArrPtr}{NArrPtr} table, char $\ast$id, int ndigits, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+void \hyperlink{fly__io_8h_a5f2ab88d56fc7da131a762bee2eedac8}{WriteVersion} (char $\ast$filename, char $\ast$version, char $\ast$argvsave)
+\item 
+void \hyperlink{fly__io_8h_a290721f9cc1d315d6a81fd4827c8f15d}{PrintEquil} (FILE $\ast$fp, double $\ast$equil\_\-var, char $\ast$title)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+I/O functions for the SimAnn code. \begin{DoxyAuthor}{Author}
+Damjan Cicin-\/Sain  \href{mailto:damjan.cicin@crg.es}{\tt damjan.cicin@crg.es} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Created on May 27, 2010, 12:07 PM
+\end{DoxyDate}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger 
+
+\subsection{Function Documentation}
+\hypertarget{fly__io_8h_afd72a5a42f8d6d3839f774a4a1a99b3f}{
+\index{fly\_\-io.h@{fly\_\-io.h}!InitDistribution@{InitDistribution}}
+\index{InitDistribution@{InitDistribution}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{InitDistribution}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DistParms} InitDistribution (FILE $\ast$ {\em fp})}}
+\label{fly__io_8h_afd72a5a42f8d6d3839f774a4a1a99b3f}
+This routine reads the distribution parameters from the input file and stores them in DistP.xx from \hyperlink{distributions_8h}{distributions.h} LG 03-\/02: need q for gen visiting distribution input file LG 05-\/02: set factors only dependent on q for general visiting distribution by calling qgt2\_\-init or qlt2\_\-init from \hyperlink{distributions_8c}{distributions.c} \hypertarget{fly__io_8h_a6deacb341d40a2c1b5693ebf05311156}{
+\index{fly\_\-io.h@{fly\_\-io.h}!InitEquilibrate@{InitEquilibrate}}
+\index{InitEquilibrate@{InitEquilibrate}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{InitEquilibrate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ChuParam} InitEquilibrate (FILE $\ast$ {\em fp})}}
+\label{fly__io_8h_a6deacb341d40a2c1b5693ebf05311156}
+InitEquilibrate: reads the equilibrate section of the data file, which is needed for equilibration runs; then puts the parameters into a static struct in \hyperlink{lsa_8c}{lsa.c} \hypertarget{fly__io_8h_a77b65a0c72ef21754bea57ad2353fb52}{
+\index{fly\_\-io.h@{fly\_\-io.h}!PrintAParameters@{PrintAParameters}}
+\index{PrintAParameters@{PrintAParameters}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{PrintAParameters}]{\setlength{\rightskip}{0pt plus 5cm}void PrintAParameters (FILE $\ast$ {\em fp}, \/  {\bf AParms} {\em aparm}, \/  char $\ast$ {\em title})}}
+\label{fly__io_8h_a77b65a0c72ef21754bea57ad2353fb52}
+PrintAParameters: writes an 'annnealing\_\-output' section with 'title' to the stream specified by fp \hypertarget{fly__io_8h_a046953585adc191345abd1d0b58ca674}{
+\index{fly\_\-io.h@{fly\_\-io.h}!PrintBlastoderm@{PrintBlastoderm}}
+\index{PrintBlastoderm@{PrintBlastoderm}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{PrintBlastoderm}]{\setlength{\rightskip}{0pt plus 5cm}void PrintBlastoderm (FILE $\ast$ {\em fp}, \/  {\bf NArrPtr} {\em table}, \/  char $\ast$ {\em id}, \/  int {\em ndigits}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{fly__io_8h_a046953585adc191345abd1d0b58ca674}
+PrintBlastoderm: writes the output of the model to a stream specified by the fp file pointer. The Table is a solution of the model as returned by Blastoderm, the id speci-\/ fies the title of the output and ndigits specifies the floating point precision to be printed. PrintBlastoderm adjusts its format automatically to the appropriate number of genes. \hypertarget{fly__io_8h_a290721f9cc1d315d6a81fd4827c8f15d}{
+\index{fly\_\-io.h@{fly\_\-io.h}!PrintEquil@{PrintEquil}}
+\index{PrintEquil@{PrintEquil}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{PrintEquil}]{\setlength{\rightskip}{0pt plus 5cm}void PrintEquil (FILE $\ast$ {\em fp}, \/  double $\ast$ {\em equil\_\-var}, \/  char $\ast$ {\em title})}}
+\label{fly__io_8h_a290721f9cc1d315d6a81fd4827c8f15d}
+PrintEquil: writes an 'equilibrate\_\-variance' section with 'title' to the stream specified by fp \hypertarget{fly__io_8h_aee009555c023c88df98bef434ecd1ab0}{
+\index{fly\_\-io.h@{fly\_\-io.h}!PrintParameters@{PrintParameters}}
+\index{PrintParameters@{PrintParameters}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{PrintParameters}]{\setlength{\rightskip}{0pt plus 5cm}void PrintParameters (FILE $\ast$ {\em fp}, \/  {\bf EqParms} $\ast$ {\em p}, \/  char $\ast$ {\em title}, \/  int {\em ndigits}, \/  {\bf TheProblem} {\em defs})}}
+\label{fly__io_8h_aee009555c023c88df98bef434ecd1ab0}
+PrintParameters: prints an eqparms section with 'title' to the stream indicated by fp \hypertarget{fly__io_8h_af3286b9a5a6281c8097ed44254e640c4}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadAParameters@{ReadAParameters}}
+\index{ReadAParameters@{ReadAParameters}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadAParameters}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AParms} ReadAParameters (FILE $\ast$ {\em fp})}}
+\label{fly__io_8h_af3286b9a5a6281c8097ed44254e640c4}
+ReadAParameters: reads the AParm struct from an annealing\_\-input sec-\/ tion; these are the annealing parameters that are not Lam-\/specific (and should NOT go into \hyperlink{lsa_8c}{lsa.c} \hypertarget{fly__io_8h_a782d45a9c51dba5ea50bf577f840beb5}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadBicoid@{ReadBicoid}}
+\index{ReadBicoid@{ReadBicoid}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadBicoid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Blist}$\ast$ ReadBicoid (FILE $\ast$ {\em fp}, \/  char $\ast$ {\em section})}}
+\label{fly__io_8h_a782d45a9c51dba5ea50bf577f840beb5}
+ReadBicoid: reads the bcd section of a data file into a linked list; also determines maxconc from the bicoid gradient \hypertarget{fly__io_8h_aceeae39c092b6931d97202da1fc401c0}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadData@{ReadData}}
+\index{ReadData@{ReadData}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadData}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dlist}$\ast$ ReadData (FILE $\ast$ {\em fp}, \/  char $\ast$ {\em section}, \/  int $\ast$ {\em ndp}, \/  {\bf TheProblem} $\ast$ {\em defs})}}
+\label{fly__io_8h_aceeae39c092b6931d97202da1fc401c0}
+ReadData: reads in a data or bias section and puts it in a linked list of arrays, one line per array; ndp is used to count the number of data points in a data file (ndp), which is used to calculate the root mean square (RMS) if required
+
+ReadData allows comments that start with a letter or punc-\/ tuation mark, and treats lines starting with a number or .num or -\/.num as data. It expects to read an int and ngenes + 1 data points: lineage, time and ngenes protein concentrations. It expects data to be in increasing spatial and temporal order. \hypertarget{fly__io_8h_a63b33c6b8a5cfb369bdb2ed868ec483c}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadDivTimes@{ReadDivTimes}}
+\index{ReadDivTimes@{ReadDivTimes}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadDivTimes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Times} ReadDivTimes (FILE $\ast$ {\em fp}, \/  {\bf TheProblem} {\em defs})}}
+\label{fly__io_8h_a63b33c6b8a5cfb369bdb2ed868ec483c}
+
+
+ReadDivTimes: reead divison times from file. MITOSIS SCHEDULE: hard-\/wired cell division tables $\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$ The division schedule is taken from the \$times section in the input file; If there is none, hard-\/coded times from \hyperlink{maternal_8c}{maternal.c} is taken.
+
+We assume that ndivs is the number of divisions that we want to simulate:
+
+i.e.
+
+
+\begin{DoxyItemize}
+\item simulation starts from ccycle 14 means ndivs = 0
+\item simulation starts from ccycle 13 means ndivs = 1
+\item simulation starts from ccycle 12 means ndivs = 2 ...
+\end{DoxyItemize}
+
+the section entryes are defined as following:
+
+$<$total\_\-divisions$>$ -\/ this is the maximum number of divisions for that time schedule. total\_\-divisions $>$= ndivs
+
+$<$gastrulation\_\-times$>$ -\/ each entry here corresponds to a gastrulation time assuming that time 0 corresponds to the first division that we are simulating.
+
+i.e. gast\_\-time = 50.0 if starting from ccycle 14 (ndivs = 0) gast\_\-time = 71.1 if starting from ccycle 13 (ndivs = 1)
+
+$<$division\_\-times$>$ -\/ in each line we have the times of all (total\_\-divisions) divisions assuming that time 0 corresponds to the start of simulation, and time entries are ordered in descending order of the cell cycles (cc14, cc13, cc12...).
+
+i.e. for ndivs = 0 we will read the first line. We start the simulation from the cycle 14, so we assume that the first simulated cycle (cycle 14) started at time 0 and no other divisions will happen. So all the times corresponding to prevous (not simulated) divisions are negative. for ndivs = 1 we will read the second line. We start the simulation from the cycle 13, so we assume that the first simulated cycle (cycle 13) started at time 0 and only one other division will happen (cc 13 -\/$>$ cc 14) at time 21.1. So (again) all the times corresponding to prevous (not simulated) divisions are negative.
+
+division\_\-durations -\/ those are the division durations (in seconds) for each division starting from the last one (cc 14).
+
+Here's an example of the \$times section
+
+\$times total\_\-divisions 6 gastrulation\_\-times 50.0 71.1 83.5 93 100.8 division\_\-times 0 -\/21.1 -\/33.5 -\/43.0 -\/51.8 -\/57.8 21.1 0.0 -\/12.4 -\/21.9 -\/30.7 -\/36.7 33.5 12.4 0.0 -\/9.5 -\/18.3 -\/24.3 43.0 21.9 9.5 0.0 -\/8.8 -\/14.8 50.8 29.7 17.3 7.8 -\/1.0 -\/7.0 division\_\-durations 5.1 3.3 3.0 3.3 3.0 3.0 \$\$
+
+ReadDivTimes: reead divison times from file.
+
+MITOSIS SCHEDULE: hard-\/wired cell division tables $\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$ The division schedule is taken from the \$times section in the input file; If there is none, hard-\/coded times from \hyperlink{maternal_8c}{maternal.c} is taken.
+
+We assume that ndivs is the number of divisions that we want to simulate:
+
+i.e.
+
+
+\begin{DoxyItemize}
+\item simulation starts from ccycle 14 means ndivs = 0
+\item simulation starts from ccycle 13 means ndivs = 1
+\item simulation starts from ccycle 12 means ndivs = 2 ...
+\end{DoxyItemize}
+
+the section entryes are defined as following:
+
+$<$total\_\-divisions$>$ -\/ this is the maximum number of divisions for that time schedule. total\_\-divisions $>$= ndivs
+
+$<$gastrulation\_\-times$>$ -\/ each entry here corresponds to a gastrulation time assuming that time 0 corresponds to the first division that we are simulating.
+
+i.e. gast\_\-time = 50.0 if starting from ccycle 14 (ndivs = 0) gast\_\-time = 71.1 if starting from ccycle 13 (ndivs = 1)
+
+$<$division\_\-times$>$ -\/ in each line we have the times of all (total\_\-divisions) divisions assuming that time 0 corresponds to the start of simulation, and time entries are ordered in descending order of the cell cycles (cc14, cc13, cc12...).
+
+i.e. for ndivs = 0 we will read the first line. We start the simulation from the cycle 14, so we assume that the first simulated cycle (cycle 14) started at time 0 and no other divisions will happen. So all the times corresponding to prevous (not simulated) divisions are negative. for ndivs = 1 we will read the second line. We start the simulation from the cycle 13, so we assume that the first simulated cycle (cycle 13) started at time 0 and only one other division will happen (cc 13 -\/$>$ cc 14) at time 21.1. So (again) all the times corresponding to prevous (not simulated) divisions are negative.
+
+division\_\-durations -\/ those are the division durations (in seconds) for each division starting from the last one (cc 14).
+
+Here's an example of the \$times section
+
+\$times total\_\-divisions 6 gastrulation\_\-times 50.0 71.1 83.5 93 100.8 division\_\-times 0 -\/21.1 -\/33.5 -\/43.0 -\/51.8 -\/57.8 21.1 0.0 -\/12.4 -\/21.9 -\/30.7 -\/36.7 33.5 12.4 0.0 -\/9.5 -\/18.3 -\/24.3 43.0 21.9 9.5 0.0 -\/8.8 -\/14.8 50.8 29.7 17.3 7.8 -\/1.0 -\/7.0 division\_\-durations 5.1 3.3 3.0 3.3 3.0 3.0 \$\$ \hypertarget{fly__io_8h_adadb82ba181120a71fe0558a31f228d1}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadGenotypes@{ReadGenotypes}}
+\index{ReadGenotypes@{ReadGenotypes}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadGenotypes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Slist}$\ast$ ReadGenotypes (FILE $\ast$ {\em fp}, \/  int {\em ngenes})}}
+\label{fly__io_8h_adadb82ba181120a71fe0558a31f228d1}
+ReadGenotypes: This function reads all the genotypes in a datafile \& returns an SList with genotype number and pointers to the corresponding section titles for bias, bcd \& facts \hypertarget{fly__io_8h_ab1da9255ee23bd4029071d26e4bff6fd}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadGuts@{ReadGuts}}
+\index{ReadGuts@{ReadGuts}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadGuts}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$$\ast$ ReadGuts (FILE $\ast$ {\em fp})}}
+\label{fly__io_8h_ab1da9255ee23bd4029071d26e4bff6fd}
+ReadGuts: reads the \$gutsdefs section in a data file into an array of strings which then need to get parsed \hypertarget{fly__io_8h_af4e1bb936ce8d6c50802221c7bb56492}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadInterpData@{ReadInterpData}}
+\index{ReadInterpData@{ReadInterpData}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadInterpData}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dlist}$\ast$ ReadInterpData (FILE $\ast$ {\em fp}, \/  char $\ast$ {\em section}, \/  int {\em num\_\-genes}, \/  int $\ast$ {\em ndp})}}
+\label{fly__io_8h_af4e1bb936ce8d6c50802221c7bb56492}
+ReadInterpData: reads the history section from a data file into an array a dedicated structure \hypertarget{fly__io_8h_a7ed0a9633890f0194268ff7a6b60a902}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadLimits@{ReadLimits}}
+\index{ReadLimits@{ReadLimits}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadLimits}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SearchSpace}$\ast$ ReadLimits (FILE $\ast$ {\em fp}, \/  {\bf TheProblem} {\em defs})}}
+\label{fly__io_8h_a7ed0a9633890f0194268ff7a6b60a902}
+ReadLimits: reads the limits section of a data file and returns the approriate \hyperlink{structSearchSpace}{SearchSpace} struct to the calling function
+
+Experimental feature: free limits \begin{DoxyAuthor}{Author}
+Anton Crombach 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2012, August 
+\end{DoxyDate}
+\hypertarget{fly__io_8h_a6818af3ca600f1901ed2b52fd4cc5116}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadParameters@{ReadParameters}}
+\index{ReadParameters@{ReadParameters}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadParameters}]{\setlength{\rightskip}{0pt plus 5cm}{\bf EqParms} ReadParameters (FILE $\ast$ {\em fp}, \/  {\bf TheProblem} {\em defs}, \/  char $\ast$ {\em section\_\-title})}}
+\label{fly__io_8h_a6818af3ca600f1901ed2b52fd4cc5116}
+ReadParamters: reads the parameters for a simulation run from the eqparms or input section of the data file as indicated by the section\_\-title argument and does the conversion of protein half lives into lambda parameters.
+
+Here we read initial state from the input file (for a gene circuit) \hypertarget{fly__io_8h_a4f4d8e689ea93e8bf7209c92f21024a8}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadParametersX@{ReadParametersX}}
+\index{ReadParametersX@{ReadParametersX}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadParametersX}]{\setlength{\rightskip}{0pt plus 5cm}{\bf EqParms} ReadParametersX (double $\ast$ {\em x}, \/  {\bf TheProblem} {\em defs})}}
+\label{fly__io_8h_a4f4d8e689ea93e8bf7209c92f21024a8}
+ReadParametersX for the input passed by the mex file -\/ needed for the scatter algorithm test
+
+Here we read initial state (and further states) from the x variable NOTE: this is a Matlab-\/specific function \hypertarget{fly__io_8h_a2ce8b335ef14fc2c4d2b64abc402e3d6}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadSATune@{ReadSATune}}
+\index{ReadSATune@{ReadSATune}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadSATune}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SAType} ReadSATune (FILE $\ast$ {\em fp})}}
+\label{fly__io_8h_a2ce8b335ef14fc2c4d2b64abc402e3d6}
+ReadSATune: reads the tune\_\-parameters section in a data file and turns a \hyperlink{structSAType}{SAType} structure to the caller \hypertarget{fly__io_8h_a28f0642d9c19c2ed3ee57e35d4f1a66d}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadTheProblem@{ReadTheProblem}}
+\index{ReadTheProblem@{ReadTheProblem}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadTheProblem}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TheProblem} ReadTheProblem (FILE $\ast$ {\em fp})}}
+\label{fly__io_8h_a28f0642d9c19c2ed3ee57e35d4f1a66d}
+ReadTheProblem: reads the problem section of a data file into the \hyperlink{structTheProblem}{TheProblem} struct. \hypertarget{fly__io_8h_a4fec517f28c1bba80a1cbc7197932574}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadTimes@{ReadTimes}}
+\index{ReadTimes@{ReadTimes}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadTimes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DArrPtr} ReadTimes (char $\ast$ {\em timefile}, \/  {\bf Zygote} {\em zyg})}}
+\label{fly__io_8h_a4fec517f28c1bba80a1cbc7197932574}
+ReadTimes: reads a time table from a file and returns a \hyperlink{structDArrPtr}{DArrPtr} FILE FORMAT: one time per line separated with newlines NOTE: max. times tab size is 10000 \hypertarget{fly__io_8h_a2666597c863bb95a1adf74c4ade02e01}{
+\index{fly\_\-io.h@{fly\_\-io.h}!ReadTweak@{ReadTweak}}
+\index{ReadTweak@{ReadTweak}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{ReadTweak}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tweak} ReadTweak (FILE $\ast$ {\em fp}, \/  int $\ast$ {\em mask}, \/  {\bf TheProblem} {\em defs})}}
+\label{fly__io_8h_a2666597c863bb95a1adf74c4ade02e01}
+ReadTweak: reads the tweak array passed from the calling function through the mask array. This array has a value of 1 or 0 for each parameter in the model and is used by Translate to create the array of pointers to the parameters-\/to-\/be-\/tweaked. If mask array is NULL, it reads that information from the input file \hypertarget{fly__io_8h_aae1a24a3973ff3c69173bb47278cf12d}{
+\index{fly\_\-io.h@{fly\_\-io.h}!WriteAParameters@{WriteAParameters}}
+\index{WriteAParameters@{WriteAParameters}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{WriteAParameters}]{\setlength{\rightskip}{0pt plus 5cm}void WriteAParameters (char $\ast$ {\em filename}, \/  {\bf AParms} {\em aparm})}}
+\label{fly__io_8h_aae1a24a3973ff3c69173bb47278cf12d}
+WriteAParameters: writes the aparm struct into a new section in the file specified by filename; the new 'annealing\_\-out-\/ put section is inserted right after the 'tune\_\-para-\/ meters' section; to achieve this, we need to write to a temporary file which is then renamed to the output file name \hypertarget{fly__io_8h_aeb1b11d076e2aa741be5d3c65d380e6d}{
+\index{fly\_\-io.h@{fly\_\-io.h}!WriteParameters@{WriteParameters}}
+\index{WriteParameters@{WriteParameters}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{WriteParameters}]{\setlength{\rightskip}{0pt plus 5cm}void WriteParameters (char $\ast$ {\em filename}, \/  {\bf EqParms} $\ast$ {\em p}, \/  char $\ast$ {\em title}, \/  int {\em ndigits}, \/  {\bf TheProblem} {\em defs})}}
+\label{fly__io_8h_aeb1b11d076e2aa741be5d3c65d380e6d}
+
+
+A function that writes parameters into the data file. WriteParameters: writes the out\_\-parm struct into a new section in the file specified by filename; the new 'eqparms' sec-\/ tion is inserted right after the 'input' section; to achieve this, we need to write to a temporary file which is then renamed to the output file name NOTE: lambdas are converted back into protein half lives!! \hypertarget{fly__io_8h_a5f2ab88d56fc7da131a762bee2eedac8}{
+\index{fly\_\-io.h@{fly\_\-io.h}!WriteVersion@{WriteVersion}}
+\index{WriteVersion@{WriteVersion}!fly_io.h@{fly\_\-io.h}}
+\subsubsection[{WriteVersion}]{\setlength{\rightskip}{0pt plus 5cm}void WriteVersion (char $\ast$ {\em filename}, \/  char $\ast$ {\em version}, \/  char $\ast$ {\em argvsave})}}
+\label{fly__io_8h_a5f2ab88d56fc7da131a762bee2eedac8}
+WriteVersion: prints the version and the complete command line used to run fly\_\-sa into the \$version section of the data file 

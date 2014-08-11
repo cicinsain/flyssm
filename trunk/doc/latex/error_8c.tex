@@ -1,0 +1,68 @@
+\hypertarget{error_8c}{
+\section{lam/error.c File Reference}
+\label{error_8c}\index{lam/error.c@{lam/error.c}}
+}
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$stdarg.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$error.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{error_8c_ae04dbb69042f37c4c595fc9beb4ca754}{error} (const char $\ast$format,...)
+\item 
+void \hyperlink{error_8c_a0633ac32e36bb5836e47d9f672fd940f}{warning} (const char $\ast$format,...)
+\item 
+void \hyperlink{error_8c_a02d86badaa9616db47d8ac2f48dd14d2}{file\_\-error} (const char $\ast$call\_\-name)
+\item 
+void \hyperlink{error_8c_adfd55e98016375f593ce75aef1da32cf}{PrintMsg} (const char $\ast$msg, int exit\_\-status)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{error_8c_a6fc0c67f11dfece64641c27bf08a9275}{
+const int {\bfseries MAX\_\-ARGS} = 25}
+\label{error_8c_a6fc0c67f11dfece64641c27bf08a9275}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+written by JR, modified by Yoginho thanks to Marcel Wolf for explaining varargs() to me (JJ)
+
+contains error and warning functions plus a function that prints out a help or usage message
+
+Copyright (C) 1989-\/2003 John Reinitz the full GPL copyright notice can be found in \hyperlink{lsa_8c}{lsa.c} 
+
+\subsection{Function Documentation}
+\hypertarget{error_8c_ae04dbb69042f37c4c595fc9beb4ca754}{
+\index{error.c@{error.c}!error@{error}}
+\index{error@{error}!error.c@{error.c}}
+\subsubsection[{error}]{\setlength{\rightskip}{0pt plus 5cm}void error (const char $\ast$ {\em format}, \/   {\em ...})}}
+\label{error_8c_ae04dbb69042f37c4c595fc9beb4ca754}
+ERROR HANDLING FUNCTIONS The two routines 'error' and 'warning' print error messages with value. 'error'then exits, while 'warning' returns to the calling function.
+
+Both functions are called analogous to the way you would call printf. The only conversion specs that are legal are c, d, f, g and s. No modifiers (h,l or float precision or size specifiers are allowed).
+
+No \% sign means just print msg and exit. \hypertarget{error_8c_a02d86badaa9616db47d8ac2f48dd14d2}{
+\index{error.c@{error.c}!file\_\-error@{file\_\-error}}
+\index{file\_\-error@{file\_\-error}!error.c@{error.c}}
+\subsubsection[{file\_\-error}]{\setlength{\rightskip}{0pt plus 5cm}void file\_\-error (const char $\ast$ {\em call\_\-name})}}
+\label{error_8c_a02d86badaa9616db47d8ac2f48dd14d2}
+file\_\-error prints an file handling error using perror(); it only needs the name of the calling function as an argument \hypertarget{error_8c_adfd55e98016375f593ce75aef1da32cf}{
+\index{error.c@{error.c}!PrintMsg@{PrintMsg}}
+\index{PrintMsg@{PrintMsg}!error.c@{error.c}}
+\subsubsection[{PrintMsg}]{\setlength{\rightskip}{0pt plus 5cm}void PrintMsg (const char $\ast$ {\em msg}, \/  int {\em exit\_\-status})}}
+\label{error_8c_adfd55e98016375f593ce75aef1da32cf}
+PrintMsg: prints a string to stderr, then quits with exit status 0; useful for printing help and usage messages \hypertarget{error_8c_a0633ac32e36bb5836e47d9f672fd940f}{
+\index{error.c@{error.c}!warning@{warning}}
+\index{warning@{warning}!error.c@{error.c}}
+\subsubsection[{warning}]{\setlength{\rightskip}{0pt plus 5cm}void warning (const char $\ast$ {\em format}, \/   {\em ...})}}
+\label{error_8c_a0633ac32e36bb5836e47d9f672fd940f}
+ERROR HANDLING FUNCTIONS The two routines 'error' and 'warning' print error messages with value. 'error'then exits, while 'warning' returns to the calling function.
+
+Both functions are called analogous to the way you would call printf. The only conversion specs that are legal are c, d, f, g and s. No modifiers (h,l or float precision or size specifiers are allowed).
+
+No \% sign means just print msg and exit. 

@@ -1,0 +1,97 @@
+\hypertarget{distributions_8h}{
+\section{lam/distributions.h File Reference}
+\label{distributions_8h}\index{lam/distributions.h@{lam/distributions.h}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmy__distrib}{my\_\-distrib}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{distributions_8h_a1e421cb66904327a060574bb56ecf33c}{
+typedef struct \hyperlink{structmy__distrib}{my\_\-distrib} {\bfseries DistParms}}
+\label{distributions_8h_a1e421cb66904327a060574bb56ecf33c}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{distributions_8h_abe89c3936ce2a47a9dc17dc9868a70ea}{gasdev} (void)
+\item 
+double \hyperlink{distributions_8h_ae01374ddda83bc2216ba9df9c76d9995}{gammln} (double xx)
+\item 
+double \hyperlink{distributions_8h_a6939194fa8d367c1f3b230adf3aa1965}{poidev} (double xm)
+\item 
+double \hyperlink{distributions_8h_a11ef6565cea7e017467ac5358579f218}{binom\_\-qgt2\_\-visit} (double theta\_\-bar, \hyperlink{structmy__distrib}{DistParms} $\ast$DistP)
+\item 
+double \hyperlink{distributions_8h_a93e3dded57aab1e7c3f25cab03bf7829}{qgt2\_\-visit} (double theta\_\-bar, \hyperlink{structmy__distrib}{DistParms} $\ast$DistP)
+\item 
+double \hyperlink{distributions_8h_a6d8634d25a12c2ac6a126097dca4f166}{qlt2\_\-visit} (double theta\_\-bar, \hyperlink{structmy__distrib}{DistParms} $\ast$DistP)
+\item 
+void \hyperlink{distributions_8h_a7fba582b8e19c69a3e93878894d836ae}{print\_\-qgt2\_\-visit} (double theta\_\-bar, \hyperlink{structmy__distrib}{DistParms} $\ast$DistP)
+\item 
+double \hyperlink{distributions_8h_a565d4e5d070943aa1435e36143019fe2}{generate\_\-dev} (double theta\_\-bar, \hyperlink{structmy__distrib}{DistParms} $\ast$DistP)
+\item 
+void \hyperlink{distributions_8h_afe1d7d37c3b4630081bfca787166bf8c}{qgt2\_\-init} (\hyperlink{structmy__distrib}{DistParms} $\ast$DistP)
+\item 
+void \hyperlink{distributions_8h_a1cefe735cbdc3a42adc3c350308ce1b7}{qlt2\_\-init} (\hyperlink{structmy__distrib}{DistParms} $\ast$DistP)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+created 5-\/02 for function prototypes found in \hyperlink{distributions_8c}{distributions.c} used in tsp\_\-sa.c (for qgt2\_\-init and qlt2\_\-init), and move.c need pi for distributions used in input file to set factors, in distributions 
+
+\subsection{Function Documentation}
+\hypertarget{distributions_8h_a11ef6565cea7e017467ac5358579f218}{
+\index{distributions.h@{distributions.h}!binom\_\-qgt2\_\-visit@{binom\_\-qgt2\_\-visit}}
+\index{binom\_\-qgt2\_\-visit@{binom\_\-qgt2\_\-visit}!distributions.h@{distributions.h}}
+\subsubsection[{binom\_\-qgt2\_\-visit}]{\setlength{\rightskip}{0pt plus 5cm}double binom\_\-qgt2\_\-visit (double {\em theta\_\-bar}, \/  {\bf DistParms} $\ast$ {\em DistP})}}
+\label{distributions_8h_a11ef6565cea7e017467ac5358579f218}
+binom\_\-qgt2\_\-visit generates random deviates for 2.6 $<$= q $<$ 3 for Tsallis GSA q-\/distribution using the REJECTION METHOD. when q is 2.6 or bigger, the tails of the distribution are significant, so it becomes necessary to use a larger range for x (the variable trunc). When q $>$2.85, an even larger range for x is needed. This value is set in qgt2\_\-init. These large values computationally challenge the computer, so the first two terms of the binomial approximation are used in the calculation of kappa and krappa. This function may be called recursively because a deviate value must be returned. Due to theoretic limit the comparison function is the limit of genvis at q=3. for values of q between 1 and 2, use qlt2\_\-visit for values of q=2 use lorentz, q=1 use normal for values of 2$<$ q $<$2.6 use qgt2\_\-visit for values of 2.6$<$= q $<$ 3 use binom\_\-qgt2\_\-visit (this routine) trunc must be set to a larger number for q $>$ 2.8 (see qgt2\_\-init) \hypertarget{distributions_8h_ae01374ddda83bc2216ba9df9c76d9995}{
+\index{distributions.h@{distributions.h}!gammln@{gammln}}
+\index{gammln@{gammln}!distributions.h@{distributions.h}}
+\subsubsection[{gammln}]{\setlength{\rightskip}{0pt plus 5cm}double gammln (double {\em xx})}}
+\label{distributions_8h_ae01374ddda83bc2216ba9df9c76d9995}
+gammln returns the ln(gamma(xx)) for xx $>$ 0 uses ln because without it too many overflows taken from Numerical Recipes in C p.214 \hypertarget{distributions_8h_abe89c3936ce2a47a9dc17dc9868a70ea}{
+\index{distributions.h@{distributions.h}!gasdev@{gasdev}}
+\index{gasdev@{gasdev}!distributions.h@{distributions.h}}
+\subsubsection[{gasdev}]{\setlength{\rightskip}{0pt plus 5cm}double gasdev (void)}}
+\label{distributions_8h_abe89c3936ce2a47a9dc17dc9868a70ea}
+gasdev returns a normally distributed deviate with zero mean and unit variance use \hyperlink{random_8c_a366247890473de118f84ba9bb20cf467}{RandomReal()} rather than ran1 taken from Numerical Recipes in C p.289 \hypertarget{distributions_8h_a565d4e5d070943aa1435e36143019fe2}{
+\index{distributions.h@{distributions.h}!generate\_\-dev@{generate\_\-dev}}
+\index{generate\_\-dev@{generate\_\-dev}!distributions.h@{distributions.h}}
+\subsubsection[{generate\_\-dev}]{\setlength{\rightskip}{0pt plus 5cm}double generate\_\-dev (double {\em theta\_\-bar}, \/  {\bf DistParms} $\ast$ {\em DistP})}}
+\label{distributions_8h_a565d4e5d070943aa1435e36143019fe2}
+generate\_\-dev generates basic deviates for any distribution The distribution type and theta\_\-bar are input as parameters deviate is the value returned. \hypertarget{distributions_8h_a6939194fa8d367c1f3b230adf3aa1965}{
+\index{distributions.h@{distributions.h}!poidev@{poidev}}
+\index{poidev@{poidev}!distributions.h@{distributions.h}}
+\subsubsection[{poidev}]{\setlength{\rightskip}{0pt plus 5cm}double poidev (double {\em xm})}}
+\label{distributions_8h_a6939194fa8d367c1f3b230adf3aa1965}
+poidev returns as a float an integer value that is a random deviate from a Poisson distribution with mean = xm. Uses \hyperlink{random_8c_a366247890473de118f84ba9bb20cf467}{RandomReal()} rather than ran1 uses ln because without it too many overflows taken from Numerical Recipes in C p.294 \hypertarget{distributions_8h_a7fba582b8e19c69a3e93878894d836ae}{
+\index{distributions.h@{distributions.h}!print\_\-qgt2\_\-visit@{print\_\-qgt2\_\-visit}}
+\index{print\_\-qgt2\_\-visit@{print\_\-qgt2\_\-visit}!distributions.h@{distributions.h}}
+\subsubsection[{print\_\-qgt2\_\-visit}]{\setlength{\rightskip}{0pt plus 5cm}void print\_\-qgt2\_\-visit (double {\em theta\_\-bar}, \/  {\bf DistParms} $\ast$ {\em DistP})}}
+\label{distributions_8h_a7fba582b8e19c69a3e93878894d836ae}
+print\_\-qgt2\_\-visit created for calculation debugging \hypertarget{distributions_8h_afe1d7d37c3b4630081bfca787166bf8c}{
+\index{distributions.h@{distributions.h}!qgt2\_\-init@{qgt2\_\-init}}
+\index{qgt2\_\-init@{qgt2\_\-init}!distributions.h@{distributions.h}}
+\subsubsection[{qgt2\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void qgt2\_\-init ({\bf DistParms} $\ast$ {\em DistP})}}
+\label{distributions_8h_afe1d7d37c3b4630081bfca787166bf8c}
+qgt2\_\-init initializes the factors used for the general visiting distribution for q between 2 and 3, but are not dependent on theta\_\-bar. These get calculated only once during initialization of the SA run and remain during the entire run. \hypertarget{distributions_8h_a93e3dded57aab1e7c3f25cab03bf7829}{
+\index{distributions.h@{distributions.h}!qgt2\_\-visit@{qgt2\_\-visit}}
+\index{qgt2\_\-visit@{qgt2\_\-visit}!distributions.h@{distributions.h}}
+\subsubsection[{qgt2\_\-visit}]{\setlength{\rightskip}{0pt plus 5cm}double qgt2\_\-visit (double {\em theta\_\-bar}, \/  {\bf DistParms} $\ast$ {\em DistP})}}
+\label{distributions_8h_a93e3dded57aab1e7c3f25cab03bf7829}
+qgt2\_\-visit generates random deviates for q between 2 and 2.6 for Tsallis GSA q-\/distribution using the REJECTION METHOD. This function may be called recursively because a deviate value must be returned. Due to theoretic limit the comparison function is the limit of genvis at q=3. for values of q between 1 and 2, use qlt2\_\-visit for values of q=2 use lorentz, q=1 use normal for values of 2$<$ q $<$2.6 use qgt2\_\-visit (this routine) for values of 2.6$<$= q $<$ 3 use binom\_\-qgt2\_\-visit \hypertarget{distributions_8h_a1cefe735cbdc3a42adc3c350308ce1b7}{
+\index{distributions.h@{distributions.h}!qlt2\_\-init@{qlt2\_\-init}}
+\index{qlt2\_\-init@{qlt2\_\-init}!distributions.h@{distributions.h}}
+\subsubsection[{qlt2\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void qlt2\_\-init ({\bf DistParms} $\ast$ {\em DistP})}}
+\label{distributions_8h_a1cefe735cbdc3a42adc3c350308ce1b7}
+qlt2\_\-init initializes the factors used for the general visiting distribution for q between 1 and 2, but are not dependent on theta\_\-bar. These get calculated only once during initialization of the SA run and remain during the entire run. \hypertarget{distributions_8h_a6d8634d25a12c2ac6a126097dca4f166}{
+\index{distributions.h@{distributions.h}!qlt2\_\-visit@{qlt2\_\-visit}}
+\index{qlt2\_\-visit@{qlt2\_\-visit}!distributions.h@{distributions.h}}
+\subsubsection[{qlt2\_\-visit}]{\setlength{\rightskip}{0pt plus 5cm}double qlt2\_\-visit (double {\em theta\_\-bar}, \/  {\bf DistParms} $\ast$ {\em DistP})}}
+\label{distributions_8h_a6d8634d25a12c2ac6a126097dca4f166}
+qlt2\_\-visit generates random deviates for values of q between 1 and 2, distributed with Tsallis GSA q-\/distribution using the REJECTION METHOD. This function may be called recursively because a deviate value must be returned. This uses a lorentzian bounding function. for values of q between 1 and 2, use qlt2\_\-visit (this routine) for q between 2 and 3 use qgt2\_\-visit for values of q=2 use lorentz, q=1 use normal for values of 2$<$ q $<$2.6 use qgt2\_\-visit for values of 2.6$<$= q $<$ 3 use binom\_\-qgt2\_\-visit 

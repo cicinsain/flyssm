@@ -1,0 +1,79 @@
+\hypertarget{structMoveState}{
+\section{MoveState Struct Reference}
+\label{structMoveState}\index{MoveState@{MoveState}}
+}
+
+
+Contains copies of the static variables of \hyperlink{moves_8c}{moves.c} and the values of parameters undergoing annealing.  
+
+
+{\ttfamily \#include $<$moves.h$>$}\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structParamList}{ParamList} $\ast$ \hyperlink{structMoveState_af721df96a567be5b998d9e6c1cdddbfb}{pt}
+\item 
+\hyperlink{structAccStats}{AccStats} $\ast$ \hyperlink{structMoveState_aaa046f50dfa641c635e4f7a307c60e99}{acc\_\-tab\_\-ptr}
+\item 
+double $\ast$ \hyperlink{structMoveState_a8f1f4ff4625f8c26fe9440979696b948}{newval}
+\item 
+double \hyperlink{structMoveState_a8822217e1bf2b4231318e2bf3b2c7d3b}{old\_\-energy}
+\item 
+int \hyperlink{structMoveState_a22129990f5089434d62c9f7dbede353c}{nparams}
+\item 
+int \hyperlink{structMoveState_ac7e613b0362356f428c7e1e5bcf09fd5}{index}
+\item 
+int \hyperlink{structMoveState_a17a8c4927f949245cdc6a6508e927b6b}{nhits}
+\item 
+int \hyperlink{structMoveState_a4f90403ee79669e85a6334b704f791b9}{nsweeps}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains copies of the static variables of \hyperlink{moves_8c}{moves.c} and the values of parameters undergoing annealing. 
+
+\subsection{Member Data Documentation}
+\hypertarget{structMoveState_aaa046f50dfa641c635e4f7a307c60e99}{
+\index{MoveState@{MoveState}!acc\_\-tab\_\-ptr@{acc\_\-tab\_\-ptr}}
+\index{acc\_\-tab\_\-ptr@{acc\_\-tab\_\-ptr}!MoveState@{MoveState}}
+\subsubsection[{acc\_\-tab\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AccStats}$\ast$ {\bf MoveState::acc\_\-tab\_\-ptr}}}
+\label{structMoveState_aaa046f50dfa641c635e4f7a307c60e99}
+points to current acceptance stats \hypertarget{structMoveState_ac7e613b0362356f428c7e1e5bcf09fd5}{
+\index{MoveState@{MoveState}!index@{index}}
+\index{index@{index}!MoveState@{MoveState}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf MoveState::index}}}
+\label{structMoveState_ac7e613b0362356f428c7e1e5bcf09fd5}
+index of parameter to be tweaked during a sweep \hypertarget{structMoveState_a8f1f4ff4625f8c26fe9440979696b948}{
+\index{MoveState@{MoveState}!newval@{newval}}
+\index{newval@{newval}!MoveState@{MoveState}}
+\subsubsection[{newval}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf MoveState::newval}}}
+\label{structMoveState_a8f1f4ff4625f8c26fe9440979696b948}
+points to array of annealed-\/on doubles for restore \hypertarget{structMoveState_a17a8c4927f949245cdc6a6508e927b6b}{
+\index{MoveState@{MoveState}!nhits@{nhits}}
+\index{nhits@{nhits}!MoveState@{MoveState}}
+\subsubsection[{nhits}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf MoveState::nhits}}}
+\label{structMoveState_a17a8c4927f949245cdc6a6508e927b6b}
+number of moves already made \hypertarget{structMoveState_a22129990f5089434d62c9f7dbede353c}{
+\index{MoveState@{MoveState}!nparams@{nparams}}
+\index{nparams@{nparams}!MoveState@{MoveState}}
+\subsubsection[{nparams}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf MoveState::nparams}}}
+\label{structMoveState_a22129990f5089434d62c9f7dbede353c}
+\# of parameters to be tweaked \hypertarget{structMoveState_a4f90403ee79669e85a6334b704f791b9}{
+\index{MoveState@{MoveState}!nsweeps@{nsweeps}}
+\index{nsweeps@{nsweeps}!MoveState@{MoveState}}
+\subsubsection[{nsweeps}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf MoveState::nsweeps}}}
+\label{structMoveState_a4f90403ee79669e85a6334b704f791b9}
+number of completed sweeps \hypertarget{structMoveState_a8822217e1bf2b4231318e2bf3b2c7d3b}{
+\index{MoveState@{MoveState}!old\_\-energy@{old\_\-energy}}
+\index{old\_\-energy@{old\_\-energy}!MoveState@{MoveState}}
+\subsubsection[{old\_\-energy}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf MoveState::old\_\-energy}}}
+\label{structMoveState_a8822217e1bf2b4231318e2bf3b2c7d3b}
+energy before the last move \hypertarget{structMoveState_af721df96a567be5b998d9e6c1cdddbfb}{
+\index{MoveState@{MoveState}!pt@{pt}}
+\index{pt@{pt}!MoveState@{MoveState}}
+\subsubsection[{pt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ParamList}$\ast$ {\bf MoveState::pt}}}
+\label{structMoveState_af721df96a567be5b998d9e6c1cdddbfb}
+Used during a save to point to annealed-\/on parameters 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+fly/\hyperlink{moves_8h}{moves.h}\end{DoxyCompactItemize}

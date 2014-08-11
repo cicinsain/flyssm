@@ -1,0 +1,13 @@
+-m w WLS (default)
+-m o OLS
+
+- Penalty section names ending with .WWWW in the old code, are ending in .x now where x is the corresponding genotype id: x=0 for the first genotype in the list, x=1 for the second etc. 
+- -s kr -g h generates a los of cvode errors during the run with fly_sa
+	[CVODE ERROR]  CVode
+	  At t = 21.273, mxstep steps taken before reaching tout.
+	SUNDIALS_ERROR: CVode() failed with flag = -1
+- -s rck -g h generates a stepsize underflow instantly with fly_sa, unfold, printscore
+- -s rck -g t generates a stepsize underflow error after 30s with fly_sa
+
+
+

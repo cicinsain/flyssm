@@ -1,0 +1,658 @@
+\hypertarget{dSFMT_8h}{
+\section{lam/dSFMT.h File Reference}
+\label{dSFMT_8h}\index{lam/dSFMT.h@{lam/dSFMT.h}}
+}
+
+
+double precision SIMD oriented Fast Mersenne Twister(dSFMT) pseudorandom number generator based on IEEE 754 format.  
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$assert.h$>$}\par
+{\ttfamily \#include $<$inttypes.h$>$}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+union \hyperlink{unionW128__T}{W128\_\-T}
+\item 
+struct \hyperlink{structDSFMT__T}{DSFMT\_\-T}
+\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{dSFMT_8h_aeda2790c35e4e205219e3c0ef1a2dd0a}{
+\#define {\bfseries DSFMT\_\-MEXP}~19937}
+\label{dSFMT_8h_aeda2790c35e4e205219e3c0ef1a2dd0a}
+
+\item 
+\#define \hyperlink{dSFMT_8h_a3b6595773bfd02df5481e6a459071a1c}{DSFMT\_\-N}~((DSFMT\_\-MEXP -\/ 128) / 104 + 1)
+\item 
+\#define \hyperlink{dSFMT_8h_aa0bbbd372d361b7fe3ea3ec2013c9097}{DSFMT\_\-N32}~(DSFMT\_\-N $\ast$ 4)
+\item 
+\#define \hyperlink{dSFMT_8h_a36560990b64532b75e95bf5b683599dc}{DSFMT\_\-N64}~(DSFMT\_\-N $\ast$ 2)
+\item 
+\hypertarget{dSFMT_8h_a00d24c7231be28dbaf71f5408f30e44c}{
+\#define {\bfseries inline}}
+\label{dSFMT_8h_a00d24c7231be28dbaf71f5408f30e44c}
+
+\item 
+\hypertarget{dSFMT_8h_ac582131d7a7c8ee57e73180d1714f9d5}{
+\#define {\bfseries PRIu64}~\char`\"{}llu\char`\"{}}
+\label{dSFMT_8h_ac582131d7a7c8ee57e73180d1714f9d5}
+
+\item 
+\hypertarget{dSFMT_8h_aba38357387a474f439428dee1984fc5a}{
+\#define {\bfseries PRIx64}~\char`\"{}llx\char`\"{}}
+\label{dSFMT_8h_aba38357387a474f439428dee1984fc5a}
+
+\item 
+\hypertarget{dSFMT_8h_a014ce50c36f4de34281551e4da3d5195}{
+\#define {\bfseries UINT64\_\-C}(v)~(v \#\# ULL)}
+\label{dSFMT_8h_a014ce50c36f4de34281551e4da3d5195}
+
+\item 
+\hypertarget{dSFMT_8h_a7490eb8287e4754e4e30153135f496e9}{
+\#define {\bfseries DSFMT\_\-PRE\_\-INLINE}~inline static}
+\label{dSFMT_8h_a7490eb8287e4754e4e30153135f496e9}
+
+\item 
+\hypertarget{dSFMT_8h_a5842d43aa58fb6f026a8fdc02cb15455}{
+\#define {\bfseries DSFMT\_\-PST\_\-INLINE}}
+\label{dSFMT_8h_a5842d43aa58fb6f026a8fdc02cb15455}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef union \hyperlink{unionW128__T}{W128\_\-T} \hyperlink{dSFMT_8h_ab1ee414cba9ca0f33a3716e7a92c2b79}{w128\_\-t}
+\item 
+\hypertarget{dSFMT_8h_a7e8239b4bedf4e53d5168d21848ab7af}{
+typedef struct \hyperlink{structDSFMT__T}{DSFMT\_\-T} {\bfseries dsfmt\_\-t}}
+\label{dSFMT_8h_a7e8239b4bedf4e53d5168d21848ab7af}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{dSFMT_8h_afccb1e4d75cea7ffe3b45cba53d1e5e0}{dsfmt\_\-gen\_\-rand\_\-all} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt)
+\item 
+void \hyperlink{dSFMT_8h_a6ad6f12b9a47ea89ceab693b1eec5079}{dsfmt\_\-fill\_\-array\_\-open\_\-close} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, double array\mbox{[}$\,$\mbox{]}, int size)
+\item 
+void \hyperlink{dSFMT_8h_a243fb9ed1b61233f3dba4ab15c541eb0}{dsfmt\_\-fill\_\-array\_\-close\_\-open} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, double array\mbox{[}$\,$\mbox{]}, int size)
+\item 
+void \hyperlink{dSFMT_8h_aeed310e17f9f652c1b0ec86298c834c1}{dsfmt\_\-fill\_\-array\_\-open\_\-open} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, double array\mbox{[}$\,$\mbox{]}, int size)
+\item 
+void \hyperlink{dSFMT_8h_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, double array\mbox{[}$\,$\mbox{]}, int size)
+\item 
+void \hyperlink{dSFMT_8h_a2fa6a84095a280a4e1556415f3d4f259}{dsfmt\_\-chk\_\-init\_\-gen\_\-rand} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, uint32\_\-t seed, int mexp)
+\item 
+void \hyperlink{dSFMT_8h_a91cef405a85910d4e56b4a1d10fb89f1}{dsfmt\_\-chk\_\-init\_\-by\_\-array} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, uint32\_\-t init\_\-key\mbox{[}$\,$\mbox{]}, int key\_\-length, int mexp)
+\item 
+const char $\ast$ \hyperlink{dSFMT_8h_af181eeb77513e5a399dd2c585cfaa055}{dsfmt\_\-get\_\-idstring} (void)
+\item 
+int \hyperlink{dSFMT_8h_af49cc1703b4cc1d0bffbd895917c303a}{dsfmt\_\-get\_\-min\_\-array\_\-size} (void)
+\item 
+DSFMT\_\-PRE\_\-INLINE uint32\_\-t \hyperlink{dSFMT_8h_a1391665a8e5f9295a589aacb776e9de6}{dsfmt\_\-genrand\_\-uint32} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_a988f7f99c98960c22f19f68edb41f399}{dsfmt\_\-genrand\_\-close1\_\-open2} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_a1d070f0dc97e95122038aed8be76f8dd}{dsfmt\_\-genrand\_\-close\_\-open} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_adb8392cee5e6d63095024b7595d3555a}{dsfmt\_\-genrand\_\-open\_\-close} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_ad0a3324227d2e65e8d8888eb675170ac}{dsfmt\_\-genrand\_\-open\_\-open} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE uint32\_\-t \hyperlink{dSFMT_8h_a5a20bef41e73968d016f4cc9bdf3c3e3}{dsfmt\_\-gv\_\-genrand\_\-uint32} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_aab9284ee31e49e698240748e5c422e76}{dsfmt\_\-gv\_\-genrand\_\-close1\_\-open2} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_a6f2a1cb0b0b6f868708a00350affbbfa}{dsfmt\_\-gv\_\-genrand\_\-close\_\-open} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_aad429a1aead793e75fdff0e9616db4f3}{dsfmt\_\-gv\_\-genrand\_\-open\_\-close} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_a27b4a95b9fd7066d55d414f385237447}{dsfmt\_\-gv\_\-genrand\_\-open\_\-open} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_a66881a0b8e76641024d09bbae3d9be7e}{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-close} (double array\mbox{[}$\,$\mbox{]}, int size) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_a55ca4ccdc72ba0b34386df16a3dfd48f}{dsfmt\_\-gv\_\-fill\_\-array\_\-close\_\-open} (double array\mbox{[}$\,$\mbox{]}, int size) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_aabefce2df25b67305dc71355e7a4ba28}{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-open} (double array\mbox{[}$\,$\mbox{]}, int size) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2} (double array\mbox{[}$\,$\mbox{]}, int size) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}{dsfmt\_\-gv\_\-init\_\-gen\_\-rand} (uint32\_\-t seed) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}{dsfmt\_\-gv\_\-init\_\-by\_\-array} (uint32\_\-t init\_\-key\mbox{[}$\,$\mbox{]}, int key\_\-length) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}{dsfmt\_\-init\_\-gen\_\-rand} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, uint32\_\-t seed) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}{dsfmt\_\-init\_\-by\_\-array} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, uint32\_\-t init\_\-key\mbox{[}$\,$\mbox{]}, int key\_\-length) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE const char $\ast$ \hyperlink{dSFMT_8h_af8252a07409d644f4cfcaa4469ebd994}{get\_\-idstring} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE int \hyperlink{dSFMT_8h_a006127d9c8946a9e1ed89de92eb48e64}{get\_\-min\_\-array\_\-size} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_a8dc496135101ef4140c7e790bf7474cd}{init\_\-gen\_\-rand} (uint32\_\-t seed) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_a46947b547a4f7d7758a682298f7ec0ce}{init\_\-by\_\-array} (uint32\_\-t init\_\-key\mbox{[}$\,$\mbox{]}, int key\_\-length) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_a5801a9157c59d0515f7a3c9328f37ec5}{genrand\_\-close1\_\-open2} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_ab5e8f9060fd540a3bb1c5b7641284cad}{genrand\_\-close\_\-open} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_af35767b9543581ee9215c384d1620ef4}{genrand\_\-open\_\-close} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE double \hyperlink{dSFMT_8h_a4ddba4b9c32e5e347acdd26bf679350e}{genrand\_\-open\_\-open} (void) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_aea84bcb5255b47c28e357a776375abf5}{fill\_\-array\_\-open\_\-close} (double array\mbox{[}$\,$\mbox{]}, int size) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_adad2a0d2f6a99cabcfd2de855dd9bb7a}{fill\_\-array\_\-close\_\-open} (double array\mbox{[}$\,$\mbox{]}, int size) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_aee2e71992c8837b579dd471cb963030b}{fill\_\-array\_\-open\_\-open} (double array\mbox{[}$\,$\mbox{]}, int size) DSFMT\_\-PST\_\-INLINE
+\item 
+DSFMT\_\-PRE\_\-INLINE void \hyperlink{dSFMT_8h_a7f249c43d75cbe1200504d5dc6103cad}{fill\_\-array\_\-close1\_\-open2} (double array\mbox{[}$\,$\mbox{]}, int size) DSFMT\_\-PST\_\-INLINE
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structDSFMT__T}{dsfmt\_\-t} \hyperlink{dSFMT_8h_adfee3c4c3505ddcfc334251f94968737}{dsfmt\_\-global\_\-data}
+\item 
+const int \hyperlink{dSFMT_8h_ab5bb9876d117b3cdf8143c701a3f8cdf}{dsfmt\_\-global\_\-mexp}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+double precision SIMD oriented Fast Mersenne Twister(dSFMT) pseudorandom number generator based on IEEE 754 format. \begin{DoxyAuthor}{Author}
+Mutsuo Saito (Hiroshima University) 
+
+Makoto Matsumoto (Hiroshima University)
+\end{DoxyAuthor}
+Copyright (C) 2007, 2008 Mutsuo Saito, Makoto Matsumoto and Hiroshima University. All rights reserved. Copyright (C) 2012 Mutsuo Saito, Makoto Matsumoto, Hiroshima University and The University of Tokyo. All rights reserved.
+
+The new BSD License is applied to this software. see LICENSE.txt
+
+\begin{DoxyNote}{Note}
+We assume that your system has inttypes.h. If your system doesn't have inttypes.h, you have to typedef uint32\_\-t and uint64\_\-t, and you have to define PRIu64 and PRIx64 in this file as follows: \begin{DoxyVerb}
+ typedef unsigned int uint32_t
+ typedef unsigned long long uint64_t
+ #define PRIu64 "llu"
+ #define PRIx64 "llx"
+\end{DoxyVerb}
+ uint32\_\-t must be exactly 32-\/bit unsigned integer type (no more, no less), and uint64\_\-t must be exactly 64-\/bit unsigned integer type. PRIu64 and PRIx64 are used for printf function to print 64-\/bit unsigned int and 64-\/bit unsigned int in hexadecimal format. 
+\end{DoxyNote}
+
+
+\subsection{Define Documentation}
+\hypertarget{dSFMT_8h_a3b6595773bfd02df5481e6a459071a1c}{
+\index{dSFMT.h@{dSFMT.h}!DSFMT\_\-N@{DSFMT\_\-N}}
+\index{DSFMT\_\-N@{DSFMT\_\-N}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{DSFMT\_\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define DSFMT\_\-N~((DSFMT\_\-MEXP -\/ 128) / 104 + 1)}}
+\label{dSFMT_8h_a3b6595773bfd02df5481e6a459071a1c}
+DSFMT generator has an internal state array of 128-\/bit integers, and N is its size. \hypertarget{dSFMT_8h_aa0bbbd372d361b7fe3ea3ec2013c9097}{
+\index{dSFMT.h@{dSFMT.h}!DSFMT\_\-N32@{DSFMT\_\-N32}}
+\index{DSFMT\_\-N32@{DSFMT\_\-N32}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{DSFMT\_\-N32}]{\setlength{\rightskip}{0pt plus 5cm}\#define DSFMT\_\-N32~(DSFMT\_\-N $\ast$ 4)}}
+\label{dSFMT_8h_aa0bbbd372d361b7fe3ea3ec2013c9097}
+N32 is the size of internal state array when regarded as an array of 32-\/bit integers. \hypertarget{dSFMT_8h_a36560990b64532b75e95bf5b683599dc}{
+\index{dSFMT.h@{dSFMT.h}!DSFMT\_\-N64@{DSFMT\_\-N64}}
+\index{DSFMT\_\-N64@{DSFMT\_\-N64}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{DSFMT\_\-N64}]{\setlength{\rightskip}{0pt plus 5cm}\#define DSFMT\_\-N64~(DSFMT\_\-N $\ast$ 2)}}
+\label{dSFMT_8h_a36560990b64532b75e95bf5b683599dc}
+N64 is the size of internal state array when regarded as an array of 64-\/bit integers. 
+
+\subsection{Typedef Documentation}
+\hypertarget{dSFMT_8h_ab1ee414cba9ca0f33a3716e7a92c2b79}{
+\index{dSFMT.h@{dSFMT.h}!w128\_\-t@{w128\_\-t}}
+\index{w128\_\-t@{w128\_\-t}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{w128\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef union {\bf W128\_\-T} {\bf w128\_\-t}}}
+\label{dSFMT_8h_ab1ee414cba9ca0f33a3716e7a92c2b79}
+128-\/bit data type 
+
+\subsection{Function Documentation}
+\hypertarget{dSFMT_8h_a91cef405a85910d4e56b4a1d10fb89f1}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-chk\_\-init\_\-by\_\-array@{dsfmt\_\-chk\_\-init\_\-by\_\-array}}
+\index{dsfmt\_\-chk\_\-init\_\-by\_\-array@{dsfmt\_\-chk\_\-init\_\-by\_\-array}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-chk\_\-init\_\-by\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}void dsfmt\_\-chk\_\-init\_\-by\_\-array ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  uint32\_\-t {\em init\_\-key}\mbox{[}$\,$\mbox{]}, \/  int {\em key\_\-length}, \/  int {\em mexp})}}
+\label{dSFMT_8h_a91cef405a85910d4e56b4a1d10fb89f1}
+This function initializes the internal state array, with an array of 32-\/bit integers used as the seeds 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \item[{\em init\_\-key}]the array of 32-\/bit integers, used as a seed. \item[{\em key\_\-length}]the length of init\_\-key. \item[{\em mexp}]caller's mersenne expornent \end{DoxyParams}
+\hypertarget{dSFMT_8h_a2fa6a84095a280a4e1556415f3d4f259}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-chk\_\-init\_\-gen\_\-rand@{dsfmt\_\-chk\_\-init\_\-gen\_\-rand}}
+\index{dsfmt\_\-chk\_\-init\_\-gen\_\-rand@{dsfmt\_\-chk\_\-init\_\-gen\_\-rand}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-chk\_\-init\_\-gen\_\-rand}]{\setlength{\rightskip}{0pt plus 5cm}void dsfmt\_\-chk\_\-init\_\-gen\_\-rand ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  uint32\_\-t {\em seed}, \/  int {\em mexp})}}
+\label{dSFMT_8h_a2fa6a84095a280a4e1556415f3d4f259}
+This function initializes the internal state array with a 32-\/bit integer seed. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \item[{\em seed}]a 32-\/bit integer used as the seed. \item[{\em mexp}]caller's mersenne expornent \end{DoxyParams}
+\hypertarget{dSFMT_8h_abeef257039f3b95b7475bbecdb521b89}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-fill\_\-array\_\-close1\_\-open2@{dsfmt\_\-fill\_\-array\_\-close1\_\-open2}}
+\index{dsfmt\_\-fill\_\-array\_\-close1\_\-open2@{dsfmt\_\-fill\_\-array\_\-close1\_\-open2}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-fill\_\-array\_\-close1\_\-open2}]{\setlength{\rightskip}{0pt plus 5cm}void dsfmt\_\-fill\_\-array\_\-close1\_\-open2 ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})}}
+\label{dSFMT_8h_abeef257039f3b95b7475bbecdb521b89}
+This function generates double precision floating point pseudorandom numbers which distribute in the range \mbox{[}1, 2) to the specified array\mbox{[}\mbox{]} by one call. The number of pseudorandom numbers is specified by the argument {\bfseries size}, which must be at least (SFMT\_\-MEXP / 128) $\ast$ 2 and a multiple of two. The function \hyperlink{dSFMT_8h_a006127d9c8946a9e1ed89de92eb48e64}{get\_\-min\_\-array\_\-size()} returns this minimum size. The generation by this function is much faster than the following fill\_\-array\_\-xxx functions.
+
+For initialization, \hyperlink{dSFMT_8h_a8dc496135101ef4140c7e790bf7474cd}{init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_a46947b547a4f7d7758a682298f7ec0ce}{init\_\-by\_\-array()} must be called before the first call of this function. This function can not be used after calling genrand\_\-xxx functions, without initialization.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \item[{\em array}]an array where pseudorandom numbers are filled by this function. The pointer to the array must be \char`\"{}aligned\char`\"{} (namely, must be a multiple of 16) in the SIMD version, since it refers to the address of a 128-\/bit integer. In the standard C version, the pointer is arbitrary.\item[{\em size}]the number of 64-\/bit pseudorandom integers to be generated. size must be a multiple of 2, and greater than or equal to (SFMT\_\-MEXP / 128) $\ast$ 2.\end{DoxyParams}
+\begin{DoxyNote}{Note}
+{\bfseries memalign} or {\bfseries posix\_\-memalign} is available to get aligned memory. Mac OSX doesn't have these functions, but {\bfseries malloc} of OSX returns the pointer to the aligned memory block. 
+\end{DoxyNote}
+\hypertarget{dSFMT_8h_a243fb9ed1b61233f3dba4ab15c541eb0}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-fill\_\-array\_\-close\_\-open@{dsfmt\_\-fill\_\-array\_\-close\_\-open}}
+\index{dsfmt\_\-fill\_\-array\_\-close\_\-open@{dsfmt\_\-fill\_\-array\_\-close\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-fill\_\-array\_\-close\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}void dsfmt\_\-fill\_\-array\_\-close\_\-open ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})}}
+\label{dSFMT_8h_a243fb9ed1b61233f3dba4ab15c541eb0}
+This function generates double precision floating point pseudorandom numbers which distribute in the range \mbox{[}0, 1) to the specified array\mbox{[}\mbox{]} by one call. This function is the same as \hyperlink{dSFMT_8h_a7f249c43d75cbe1200504d5dc6103cad}{fill\_\-array\_\-close1\_\-open2()} except the distribution range.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em dsfmt}]dsfmt state vector. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_a7f249c43d75cbe1200504d5dc6103cad}{fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_a6ad6f12b9a47ea89ceab693b1eec5079}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-fill\_\-array\_\-open\_\-close@{dsfmt\_\-fill\_\-array\_\-open\_\-close}}
+\index{dsfmt\_\-fill\_\-array\_\-open\_\-close@{dsfmt\_\-fill\_\-array\_\-open\_\-close}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-fill\_\-array\_\-open\_\-close}]{\setlength{\rightskip}{0pt plus 5cm}void dsfmt\_\-fill\_\-array\_\-open\_\-close ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})}}
+\label{dSFMT_8h_a6ad6f12b9a47ea89ceab693b1eec5079}
+This function generates double precision floating point pseudorandom numbers which distribute in the range (0, 1\mbox{]} to the specified array\mbox{[}\mbox{]} by one call. This function is the same as \hyperlink{dSFMT_8h_a7f249c43d75cbe1200504d5dc6103cad}{fill\_\-array\_\-close1\_\-open2()} except the distribution range.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_a7f249c43d75cbe1200504d5dc6103cad}{fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_aeed310e17f9f652c1b0ec86298c834c1}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-fill\_\-array\_\-open\_\-open@{dsfmt\_\-fill\_\-array\_\-open\_\-open}}
+\index{dsfmt\_\-fill\_\-array\_\-open\_\-open@{dsfmt\_\-fill\_\-array\_\-open\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-fill\_\-array\_\-open\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}void dsfmt\_\-fill\_\-array\_\-open\_\-open ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})}}
+\label{dSFMT_8h_aeed310e17f9f652c1b0ec86298c834c1}
+This function generates double precision floating point pseudorandom numbers which distribute in the range (0, 1) to the specified array\mbox{[}\mbox{]} by one call. This function is the same as \hyperlink{dSFMT_8h_a7f249c43d75cbe1200504d5dc6103cad}{fill\_\-array\_\-close1\_\-open2()} except the distribution range.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_a7f249c43d75cbe1200504d5dc6103cad}{fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_afccb1e4d75cea7ffe3b45cba53d1e5e0}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gen\_\-rand\_\-all@{dsfmt\_\-gen\_\-rand\_\-all}}
+\index{dsfmt\_\-gen\_\-rand\_\-all@{dsfmt\_\-gen\_\-rand\_\-all}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gen\_\-rand\_\-all}]{\setlength{\rightskip}{0pt plus 5cm}void dsfmt\_\-gen\_\-rand\_\-all ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt})}}
+\label{dSFMT_8h_afccb1e4d75cea7ffe3b45cba53d1e5e0}
+This function fills the internal state array with double precision floating point pseudorandom numbers of the IEEE 754 format. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \end{DoxyParams}
+\hypertarget{dSFMT_8h_a988f7f99c98960c22f19f68edb41f399}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-genrand\_\-close1\_\-open2@{dsfmt\_\-genrand\_\-close1\_\-open2}}
+\index{dsfmt\_\-genrand\_\-close1\_\-open2@{dsfmt\_\-genrand\_\-close1\_\-open2}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-genrand\_\-close1\_\-open2}]{\setlength{\rightskip}{0pt plus 5cm}static double dsfmt\_\-genrand\_\-close1\_\-open2 ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a988f7f99c98960c22f19f68edb41f399}
+This function generates and returns double precision pseudorandom number which distributes uniformly in the range \mbox{[}1, 2). This is the primitive and faster than generating numbers in other ranges. \hyperlink{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}{dsfmt\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}{dsfmt\_\-init\_\-by\_\-array()} must be called before this function. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt internal state date \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_a1d070f0dc97e95122038aed8be76f8dd}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-genrand\_\-close\_\-open@{dsfmt\_\-genrand\_\-close\_\-open}}
+\index{dsfmt\_\-genrand\_\-close\_\-open@{dsfmt\_\-genrand\_\-close\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-genrand\_\-close\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static double dsfmt\_\-genrand\_\-close\_\-open ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a1d070f0dc97e95122038aed8be76f8dd}
+This function generates and returns double precision pseudorandom number which distributes uniformly in the range \mbox{[}0, 1). \hyperlink{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}{dsfmt\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}{dsfmt\_\-init\_\-by\_\-array()} must be called before this function. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt internal state date \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_adb8392cee5e6d63095024b7595d3555a}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-genrand\_\-open\_\-close@{dsfmt\_\-genrand\_\-open\_\-close}}
+\index{dsfmt\_\-genrand\_\-open\_\-close@{dsfmt\_\-genrand\_\-open\_\-close}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-genrand\_\-open\_\-close}]{\setlength{\rightskip}{0pt plus 5cm}static double dsfmt\_\-genrand\_\-open\_\-close ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_adb8392cee5e6d63095024b7595d3555a}
+This function generates and returns double precision pseudorandom number which distributes uniformly in the range (0, 1\mbox{]}. \hyperlink{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}{dsfmt\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}{dsfmt\_\-init\_\-by\_\-array()} must be called before this function. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt internal state date \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_ad0a3324227d2e65e8d8888eb675170ac}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-genrand\_\-open\_\-open@{dsfmt\_\-genrand\_\-open\_\-open}}
+\index{dsfmt\_\-genrand\_\-open\_\-open@{dsfmt\_\-genrand\_\-open\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-genrand\_\-open\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static double dsfmt\_\-genrand\_\-open\_\-open ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_ad0a3324227d2e65e8d8888eb675170ac}
+This function generates and returns double precision pseudorandom number which distributes uniformly in the range (0, 1). \hyperlink{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}{dsfmt\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}{dsfmt\_\-init\_\-by\_\-array()} must be called before this function. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt internal state date \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_a1391665a8e5f9295a589aacb776e9de6}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-genrand\_\-uint32@{dsfmt\_\-genrand\_\-uint32}}
+\index{dsfmt\_\-genrand\_\-uint32@{dsfmt\_\-genrand\_\-uint32}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-genrand\_\-uint32}]{\setlength{\rightskip}{0pt plus 5cm}static uint32\_\-t dsfmt\_\-genrand\_\-uint32 ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a1391665a8e5f9295a589aacb776e9de6}
+This function generates and returns unsigned 32-\/bit integer. This is slower than SFMT, only for convenience usage. \hyperlink{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}{dsfmt\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}{dsfmt\_\-init\_\-by\_\-array()} must be called before this function. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt internal state date \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_af181eeb77513e5a399dd2c585cfaa055}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-get\_\-idstring@{dsfmt\_\-get\_\-idstring}}
+\index{dsfmt\_\-get\_\-idstring@{dsfmt\_\-get\_\-idstring}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-get\_\-idstring}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ dsfmt\_\-get\_\-idstring (void)}}
+\label{dSFMT_8h_af181eeb77513e5a399dd2c585cfaa055}
+This function returns the identification string. The string shows the Mersenne exponent, and all parameters of this generator. \begin{DoxyReturn}{Returns}
+id string. 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_af49cc1703b4cc1d0bffbd895917c303a}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-get\_\-min\_\-array\_\-size@{dsfmt\_\-get\_\-min\_\-array\_\-size}}
+\index{dsfmt\_\-get\_\-min\_\-array\_\-size@{dsfmt\_\-get\_\-min\_\-array\_\-size}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-get\_\-min\_\-array\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}int dsfmt\_\-get\_\-min\_\-array\_\-size (void)}}
+\label{dSFMT_8h_af49cc1703b4cc1d0bffbd895917c303a}
+This function returns the minimum size of array used for {\bfseries fill\_\-array} functions. \begin{DoxyReturn}{Returns}
+minimum size of array used for fill\_\-array functions. 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2@{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2}}
+\index{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2@{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2}]{\setlength{\rightskip}{0pt plus 5cm}static void dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2 (double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}
+This function generates double precision floating point pseudorandom numbers which distribute in the range \mbox{[}1, 2) to the specified array\mbox{[}\mbox{]} by one call. This function is the same as \hyperlink{dSFMT_8c_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2()} except that this function uses {\bfseries global} variables. 
+\begin{DoxyParams}{Parameters}
+\item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8c_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_a55ca4ccdc72ba0b34386df16a3dfd48f}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-fill\_\-array\_\-close\_\-open@{dsfmt\_\-gv\_\-fill\_\-array\_\-close\_\-open}}
+\index{dsfmt\_\-gv\_\-fill\_\-array\_\-close\_\-open@{dsfmt\_\-gv\_\-fill\_\-array\_\-close\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-fill\_\-array\_\-close\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static void dsfmt\_\-gv\_\-fill\_\-array\_\-close\_\-open (double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a55ca4ccdc72ba0b34386df16a3dfd48f}
+This function generates double precision floating point pseudorandom numbers which distribute in the range \mbox{[}0, 1) to the specified array\mbox{[}\mbox{]} by one call. This function is the same as \hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} except the distribution range. This function uses {\bfseries global} variables. 
+\begin{DoxyParams}{Parameters}
+\item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8c_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2()} 
+
+\hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_a66881a0b8e76641024d09bbae3d9be7e}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-close@{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-close}}
+\index{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-close@{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-close}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-close}]{\setlength{\rightskip}{0pt plus 5cm}static void dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-close (double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a66881a0b8e76641024d09bbae3d9be7e}
+This function generates double precision floating point pseudorandom numbers which distribute in the range (0, 1\mbox{]} to the specified array\mbox{[}\mbox{]} by one call. This function is the same as \hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} except the distribution range. This function uses {\bfseries global} variables. 
+\begin{DoxyParams}{Parameters}
+\item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8c_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2()} and 
+
+\hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_aabefce2df25b67305dc71355e7a4ba28}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-open@{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-open}}
+\index{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-open@{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static void dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-open (double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_aabefce2df25b67305dc71355e7a4ba28}
+This function generates double precision floating point pseudorandom numbers which distribute in the range (0, 1) to the specified array\mbox{[}\mbox{]} by one call. This function is the same as \hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} except the distribution range. This function uses {\bfseries global} variables. 
+\begin{DoxyParams}{Parameters}
+\item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8c_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2()} 
+
+\hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_aab9284ee31e49e698240748e5c422e76}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-genrand\_\-close1\_\-open2@{dsfmt\_\-gv\_\-genrand\_\-close1\_\-open2}}
+\index{dsfmt\_\-gv\_\-genrand\_\-close1\_\-open2@{dsfmt\_\-gv\_\-genrand\_\-close1\_\-open2}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-genrand\_\-close1\_\-open2}]{\setlength{\rightskip}{0pt plus 5cm}static double dsfmt\_\-gv\_\-genrand\_\-close1\_\-open2 (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_aab9284ee31e49e698240748e5c422e76}
+This function generates and returns double precision pseudorandom number which distributes uniformly in the range \mbox{[}1, 2). \hyperlink{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}{dsfmt\_\-gv\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}{dsfmt\_\-gv\_\-init\_\-by\_\-array()} must be called before this function. This function uses {\bfseries global} variables. \begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_a6f2a1cb0b0b6f868708a00350affbbfa}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-genrand\_\-close\_\-open@{dsfmt\_\-gv\_\-genrand\_\-close\_\-open}}
+\index{dsfmt\_\-gv\_\-genrand\_\-close\_\-open@{dsfmt\_\-gv\_\-genrand\_\-close\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-genrand\_\-close\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static double dsfmt\_\-gv\_\-genrand\_\-close\_\-open (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a6f2a1cb0b0b6f868708a00350affbbfa}
+This function generates and returns double precision pseudorandom number which distributes uniformly in the range \mbox{[}0, 1). \hyperlink{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}{dsfmt\_\-gv\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}{dsfmt\_\-gv\_\-init\_\-by\_\-array()} must be called before this function. This function uses {\bfseries global} variables. \begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_aad429a1aead793e75fdff0e9616db4f3}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-genrand\_\-open\_\-close@{dsfmt\_\-gv\_\-genrand\_\-open\_\-close}}
+\index{dsfmt\_\-gv\_\-genrand\_\-open\_\-close@{dsfmt\_\-gv\_\-genrand\_\-open\_\-close}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-genrand\_\-open\_\-close}]{\setlength{\rightskip}{0pt plus 5cm}static double dsfmt\_\-gv\_\-genrand\_\-open\_\-close (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_aad429a1aead793e75fdff0e9616db4f3}
+This function generates and returns double precision pseudorandom number which distributes uniformly in the range (0, 1\mbox{]}. \hyperlink{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}{dsfmt\_\-gv\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}{dsfmt\_\-gv\_\-init\_\-by\_\-array()} must be called before this function. This function uses {\bfseries global} variables. \begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_a27b4a95b9fd7066d55d414f385237447}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-genrand\_\-open\_\-open@{dsfmt\_\-gv\_\-genrand\_\-open\_\-open}}
+\index{dsfmt\_\-gv\_\-genrand\_\-open\_\-open@{dsfmt\_\-gv\_\-genrand\_\-open\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-genrand\_\-open\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static double dsfmt\_\-gv\_\-genrand\_\-open\_\-open (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a27b4a95b9fd7066d55d414f385237447}
+This function generates and returns double precision pseudorandom number which distributes uniformly in the range (0, 1). \hyperlink{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}{dsfmt\_\-gv\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}{dsfmt\_\-gv\_\-init\_\-by\_\-array()} must be called before this function. This function uses {\bfseries global} variables. \begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_a5a20bef41e73968d016f4cc9bdf3c3e3}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-genrand\_\-uint32@{dsfmt\_\-gv\_\-genrand\_\-uint32}}
+\index{dsfmt\_\-gv\_\-genrand\_\-uint32@{dsfmt\_\-gv\_\-genrand\_\-uint32}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-genrand\_\-uint32}]{\setlength{\rightskip}{0pt plus 5cm}static uint32\_\-t dsfmt\_\-gv\_\-genrand\_\-uint32 (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a5a20bef41e73968d016f4cc9bdf3c3e3}
+This function generates and returns unsigned 32-\/bit integer. This is slower than SFMT, only for convenience usage. \hyperlink{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}{dsfmt\_\-gv\_\-init\_\-gen\_\-rand()} or \hyperlink{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}{dsfmt\_\-gv\_\-init\_\-by\_\-array()} must be called before this function. This function uses {\bfseries global} variables. \begin{DoxyReturn}{Returns}
+double precision floating point pseudorandom number 
+\end{DoxyReturn}
+\hypertarget{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-init\_\-by\_\-array@{dsfmt\_\-gv\_\-init\_\-by\_\-array}}
+\index{dsfmt\_\-gv\_\-init\_\-by\_\-array@{dsfmt\_\-gv\_\-init\_\-by\_\-array}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-init\_\-by\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}static void dsfmt\_\-gv\_\-init\_\-by\_\-array (uint32\_\-t {\em init\_\-key}\mbox{[}$\,$\mbox{]}, \/  int {\em key\_\-length})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}
+This function initializes the internal state array, with an array of 32-\/bit integers used as the seeds. This function uses {\bfseries global} variables. 
+\begin{DoxyParams}{Parameters}
+\item[{\em init\_\-key}]the array of 32-\/bit integers, used as a seed. \item[{\em key\_\-length}]the length of init\_\-key. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}{dsfmt\_\-init\_\-by\_\-array()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-gv\_\-init\_\-gen\_\-rand@{dsfmt\_\-gv\_\-init\_\-gen\_\-rand}}
+\index{dsfmt\_\-gv\_\-init\_\-gen\_\-rand@{dsfmt\_\-gv\_\-init\_\-gen\_\-rand}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-gv\_\-init\_\-gen\_\-rand}]{\setlength{\rightskip}{0pt plus 5cm}static void dsfmt\_\-gv\_\-init\_\-gen\_\-rand (uint32\_\-t {\em seed})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}
+This function initializes the internal state array with a 32-\/bit integer seed. This function uses {\bfseries global} variables. 
+\begin{DoxyParams}{Parameters}
+\item[{\em seed}]a 32-\/bit integer used as the seed. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}{dsfmt\_\-init\_\-gen\_\-rand()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-init\_\-by\_\-array@{dsfmt\_\-init\_\-by\_\-array}}
+\index{dsfmt\_\-init\_\-by\_\-array@{dsfmt\_\-init\_\-by\_\-array}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-init\_\-by\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}static void dsfmt\_\-init\_\-by\_\-array ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  uint32\_\-t {\em init\_\-key}\mbox{[}$\,$\mbox{]}, \/  int {\em key\_\-length})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}
+This function initializes the internal state array, with an array of 32-\/bit integers used as the seeds. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector \item[{\em init\_\-key}]the array of 32-\/bit integers, used as a seed. \item[{\em key\_\-length}]the length of init\_\-key. \end{DoxyParams}
+\hypertarget{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-init\_\-gen\_\-rand@{dsfmt\_\-init\_\-gen\_\-rand}}
+\index{dsfmt\_\-init\_\-gen\_\-rand@{dsfmt\_\-init\_\-gen\_\-rand}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-init\_\-gen\_\-rand}]{\setlength{\rightskip}{0pt plus 5cm}static void dsfmt\_\-init\_\-gen\_\-rand ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  uint32\_\-t {\em seed})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}
+This function initializes the internal state array with a 32-\/bit integer seed. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \item[{\em seed}]a 32-\/bit integer used as the seed. \end{DoxyParams}
+\hypertarget{dSFMT_8h_a7f249c43d75cbe1200504d5dc6103cad}{
+\index{dSFMT.h@{dSFMT.h}!fill\_\-array\_\-close1\_\-open2@{fill\_\-array\_\-close1\_\-open2}}
+\index{fill\_\-array\_\-close1\_\-open2@{fill\_\-array\_\-close1\_\-open2}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{fill\_\-array\_\-close1\_\-open2}]{\setlength{\rightskip}{0pt plus 5cm}static void fill\_\-array\_\-close1\_\-open2 (double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a7f249c43d75cbe1200504d5dc6103cad}
+This function is juset the same as \hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8c_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2()}, 
+
+\hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_adad2a0d2f6a99cabcfd2de855dd9bb7a}{
+\index{dSFMT.h@{dSFMT.h}!fill\_\-array\_\-close\_\-open@{fill\_\-array\_\-close\_\-open}}
+\index{fill\_\-array\_\-close\_\-open@{fill\_\-array\_\-close\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{fill\_\-array\_\-close\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static void fill\_\-array\_\-close\_\-open (double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_adad2a0d2f6a99cabcfd2de855dd9bb7a}
+This function is juset the same as \hyperlink{dSFMT_8h_a55ca4ccdc72ba0b34386df16a3dfd48f}{dsfmt\_\-gv\_\-fill\_\-array\_\-close\_\-open()}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_a55ca4ccdc72ba0b34386df16a3dfd48f}{dsfmt\_\-gv\_\-fill\_\-array\_\-close\_\-open()}, 
+
+\hyperlink{dSFMT_8c_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2()}, 
+
+\hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_aea84bcb5255b47c28e357a776375abf5}{
+\index{dSFMT.h@{dSFMT.h}!fill\_\-array\_\-open\_\-close@{fill\_\-array\_\-open\_\-close}}
+\index{fill\_\-array\_\-open\_\-close@{fill\_\-array\_\-open\_\-close}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{fill\_\-array\_\-open\_\-close}]{\setlength{\rightskip}{0pt plus 5cm}static void fill\_\-array\_\-open\_\-close (double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_aea84bcb5255b47c28e357a776375abf5}
+This function is juset the same as \hyperlink{dSFMT_8h_a66881a0b8e76641024d09bbae3d9be7e}{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-close()}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_a66881a0b8e76641024d09bbae3d9be7e}{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-close()}, 
+
+\hyperlink{dSFMT_8c_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2()}, 
+
+\hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_aee2e71992c8837b579dd471cb963030b}{
+\index{dSFMT.h@{dSFMT.h}!fill\_\-array\_\-open\_\-open@{fill\_\-array\_\-open\_\-open}}
+\index{fill\_\-array\_\-open\_\-open@{fill\_\-array\_\-open\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{fill\_\-array\_\-open\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static void fill\_\-array\_\-open\_\-open (double {\em array}\mbox{[}$\,$\mbox{]}, \/  int {\em size})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_aee2e71992c8837b579dd471cb963030b}
+This function is juset the same as \hyperlink{dSFMT_8h_aabefce2df25b67305dc71355e7a4ba28}{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-open()}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em array}]an array where pseudorandom numbers are filled by this function. \item[{\em size}]the number of pseudorandom numbers to be generated. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_aabefce2df25b67305dc71355e7a4ba28}{dsfmt\_\-gv\_\-fill\_\-array\_\-open\_\-open()}, 
+
+\hyperlink{dSFMT_8c_abeef257039f3b95b7475bbecdb521b89}{dsfmt\_\-fill\_\-array\_\-close1\_\-open2()}, 
+
+\hyperlink{dSFMT_8h_a6dc013d6bb958f355ca211707498a6aa}{dsfmt\_\-gv\_\-fill\_\-array\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_a5801a9157c59d0515f7a3c9328f37ec5}{
+\index{dSFMT.h@{dSFMT.h}!genrand\_\-close1\_\-open2@{genrand\_\-close1\_\-open2}}
+\index{genrand\_\-close1\_\-open2@{genrand\_\-close1\_\-open2}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{genrand\_\-close1\_\-open2}]{\setlength{\rightskip}{0pt plus 5cm}static double genrand\_\-close1\_\-open2 (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a5801a9157c59d0515f7a3c9328f37ec5}
+This function is just the same as \hyperlink{dSFMT_8h_aab9284ee31e49e698240748e5c422e76}{dsfmt\_\-gv\_\-genrand\_\-close1\_\-open2()}. \begin{DoxyReturn}{Returns}
+double precision floating point number. see also 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_a988f7f99c98960c22f19f68edb41f399}{dsfmt\_\-genrand\_\-close1\_\-open2()} 
+
+\hyperlink{dSFMT_8h_aab9284ee31e49e698240748e5c422e76}{dsfmt\_\-gv\_\-genrand\_\-close1\_\-open2()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_ab5e8f9060fd540a3bb1c5b7641284cad}{
+\index{dSFMT.h@{dSFMT.h}!genrand\_\-close\_\-open@{genrand\_\-close\_\-open}}
+\index{genrand\_\-close\_\-open@{genrand\_\-close\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{genrand\_\-close\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static double genrand\_\-close\_\-open (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_ab5e8f9060fd540a3bb1c5b7641284cad}
+This function is just the same as \hyperlink{dSFMT_8h_a6f2a1cb0b0b6f868708a00350affbbfa}{dsfmt\_\-gv\_\-genrand\_\-close\_\-open()}. \begin{DoxyReturn}{Returns}
+double precision floating point number. see also 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_a1d070f0dc97e95122038aed8be76f8dd}{dsfmt\_\-genrand\_\-close\_\-open()} 
+
+\hyperlink{dSFMT_8h_a6f2a1cb0b0b6f868708a00350affbbfa}{dsfmt\_\-gv\_\-genrand\_\-close\_\-open()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_af35767b9543581ee9215c384d1620ef4}{
+\index{dSFMT.h@{dSFMT.h}!genrand\_\-open\_\-close@{genrand\_\-open\_\-close}}
+\index{genrand\_\-open\_\-close@{genrand\_\-open\_\-close}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{genrand\_\-open\_\-close}]{\setlength{\rightskip}{0pt plus 5cm}static double genrand\_\-open\_\-close (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_af35767b9543581ee9215c384d1620ef4}
+This function is just the same as \hyperlink{dSFMT_8h_aad429a1aead793e75fdff0e9616db4f3}{dsfmt\_\-gv\_\-genrand\_\-open\_\-close()}. \begin{DoxyReturn}{Returns}
+double precision floating point number. see also 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_adb8392cee5e6d63095024b7595d3555a}{dsfmt\_\-genrand\_\-open\_\-close()} 
+
+\hyperlink{dSFMT_8h_aad429a1aead793e75fdff0e9616db4f3}{dsfmt\_\-gv\_\-genrand\_\-open\_\-close()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_a4ddba4b9c32e5e347acdd26bf679350e}{
+\index{dSFMT.h@{dSFMT.h}!genrand\_\-open\_\-open@{genrand\_\-open\_\-open}}
+\index{genrand\_\-open\_\-open@{genrand\_\-open\_\-open}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{genrand\_\-open\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}static double genrand\_\-open\_\-open (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a4ddba4b9c32e5e347acdd26bf679350e}
+This function is just the same as \hyperlink{dSFMT_8h_a27b4a95b9fd7066d55d414f385237447}{dsfmt\_\-gv\_\-genrand\_\-open\_\-open()}. \begin{DoxyReturn}{Returns}
+double precision floating point number. see also 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_ad0a3324227d2e65e8d8888eb675170ac}{dsfmt\_\-genrand\_\-open\_\-open()} 
+
+\hyperlink{dSFMT_8h_a27b4a95b9fd7066d55d414f385237447}{dsfmt\_\-gv\_\-genrand\_\-open\_\-open()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_af8252a07409d644f4cfcaa4469ebd994}{
+\index{dSFMT.h@{dSFMT.h}!get\_\-idstring@{get\_\-idstring}}
+\index{get\_\-idstring@{get\_\-idstring}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{get\_\-idstring}]{\setlength{\rightskip}{0pt plus 5cm}static const char $\ast$ get\_\-idstring (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_af8252a07409d644f4cfcaa4469ebd994}
+This function is just the same as \hyperlink{dSFMT_8c_af181eeb77513e5a399dd2c585cfaa055}{dsfmt\_\-get\_\-idstring()}. \begin{DoxyReturn}{Returns}
+id string. see also 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8c_af181eeb77513e5a399dd2c585cfaa055}{dsfmt\_\-get\_\-idstring()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_a006127d9c8946a9e1ed89de92eb48e64}{
+\index{dSFMT.h@{dSFMT.h}!get\_\-min\_\-array\_\-size@{get\_\-min\_\-array\_\-size}}
+\index{get\_\-min\_\-array\_\-size@{get\_\-min\_\-array\_\-size}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{get\_\-min\_\-array\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}static int get\_\-min\_\-array\_\-size (void)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a006127d9c8946a9e1ed89de92eb48e64}
+This function is just the same as \hyperlink{dSFMT_8c_af49cc1703b4cc1d0bffbd895917c303a}{dsfmt\_\-get\_\-min\_\-array\_\-size()}. \begin{DoxyReturn}{Returns}
+minimum size of array used for fill\_\-array functions. see also 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8c_af49cc1703b4cc1d0bffbd895917c303a}{dsfmt\_\-get\_\-min\_\-array\_\-size()} 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_a46947b547a4f7d7758a682298f7ec0ce}{
+\index{dSFMT.h@{dSFMT.h}!init\_\-by\_\-array@{init\_\-by\_\-array}}
+\index{init\_\-by\_\-array@{init\_\-by\_\-array}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{init\_\-by\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}static void init\_\-by\_\-array (uint32\_\-t {\em init\_\-key}\mbox{[}$\,$\mbox{]}, \/  int {\em key\_\-length})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a46947b547a4f7d7758a682298f7ec0ce}
+This function is just the same as \hyperlink{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}{dsfmt\_\-gv\_\-init\_\-by\_\-array()}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em init\_\-key}]the array of 32-\/bit integers, used as a seed. \item[{\em key\_\-length}]the length of init\_\-key. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_aed8c0aab532874c09c43144a5a054191}{dsfmt\_\-gv\_\-init\_\-by\_\-array()}, 
+
+\hyperlink{dSFMT_8h_aa54b7fee7995bb6fc4e6a0f436b84b43}{dsfmt\_\-init\_\-by\_\-array()}. 
+\end{DoxySeeAlso}
+\hypertarget{dSFMT_8h_a8dc496135101ef4140c7e790bf7474cd}{
+\index{dSFMT.h@{dSFMT.h}!init\_\-gen\_\-rand@{init\_\-gen\_\-rand}}
+\index{init\_\-gen\_\-rand@{init\_\-gen\_\-rand}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{init\_\-gen\_\-rand}]{\setlength{\rightskip}{0pt plus 5cm}static void init\_\-gen\_\-rand (uint32\_\-t {\em seed})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dSFMT_8h_a8dc496135101ef4140c7e790bf7474cd}
+This function is just the same as \hyperlink{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}{dsfmt\_\-gv\_\-init\_\-gen\_\-rand()}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em seed}]a 32-\/bit integer used as the seed. see also \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{dSFMT_8h_a7b740379d0e954de5836560e4bc5dbfc}{dsfmt\_\-gv\_\-init\_\-gen\_\-rand()}, 
+
+\hyperlink{dSFMT_8h_aa767efdc0f36a3cde4d61d3764a473de}{dsfmt\_\-init\_\-gen\_\-rand()}. 
+\end{DoxySeeAlso}
+
+
+\subsection{Variable Documentation}
+\hypertarget{dSFMT_8h_adfee3c4c3505ddcfc334251f94968737}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-global\_\-data@{dsfmt\_\-global\_\-data}}
+\index{dsfmt\_\-global\_\-data@{dsfmt\_\-global\_\-data}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-global\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dsfmt\_\-t} {\bf dsfmt\_\-global\_\-data}}}
+\label{dSFMT_8h_adfee3c4c3505ddcfc334251f94968737}
+dsfmt internal state vector \hypertarget{dSFMT_8h_ab5bb9876d117b3cdf8143c701a3f8cdf}{
+\index{dSFMT.h@{dSFMT.h}!dsfmt\_\-global\_\-mexp@{dsfmt\_\-global\_\-mexp}}
+\index{dsfmt\_\-global\_\-mexp@{dsfmt\_\-global\_\-mexp}!dSFMT.h@{dSFMT.h}}
+\subsubsection[{dsfmt\_\-global\_\-mexp}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf dsfmt\_\-global\_\-mexp}}}
+\label{dSFMT_8h_ab5bb9876d117b3cdf8143c701a3f8cdf}
+dsfmt mexp for check 

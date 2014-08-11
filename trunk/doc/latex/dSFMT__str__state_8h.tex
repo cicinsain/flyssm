@@ -1,0 +1,69 @@
+\hypertarget{dSFMT__str__state_8h}{
+\section{lam/dSFMT\_\-str\_\-state.h File Reference}
+\label{dSFMT__str__state_8h}\index{lam/dSFMT\_\-str\_\-state.h@{lam/dSFMT\_\-str\_\-state.h}}
+}
+
+
+function to save and load the state of a dSFMT  
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{dSFMT__str__state_8h_aa34e8c89adcd01848de1e19e0b8d5444}{dsfmt\_\-state\_\-to\_\-str} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, char $\ast$prefix)
+\item 
+char $\ast$ \hyperlink{dSFMT__str__state_8h_a3afba709d29279df561d59804dbe0ebe}{dsfmt\_\-strlist\_\-to\_\-state} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, char $\ast$$\ast$strlist, char $\ast$prefix)
+\item 
+char $\ast$ \hyperlink{dSFMT__str__state_8h_a8d73576c7e3a3ad0ab3fee1b88e9f78b}{dsfmt\_\-str\_\-to\_\-state} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, char $\ast$origstr, char $\ast$prefix)
+\item 
+char $\ast$ \hyperlink{dSFMT__str__state_8h_a97f1b78db99777ac9360e1ee3e2d56c1}{dsfmt\_\-file\_\-to\_\-state} (\hyperlink{structDSFMT__T}{dsfmt\_\-t} $\ast$dsfmt, FILE $\ast$origfile, char $\ast$prefix)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+function to save and load the state of a dSFMT \begin{DoxyAuthor}{Author}
+Andrea C G Mennucci (Scuola Normale Superiore)
+\end{DoxyAuthor}
+Copyright (C) 2010 Andrea C G Mennucci
+
+The new BSD License is applied to this software, see LICENSE.txt 
+
+\subsection{Function Documentation}
+\hypertarget{dSFMT__str__state_8h_a97f1b78db99777ac9360e1ee3e2d56c1}{
+\index{dSFMT\_\-str\_\-state.h@{dSFMT\_\-str\_\-state.h}!dsfmt\_\-file\_\-to\_\-state@{dsfmt\_\-file\_\-to\_\-state}}
+\index{dsfmt\_\-file\_\-to\_\-state@{dsfmt\_\-file\_\-to\_\-state}!dSFMT_str_state.h@{dSFMT\_\-str\_\-state.h}}
+\subsubsection[{dsfmt\_\-file\_\-to\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ dsfmt\_\-file\_\-to\_\-state ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  FILE $\ast$ {\em origfile}, \/  char $\ast$ {\em prefix})}}
+\label{dSFMT__str__state_8h_a97f1b78db99777ac9360e1ee3e2d56c1}
+This function reads a file descriptor that represents the state of the dSFMT, and fills the state. It returns NULL if OK, or a string explaining the error, if any. (It should be freed after use)
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \item[{\em origfile}]the file encoding the state \item[{\em prefix}]the prefix that starts all lines; if it is NULL, it is set to \char`\"{}dsfmt\_\-\char`\"{} \end{DoxyParams}
+\hypertarget{dSFMT__str__state_8h_aa34e8c89adcd01848de1e19e0b8d5444}{
+\index{dSFMT\_\-str\_\-state.h@{dSFMT\_\-str\_\-state.h}!dsfmt\_\-state\_\-to\_\-str@{dsfmt\_\-state\_\-to\_\-str}}
+\index{dsfmt\_\-state\_\-to\_\-str@{dsfmt\_\-state\_\-to\_\-str}!dSFMT_str_state.h@{dSFMT\_\-str\_\-state.h}}
+\subsubsection[{dsfmt\_\-state\_\-to\_\-str}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ dsfmt\_\-state\_\-to\_\-str ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  char $\ast$ {\em prefix})}}
+\label{dSFMT__str__state_8h_aa34e8c89adcd01848de1e19e0b8d5444}
+This function returns a string that represents the state of the dSFMT. The string is allocated and should be free-\/d after use.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \item[{\em prefix}]a prefix to start all lines; if it is NULL, it is set to \char`\"{}dsfmt\_\-\char`\"{} \end{DoxyParams}
+\hypertarget{dSFMT__str__state_8h_a8d73576c7e3a3ad0ab3fee1b88e9f78b}{
+\index{dSFMT\_\-str\_\-state.h@{dSFMT\_\-str\_\-state.h}!dsfmt\_\-str\_\-to\_\-state@{dsfmt\_\-str\_\-to\_\-state}}
+\index{dsfmt\_\-str\_\-to\_\-state@{dsfmt\_\-str\_\-to\_\-state}!dSFMT_str_state.h@{dSFMT\_\-str\_\-state.h}}
+\subsubsection[{dsfmt\_\-str\_\-to\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ dsfmt\_\-str\_\-to\_\-state ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  char $\ast$ {\em origstr}, \/  char $\ast$ {\em prefix})}}
+\label{dSFMT__str__state_8h_a8d73576c7e3a3ad0ab3fee1b88e9f78b}
+This function reads a string that represents the state of the dSFMT, and fills the state. It returns NULL if OK, or a string explaining the error, if any. (It should be freed after use)
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector. \item[{\em origstr}]the string encoding the state \item[{\em prefix}]the prefix that starts all lines; if it is NULL, it is set to \char`\"{}dsfmt\_\-\char`\"{} \end{DoxyParams}
+\hypertarget{dSFMT__str__state_8h_a3afba709d29279df561d59804dbe0ebe}{
+\index{dSFMT\_\-str\_\-state.h@{dSFMT\_\-str\_\-state.h}!dsfmt\_\-strlist\_\-to\_\-state@{dsfmt\_\-strlist\_\-to\_\-state}}
+\index{dsfmt\_\-strlist\_\-to\_\-state@{dsfmt\_\-strlist\_\-to\_\-state}!dSFMT_str_state.h@{dSFMT\_\-str\_\-state.h}}
+\subsubsection[{dsfmt\_\-strlist\_\-to\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ dsfmt\_\-strlist\_\-to\_\-state ({\bf dsfmt\_\-t} $\ast$ {\em dsfmt}, \/  char $\ast$$\ast$ {\em strlist}, \/  char $\ast$ {\em prefix})}}
+\label{dSFMT__str__state_8h_a3afba709d29279df561d59804dbe0ebe}
+This function reads a NULL terminated list of string that represents the state of the dSFMT, and fills the state. It returns NULL if OK, or a string explaining the error, if any. (The error should be freed after use)
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dsfmt}]dsfmt state vector to be filled. \item[{\em strlist}]the NULL terminated list of strings encoding the state \item[{\em prefix}]the prefix that starts all lines; if it is NULL, it is set to \char`\"{}dsfmt\_\-\char`\"{} \end{DoxyParams}

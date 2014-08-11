@@ -1,0 +1,70 @@
+\hypertarget{global_8h}{
+\section{lam/global.h File Reference}
+\label{global_8h}\index{lam/global.h@{lam/global.h}}
+}
+{\ttfamily \#include $<$float.h$>$}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structScoreOutput}{ScoreOutput}
+\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{global_8h_a51171bef903405deb22ac8950b1f6d12}{MAX\_\-RECORD}~256
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{global_8h_ac3e1795766a80ec63b157951b4b9a7d4}{
+int {\bfseries debug}}
+\label{global_8h_ac3e1795766a80ec63b157951b4b9a7d4}
+
+\item 
+\hypertarget{global_8h_a2e38bc3eb76494c57ef959c6e863bc6c}{
+int {\bfseries proc\_\-id}}
+\label{global_8h_a2e38bc3eb76494c57ef959c6e863bc6c}
+
+\item 
+const int \hyperlink{global_8h_ab8b764097b0f861ad9adc095a88e6edb}{MAX\_\-PRECISION}
+\item 
+const double \hyperlink{global_8h_a634312c07b9e2c66592be1878b5a6564}{FORBIDDEN\_\-MOVE}
+\item 
+const int \hyperlink{global_8h_ac0856e3e4744f90264ff7477676c2e7b}{OUT\_\-OF\_\-BOUND}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+written by JR, modified by Yoginho
+
+THIS HEADER CONTAINS $\ast$ONLY$\ast$ STUFF THAT IS NEEDED IN BOTH LSA.C AND COST FUNCTION-\/SPECIFIC FILES.
+
+PLEASE THINK TWICE BEFORE PUTTING ANYTHING IN HERE!!!!
+
+\hyperlink{global_8h}{global.h} gets included automatically by other header files if needed and is not included explicitly in .c files. 
+
+\subsection{Define Documentation}
+\hypertarget{global_8h_a51171bef903405deb22ac8950b1f6d12}{
+\index{global.h@{global.h}!MAX\_\-RECORD@{MAX\_\-RECORD}}
+\index{MAX\_\-RECORD@{MAX\_\-RECORD}!global.h@{global.h}}
+\subsubsection[{MAX\_\-RECORD}]{\setlength{\rightskip}{0pt plus 5cm}\#define MAX\_\-RECORD~256}}
+\label{global_8h_a51171bef903405deb22ac8950b1f6d12}
+IMPORTANT NOTE: the following used to be only 80 to be backward compatible with punch cards that were of that maximum length. We have decided to abandon punch-\/card compatibility, since few people are actually using them anymore... It was a tough decision though. JR \& JJ, July 2001 
+
+\subsection{Variable Documentation}
+\hypertarget{global_8h_a634312c07b9e2c66592be1878b5a6564}{
+\index{global.h@{global.h}!FORBIDDEN\_\-MOVE@{FORBIDDEN\_\-MOVE}}
+\index{FORBIDDEN\_\-MOVE@{FORBIDDEN\_\-MOVE}!global.h@{global.h}}
+\subsubsection[{FORBIDDEN\_\-MOVE}]{\setlength{\rightskip}{0pt plus 5cm}const double {\bf FORBIDDEN\_\-MOVE}}}
+\label{global_8h_a634312c07b9e2c66592be1878b5a6564}
+the following constant as a score tells the annealer to reject a move, no matter what. It had better not be a number that could actually be a score. \hypertarget{global_8h_ab8b764097b0f861ad9adc095a88e6edb}{
+\index{global.h@{global.h}!MAX\_\-PRECISION@{MAX\_\-PRECISION}}
+\index{MAX\_\-PRECISION@{MAX\_\-PRECISION}!global.h@{global.h}}
+\subsubsection[{MAX\_\-PRECISION}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf MAX\_\-PRECISION}}}
+\label{global_8h_ab8b764097b0f861ad9adc095a88e6edb}
+The following defines the maximum float precision that is supported by the code. \hypertarget{global_8h_ac0856e3e4744f90264ff7477676c2e7b}{
+\index{global.h@{global.h}!OUT\_\-OF\_\-BOUND@{OUT\_\-OF\_\-BOUND}}
+\index{OUT\_\-OF\_\-BOUND@{OUT\_\-OF\_\-BOUND}!global.h@{global.h}}
+\subsubsection[{OUT\_\-OF\_\-BOUND}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf OUT\_\-OF\_\-BOUND}}}
+\label{global_8h_ac0856e3e4744f90264ff7477676c2e7b}
+out of bound control in score 

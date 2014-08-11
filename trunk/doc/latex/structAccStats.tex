@@ -1,0 +1,51 @@
+\hypertarget{structAccStats}{
+\section{AccStats Struct Reference}
+\label{structAccStats}\index{AccStats@{AccStats}}
+}
+
+
+Acceptance statistics are used for keeping the acceptance ratio for each parameter as close as possible to 0.44.  
+
+
+{\ttfamily \#include $<$moves.h$>$}\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{structAccStats_a2b39aee6603f5812f840f8da04447c28}{acc\_\-ratio}
+\item 
+double \hyperlink{structAccStats_ab4014e14e83e9330df034fd58345eb2e}{theta\_\-bar}
+\item 
+int \hyperlink{structAccStats_abe628be4d47984425dbbb60886d2c89a}{hits}
+\item 
+int \hyperlink{structAccStats_ad3e93bcadea6e3d1a5060ab63159bc9e}{success}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Acceptance statistics are used for keeping the acceptance ratio for each parameter as close as possible to 0.44. There is one such struct for each parameter to be tweaked. 
+
+\subsection{Member Data Documentation}
+\hypertarget{structAccStats_a2b39aee6603f5812f840f8da04447c28}{
+\index{AccStats@{AccStats}!acc\_\-ratio@{acc\_\-ratio}}
+\index{acc\_\-ratio@{acc\_\-ratio}!AccStats@{AccStats}}
+\subsubsection[{acc\_\-ratio}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf AccStats::acc\_\-ratio}}}
+\label{structAccStats_a2b39aee6603f5812f840f8da04447c28}
+acceptance ratio for parameter \hypertarget{structAccStats_abe628be4d47984425dbbb60886d2c89a}{
+\index{AccStats@{AccStats}!hits@{hits}}
+\index{hits@{hits}!AccStats@{AccStats}}
+\subsubsection[{hits}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf AccStats::hits}}}
+\label{structAccStats_abe628be4d47984425dbbb60886d2c89a}
+number of moves since last call to {\ttfamily \hyperlink{moves_8c_aec3936bd73396a7fbbbb0f51d518ae24}{UpdateControl()}} \hypertarget{structAccStats_ad3e93bcadea6e3d1a5060ab63159bc9e}{
+\index{AccStats@{AccStats}!success@{success}}
+\index{success@{success}!AccStats@{AccStats}}
+\subsubsection[{success}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf AccStats::success}}}
+\label{structAccStats_ad3e93bcadea6e3d1a5060ab63159bc9e}
+number of these moves that were accepted \hypertarget{structAccStats_ab4014e14e83e9330df034fd58345eb2e}{
+\index{AccStats@{AccStats}!theta\_\-bar@{theta\_\-bar}}
+\index{theta\_\-bar@{theta\_\-bar}!AccStats@{AccStats}}
+\subsubsection[{theta\_\-bar}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf AccStats::theta\_\-bar}}}
+\label{structAccStats_ab4014e14e83e9330df034fd58345eb2e}
+theta bar is proportional to move size 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+fly/\hyperlink{moves_8h}{moves.h}\end{DoxyCompactItemize}

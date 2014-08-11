@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="89">
+  <projectmakefile>SimAnn-Makefile.mk</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>/home/nisusers/dcicin/NetBeansProjects/SimAnnH/trunk/fly/unfold -G -s rck -i 4.0 -a 0.001 -j /home/nisusers/dcicin/Desktop/Hilde/optimization/scriptsH/output_timepoints.dat /home/nisusers/dcicin/Jaeger_Lab/damjan/Hilde/121121/tllg58c13-v7.0_19_hb.tmp</runcommandpicklistitem>
+          <runcommandpicklistitem>/home/nisusers/dcicin/NetBeansProjects/SimAnnH/trunk/fly/unfold -G -s rck -i 4.0 -a 0.001 -j /home/nisusers/dcicin/Desktop/Hilde/optimization/scriptsH/output_timepoints.dat /home/nisusers/dcicin/Jaeger_Lab/damjan/Hilde/121121/tllg58c13-v7.0_9_gt-p.tmp</runcommandpicklistitem>
+          <runcommandpicklistitem>/home/nisusers/dcicin/NetBeansProjects/SimAnnH/trunk/fly/unfold -G -s rck -i 4.0 -a 0.001 -t 10.550 /home/nisusers/dcicin/Jaeger_Lab/damjan/Hilde/121121/tllg58c13-v7.0_9_gt-p.tmp</runcommandpicklistitem>
+          <runcommandpicklistitem>/home/nisusers/dcicin/NetBeansProjects/SimAnnH/trunk/fly/unfold -G -s rck -i 4.0 -a 0.001 -t 30.475 /home/nisusers/dcicin/Jaeger_Lab/damjan/Hilde/121121/tllg58c13-v7.0_9_gt-p.tmp</runcommandpicklistitem>
+          <runcommandpicklistitem>/home/nisusers/dcicin/NetBeansProjects/SimAnnH/trunk/fly/unfold -G -s rck -i 4.0 -a 0.001 -t 10.550 /home/nisusers/dcicin/Jaeger_Lab/damjan/Hilde/121121/tllg58c13-v7.0_9_gt-a.tmp</runcommandpicklistitem>
+          <runcommandpicklistitem>./fly/unfold -j ~/Desktop/Berta/unfold2/fly_simann/trunk/input/long_output_times -x eqparms -s rck ~/Desktop/Berta/unfold2/fly_simann/trunk/input/dm_hkgn58_ft_004_DIFF_OFF_4126_saddle1_013</runcommandpicklistitem>
+          <runcommandpicklistitem>fly/unfold -j ~/Desktop/Berta/unfold2/fly_simann/trunk/input/long_output_times -x eqparms -s rck ~/Desktop/Berta/unfold2/fly_simann/trunk/input/dm_hkgn58_ft_004_DIFF_OFF_4126_saddle1_013</runcommandpicklistitem>
+          <runcommandpicklistitem>fly/fly_sa -s rck -t -l -i 4.0 -a 0.001 /home/nisusers/dcicin/Desktop/Hilde/optimization/mnoutput/hildenewtest/tllg58c13-v5.4_1gt_1</runcommandpicklistitem>
+          <runcommandpicklistitem>fly/fly_sa -s rck -t -l -i 4.0 -a 0.001 /users/jjaeger/dcicin/Desktop/Hilde/optimization/greame/tllg58c13-v4.2_001_new</runcommandpicklistitem>
+          <runcommandpicklistitem>fly/fly_sa -s bnd -t -l -i 4.0 -a 0.001 /users/jjaeger/dcicin/Desktop/Hilde/optimization/greame/tllg58c13-v4.2_001_new</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>fly/fly_sa -s bnd -t -l -i 4.0 -a 0.001 /users/jjaeger/dcicin/Desktop/Hilde/optimization/greame/tllg58c13-v4.2_001_new</runcommand>
+        <rundir>/users/jjaeger/dcicin/NetBeansProjects/SimAnn/trunk/</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

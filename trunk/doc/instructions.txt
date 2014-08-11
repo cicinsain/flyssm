@@ -1,0 +1,94 @@
+/***************************************************************************
+ *   Copyright (C) 2009 by Anton Crombach, anton.crombach@crg.es           *
+ *                                                                         *
+ *   Copyright (C) 2006 by Yves Fomekong Nanfack, F.219,+31 20 525 7530,   *
+ *   yvesf@science.uva.nl                                                  *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ ***************************************************************************/
+
+************
+INSTALLATION
+************
+(1) install OPENMPI, GSL and SUNDIALS first
+(2) go to trunk folder
+(3) make the MPICC variable in Makefile point to your OPENMPI mpicc compiler
+(3a) if GSL or SUNDIALS libraries are not installed in /usr/local, then you should point
+to them by adding -L/your/lib/folder1 -L/your/lib/folder2 to the CLFLAGS variable in Makefile
+(3b) if GSL or SUNDIALS includes are not installed in /usr/local, then you should point
+to them by adding -I/your/include/folder1 -I/your/include/folder2 to the INCLUDES variable in Makefile
+(4) $make deps
+(5) $make
+
+
+/*************************************************************************** 
+ *   Instructions to execute the different programs						           *
+ ***************************************************************************/
+printscore: printscore of a datafile (simple). Print the chi square and the 
+root mean square (RMS)
+"Usage: printscore [-a <accuracy>] [-D] [-f <float_prec>] [-g <g(u)>] [-G]\n"
+"                  [-h] [-i <stepsize>] [-o] [-p] [-s <solver>] [-v]\n"
+"                  [-x <sect_title>]\n"
+"                  <datafile>\n";
+
+
+unfold: solve a model parameters and return solution for given time points
+"Usage: unfold [-a <accuracy>] [-D] [-f <float_prec>] [-g <g(u)>] [-G]\n"
+"              [-h] [-i <stepsize>] [-j <timefile>] [-o] [-p <pstep>]\n"
+"              [-s <solver>] [-t <time>] [-v] [-x <sect_title>]\n"
+"              [-z <gast_time>]\n"
+"              <datafile> [<genotype>]\n";
+
+
+scramble: generate new random model parameters within constraint limits. Note:
+'-x sect_title' is the section you want to regenerate
+"Usage: scramble [-f <float_prec>] [-h] [-v]\n"
+"                [-w <out_file>] [-x <sect_title>]\n"
+"                <datafile>\n";
+
+
+
+The programs have the same arguments, though some arguments may have different behaviour according to the program... (which is not so nice).
+
+The list of arguments:
+    -a <arg>   : solver accuracy
+    -b <arg>   : backup frequency 
+    -f <arg>   : float precision
+    -g <s,t,h> : choose g(u) function [sqrt, tanh, exp, hvs]
+    -h         : print the help message (help may show obsolete options...)
+    -i <arg>   : stepsize 
+    -m <o,w>   : (o)LS or (w)LS
+    -r <0/1>   : shows RMS or chi square (recommended value 1)
+    -s <arg>   : solver [a=Adams, bd=BaDe, bs=BuSt, e=Euler,
+                 h=Heun, mi or m=Milne, me=Meuler, r4 or r=Rk4, r2=Rk2,
+                 rck=Rkck (default), rf=Rkf, bnd=Band]
+    -w <arg>   : output dir. If omitted, create a directory name
+                 <input_name_out>
+    -x <sect_title> : input parameters to be read (it should exist in the input
+                      file). Default is 'input'
+
+That's it!
+
+Run example:
+./fly/fly_sa -s bnd -l -i 4.0 -a 0.0001 -w output/fly_output input/default.config
+
+%run a simple SA on file default.config using Krylov numerical solver with solver stepsize 4 and accuracy 0.0001, display log to terminal and generate output at 
+output/fly_output
+
+
+
+
+

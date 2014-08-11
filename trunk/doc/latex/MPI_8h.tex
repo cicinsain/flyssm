@@ -1,0 +1,173 @@
+\hypertarget{MPI_8h}{
+\section{lam/MPI.h File Reference}
+\label{MPI_8h}\index{lam/MPI.h@{lam/MPI.h}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{MPI_8h_a2c336b253a8c93bc9ae162ea4ea0e120}{UpdateLParameter} (void)
+\item 
+void \hyperlink{MPI_8h_a53739d4ae5bae8ce8f96188290bebbb6}{DoMix} (void)
+\item 
+void \hyperlink{MPI_8h_a63fbdc42c454e86bf65c7ce9ddfa4c97}{DoFixMix} (void)
+\item 
+void \hyperlink{MPI_8h_a392434da8fd267c28457251c6be936e3}{MakeLamMsg} (double $\ast$$\ast$sendbuf)
+\item 
+void \hyperlink{MPI_8h_a85ed14ba60fcf0779145ae4677b8b6fc}{AcceptLamMsg} (double $\ast$recvbuf)
+\item 
+void \hyperlink{MPI_8h_a56398ede48648f36cfc5975af4283937}{InitTuning} (void)
+\item 
+void \hyperlink{MPI_8h_a95e4d47c2fd9172d156d07bf683ea242}{DoTuning} (void)
+\item 
+void \hyperlink{MPI_8h_aa585bf49c0a06f7e279c674409964fe1}{WriteTuning} (void)
+\item 
+int \hyperlink{MPI_8h_a187a677b9e64ba43ec6d9b882b10471c}{StopTuning} (void)
+\item 
+void \hyperlink{MPI_8h_a42e002dd138ca09a8ccdc1b5b9164f51}{MakeStateMsg} (long $\ast$$\ast$longbuf, int $\ast$lsize, double $\ast$$\ast$doublebuf, int $\ast$dsize)
+\item 
+void \hyperlink{MPI_8h_a0f022d81ce71ffb46b30d6f2afdd15fc}{AcceptStateMsg} (long $\ast$longbuf, double $\ast$doublebuf)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{MPI_8h_a489d8e7dccbab44d1830e73395beb00c}{
+const int {\bfseries MAX\_\-MIX}}
+\label{MPI_8h_a489d8e7dccbab44d1830e73395beb00c}
+
+\item 
+\hypertarget{MPI_8h_a9408f96d87913ea03a6c84cac52723d0}{
+const int {\bfseries GROUP\_\-SIZE}}
+\label{MPI_8h_a9408f96d87913ea03a6c84cac52723d0}
+
+\item 
+\hypertarget{MPI_8h_a5fdf520005135ea9067e1de9179cb646}{
+const int {\bfseries STOP\_\-TUNE\_\-CNT}}
+\label{MPI_8h_a5fdf520005135ea9067e1de9179cb646}
+
+\item 
+\hypertarget{MPI_8h_a45a2d3c4a2a70ce9a969b7f1f4e41f52}{
+const int {\bfseries STOP\_\-TUNE\_\-CRIT}}
+\label{MPI_8h_a45a2d3c4a2a70ce9a969b7f1f4e41f52}
+
+\item 
+\hypertarget{MPI_8h_aa3e4b2ed0d35a6602e8c396d95bc1dbc}{
+const int {\bfseries LSTAT\_\-LENGTH}}
+\label{MPI_8h_aa3e4b2ed0d35a6602e8c396d95bc1dbc}
+
+\item 
+\hypertarget{MPI_8h_a51854984b60eb941ce6d0502c7d91925}{
+const int {\bfseries LSTAT\_\-LENGTH\_\-TUNE}}
+\label{MPI_8h_a51854984b60eb941ce6d0502c7d91925}
+
+\item 
+\hypertarget{MPI_8h_a20705b4372a9940d34a164bae541be1f}{
+int {\bfseries myid}}
+\label{MPI_8h_a20705b4372a9940d34a164bae541be1f}
+
+\item 
+\hypertarget{MPI_8h_a824ac1af8a4229ed37411081a1ffd928}{
+int {\bfseries nnodes}}
+\label{MPI_8h_a824ac1af8a4229ed37411081a1ffd928}
+
+\item 
+\hypertarget{MPI_8h_ac12aec46d561cff2caffc35ef7bfc40f}{
+int {\bfseries tuning}}
+\label{MPI_8h_ac12aec46d561cff2caffc35ef7bfc40f}
+
+\item 
+\hypertarget{MPI_8h_a68fcc7e9a69861f5561d7bee6f1a305a}{
+int {\bfseries covar\_\-index}}
+\label{MPI_8h_a68fcc7e9a69861f5561d7bee6f1a305a}
+
+\item 
+\hypertarget{MPI_8h_a356f27c3b3cb26bd8170fc7555050827}{
+int {\bfseries write\_\-tune\_\-stat}}
+\label{MPI_8h_a356f27c3b3cb26bd8170fc7555050827}
+
+\item 
+\hypertarget{MPI_8h_a7470a7f95b4c01f7e1ca9c6a8af36514}{
+int {\bfseries auto\_\-stop\_\-tune}}
+\label{MPI_8h_a7470a7f95b4c01f7e1ca9c6a8af36514}
+
+\item 
+\hypertarget{MPI_8h_a4806bd9eddfa4f6a6e113bc0471bcfa3}{
+int {\bfseries write\_\-llog}}
+\label{MPI_8h_a4806bd9eddfa4f6a6e113bc0471bcfa3}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+written by John Reinitz modified by King-\/Wai Chu and Johannes Jaeger
+
+last modified, 06/13/2002
+
+IMPORTANT: IF YOU EVER CHANGE ANYTHING IN THIS FILE, LET ALL YOUR FELLOW PROGRAMMERS KNOW WELL IN ADVANCE AND CONSULT WITH THEM IF THEY AGREE ON YOUR CHANGES!!
+
+\hyperlink{MPI_8h}{MPI.h} contains structs and constants that are specific to parallel annealing code using MPI.
+
+This includes prototypes for all the tuning functions below.
+
+There are two problem-\/specific functions declared below that need to be defined in move(s).c.
+
+NOTE: this header only contains prototypes for functions used for parallel annealing code only; all prototypes of functions that include serial code need to go into \hyperlink{sa_8h}{sa.h} 
+
+\subsection{Function Documentation}
+\hypertarget{MPI_8h_a85ed14ba60fcf0779145ae4677b8b6fc}{
+\index{MPI.h@{MPI.h}!AcceptLamMsg@{AcceptLamMsg}}
+\index{AcceptLamMsg@{AcceptLamMsg}!MPI.h@{MPI.h}}
+\subsubsection[{AcceptLamMsg}]{\setlength{\rightskip}{0pt plus 5cm}void AcceptLamMsg (double $\ast$ {\em recvbuf})}}
+\label{MPI_8h_a85ed14ba60fcf0779145ae4677b8b6fc}
+AcceptLamMsg: receives new energy and Lam stats upon mixing \hypertarget{MPI_8h_a0f022d81ce71ffb46b30d6f2afdd15fc}{
+\index{MPI.h@{MPI.h}!AcceptStateMsg@{AcceptStateMsg}}
+\index{AcceptStateMsg@{AcceptStateMsg}!MPI.h@{MPI.h}}
+\subsubsection[{AcceptStateMsg}]{\setlength{\rightskip}{0pt plus 5cm}void AcceptStateMsg (long $\ast$ {\em longbuf}, \/  double $\ast$ {\em doublebuf})}}
+\label{MPI_8h_a0f022d81ce71ffb46b30d6f2afdd15fc}
+AcceptMsg: communicates a message about move stats received via MPI to move(s).c; see the comment for MakeStateMsg for the ra-\/ tionale behind the two arrays that are passed \hypertarget{MPI_8h_a63fbdc42c454e86bf65c7ce9ddfa4c97}{
+\index{MPI.h@{MPI.h}!DoFixMix@{DoFixMix}}
+\index{DoFixMix@{DoFixMix}!MPI.h@{MPI.h}}
+\subsubsection[{DoFixMix}]{\setlength{\rightskip}{0pt plus 5cm}void DoFixMix (void)}}
+\label{MPI_8h_a63fbdc42c454e86bf65c7ce9ddfa4c97}
+DoFixMix: for equilibration run, we only need to pass the move state since Lam stats are not needed at constant temperature \hypertarget{MPI_8h_a53739d4ae5bae8ce8f96188290bebbb6}{
+\index{MPI.h@{MPI.h}!DoMix@{DoMix}}
+\index{DoMix@{DoMix}!MPI.h@{MPI.h}}
+\subsubsection[{DoMix}]{\setlength{\rightskip}{0pt plus 5cm}void DoMix (void)}}
+\label{MPI_8h_a53739d4ae5bae8ce8f96188290bebbb6}
+DoMix: does the mixing; sends move state and local Lam stats to the dance partner(s) \hypertarget{MPI_8h_a95e4d47c2fd9172d156d07bf683ea242}{
+\index{MPI.h@{MPI.h}!DoTuning@{DoTuning}}
+\index{DoTuning@{DoTuning}!MPI.h@{MPI.h}}
+\subsubsection[{DoTuning}]{\setlength{\rightskip}{0pt plus 5cm}void DoTuning (void)}}
+\label{MPI_8h_a95e4d47c2fd9172d156d07bf683ea242}
+DoTuning: calculates the cross-\/correlation (for lower bound) and the variance of local means (for upper bound) for a sub\_\-tune\_\- interval; the results are added to arrays, which span the whole tuning\_\-interval; when these values get written to the 'bound' files, they will be divided by the number of mixes we have done already to average them out (see also King-\/Wai Chu's thesis, p. 63) \hypertarget{MPI_8h_a56398ede48648f36cfc5975af4283937}{
+\index{MPI.h@{MPI.h}!InitTuning@{InitTuning}}
+\index{InitTuning@{InitTuning}!MPI.h@{MPI.h}}
+\subsubsection[{InitTuning}]{\setlength{\rightskip}{0pt plus 5cm}void InitTuning (void)}}
+\label{MPI_8h_a56398ede48648f36cfc5975af4283937}
+InitTuning: sets up/restores structs and variables for tuning runs \hypertarget{MPI_8h_a392434da8fd267c28457251c6be936e3}{
+\index{MPI.h@{MPI.h}!MakeLamMsg@{MakeLamMsg}}
+\index{MakeLamMsg@{MakeLamMsg}!MPI.h@{MPI.h}}
+\subsubsection[{MakeLamMsg}]{\setlength{\rightskip}{0pt plus 5cm}void MakeLamMsg (double $\ast$$\ast$ {\em sendbuf})}}
+\label{MPI_8h_a392434da8fd267c28457251c6be936e3}
+MakeLamMsg: packages local Lam stats into send buffer \hypertarget{MPI_8h_a42e002dd138ca09a8ccdc1b5b9164f51}{
+\index{MPI.h@{MPI.h}!MakeStateMsg@{MakeStateMsg}}
+\index{MakeStateMsg@{MakeStateMsg}!MPI.h@{MPI.h}}
+\subsubsection[{MakeStateMsg}]{\setlength{\rightskip}{0pt plus 5cm}void MakeStateMsg (long $\ast$$\ast$ {\em longbuf}, \/  int $\ast$ {\em lsize}, \/  double $\ast$$\ast$ {\em doublebuf}, \/  int $\ast$ {\em dsize})}}
+\label{MPI_8h_a42e002dd138ca09a8ccdc1b5b9164f51}
+MakeStateMsg: function to prepare a message which is then passed to other nodes via MPI telling the other nodes about move stats; since we don't know about the move state structs, but can assume that we'll only have to send longs and doubles, we split the message in two arrays, one for the longs and one for the doubles; then we re-\/ turn the arrays and their sizes for \hyperlink{lsa_8c}{lsa.c} to send them to the dance partners
+
+note that all the arguments need to get passed by refe-\/ rence since we need to allocate the arrays according to their problem-\/specific size in move(s).c \hypertarget{MPI_8h_a187a677b9e64ba43ec6d9b882b10471c}{
+\index{MPI.h@{MPI.h}!StopTuning@{StopTuning}}
+\index{StopTuning@{StopTuning}!MPI.h@{MPI.h}}
+\subsubsection[{StopTuning}]{\setlength{\rightskip}{0pt plus 5cm}int StopTuning (void)}}
+\label{MPI_8h_a187a677b9e64ba43ec6d9b882b10471c}
+StopTuning: is to tuning runs what \hyperlink{lsa_8c_af1f7f727fc1eb8fadaf6771b9c16e977}{Frozen()} is to a normal annealing run: it basically checks if the tuning stop criterion applies and returns true if that's the case \hypertarget{MPI_8h_a2c336b253a8c93bc9ae162ea4ea0e120}{
+\index{MPI.h@{MPI.h}!UpdateLParameter@{UpdateLParameter}}
+\index{UpdateLParameter@{UpdateLParameter}!MPI.h@{MPI.h}}
+\subsubsection[{UpdateLParameter}]{\setlength{\rightskip}{0pt plus 5cm}void UpdateLParameter (void)}}
+\label{MPI_8h_a2c336b253a8c93bc9ae162ea4ea0e120}
+UpdateLParameter: update local parameters l\_\-A, l\_\-B, l\_\-D and l\_\-E and the local estimators for mean and standard deviation for both upper and lower bounds of M\_\-Opt for the current S \hypertarget{MPI_8h_aa585bf49c0a06f7e279c674409964fe1}{
+\index{MPI.h@{MPI.h}!WriteTuning@{WriteTuning}}
+\index{WriteTuning@{WriteTuning}!MPI.h@{MPI.h}}
+\subsubsection[{WriteTuning}]{\setlength{\rightskip}{0pt plus 5cm}void WriteTuning (void)}}
+\label{MPI_8h_aa585bf49c0a06f7e279c674409964fe1}
+WriteTuning: writes tuning stats to files ever tune\_\-interval 

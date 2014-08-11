@@ -1,0 +1,81 @@
+\hypertarget{scramble_8c}{
+\section{fly/scramble.c File Reference}
+\label{scramble_8c}\index{fly/scramble.c@{fly/scramble.c}}
+}
+
+
+Reads the 'input' or 'eqparms' section of a data file and returns random parameter values that are within the limits specified by the \$limits section of the data file.  
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$sys/types.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$moves.h$>$}\par
+{\ttfamily \#include $<$error.h$>$}\par
+{\ttfamily \#include $<$maternal.h$>$}\par
+{\ttfamily \#include $<$score.h$>$}\par
+{\ttfamily \#include $<$zygotic.h$>$}\par
+{\ttfamily \#include $<$../lam/random.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{scramble_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{scramble_8c_a5fb0ca78952ca848cfe3297722726aae}{
+const char $\ast$ {\bfseries OPTS} = \char`\"{}:f:hvw:x:\char`\"{}}
+\label{scramble_8c_a5fb0ca78952ca848cfe3297722726aae}
+
+\item 
+const int \hyperlink{scramble_8c_ab8b764097b0f861ad9adc095a88e6edb}{MAX\_\-PRECISION} = 16
+\item 
+const double \hyperlink{scramble_8c_a634312c07b9e2c66592be1878b5a6564}{FORBIDDEN\_\-MOVE} = DBL\_\-MAX
+\item 
+const int \hyperlink{scramble_8c_ac0856e3e4744f90264ff7477676c2e7b}{OUT\_\-OF\_\-BOUND} = -\/1
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Reads the 'input' or 'eqparms' section of a data file and returns random parameter values that are within the limits specified by the \$limits section of the data file. \begin{DoxyAuthor}{Author}
+JR, modified by Yoginho
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+Note that only those parameters will get scrambled which are indicated as to-\/be-\/tweaked in the \$tweak section of the data file.
+
+\begin{DoxyParagraph}{A short comment on penalty limits (JJ, Aug 7, 2001): }
+
+\end{DoxyParagraph}
+In order to produce random values of T, m and h that are within reasonable limits when no explicit limits are used for them, we do the following approximation:
+
+First, we determine the limits of u in g(u) within which there is no penalty assigned. This is true for all g(u) be-\/ tween Lambda and (1-\/Lambda). Therefore, we calculate the in-\/ verse function of g(u) for those to values to get upper and lower limits for u (based on ideas by Eric Mjolsness). Since we need to sum up all T $\ast$ vmax, m $\ast$ mmax and h to get u, we'll compensate by dividing the limits by the sqrt of the number of genes in the problem. This way we think, we'll get reasonable limits for single parameters (idea by JR). All the above happens in the Penalty2Limits function in sco-\/ re.c. When comparing parameters to limits, don't forget to multiply Ts with vmax and ms with mmax. This happens in main of scramble below. hs are compared as they are.
+
+See JJs lab notes for further detail on g(u)-\/inverse and such. 
+
+\subsection{Function Documentation}
+\hypertarget{scramble_8c_a3c04138a5bfe5d72780bb7e82a18e627}{
+\index{scramble.c@{scramble.c}!main@{main}}
+\index{main@{main}!scramble.c@{scramble.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
+\label{scramble_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+\hyperlink{scramble_8c}{scramble.c} main function 
+
+\subsection{Variable Documentation}
+\hypertarget{scramble_8c_a634312c07b9e2c66592be1878b5a6564}{
+\index{scramble.c@{scramble.c}!FORBIDDEN\_\-MOVE@{FORBIDDEN\_\-MOVE}}
+\index{FORBIDDEN\_\-MOVE@{FORBIDDEN\_\-MOVE}!scramble.c@{scramble.c}}
+\subsubsection[{FORBIDDEN\_\-MOVE}]{\setlength{\rightskip}{0pt plus 5cm}const double {\bf FORBIDDEN\_\-MOVE} = DBL\_\-MAX}}
+\label{scramble_8c_a634312c07b9e2c66592be1878b5a6564}
+the following constant as a score tells the annealer to reject a move, no matter what. It had better not be a number that could actually be a score. \hypertarget{scramble_8c_ab8b764097b0f861ad9adc095a88e6edb}{
+\index{scramble.c@{scramble.c}!MAX\_\-PRECISION@{MAX\_\-PRECISION}}
+\index{MAX\_\-PRECISION@{MAX\_\-PRECISION}!scramble.c@{scramble.c}}
+\subsubsection[{MAX\_\-PRECISION}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf MAX\_\-PRECISION} = 16}}
+\label{scramble_8c_ab8b764097b0f861ad9adc095a88e6edb}
+The following defines the maximum float precision that is supported by the code. \hypertarget{scramble_8c_ac0856e3e4744f90264ff7477676c2e7b}{
+\index{scramble.c@{scramble.c}!OUT\_\-OF\_\-BOUND@{OUT\_\-OF\_\-BOUND}}
+\index{OUT\_\-OF\_\-BOUND@{OUT\_\-OF\_\-BOUND}!scramble.c@{scramble.c}}
+\subsubsection[{OUT\_\-OF\_\-BOUND}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf OUT\_\-OF\_\-BOUND} = -\/1}}
+\label{scramble_8c_ac0856e3e4744f90264ff7477676c2e7b}
+out of bound control in score 

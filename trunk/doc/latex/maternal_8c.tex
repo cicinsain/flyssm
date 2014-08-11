@@ -1,0 +1,471 @@
+\hypertarget{maternal_8c}{
+\section{fly/maternal.c File Reference}
+\label{maternal_8c}\index{fly/maternal.c@{fly/maternal.c}}
+}
+
+
+Defines a lot of constants, bias-\/related stuff and functions to deal with the data structures.  
+{\ttfamily \#include $<$float.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$ctype.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$error.h$>$}\par
+{\ttfamily \#include \char`\"{}maternal.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}integrate.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}zygotic.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}fly\_\-io.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}ioTools.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structTimes}{Times} \hyperlink{maternal_8c_a13da361753be3551f3693b444062b9ad}{InitTimes} (\hyperlink{structTheProblem}{TheProblem} defs)
+\item 
+\hyperlink{structGenoType}{GenoType} $\ast$ \hyperlink{maternal_8c_a3a6102aa7a9db11f758a2e4e1142eee4}{InitBicoid} (FILE $\ast$fp, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+\hyperlink{structBias}{Bias} \hyperlink{maternal_8c_af2c34df68a6b095ecdf88536b59ba79b}{InitBias} (FILE $\ast$fp, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+\hyperlink{structGenoType}{GenoType} $\ast$ \hyperlink{maternal_8c_aad53d7072bbd89196ea744798e056c7f}{InitBTs} (\hyperlink{structGenoType}{GenoType} $\ast$biastype, int nalleles)
+\item 
+int $\ast$ \hyperlink{maternal_8c_a948a840ac7bea7d8da4a729a3e2c470f}{InitNNucs} (\hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+void \hyperlink{maternal_8c_a8d15fc35aa9d95eac2333c7fd8508499}{InitFullNNucs} (\hyperlink{structZygote}{Zygote} $\ast$zyg, int $\ast$full\_\-lin\_\-start)
+\item 
+\hyperlink{structDArrPtr}{DArrPtr} \hyperlink{maternal_8c_ab0bc9364ad30c3db66aff258552d7a7e}{GetBicoid} (double time, int genindex, \hyperlink{structGenoType}{GenoType} $\ast$bcdtype, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+\hyperlink{structDArrPtr}{DArrPtr} \hyperlink{maternal_8c_a1fe11ad2b9518f6474390a6cee66f784}{GetBias} (double time, int genindex, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+\hyperlink{structDArrPtr}{DArrPtr} \hyperlink{maternal_8c_ad456ad4161392555dd8bd593b84ac441}{GetBTimes} (char $\ast$genotype, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+int \hyperlink{maternal_8c_a1055deae4e10cfa4864cb310def79161}{GetNNucs} (\hyperlink{structTheProblem}{TheProblem} $\ast$defs, int $\ast$nnucs, double t, \hyperlink{structTimes}{Times} $\ast$times)
+\item 
+int \hyperlink{maternal_8c_a3bba757bfcb8681db77cd89d79dd67e6}{GetStartLin} (double t, \hyperlink{structTheProblem}{TheProblem} defs, int $\ast$lin\_\-start, \hyperlink{structTimes}{Times} $\ast$times)
+\item 
+int \hyperlink{maternal_8c_aefdac9f61878cae6f44c97ac67d608ee}{Index2StartLin} (int index, int $\ast$full\_\-lin\_\-start)
+\item 
+int \hyperlink{maternal_8c_a6638cae84a355ab097499f5049e92d38}{Index2NNuc} (int index, int $\ast$full\_\-nnucs)
+\item 
+int \hyperlink{maternal_8c_ae037dfdadcaac54274f37d6824a9a3f5}{GetStartLinIndex} (double t, \hyperlink{structTheProblem}{TheProblem} $\ast$defs, \hyperlink{structTimes}{Times} $\ast$times)
+\item 
+unsigned int \hyperlink{maternal_8c_aa565b547e543ebd8d10f3a7f9b72325f}{GetCCycle} (double time, int ndivs, \hyperlink{structTimes}{Times} $\ast$times)
+\item 
+unsigned int \hyperlink{maternal_8c_a7cc7634675af493d38170928cddeff4d}{ParseLineage} (unsigned int lin)
+\item 
+double $\ast$ \hyperlink{maternal_8c_ac06deac6dcbaff14728730fa3d57aac8}{GetDivtable} (int ndivs)
+\item 
+double $\ast$ \hyperlink{maternal_8c_a11c603f2a5ba1eb4b14dacddaaa950a6}{GetDurations} (int ndivs)
+\item 
+double \hyperlink{maternal_8c_a26d0c3d18c3463816a1c3712da8b3fa5}{GetGastTime} (int ndivs)
+\item 
+void \hyperlink{maternal_8c_a441daafceb118ba74a04c21613ab5a9b}{GetD} (double t, double $\ast$d, double $\ast$D\_\-tab, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+int \hyperlink{maternal_8c_a565091461e4ab53aced10990c764744a}{Theta} (double time, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+int \hyperlink{maternal_8c_ae9f2fa5d62eb7d7c22724ca11a17b021}{GetRule} (double time, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+int \hyperlink{maternal_8c_a05d24739aa900bfffe90395e58232265}{GetIndex} (char $\ast$genotype, \hyperlink{structGenoType}{GenoType} $\ast$bcdtype, int nalleles)
+\item 
+\hyperlink{structDArrPtr}{DArrPtr} \hyperlink{maternal_8c_a8b573286119d1d816a8a6b835aa0ae63}{MakeTable} (double p\_\-stepsize, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+\hyperlink{structBArrPtr}{BArrPtr} \hyperlink{maternal_8c_ae0ed0d661ccbc66a589661dee9aa3b24}{List2Bicoid} (\hyperlink{structBlist}{Blist} $\ast$inlist, \hyperlink{structZygote}{Zygote} $\ast$zyg)
+\item 
+\hyperlink{structNArrPtr}{NArrPtr} \hyperlink{maternal_8c_adccce339b41e21ad9cd5803229c30da7}{List2Bias} (\hyperlink{structDlist}{Dlist} $\ast$inlist, \hyperlink{structTheProblem}{TheProblem} defs)
+\item 
+\hyperlink{structDataTable}{DataTable} $\ast$ \hyperlink{maternal_8c_a096cb735087ad4f8e85c6538c2fa338b}{List2Interp} (\hyperlink{structDlist}{Dlist} $\ast$inlist, \hyperlink{structInput}{Input} $\ast$inp, int ngenes)
+\item 
+int \hyperlink{maternal_8c_a2f40504fabee4bd2a9027218f152b2ec}{descend} (int $\ast$x, int $\ast$y)
+\item 
+\hyperlink{structBlist}{Blist} $\ast$ \hyperlink{maternal_8c_a1f0566397482b499a65ea5f7c0d012ab}{init\_\-Blist} (void)
+\item 
+\hyperlink{structBlist}{Blist} $\ast$ \hyperlink{maternal_8c_ab8d3b885000339b66a4dfc3904cad457}{addto\_\-Blist} (\hyperlink{structBlist}{Blist} $\ast$start, \hyperlink{structBlist}{Blist} $\ast$adduct)
+\item 
+void \hyperlink{maternal_8c_a44d43aad2958f467b47159eb08fa98b4}{free\_\-Blist} (\hyperlink{structBlist}{Blist} $\ast$start)
+\item 
+int \hyperlink{maternal_8c_a1c94571932b8182bedee805ded52229f}{count\_\-Blist} (\hyperlink{structBlist}{Blist} $\ast$start)
+\item 
+\hyperlink{structDlist}{Dlist} $\ast$ \hyperlink{maternal_8c_a2434eb4a701b42c8a888cbbaa2272a3d}{init\_\-Dlist} (int size)
+\item 
+\hyperlink{structDlist}{Dlist} $\ast$ \hyperlink{maternal_8c_a2ce6bf49da7033353a6c4ad9e118dfee}{addto\_\-Dlist} (\hyperlink{structDlist}{Dlist} $\ast$start, \hyperlink{structDlist}{Dlist} $\ast$adduct)
+\item 
+void \hyperlink{maternal_8c_a460ac9c744d59826d6a89ddba89eac46}{free\_\-Dlist} (\hyperlink{structDlist}{Dlist} $\ast$start)
+\item 
+int \hyperlink{maternal_8c_a2a2d82c60142ca9ed0662e9a0e109b3a}{count\_\-Dlist} (\hyperlink{structDlist}{Dlist} $\ast$start)
+\item 
+\hyperlink{structSlist}{Slist} $\ast$ \hyperlink{maternal_8c_a6dc93b8519987bf7993371c7bee76a65}{init\_\-Slist} (void)
+\item 
+\hyperlink{structSlist}{Slist} $\ast$ \hyperlink{maternal_8c_a72833e12fe8b6d9269c35a9782c149f3}{addto\_\-Slist} (\hyperlink{structSlist}{Slist} $\ast$start, \hyperlink{structSlist}{Slist} $\ast$adduct)
+\item 
+void \hyperlink{maternal_8c_a5b838dfdcaba96c6b41f98bfab7335ff}{free\_\-Slist} (\hyperlink{structSlist}{Slist} $\ast$start)
+\item 
+int \hyperlink{maternal_8c_a051d88bfc70a8d3cd40b9e5aa743955a}{count\_\-Slist} (\hyperlink{structSlist}{Slist} $\ast$start)
+\item 
+\hypertarget{maternal_8c_a92e5de0212071260369b3bb6c1b3a79d}{
+double $\ast$ {\bfseries Get\_\-Theta\_\-Discons} (int $\ast$theta\_\-discon\_\-size, \hyperlink{structZygote}{Zygote} $\ast$zyg)}
+\label{maternal_8c_a92e5de0212071260369b3bb6c1b3a79d}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{maternal_8c_a4e8e34d27859a028cf4f4deb069e2f0c}{
+const double {\bfseries old\_\-divtimes} \mbox{[}3\mbox{]} = \{ 52.0, 28.0, 12.0 \}}
+\label{maternal_8c_a4e8e34d27859a028cf4f4deb069e2f0c}
+
+\item 
+\hypertarget{maternal_8c_a9e2e7dae01c33b961531a12a7e3f2ee1}{
+const double {\bfseries divtimes1} \mbox{[}1\mbox{]} = \{ 21.1 \}}
+\label{maternal_8c_a9e2e7dae01c33b961531a12a7e3f2ee1}
+
+\item 
+\hypertarget{maternal_8c_a5f125235c5eecb5d6629afd29b0da0fe}{
+const double {\bfseries divtimes2} \mbox{[}2\mbox{]} = \{ 33.5, 12.4 \}}
+\label{maternal_8c_a5f125235c5eecb5d6629afd29b0da0fe}
+
+\item 
+\hypertarget{maternal_8c_a26df5813269d374b4282018c47f91dcd}{
+const double {\bfseries divtimes3} \mbox{[}3\mbox{]} = \{ 43.0, 21.9, 9.5 \}}
+\label{maternal_8c_a26df5813269d374b4282018c47f91dcd}
+
+\item 
+\hypertarget{maternal_8c_a687b01ab83f454ff5aa90435f8e71044}{
+const double {\bfseries divtimes4} \mbox{[}4\mbox{]} = \{ 50.8, 29.7, 17.3, 7.8 \}}
+\label{maternal_8c_a687b01ab83f454ff5aa90435f8e71044}
+
+\item 
+\hypertarget{maternal_8c_a9b99c7faf49785602f607e7db7f24a90}{
+const double {\bfseries div\_\-duration1} \mbox{[}1\mbox{]} = \{ 5.1 \}}
+\label{maternal_8c_a9b99c7faf49785602f607e7db7f24a90}
+
+\item 
+\hypertarget{maternal_8c_a888e9919553f94d3fc1a37bc27483167}{
+const double {\bfseries div\_\-duration2} \mbox{[}2\mbox{]} = \{ 5.1, 3.3 \}}
+\label{maternal_8c_a888e9919553f94d3fc1a37bc27483167}
+
+\item 
+\hypertarget{maternal_8c_abe51eb4d669d603534aca8dd53642488}{
+const double {\bfseries div\_\-duration3} \mbox{[}3\mbox{]} = \{ 5.1, 3.3, 3.0 \}}
+\label{maternal_8c_abe51eb4d669d603534aca8dd53642488}
+
+\item 
+\hypertarget{maternal_8c_a2f90ace57d1553021af82e3c27834c5a}{
+const double {\bfseries div\_\-duration4} \mbox{[}4\mbox{]} = \{ 5.1, 3.3, 3.0, 3.3 \}}
+\label{maternal_8c_a2f90ace57d1553021af82e3c27834c5a}
+
+\item 
+\hypertarget{maternal_8c_a4e2ed3af92cd1dfbdab065c38775adb5}{
+const double {\bfseries old\_\-gast\_\-time} = 88.}
+\label{maternal_8c_a4e2ed3af92cd1dfbdab065c38775adb5}
+
+\item 
+\hypertarget{maternal_8c_a5b16870d31e0eb2b9fbd51f7bdff8466}{
+const double {\bfseries gast\_\-time0} = 50.}
+\label{maternal_8c_a5b16870d31e0eb2b9fbd51f7bdff8466}
+
+\item 
+\hypertarget{maternal_8c_ad70dd80750843af51166da5514cd013a}{
+const double {\bfseries gast\_\-time1} = 71.1}
+\label{maternal_8c_ad70dd80750843af51166da5514cd013a}
+
+\item 
+\hypertarget{maternal_8c_af78a5ecd115620d9ce9cced09f5c67fd}{
+const double {\bfseries gast\_\-time2} = 83.5}
+\label{maternal_8c_af78a5ecd115620d9ce9cced09f5c67fd}
+
+\item 
+\hypertarget{maternal_8c_a9c0e1819596ec41965daf2689a929811}{
+const double {\bfseries gast\_\-time3} = 93.}
+\label{maternal_8c_a9c0e1819596ec41965daf2689a929811}
+
+\item 
+\hypertarget{maternal_8c_a607fc4c08341d28ec2e1c935dc1be0a7}{
+const double {\bfseries gast\_\-time4} = 100.8}
+\label{maternal_8c_a607fc4c08341d28ec2e1c935dc1be0a7}
+
+\item 
+\hypertarget{maternal_8c_abc46b2f9c1d43accc9ac94c57b7ef6d2}{
+const double {\bfseries MAX\_\-STEPSIZE} = 100.8}
+\label{maternal_8c_abc46b2f9c1d43accc9ac94c57b7ef6d2}
+
+\item 
+\hypertarget{maternal_8c_a042b727580eaabbe77af1e5e7130e7cb}{
+const int {\bfseries CYCLE1} = 1}
+\label{maternal_8c_a042b727580eaabbe77af1e5e7130e7cb}
+
+\item 
+\hypertarget{maternal_8c_a714f7d490e2b2836e4f534153b3af0a3}{
+const int {\bfseries CYCLE2} = 2}
+\label{maternal_8c_a714f7d490e2b2836e4f534153b3af0a3}
+
+\item 
+\hypertarget{maternal_8c_af48561838a70450dedd1bea519714747}{
+const int {\bfseries CYCLE3} = 4}
+\label{maternal_8c_af48561838a70450dedd1bea519714747}
+
+\item 
+\hypertarget{maternal_8c_a1e57526e8161c6dd884893065268d41a}{
+const int {\bfseries CYCLE4} = 8}
+\label{maternal_8c_a1e57526e8161c6dd884893065268d41a}
+
+\item 
+\hypertarget{maternal_8c_aff52ca0a7593147d84760056f55933e3}{
+const int {\bfseries CYCLE5} = 16}
+\label{maternal_8c_aff52ca0a7593147d84760056f55933e3}
+
+\item 
+\hypertarget{maternal_8c_ae11eb2aaa9d77fc1e62ce2cb7316fa23}{
+const int {\bfseries CYCLE6} = 32}
+\label{maternal_8c_ae11eb2aaa9d77fc1e62ce2cb7316fa23}
+
+\item 
+\hypertarget{maternal_8c_ac541c5afd3670d5c4f78d809d42e993b}{
+const int {\bfseries CYCLE7} = 64}
+\label{maternal_8c_ac541c5afd3670d5c4f78d809d42e993b}
+
+\item 
+\hypertarget{maternal_8c_a046e4615f17da2f2f5ba90fc6be3304e}{
+const int {\bfseries CYCLE8} = 128}
+\label{maternal_8c_a046e4615f17da2f2f5ba90fc6be3304e}
+
+\item 
+\hypertarget{maternal_8c_a6081a9b8dbe729f583ecfec4732deb3f}{
+const int {\bfseries CYCLE9} = 256}
+\label{maternal_8c_a6081a9b8dbe729f583ecfec4732deb3f}
+
+\item 
+\hypertarget{maternal_8c_a709453198550389408bfabbb1f16be98}{
+const int {\bfseries CYCLE10} = 512}
+\label{maternal_8c_a709453198550389408bfabbb1f16be98}
+
+\item 
+\hypertarget{maternal_8c_a5b6db53ad04baa4390172d776b2bb646}{
+const int {\bfseries CYCLE11} = 1024}
+\label{maternal_8c_a5b6db53ad04baa4390172d776b2bb646}
+
+\item 
+\hypertarget{maternal_8c_a8dc752e7edf9738ba8027e0878273ac2}{
+const int {\bfseries CYCLE12} = 2048}
+\label{maternal_8c_a8dc752e7edf9738ba8027e0878273ac2}
+
+\item 
+\hypertarget{maternal_8c_a03123d38fa3f5a942b7cbd61f52b8c01}{
+const int {\bfseries CYCLE13} = 4096}
+\label{maternal_8c_a03123d38fa3f5a942b7cbd61f52b8c01}
+
+\item 
+\hypertarget{maternal_8c_abb4e60dd6b6e7bffc8d34ef2532997a4}{
+const int {\bfseries CYCLE14} = 8192}
+\label{maternal_8c_abb4e60dd6b6e7bffc8d34ef2532997a4}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines a lot of constants, bias-\/related stuff and functions to deal with the data structures. \begin{DoxyAuthor}{Author}
+JR, modified by Yoginho
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+1. structs and constants for things used throughout the fly model specific part of the code (since this file will al-\/ ways get included when we run the fly model); therefore all fly-\/specific things that used to be in \hyperlink{global_8h}{global.h} are now in here 2. stuff that deals with that part of the blastoderm which is fixed by the maternal genotype, i.e. division schedules (including the rules for \hyperlink{zygotic_8c}{zygotic.c}, the number of nuclei at each cleavage cycle and the lineage number of the most anterior nucleus for each cleavage cycle), bicoid gra-\/ dients and diffusion schedules 3. bias-\/related stuff is also in here since it's needed to run the model 
+
+\subsection{Function Documentation}
+\hypertarget{maternal_8c_ab8d3b885000339b66a4dfc3904cad457}{
+\index{maternal.c@{maternal.c}!addto\_\-Blist@{addto\_\-Blist}}
+\index{addto\_\-Blist@{addto\_\-Blist}!maternal.c@{maternal.c}}
+\subsubsection[{addto\_\-Blist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Blist}$\ast$ addto\_\-Blist ({\bf Blist} $\ast$ {\em start}, \/  {\bf Blist} $\ast$ {\em adduct})}}
+\label{maternal_8c_ab8d3b885000339b66a4dfc3904cad457}
+addto\_\-Blist: adds the adduct to an already existing linkd list \hypertarget{maternal_8c_a2ce6bf49da7033353a6c4ad9e118dfee}{
+\index{maternal.c@{maternal.c}!addto\_\-Dlist@{addto\_\-Dlist}}
+\index{addto\_\-Dlist@{addto\_\-Dlist}!maternal.c@{maternal.c}}
+\subsubsection[{addto\_\-Dlist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dlist}$\ast$ addto\_\-Dlist ({\bf Dlist} $\ast$ {\em start}, \/  {\bf Dlist} $\ast$ {\em adduct})}}
+\label{maternal_8c_a2ce6bf49da7033353a6c4ad9e118dfee}
+addto\_\-Dlist: adds the adduct to an already existing linkd list \hypertarget{maternal_8c_a72833e12fe8b6d9269c35a9782c149f3}{
+\index{maternal.c@{maternal.c}!addto\_\-Slist@{addto\_\-Slist}}
+\index{addto\_\-Slist@{addto\_\-Slist}!maternal.c@{maternal.c}}
+\subsubsection[{addto\_\-Slist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Slist}$\ast$ addto\_\-Slist ({\bf Slist} $\ast$ {\em start}, \/  {\bf Slist} $\ast$ {\em adduct})}}
+\label{maternal_8c_a72833e12fe8b6d9269c35a9782c149f3}
+addto\_\-Slist: adds the adduct to an already existing linkd list \hypertarget{maternal_8c_a1c94571932b8182bedee805ded52229f}{
+\index{maternal.c@{maternal.c}!count\_\-Blist@{count\_\-Blist}}
+\index{count\_\-Blist@{count\_\-Blist}!maternal.c@{maternal.c}}
+\subsubsection[{count\_\-Blist}]{\setlength{\rightskip}{0pt plus 5cm}int count\_\-Blist ({\bf Blist} $\ast$ {\em start})}}
+\label{maternal_8c_a1c94571932b8182bedee805ded52229f}
+count\_\-Blist: counts elements in the linked list \hypertarget{maternal_8c_a2a2d82c60142ca9ed0662e9a0e109b3a}{
+\index{maternal.c@{maternal.c}!count\_\-Dlist@{count\_\-Dlist}}
+\index{count\_\-Dlist@{count\_\-Dlist}!maternal.c@{maternal.c}}
+\subsubsection[{count\_\-Dlist}]{\setlength{\rightskip}{0pt plus 5cm}int count\_\-Dlist ({\bf Dlist} $\ast$ {\em start})}}
+\label{maternal_8c_a2a2d82c60142ca9ed0662e9a0e109b3a}
+count\_\-Dlist: counts elements in the linked list \hypertarget{maternal_8c_a051d88bfc70a8d3cd40b9e5aa743955a}{
+\index{maternal.c@{maternal.c}!count\_\-Slist@{count\_\-Slist}}
+\index{count\_\-Slist@{count\_\-Slist}!maternal.c@{maternal.c}}
+\subsubsection[{count\_\-Slist}]{\setlength{\rightskip}{0pt plus 5cm}int count\_\-Slist ({\bf Slist} $\ast$ {\em start})}}
+\label{maternal_8c_a051d88bfc70a8d3cd40b9e5aa743955a}
+count\_\-Slist: counts elements in the linked list \hypertarget{maternal_8c_a2f40504fabee4bd2a9027218f152b2ec}{
+\index{maternal.c@{maternal.c}!descend@{descend}}
+\index{descend@{descend}!maternal.c@{maternal.c}}
+\subsubsection[{descend}]{\setlength{\rightskip}{0pt plus 5cm}int descend (int $\ast$ {\em x}, \/  int $\ast$ {\em y})}}
+\label{maternal_8c_a2f40504fabee4bd2a9027218f152b2ec}
+Comparison function for qsort \hypertarget{maternal_8c_a44d43aad2958f467b47159eb08fa98b4}{
+\index{maternal.c@{maternal.c}!free\_\-Blist@{free\_\-Blist}}
+\index{free\_\-Blist@{free\_\-Blist}!maternal.c@{maternal.c}}
+\subsubsection[{free\_\-Blist}]{\setlength{\rightskip}{0pt plus 5cm}void free\_\-Blist ({\bf Blist} $\ast$ {\em start})}}
+\label{maternal_8c_a44d43aad2958f467b47159eb08fa98b4}
+free\_\-Blist: frees memory of linked list \hypertarget{maternal_8c_a460ac9c744d59826d6a89ddba89eac46}{
+\index{maternal.c@{maternal.c}!free\_\-Dlist@{free\_\-Dlist}}
+\index{free\_\-Dlist@{free\_\-Dlist}!maternal.c@{maternal.c}}
+\subsubsection[{free\_\-Dlist}]{\setlength{\rightskip}{0pt plus 5cm}void free\_\-Dlist ({\bf Dlist} $\ast$ {\em start})}}
+\label{maternal_8c_a460ac9c744d59826d6a89ddba89eac46}
+free\_\-Dlist: frees memory of linked list \hypertarget{maternal_8c_a5b838dfdcaba96c6b41f98bfab7335ff}{
+\index{maternal.c@{maternal.c}!free\_\-Slist@{free\_\-Slist}}
+\index{free\_\-Slist@{free\_\-Slist}!maternal.c@{maternal.c}}
+\subsubsection[{free\_\-Slist}]{\setlength{\rightskip}{0pt plus 5cm}void free\_\-Slist ({\bf Slist} $\ast$ {\em start})}}
+\label{maternal_8c_a5b838dfdcaba96c6b41f98bfab7335ff}
+free\_\-Slist: frees memory of linked list \hypertarget{maternal_8c_a1fe11ad2b9518f6474390a6cee66f784}{
+\index{maternal.c@{maternal.c}!GetBias@{GetBias}}
+\index{GetBias@{GetBias}!maternal.c@{maternal.c}}
+\subsubsection[{GetBias}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DArrPtr} GetBias (double {\em time}, \/  int {\em genindex}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_a1fe11ad2b9518f6474390a6cee66f784}
+GetBias: This function returns bias values for a given time and genotype. \hypertarget{maternal_8c_ab0bc9364ad30c3db66aff258552d7a7e}{
+\index{maternal.c@{maternal.c}!GetBicoid@{GetBicoid}}
+\index{GetBicoid@{GetBicoid}!maternal.c@{maternal.c}}
+\subsubsection[{GetBicoid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DArrPtr} GetBicoid (double {\em time}, \/  int {\em genindex}, \/  {\bf GenoType} $\ast$ {\em bcdtype}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_ab0bc9364ad30c3db66aff258552d7a7e}
+GetBicoid: returns a bicoid gradients (in form of a \hyperlink{structDArrPtr}{DArrPtr}) for a specific time and genotype. \hypertarget{maternal_8c_ad456ad4161392555dd8bd593b84ac441}{
+\index{maternal.c@{maternal.c}!GetBTimes@{GetBTimes}}
+\index{GetBTimes@{GetBTimes}!maternal.c@{maternal.c}}
+\subsubsection[{GetBTimes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DArrPtr} GetBTimes (char $\ast$ {\em genotype}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_ad456ad4161392555dd8bd593b84ac441}
+GetBTimes: returns a sized array of times for which there is bias \hypertarget{maternal_8c_aa565b547e543ebd8d10f3a7f9b72325f}{
+\index{maternal.c@{maternal.c}!GetCCycle@{GetCCycle}}
+\index{GetCCycle@{GetCCycle}!maternal.c@{maternal.c}}
+\subsubsection[{GetCCycle}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetCCycle (double {\em time}, \/  int {\em ndivs}, \/  {\bf Times} $\ast$ {\em times})}}
+\label{maternal_8c_aa565b547e543ebd8d10f3a7f9b72325f}
+GetCCycle: returns cleavage cycle number for a given time \hypertarget{maternal_8c_a441daafceb118ba74a04c21613ab5a9b}{
+\index{maternal.c@{maternal.c}!GetD@{GetD}}
+\index{GetD@{GetD}!maternal.c@{maternal.c}}
+\subsubsection[{GetD}]{\setlength{\rightskip}{0pt plus 5cm}void GetD (double {\em t}, \/  double $\ast$ {\em d}, \/  double $\ast$ {\em D\_\-tab}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_a441daafceb118ba74a04c21613ab5a9b}
+GetD: returns diffusion parameters D according to the diff. params. in the data file and the diffusion schedule used. NOTE: Caller must allocate D\_\-tab \hypertarget{maternal_8c_ac06deac6dcbaff14728730fa3d57aac8}{
+\index{maternal.c@{maternal.c}!GetDivtable@{GetDivtable}}
+\index{GetDivtable@{GetDivtable}!maternal.c@{maternal.c}}
+\subsubsection[{GetDivtable}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ GetDivtable (int {\em ndivs})}}
+\label{maternal_8c_ac06deac6dcbaff14728730fa3d57aac8}
+GetDivtable: returns times of cell divisions depending on ndivs and olddivstyle; returns NULL in case of an error \hypertarget{maternal_8c_a11c603f2a5ba1eb4b14dacddaaa950a6}{
+\index{maternal.c@{maternal.c}!GetDurations@{GetDurations}}
+\index{GetDurations@{GetDurations}!maternal.c@{maternal.c}}
+\subsubsection[{GetDurations}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ GetDurations (int {\em ndivs})}}
+\label{maternal_8c_a11c603f2a5ba1eb4b14dacddaaa950a6}
+GetDurations: returns pointer to durations of cell divisions de-\/ pending on ndivs and olddivstyle; returns NULL in case of an error \hypertarget{maternal_8c_a26d0c3d18c3463816a1c3712da8b3fa5}{
+\index{maternal.c@{maternal.c}!GetGastTime@{GetGastTime}}
+\index{GetGastTime@{GetGastTime}!maternal.c@{maternal.c}}
+\subsubsection[{GetGastTime}]{\setlength{\rightskip}{0pt plus 5cm}double GetGastTime (int {\em ndivs})}}
+\label{maternal_8c_a26d0c3d18c3463816a1c3712da8b3fa5}
+GetGastTime: returns time of gastrulation depending on ndivs and olddivstyle; returns 0 in case of an error; if a custom gastrulation time is chosen with -\/S, it will be returned only if it's bigger than the normal gastrulation time \hypertarget{maternal_8c_a05d24739aa900bfffe90395e58232265}{
+\index{maternal.c@{maternal.c}!GetIndex@{GetIndex}}
+\index{GetIndex@{GetIndex}!maternal.c@{maternal.c}}
+\subsubsection[{GetIndex}]{\setlength{\rightskip}{0pt plus 5cm}int GetIndex (char $\ast$ {\em genotype}, \/  {\bf GenoType} $\ast$ {\em bcdtype}, \/  int {\em nalleles})}}
+\label{maternal_8c_a05d24739aa900bfffe90395e58232265}
+GetIndex: this functions returns the genotype index for a given genotype number for reading the \hyperlink{structGenoType}{GenoType} struct. \hypertarget{maternal_8c_a1055deae4e10cfa4864cb310def79161}{
+\index{maternal.c@{maternal.c}!GetNNucs@{GetNNucs}}
+\index{GetNNucs@{GetNNucs}!maternal.c@{maternal.c}}
+\subsubsection[{GetNNucs}]{\setlength{\rightskip}{0pt plus 5cm}int GetNNucs ({\bf TheProblem} $\ast$ {\em defs}, \/  int $\ast$ {\em nnucs}, \/  double {\em t}, \/  {\bf Times} $\ast$ {\em times})}}
+\label{maternal_8c_a1055deae4e10cfa4864cb310def79161}
+GetNNucs: returns number of nuclei for a given time \hypertarget{maternal_8c_ae9f2fa5d62eb7d7c22724ca11a17b021}{
+\index{maternal.c@{maternal.c}!GetRule@{GetRule}}
+\index{GetRule@{GetRule}!maternal.c@{maternal.c}}
+\subsubsection[{GetRule}]{\setlength{\rightskip}{0pt plus 5cm}int GetRule (double {\em time}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_ae9f2fa5d62eb7d7c22724ca11a17b021}
+GetRule: returns the appropriate rule for a given time; used by the derivative function \hypertarget{maternal_8c_a3bba757bfcb8681db77cd89d79dd67e6}{
+\index{maternal.c@{maternal.c}!GetStartLin@{GetStartLin}}
+\index{GetStartLin@{GetStartLin}!maternal.c@{maternal.c}}
+\subsubsection[{GetStartLin}]{\setlength{\rightskip}{0pt plus 5cm}int GetStartLin (double {\em t}, \/  {\bf TheProblem} {\em defs}, \/  int $\ast$ {\em lin\_\-start}, \/  {\bf Times} $\ast$ {\em times})}}
+\label{maternal_8c_a3bba757bfcb8681db77cd89d79dd67e6}
+GetStartLin: returns the lineage number of the most anterior nucleus for a given time \hypertarget{maternal_8c_ae037dfdadcaac54274f37d6824a9a3f5}{
+\index{maternal.c@{maternal.c}!GetStartLinIndex@{GetStartLinIndex}}
+\index{GetStartLinIndex@{GetStartLinIndex}!maternal.c@{maternal.c}}
+\subsubsection[{GetStartLinIndex}]{\setlength{\rightskip}{0pt plus 5cm}int GetStartLinIndex (double {\em t}, \/  {\bf TheProblem} $\ast$ {\em defs}, \/  {\bf Times} $\ast$ {\em times})}}
+\label{maternal_8c_ae037dfdadcaac54274f37d6824a9a3f5}
+GetStartLinIndex: returns the index of the lineage array for a given time \hypertarget{maternal_8c_a6638cae84a355ab097499f5049e92d38}{
+\index{maternal.c@{maternal.c}!Index2NNuc@{Index2NNuc}}
+\index{Index2NNuc@{Index2NNuc}!maternal.c@{maternal.c}}
+\subsubsection[{Index2NNuc}]{\setlength{\rightskip}{0pt plus 5cm}int Index2NNuc (int {\em index}, \/  int $\ast$ {\em full\_\-nnucs})}}
+\label{maternal_8c_a6638cae84a355ab097499f5049e92d38}
+Index2NNuc: get number of nuclei from index \hypertarget{maternal_8c_aefdac9f61878cae6f44c97ac67d608ee}{
+\index{maternal.c@{maternal.c}!Index2StartLin@{Index2StartLin}}
+\index{Index2StartLin@{Index2StartLin}!maternal.c@{maternal.c}}
+\subsubsection[{Index2StartLin}]{\setlength{\rightskip}{0pt plus 5cm}int Index2StartLin (int {\em index}, \/  int $\ast$ {\em full\_\-lin\_\-start})}}
+\label{maternal_8c_aefdac9f61878cae6f44c97ac67d608ee}
+Index2StartLin: get starting lineage from index \hypertarget{maternal_8c_a1f0566397482b499a65ea5f7c0d012ab}{
+\index{maternal.c@{maternal.c}!init\_\-Blist@{init\_\-Blist}}
+\index{init\_\-Blist@{init\_\-Blist}!maternal.c@{maternal.c}}
+\subsubsection[{init\_\-Blist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Blist}$\ast$ init\_\-Blist (void)}}
+\label{maternal_8c_a1f0566397482b499a65ea5f7c0d012ab}
+init\_\-Blist: allocates first element and returns pointer to it \hypertarget{maternal_8c_a2434eb4a701b42c8a888cbbaa2272a3d}{
+\index{maternal.c@{maternal.c}!init\_\-Dlist@{init\_\-Dlist}}
+\index{init\_\-Dlist@{init\_\-Dlist}!maternal.c@{maternal.c}}
+\subsubsection[{init\_\-Dlist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dlist}$\ast$ init\_\-Dlist (int {\em size})}}
+\label{maternal_8c_a2434eb4a701b42c8a888cbbaa2272a3d}
+init\_\-Dlist: allocates first element and returns pointer to it \hypertarget{maternal_8c_a6dc93b8519987bf7993371c7bee76a65}{
+\index{maternal.c@{maternal.c}!init\_\-Slist@{init\_\-Slist}}
+\index{init\_\-Slist@{init\_\-Slist}!maternal.c@{maternal.c}}
+\subsubsection[{init\_\-Slist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Slist}$\ast$ init\_\-Slist (void)}}
+\label{maternal_8c_a6dc93b8519987bf7993371c7bee76a65}
+init\_\-Slist: allocates first element and returns pointer to it \hypertarget{maternal_8c_af2c34df68a6b095ecdf88536b59ba79b}{
+\index{maternal.c@{maternal.c}!InitBias@{InitBias}}
+\index{InitBias@{InitBias}!maternal.c@{maternal.c}}
+\subsubsection[{InitBias}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bias} InitBias (FILE $\ast$ {\em fp}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_af2c34df68a6b095ecdf88536b59ba79b}
+InitBias: puts bias records in a form where get\_\-bias can use them; it expects times in increasing order; it expects a non-\/ sparse entry, with no genes or nuclei missing \hypertarget{maternal_8c_a3a6102aa7a9db11f758a2e4e1142eee4}{
+\index{maternal.c@{maternal.c}!InitBicoid@{InitBicoid}}
+\index{InitBicoid@{InitBicoid}!maternal.c@{maternal.c}}
+\subsubsection[{InitBicoid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf GenoType}$\ast$ InitBicoid (FILE $\ast$ {\em fp}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_a3a6102aa7a9db11f758a2e4e1142eee4}
+InitBicoid: Copies the \hyperlink{structBlist}{Blist} read by ReadBicoid into the \hyperlink{structDArrPtr}{DArrPtr} structure; the bicoid \hyperlink{structDArrPtr}{DArrPtr} contains pointers to bcd arrays for each cell division cycle \hypertarget{maternal_8c_aad53d7072bbd89196ea744798e056c7f}{
+\index{maternal.c@{maternal.c}!InitBTs@{InitBTs}}
+\index{InitBTs@{InitBTs}!maternal.c@{maternal.c}}
+\subsubsection[{InitBTs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf GenoType}$\ast$ InitBTs ({\bf GenoType} $\ast$ {\em biastype}, \/  int {\em nalleles})}}
+\label{maternal_8c_aad53d7072bbd89196ea744798e056c7f}
+InitBTs: initializes the BT struct that holds all times for which we have bias. \hypertarget{maternal_8c_a8d15fc35aa9d95eac2333c7fd8508499}{
+\index{maternal.c@{maternal.c}!InitFullNNucs@{InitFullNNucs}}
+\index{InitFullNNucs@{InitFullNNucs}!maternal.c@{maternal.c}}
+\subsubsection[{InitFullNNucs}]{\setlength{\rightskip}{0pt plus 5cm}void InitFullNNucs ({\bf Zygote} $\ast$ {\em zyg}, \/  int $\ast$ {\em full\_\-lin\_\-start})}}
+\label{maternal_8c_a8d15fc35aa9d95eac2333c7fd8508499}
+InitFullNNucs: takes the global defs.nnucs and calculates number of nucs for each cleavage cycle which are then stored in reverse order in the static nnucs\mbox{[}\mbox{]} array CAUTION: defs struct and lin\_\-start need to be initialized before! \hypertarget{maternal_8c_a948a840ac7bea7d8da4a729a3e2c470f}{
+\index{maternal.c@{maternal.c}!InitNNucs@{InitNNucs}}
+\index{InitNNucs@{InitNNucs}!maternal.c@{maternal.c}}
+\subsubsection[{InitNNucs}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ InitNNucs ({\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_a948a840ac7bea7d8da4a729a3e2c470f}
+InitNNucs: takes the global defs.nnucs and calculates number of nucs for each cleavage cycle which are then stored in reverse order in the static nnucs\mbox{[}\mbox{]} array CAUTION: defs struct and lin\_\-start need to be initialized before! \hypertarget{maternal_8c_a13da361753be3551f3693b444062b9ad}{
+\index{maternal.c@{maternal.c}!InitTimes@{InitTimes}}
+\index{InitTimes@{InitTimes}!maternal.c@{maternal.c}}
+\subsubsection[{InitTimes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Times} InitTimes ({\bf TheProblem} {\em defs})}}
+\label{maternal_8c_a13da361753be3551f3693b444062b9ad}
+InitTimes: Reading hardcoded times in case that we don't find the times section in the input file \hypertarget{maternal_8c_adccce339b41e21ad9cd5803229c30da7}{
+\index{maternal.c@{maternal.c}!List2Bias@{List2Bias}}
+\index{List2Bias@{List2Bias}!maternal.c@{maternal.c}}
+\subsubsection[{List2Bias}]{\setlength{\rightskip}{0pt plus 5cm}{\bf NArrPtr} List2Bias ({\bf Dlist} $\ast$ {\em inlist}, \/  {\bf TheProblem} {\em defs})}}
+\label{maternal_8c_adccce339b41e21ad9cd5803229c30da7}
+List2Bias: takes a \hyperlink{structDlist}{Dlist} and returns the corresponding \hyperlink{structDArrPtr}{DArrPtr} structure. \hypertarget{maternal_8c_ae0ed0d661ccbc66a589661dee9aa3b24}{
+\index{maternal.c@{maternal.c}!List2Bicoid@{List2Bicoid}}
+\index{List2Bicoid@{List2Bicoid}!maternal.c@{maternal.c}}
+\subsubsection[{List2Bicoid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BArrPtr} List2Bicoid ({\bf Blist} $\ast$ {\em inlist}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_ae0ed0d661ccbc66a589661dee9aa3b24}
+List2Bicoid: takes a \hyperlink{structBlist}{Blist} and returns the corresponding \hyperlink{structBArrPtr}{BArrPtr} structure; also initializes the lin\_\-start array which contains the lineage number of the most anterior nucleus for each cell cycle (we need this for cell division and printing model output) \hypertarget{maternal_8c_a096cb735087ad4f8e85c6538c2fa338b}{
+\index{maternal.c@{maternal.c}!List2Interp@{List2Interp}}
+\index{List2Interp@{List2Interp}!maternal.c@{maternal.c}}
+\subsubsection[{List2Interp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DataTable}$\ast$ List2Interp ({\bf Dlist} $\ast$ {\em inlist}, \/  {\bf Input} $\ast$ {\em inp}, \/  int {\em ngenes})}}
+\label{maternal_8c_a096cb735087ad4f8e85c6538c2fa338b}
+List2Interp: takes a \hyperlink{structDlist}{Dlist} and returns the corresponding interpolation \hyperlink{structDataTable}{DataTable} structure. \hypertarget{maternal_8c_a8b573286119d1d816a8a6b835aa0ae63}{
+\index{maternal.c@{maternal.c}!MakeTable@{MakeTable}}
+\index{MakeTable@{MakeTable}!maternal.c@{maternal.c}}
+\subsubsection[{MakeTable}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DArrPtr} MakeTable (double {\em p\_\-stepsize}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_a8b573286119d1d816a8a6b835aa0ae63}
+MakeTable: this function constructs a time table for Blastoderm based on a comand line option (print\_\-stepsize) and the cell division tables here in \hyperlink{maternal_8c}{maternal.c} DISCLAIMER: this thing is written in a very bad way; but hey it does its job!!!!!!! \hypertarget{maternal_8c_a7cc7634675af493d38170928cddeff4d}{
+\index{maternal.c@{maternal.c}!ParseLineage@{ParseLineage}}
+\index{ParseLineage@{ParseLineage}!maternal.c@{maternal.c}}
+\subsubsection[{ParseLineage}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int ParseLineage (unsigned int {\em lin})}}
+\label{maternal_8c_a7cc7634675af493d38170928cddeff4d}
+ParseLineage: takes lineage number as input and returns the cleavage cycle the nucleus belongs to. \hypertarget{maternal_8c_a565091461e4ab53aced10990c764744a}{
+\index{maternal.c@{maternal.c}!Theta@{Theta}}
+\index{Theta@{Theta}!maternal.c@{maternal.c}}
+\subsubsection[{Theta}]{\setlength{\rightskip}{0pt plus 5cm}int Theta (double {\em time}, \/  {\bf Zygote} $\ast$ {\em zyg})}}
+\label{maternal_8c_a565091461e4ab53aced10990c764744a}
+Theta: Returns the value of theta(t) in the autonomous version of the equations 

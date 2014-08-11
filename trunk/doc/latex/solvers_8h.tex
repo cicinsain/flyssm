@@ -1,0 +1,254 @@
+\hypertarget{solvers_8h}{
+\section{fly/solvers.h File Reference}
+\label{solvers_8h}\index{fly/solvers.h@{fly/solvers.h}}
+}
+
+
+Contains the interface to the solver functions.  
+{\ttfamily \#include $<$cvode/cvode.h$>$}\par
+{\ttfamily \#include $<$cvode/cvode\_\-band.h$>$}\par
+{\ttfamily \#include $<$cvode/cvode\_\-spgmr.h$>$}\par
+{\ttfamily \#include $<$nvector/nvector\_\-serial.h$>$}\par
+{\ttfamily \#include $<$sundials/sundials\_\-dense.h$>$}\par
+{\ttfamily \#include $<$sundials/sundials\_\-types.h$>$}\par
+{\ttfamily \#include $<$sundials/sundials\_\-math.h$>$}\par
+{\ttfamily \#include \char`\"{}maternal.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{solvers_8h_ae8016a49c971f7f973663bcfd6921dbb}{Euler} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_a270ab0adff5052cf4e1da796c23d99c4}{Meuler} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_a97e03e6ff4dc28c1fa9882e09b30d59c}{Heun} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_aa769d6b7f7c138e8c659a7e7b1a256da}{Rk2} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_af811314e3f811a04f9dfc54a3368d359}{Rk4} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_a22d1585560a34951ee703468643de616}{Rkck} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_a6087b8c0ab5c1170a4e3000289f7e7ea}{Rkf} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_a38d2c4e212d863c00c4275a5867287aa}{Milne} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_aa20e5e9f5c0b7807c310cbe0444e96f7}{Adams} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_a5135579c74007c279b00970d4bf23a01}{BuSt} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_a121e2c55a5a00a0ad9b953ee654cde08}{BaDe} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+void \hyperlink{solvers_8h_a8a66f188e5d29e85923a6c3deb314fc6}{Krylov} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+int \hyperlink{solvers_8h_a0adb937524dd2a86627683c4eb9681df}{InitKrylovVariables} (double $\ast$vin, int n)
+\item 
+\hypertarget{solvers_8h_a655b3c9db3a10fcc5997e7e858d8f41d}{
+int {\bfseries InitBandSolver} (realtype tzero, double stephint, double rel\_\-tol, double abs\_\-tol)}
+\label{solvers_8h_a655b3c9db3a10fcc5997e7e858d8f41d}
+
+\item 
+\hypertarget{solvers_8h_a605fb06d99c427905ed98deb79d19618}{
+void {\bfseries FreeBandSolver} (void)}
+\label{solvers_8h_a605fb06d99c427905ed98deb79d19618}
+
+\item 
+\hypertarget{solvers_8h_a7b2523b3f0a227d17e730290afde692f}{
+int {\bfseries CheckFlag} (void $\ast$flagvalue, char $\ast$funcname, int opt)}
+\label{solvers_8h_a7b2523b3f0a227d17e730290afde692f}
+
+\item 
+int \hyperlink{solvers_8h_aea41aa29042230e96f756b96180271cd}{my\_\-f\_\-band} (realtype t, N\_\-Vector y, N\_\-Vector ydot, void $\ast$extra\_\-data)
+\item 
+void \hyperlink{solvers_8h_aa9f4951e44339690c0b36fcb131e25d6}{WriteSolvLog} (char $\ast$solver, double tin, double tout, double h, int n, int nderivs, FILE $\ast$slog)
+\item 
+void \hyperlink{solvers_8h_a4a45ad1ee998bd642e3adf4ae72f5f1c}{SoDe} (double $\ast$vin, double $\ast$vout, double tin, double tout, double stephint, double accuracy, int n, FILE $\ast$slog, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+\hypertarget{solvers_8h_a25482a4d9598a01c466c4656cc05ce4c}{
+double $\ast$ {\bfseries Construct\_\-Discont\_\-Array} (double range, double $\ast$taus, int n, double $\ast$starts, int sn, int $\ast$disc\_\-size)}
+\label{solvers_8h_a25482a4d9598a01c466c4656cc05ce4c}
+
+\item 
+\hypertarget{solvers_8h_a0ba009b4c4a756295032d2d2c629846e}{
+int {\bfseries compare} (double $\ast$x, double $\ast$y)}
+\label{solvers_8h_a0ba009b4c4a756295032d2d2c629846e}
+
+\item 
+\hypertarget{solvers_8h_aac12e37840909f894220d2cd7e3c96e9}{
+int {\bfseries y\_\-delayed} (double $\ast$$\ast$$\ast$vd, int n, double $\ast$rktimes, double $\ast$tau, double $\ast$grid, double $\ast$$\ast$vdone, double $\ast$$\ast$deriv1, double $\ast$$\ast$deriv2, double $\ast$$\ast$deriv3, double $\ast$$\ast$deriv4, int gridsize, double accu, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)}
+\label{solvers_8h_aac12e37840909f894220d2cd7e3c96e9}
+
+\item 
+void \hyperlink{solvers_8h_a4be37b339afa64593767489d8d46c746}{DCERk32} (double $\ast$$\ast$vatt, int n, double $\ast$tarray, int tpoints, double $\ast$darray, int dpoints, double stephint, double accuracy, \hyperlink{structSolverInput}{SolverInput} $\ast$si, \hyperlink{structInput}{Input} $\ast$inp)
+\item 
+\hypertarget{solvers_8h_a2e284fa03cc0d813a3817fce38b3767d}{
+void {\bfseries CE} (double t, double $\ast$vans, double tbegin, double $\ast$v\_\-at\_\-tbegin, double ech, double $\ast$d1, double $\ast$d2, double $\ast$d3, double $\ast$d4, int n)}
+\label{solvers_8h_a2e284fa03cc0d813a3817fce38b3767d}
+
+\item 
+\hypertarget{solvers_8h_a283a82ba094e935a7df59ab28372d64e}{
+void {\bfseries DivideHistory} (double t1, double t2, \hyperlink{structZygote}{Zygote} $\ast$zyg)}
+\label{solvers_8h_a283a82ba094e935a7df59ab28372d64e}
+
+\item 
+\hypertarget{solvers_8h_a62c54ac649fb756dfe1449fe97997ea4}{
+void {\bfseries FreeDelaySolver} (void)}
+\label{solvers_8h_a62c54ac649fb756dfe1449fe97997ea4}
+
+\item 
+\hypertarget{solvers_8h_a28d5f0f1bac4fe188f5162c736d1cfff}{
+void {\bfseries InitDelaySolver} (void)}
+\label{solvers_8h_a28d5f0f1bac4fe188f5162c736d1cfff}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{solvers_8h_afa6fd891bc367edef18218fc27398c5f}{
+void($\ast$ {\bfseries p\_\-deriv} )(double $\ast$, double, double $\ast$, int, \hyperlink{structSolverInput}{SolverInput} $\ast$, \hyperlink{structInput}{Input} $\ast$)}
+\label{solvers_8h_afa6fd891bc367edef18218fc27398c5f}
+
+\item 
+\hypertarget{solvers_8h_a2f5ce7bc6ecd317fd131a8f2b36b4ca2}{
+void($\ast$ {\bfseries p\_\-deriv\_\-lite} )(double $\ast$, double, double $\ast$, int, \hyperlink{structSolverInput}{SolverInput} $\ast$, \hyperlink{structInput}{Input} $\ast$)}
+\label{solvers_8h_a2f5ce7bc6ecd317fd131a8f2b36b4ca2}
+
+\item 
+\hypertarget{solvers_8h_a86449d797be83bae49724f0db1ebcbf0}{
+void($\ast$ {\bfseries d\_\-deriv} )(double $\ast$, double $\ast$$\ast$, double, double $\ast$, int, \hyperlink{structSolverInput}{SolverInput} $\ast$, \hyperlink{structInput}{Input} $\ast$)}
+\label{solvers_8h_a86449d797be83bae49724f0db1ebcbf0}
+
+\item 
+\hypertarget{solvers_8h_af5a5681843da627ec4d1a2ec3fbb24da}{
+void($\ast$ {\bfseries p\_\-jacobn} )(double, double $\ast$, double $\ast$, double $\ast$$\ast$, int, \hyperlink{structSolverInput}{SolverInput} $\ast$, \hyperlink{structInput}{Input} $\ast$)}
+\label{solvers_8h_af5a5681843da627ec4d1a2ec3fbb24da}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains the interface to the solver functions. Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+In other words, solver function prototypes and the p\_\-deriv global which serves as a definition of the interface to the derivative func.
+
+\begin{DoxyNote}{Note}
+{\itshape ONLY\/} general solvers allowed here; they {\itshape MUST\/} comply to the generic solver interface (see \hyperlink{solvers_8c}{solvers.c} for details) 
+\end{DoxyNote}
+
+
+\subsection{Function Documentation}
+\hypertarget{solvers_8h_aa20e5e9f5c0b7807c310cbe0444e96f7}{
+\index{solvers.h@{solvers.h}!Adams@{Adams}}
+\index{Adams@{Adams}!solvers.h@{solvers.h}}
+\subsubsection[{Adams}]{\setlength{\rightskip}{0pt plus 5cm}void Adams (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_aa20e5e9f5c0b7807c310cbe0444e96f7}
+Adams: propagates vin (of size n) from tin to tout by Adams-\/Moulton which is an implicit predictor-\/corrector method of second order; the result is returned by vout
+
+This solver was implemented by Konstantin Koslov, Spring 2002 Slightly modified by Manu, July 2002 \hypertarget{solvers_8h_a121e2c55a5a00a0ad9b953ee654cde08}{
+\index{solvers.h@{solvers.h}!BaDe@{BaDe}}
+\index{BaDe@{BaDe}!solvers.h@{solvers.h}}
+\subsubsection[{BaDe}]{\setlength{\rightskip}{0pt plus 5cm}void BaDe (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_a121e2c55a5a00a0ad9b953ee654cde08}
+BaDe: propagates v(t) from t1 to t2 by Bader-\/Deuflhard; this method uses Richardson extrapolation to estimate v's at a hypothe-\/ tical stepsize of 0; the extrapolation also yields an error estimate, which is used to adapt stepsize and change the or-\/ der of the method as required; the result is returned by vout
+
+This solver was implemented by Yogi, based on BuSt, Aug 2002 \hypertarget{solvers_8h_a5135579c74007c279b00970d4bf23a01}{
+\index{solvers.h@{solvers.h}!BuSt@{BuSt}}
+\index{BuSt@{BuSt}!solvers.h@{solvers.h}}
+\subsubsection[{BuSt}]{\setlength{\rightskip}{0pt plus 5cm}void BuSt (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_a5135579c74007c279b00970d4bf23a01}
+BuSt: propagates v(t) from t1 to t2 by Bulirsch-\/Stoer; this method uses Richardson extrapolation to estimate v's at a hypothe-\/ tical stepsize of 0; the extrapolation also yields an error estimate, which is used to adapt stepsize and change the or-\/ der of the method as required; the result is returned by vout
+
+This solver was implemented by Manu, July 2002 \hypertarget{solvers_8h_a4be37b339afa64593767489d8d46c746}{
+\index{solvers.h@{solvers.h}!DCERk32@{DCERk32}}
+\index{DCERk32@{DCERk32}!solvers.h@{solvers.h}}
+\subsubsection[{DCERk32}]{\setlength{\rightskip}{0pt plus 5cm}void DCERk32 (double $\ast$$\ast$ {\em vatt}, \/  int {\em n}, \/  double $\ast$ {\em tarray}, \/  int {\em tpoints}, \/  double $\ast$ {\em darray}, \/  int {\em dpoints}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_a4be37b339afa64593767489d8d46c746}
+DCERk3(2): propagates v\mbox{[}0\mbox{]} (of size n) according to tarray by the Runge-\/Kutta 3(2) pair with continuous extension storing the result in vatt. Initial conditions are specified in vatt\mbox{[}0\mbox{]}, corresponding to tarray\mbox{[}0\mbox{]} 
+
+used for storing intermediate steps \hypertarget{solvers_8h_ae8016a49c971f7f973663bcfd6921dbb}{
+\index{solvers.h@{solvers.h}!Euler@{Euler}}
+\index{Euler@{Euler}!solvers.h@{solvers.h}}
+\subsubsection[{Euler}]{\setlength{\rightskip}{0pt plus 5cm}void Euler (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_ae8016a49c971f7f973663bcfd6921dbb}
+FUNCTION PROTOTYPES
+
+Euler: propagates vin (of size n) from tin to tout by the Euler method; the result is returned by vout \hypertarget{solvers_8h_a97e03e6ff4dc28c1fa9882e09b30d59c}{
+\index{solvers.h@{solvers.h}!Heun@{Heun}}
+\index{Heun@{Heun}!solvers.h@{solvers.h}}
+\subsubsection[{Heun}]{\setlength{\rightskip}{0pt plus 5cm}void Heun (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_a97e03e6ff4dc28c1fa9882e09b30d59c}
+Heun: propagates vin (of size n) from tin to tout by Heun's method the result is returned by vout \hypertarget{solvers_8h_a0adb937524dd2a86627683c4eb9681df}{
+\index{solvers.h@{solvers.h}!InitKrylovVariables@{InitKrylovVariables}}
+\index{InitKrylovVariables@{InitKrylovVariables}!solvers.h@{solvers.h}}
+\subsubsection[{InitKrylovVariables}]{\setlength{\rightskip}{0pt plus 5cm}int InitKrylovVariables (double $\ast$ {\em vin}, \/  int {\em n})}}
+\label{solvers_8h_a0adb937524dd2a86627683c4eb9681df}
+Krylov: propagates vin (of size n) from tin to tout by BDF (Backward $\ast$ Differential Formulas and use of a Newton-\/Krylov method with $\ast$ preconditioning to avoid the costly computation of the $\ast$ jacobian. $\ast$
+
+$\ast$ This solver was written by Anton Crombach, October 2010 $\ast$ $\ast$ \hypertarget{solvers_8h_a8a66f188e5d29e85923a6c3deb314fc6}{
+\index{solvers.h@{solvers.h}!Krylov@{Krylov}}
+\index{Krylov@{Krylov}!solvers.h@{solvers.h}}
+\subsubsection[{Krylov}]{\setlength{\rightskip}{0pt plus 5cm}void Krylov (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em sinput}, \/  {\bf Input} $\ast$ {\em input})}}
+\label{solvers_8h_a8a66f188e5d29e85923a6c3deb314fc6}
+Krylov: propagates vin (of size n) from tin to tout by BDF (Backward Differential Formulas and use of a Newton-\/Krylov method with preconditioning to avoid the costly computation of the jacobian.
+
+This solver was written by Anton Crombach, October 2010
+
+I realised I cannot evaluate only part of the derivative (f.i. only the production/decay part)... so let's see what happens if I evaluate the full derivative for preconditioning. That actually works better.
+
+This is actually the Krylov Band solver. \hypertarget{solvers_8h_a270ab0adff5052cf4e1da796c23d99c4}{
+\index{solvers.h@{solvers.h}!Meuler@{Meuler}}
+\index{Meuler@{Meuler}!solvers.h@{solvers.h}}
+\subsubsection[{Meuler}]{\setlength{\rightskip}{0pt plus 5cm}void Meuler (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_a270ab0adff5052cf4e1da796c23d99c4}
+Meuler: propagates vin (of size n) from tin to tout by the Modified Euler method (this is NOT the midpoint method, see \hyperlink{solvers_8c_aa769d6b7f7c138e8c659a7e7b1a256da}{Rk2()}); the result is returned by vout \hypertarget{solvers_8h_a38d2c4e212d863c00c4275a5867287aa}{
+\index{solvers.h@{solvers.h}!Milne@{Milne}}
+\index{Milne@{Milne}!solvers.h@{solvers.h}}
+\subsubsection[{Milne}]{\setlength{\rightskip}{0pt plus 5cm}void Milne (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_a38d2c4e212d863c00c4275a5867287aa}
+Milne: propagates vin (of size n) from tin to tout by Milne-\/Simpson which is a predictor-\/corrector method; the result is retur-\/ ned by vout
+
+This solver was implemented by Konstantin Koslov, Dec 2001/Jan 2002
+
+THIS SOLVER SEEMS TO BE BUGGY FOR SOME REASON, DO NOT USE IT!!!!! \hypertarget{solvers_8h_aea41aa29042230e96f756b96180271cd}{
+\index{solvers.h@{solvers.h}!my\_\-f\_\-band@{my\_\-f\_\-band}}
+\index{my\_\-f\_\-band@{my\_\-f\_\-band}!solvers.h@{solvers.h}}
+\subsubsection[{my\_\-f\_\-band}]{\setlength{\rightskip}{0pt plus 5cm}int my\_\-f\_\-band (realtype {\em t}, \/  N\_\-Vector {\em y}, \/  N\_\-Vector {\em ydot}, \/  void $\ast$ {\em extra\_\-data})}}
+\label{solvers_8h_aea41aa29042230e96f756b96180271cd}
+wrapper function -\/ to call the derivative \hypertarget{solvers_8h_aa769d6b7f7c138e8c659a7e7b1a256da}{
+\index{solvers.h@{solvers.h}!Rk2@{Rk2}}
+\index{Rk2@{Rk2}!solvers.h@{solvers.h}}
+\subsubsection[{Rk2}]{\setlength{\rightskip}{0pt plus 5cm}void Rk2 (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_aa769d6b7f7c138e8c659a7e7b1a256da}
+Rk2: propagates vin (of size n) from tin to tout by the Midpoint or Second-\/Order Runge-\/Kutta method; the result is returned by vout \hypertarget{solvers_8h_af811314e3f811a04f9dfc54a3368d359}{
+\index{solvers.h@{solvers.h}!Rk4@{Rk4}}
+\index{Rk4@{Rk4}!solvers.h@{solvers.h}}
+\subsubsection[{Rk4}]{\setlength{\rightskip}{0pt plus 5cm}void Rk4 (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_af811314e3f811a04f9dfc54a3368d359}
+Rk4: propagates vin (of size n) from tin to tout by the Fourth-\/Order Runge-\/Kutta method; the result is returned by vout
+
+written by Joel Linton (somewhere around 1998) fixed and modified by Yoginho (somewhere around 2001) \hypertarget{solvers_8h_a22d1585560a34951ee703468643de616}{
+\index{solvers.h@{solvers.h}!Rkck@{Rkck}}
+\index{Rkck@{Rkck}!solvers.h@{solvers.h}}
+\subsubsection[{Rkck}]{\setlength{\rightskip}{0pt plus 5cm}void Rkck (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_a22d1585560a34951ee703468643de616}
+Rkck: propagates vin (of size n) from tin to tout by the Runge-\/Kutta Cash-\/Karp method, which is an adaptive-\/stepsize Rk method; it uses a fifth-\/order Rk formula with an embedded forth-\/oder for-\/ mula for calucalting the error; its result is returned by vout
+
+This solver was written by Marcel Wolf, Spring 2002. 
+
+used for storing intermediate steps \hypertarget{solvers_8h_a6087b8c0ab5c1170a4e3000289f7e7ea}{
+\index{solvers.h@{solvers.h}!Rkf@{Rkf}}
+\index{Rkf@{Rkf}!solvers.h@{solvers.h}}
+\subsubsection[{Rkf}]{\setlength{\rightskip}{0pt plus 5cm}void Rkf (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_a6087b8c0ab5c1170a4e3000289f7e7ea}
+Rkf: propagates vin (of size n) from tin to tout by the Runge-\/Kutta Fehlberg method, which is a the original adaptive-\/stepsize Rk method (Cash-\/Karp is an improved version of this); it uses a fifth-\/order Rk formula with an embedded forth-\/oder formula for calucalting the error; its result is returned by vout
+
+This solver was written by Marcel Wolf, Spring 2002. \hypertarget{solvers_8h_a4a45ad1ee998bd642e3adf4ae72f5f1c}{
+\index{solvers.h@{solvers.h}!SoDe@{SoDe}}
+\index{SoDe@{SoDe}!solvers.h@{solvers.h}}
+\subsubsection[{SoDe}]{\setlength{\rightskip}{0pt plus 5cm}void SoDe (double $\ast$ {\em vin}, \/  double $\ast$ {\em vout}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em stephint}, \/  double {\em accuracy}, \/  int {\em n}, \/  FILE $\ast$ {\em slog}, \/  {\bf SolverInput} $\ast$ {\em si}, \/  {\bf Input} $\ast$ {\em inp})}}
+\label{solvers_8h_a4a45ad1ee998bd642e3adf4ae72f5f1c}
+Delay solver -\/ by Manu? \hypertarget{solvers_8h_aa9f4951e44339690c0b36fcb131e25d6}{
+\index{solvers.h@{solvers.h}!WriteSolvLog@{WriteSolvLog}}
+\index{WriteSolvLog@{WriteSolvLog}!solvers.h@{solvers.h}}
+\subsubsection[{WriteSolvLog}]{\setlength{\rightskip}{0pt plus 5cm}void WriteSolvLog (char $\ast$ {\em solver}, \/  double {\em tin}, \/  double {\em tout}, \/  double {\em h}, \/  int {\em n}, \/  int {\em nderivs}, \/  FILE $\ast$ {\em slog})}}
+\label{solvers_8h_aa9f4951e44339690c0b36fcb131e25d6}
+WriteSolvLog: write to solver log file 

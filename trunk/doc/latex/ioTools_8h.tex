@@ -1,0 +1,40 @@
+\hypertarget{ioTools_8h}{
+\section{lam/ioTools.h File Reference}
+\label{ioTools_8h}\index{lam/ioTools.h@{lam/ioTools.h}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$sys/time.h$>$}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}error.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+FILE $\ast$ \hyperlink{ioTools_8h_a28bac5fd43e0d0417e7714ceff44536d}{FindSection} (FILE $\ast$fp, char $\ast$input\_\-section)
+\item 
+void \hyperlink{ioTools_8h_aa487cca17e7b0ce7ad0b6624d73e4d18}{KillSection} (char $\ast$filename, char $\ast$title)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Copyright (C) 2006 by Yves Fomekong Nanfack, F.219,+31 20 525 7530, \href{mailto:yvesf@science.uva.nl}{\tt yvesf@science.uva.nl} $\ast$
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place -\/ Suite 330, Boston, MA 02111-\/1307, USA. 
+
+\subsection{Function Documentation}
+\hypertarget{ioTools_8h_a28bac5fd43e0d0417e7714ceff44536d}{
+\index{ioTools.h@{ioTools.h}!FindSection@{FindSection}}
+\index{FindSection@{FindSection}!ioTools.h@{ioTools.h}}
+\subsubsection[{FindSection}]{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ FindSection (FILE $\ast$ {\em fp}, \/  char $\ast$ {\em input\_\-section})}}
+\label{ioTools_8h_a28bac5fd43e0d0417e7714ceff44536d}
+FindSection: This function finds a given section of the input file \& returns a pointer positioned to the first record of that section. Section titles should be passed without the preceding '\$'. If it can't find the right section, the function returns NULL. \hypertarget{ioTools_8h_aa487cca17e7b0ce7ad0b6624d73e4d18}{
+\index{ioTools.h@{ioTools.h}!KillSection@{KillSection}}
+\index{KillSection@{KillSection}!ioTools.h@{ioTools.h}}
+\subsubsection[{KillSection}]{\setlength{\rightskip}{0pt plus 5cm}void KillSection (char $\ast$ {\em filename}, \/  char $\ast$ {\em title})}}
+\label{ioTools_8h_aa487cca17e7b0ce7ad0b6624d73e4d18}
+KillSection: erases the section with 'title' from the file 'fp' 

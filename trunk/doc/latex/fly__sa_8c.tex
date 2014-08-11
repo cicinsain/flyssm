@@ -1,0 +1,131 @@
+\hypertarget{fly__sa_8c}{
+\section{fly/fly\_\-sa.c File Reference}
+\label{fly__sa_8c}\index{fly/fly\_\-sa.c@{fly/fly\_\-sa.c}}
+}
+
+
+Although \hyperlink{printscore_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main()} is in \hyperlink{lsa_8c}{lsa.c}, this is the file that 'defines' the fly\_\-sa program.  
+{\ttfamily \#include $<$float.h$>$}\par
+{\ttfamily \#include $<$limits.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include \char`\"{}error.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}distributions.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}integrate.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}maternal.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}moves.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}random.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sa.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}score.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}solvers.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}zygotic.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}fly\_\-io.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{fly__sa_8c_a26853a88f50f5f82cca810ea51bdd049}{ParseCommandLine} (int argc, char $\ast$$\ast$argv)
+\item 
+double \hyperlink{fly__sa_8c_abd595e298b75c7ef53412df7b3d4ccf6}{MoveSA} (\hyperlink{structNucStateType}{NucStatePtr} state\_\-ptr, \hyperlink{structmy__distrib}{DistParms} $\ast$distp, \hyperlink{structScoreOutput}{ScoreOutput} $\ast$out, \hyperlink{structFiles}{Files} $\ast$files, int init, int jacobian)
+\item 
+void \hyperlink{fly__sa_8c_a4cdbbbb8ebb7753c6132f6a3218a2ac1}{RestoreState} (\hyperlink{structNucStateType}{NucStatePtr} state\_\-ptr, \hyperlink{structmy__distrib}{DistParms} $\ast$distp, \hyperlink{structFiles}{Files} $\ast$files)
+\item 
+void \hyperlink{fly__sa_8c_a45d1a324699c442834c5196d02f8124d}{FinalMove} (void)
+\item 
+void \hyperlink{fly__sa_8c_a84f1db9b0dd02782be364c0e9f4af1d9}{WriteEquil} (char $\ast$filename, double $\ast$equil\_\-var)
+\item 
+void \hyperlink{fly__sa_8c_ab167d096961551e35a5c33d7fe725502}{WriteTimes} (double $\ast$times)
+\item 
+void \hyperlink{fly__sa_8c_af9009b030da9c8e38060f2b00ae24661}{PrintTimes} (FILE $\ast$fp, double $\ast$times)
+\item 
+\hyperlink{structOpts}{Opts} $\ast$ \hyperlink{fly__sa_8c_a015b18ef05bf09796eb7c6572ac2c843}{GetOptions} (void)
+\item 
+void \hyperlink{fly__sa_8c_a603709c1fa1952f3bbb5def09e72963d}{RestoreOptions} (\hyperlink{structOpts}{Opts} $\ast$options)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{fly__sa_8c_a5fb0ca78952ca848cfe3297722726aae}{
+const char $\ast$ {\bfseries OPTS} = \char`\"{}:a:b:Bc:C:De:Ef:g:hi:lLm:nNopQr:s:StTvw:W:y:\char`\"{}}
+\label{fly__sa_8c_a5fb0ca78952ca848cfe3297722726aae}
+
+\item 
+\hypertarget{fly__sa_8c_ac7e6da7ea35dbd7b5e2a9672cb240044}{
+void($\ast$ {\bfseries pd} )(double $\ast$, double, double $\ast$, int, \hyperlink{structSolverInput}{SolverInput} $\ast$, \hyperlink{structInput}{Input} $\ast$)}
+\label{fly__sa_8c_ac7e6da7ea35dbd7b5e2a9672cb240044}
+
+\item 
+\hypertarget{fly__sa_8c_a636f47d95a0fe950705e3c3b8e221493}{
+void($\ast$ {\bfseries pj} )(double, double $\ast$, double $\ast$, double $\ast$$\ast$, int, \hyperlink{structSolverInput}{SolverInput} $\ast$, \hyperlink{structInput}{Input} $\ast$)}
+\label{fly__sa_8c_a636f47d95a0fe950705e3c3b8e221493}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Although \hyperlink{printscore_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main()} is in \hyperlink{lsa_8c}{lsa.c}, this is the file that 'defines' the fly\_\-sa program. \begin{DoxyAuthor}{Author}
+JR, modified by Yoginho, -\/D landscape option by Lorraine Greenwald in Oct 2002, -\/g option by Yousong Wang in Feb 2002, -\/a option by Marcel Wolf in Apr 2002
+\end{DoxyAuthor}
+Copyright (C) 1989-\/2003 John Reinitz, 2009-\/2013 Damjan Cicin-\/Sain, Anton Crombach and Yogi Jaeger
+
+It contains most of its problem-\/ specific code (except for move generation -\/$>$ \hyperlink{moves_8c}{moves.c}, saving of intermediate state files -\/$>$ \hyperlink{savestate_8c}{savestate.c} and communication with the specific cost function that is used -\/$>$ \hyperlink{translate_8c}{translate.c}).
+
+After I've told you all that's NOT in this file, here's what the funcs below actually do: parsing fly\_\-sa command line opts is one of its jobs; there are funcs that make the first and last moves and funcs that read and write Lam and Lam-\/independent annealing parameters to the problem-\/specific data file. 
+
+\subsection{Function Documentation}
+\hypertarget{fly__sa_8c_a45d1a324699c442834c5196d02f8124d}{
+\index{fly\_\-sa.c@{fly\_\-sa.c}!FinalMove@{FinalMove}}
+\index{FinalMove@{FinalMove}!fly_sa.c@{fly\_\-sa.c}}
+\subsubsection[{FinalMove}]{\setlength{\rightskip}{0pt plus 5cm}void FinalMove (void)}}
+\label{fly__sa_8c_a45d1a324699c442834c5196d02f8124d}
+FinalMove: determines the final energy and move count and then prints those to wherever they need to be printed to; also should do the cleaning up, i.e freeing stuff and such after a run \hypertarget{fly__sa_8c_a015b18ef05bf09796eb7c6572ac2c843}{
+\index{fly\_\-sa.c@{fly\_\-sa.c}!GetOptions@{GetOptions}}
+\index{GetOptions@{GetOptions}!fly_sa.c@{fly\_\-sa.c}}
+\subsubsection[{GetOptions}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Opts}$\ast$ GetOptions (void)}}
+\label{fly__sa_8c_a015b18ef05bf09796eb7c6572ac2c843}
+GetOptions: returns command line options to \hyperlink{savestate_8c}{savestate.c} for the detailed meaning of all these options see Parse-\/ CommandLine() above); \hyperlink{structOpts}{Opts} struct defined in \hyperlink{moves_8h}{moves.h} \hypertarget{fly__sa_8c_abd595e298b75c7ef53412df7b3d4ccf6}{
+\index{fly\_\-sa.c@{fly\_\-sa.c}!MoveSA@{MoveSA}}
+\index{MoveSA@{MoveSA}!fly_sa.c@{fly\_\-sa.c}}
+\subsubsection[{MoveSA}]{\setlength{\rightskip}{0pt plus 5cm}double MoveSA ({\bf NucStatePtr} {\em state\_\-ptr}, \/  {\bf DistParms} $\ast$ {\em distp}, \/  {\bf ScoreOutput} $\ast$ {\em out}, \/  {\bf Files} $\ast$ {\em files}, \/  int {\em init}, \/  int {\em jacobian})}}
+\label{fly__sa_8c_abd595e298b75c7ef53412df7b3d4ccf6}
+MoveSA: This function actually does almost everything. First it creates a static \hyperlink{structInput}{Input} structure 'inp', where it puts all the information from the input file. This part is executed only once (when init == 1). Then it creates a \hyperlink{structScoreOutput}{ScoreOutput} structure 'out' where the score, penalty and residual vectors will be stored. At the end it runs the score function, where all the calculation is done. \hypertarget{fly__sa_8c_a26853a88f50f5f82cca810ea51bdd049}{
+\index{fly\_\-sa.c@{fly\_\-sa.c}!ParseCommandLine@{ParseCommandLine}}
+\index{ParseCommandLine@{ParseCommandLine}!fly_sa.c@{fly\_\-sa.c}}
+\subsubsection[{ParseCommandLine}]{\setlength{\rightskip}{0pt plus 5cm}int ParseCommandLine (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
+\label{fly__sa_8c_a26853a88f50f5f82cca810ea51bdd049}
+ParseCommandLine: well, parses the command line and returns an index to the 1st argument after the command line options \hypertarget{fly__sa_8c_af9009b030da9c8e38060f2b00ae24661}{
+\index{fly\_\-sa.c@{fly\_\-sa.c}!PrintTimes@{PrintTimes}}
+\index{PrintTimes@{PrintTimes}!fly_sa.c@{fly\_\-sa.c}}
+\subsubsection[{PrintTimes}]{\setlength{\rightskip}{0pt plus 5cm}void PrintTimes (FILE $\ast$ {\em fp}, \/  double $\ast$ {\em times})}}
+\label{fly__sa_8c_af9009b030da9c8e38060f2b00ae24661}
+PrintTimes: writes two (parallel: three) times sections \hypertarget{fly__sa_8c_a603709c1fa1952f3bbb5def09e72963d}{
+\index{fly\_\-sa.c@{fly\_\-sa.c}!RestoreOptions@{RestoreOptions}}
+\index{RestoreOptions@{RestoreOptions}!fly_sa.c@{fly\_\-sa.c}}
+\subsubsection[{RestoreOptions}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreOptions ({\bf Opts} $\ast$ {\em options})}}
+\label{fly__sa_8c_a603709c1fa1952f3bbb5def09e72963d}
+RestoreOptions: restores the values of the command line opt variables from the \hyperlink{structOpts}{Opts} struct (used for restoring a run) \hypertarget{fly__sa_8c_a4cdbbbb8ebb7753c6132f6a3218a2ac1}{
+\index{fly\_\-sa.c@{fly\_\-sa.c}!RestoreState@{RestoreState}}
+\index{RestoreState@{RestoreState}!fly_sa.c@{fly\_\-sa.c}}
+\subsubsection[{RestoreState}]{\setlength{\rightskip}{0pt plus 5cm}void RestoreState ({\bf NucStatePtr} {\em state\_\-ptr}, \/  {\bf DistParms} $\ast$ {\em distp}, \/  {\bf Files} $\ast$ {\em files})}}
+\label{fly__sa_8c_a4cdbbbb8ebb7753c6132f6a3218a2ac1}
+RestoreState: called when an interrupted run is restored; does the following:
+\begin{DoxyItemize}
+\item stores various static things for filenames and such
+\item initializes Lam parameters for \hyperlink{lsa_8c}{lsa.c}
+\item initializes model and scoring funcs \& solver stepsize
+\item initializes move generation in \hyperlink{moves_8c}{moves.c}
+\item restores state at which previous run was interrupted according to state file
+\end{DoxyItemize}
+
+Comment by JR: RestoreState was originally going to be implemented with branches in InitialMove. That won't work because when when this func. returns, control should go right to \hyperlink{lsa_8c_a3d44ba75fca31cf103092e6b7a604dcf}{Loop()}, skipping all the initiali-\/ zation stuff in Initialize. Hence most of the code in InitialMove is just repeated here. \hypertarget{fly__sa_8c_a84f1db9b0dd02782be364c0e9f4af1d9}{
+\index{fly\_\-sa.c@{fly\_\-sa.c}!WriteEquil@{WriteEquil}}
+\index{WriteEquil@{WriteEquil}!fly_sa.c@{fly\_\-sa.c}}
+\subsubsection[{WriteEquil}]{\setlength{\rightskip}{0pt plus 5cm}void WriteEquil (char $\ast$ {\em filename}, \/  double $\ast$ {\em equil\_\-var})}}
+\label{fly__sa_8c_a84f1db9b0dd02782be364c0e9f4af1d9}
+WriteEquil: writes the equilibrate\_\-variance section to the data file right after the \$equilibrate section \hypertarget{fly__sa_8c_ab167d096961551e35a5c33d7fe725502}{
+\index{fly\_\-sa.c@{fly\_\-sa.c}!WriteTimes@{WriteTimes}}
+\index{WriteTimes@{WriteTimes}!fly_sa.c@{fly\_\-sa.c}}
+\subsubsection[{WriteTimes}]{\setlength{\rightskip}{0pt plus 5cm}void WriteTimes (double $\ast$ {\em times})}}
+\label{fly__sa_8c_ab167d096961551e35a5c33d7fe725502}
+WriteTimes: writes the timing information to wherever it needs to be written to at the end of a run 
