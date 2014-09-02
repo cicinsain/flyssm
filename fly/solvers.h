@@ -162,7 +162,7 @@ void BuSt( double *vin, double *vout, double tin, double tout, double stephint, 
 void BaDe( double *vin, double *vout, double tin, double tout, double stephint, double accuracy, int n, FILE * slog, SolverInput * si, Input * inp );
 
 
-/**  Krylov: propagates vin (of size n) from tin to tout by BDF (Backward  
+/**  Band: propagates vin (of size n) from tin to tout by BDF (Backward  
  *           Differential Formulas and use of a Newton-Krylov method with  
  *           preconditioning to avoid the costly computation of the        
  *           jacobian.                                                     
@@ -174,10 +174,10 @@ void BaDe( double *vin, double *vout, double tin, double tout, double stephint, 
  * production/decay part)... so let's see what happens if I evaluate the full
  * derivative for preconditioning. That actually works better.
  * 
- * This is actually the Krylov Band solver. */
-void Krylov( double *vin, double *vout, double tin, double tout, double stephint, double accuracy, int n, FILE * slog, SolverInput * si, Input * inp );
+ * This is actually the Direct Band solver. */
+void Band( double *vin, double *vout, double tin, double tout, double stephint, double accuracy, int n, FILE * slog, SolverInput * si, Input * inp );
 
-int InitKrylovVariables( double *vin, int n );
+int InitBandVariables( double *vin, int n );
 
 int InitBandSolver( realtype tzero, double stephint, double rel_tol, double abs_tol );
 void FreeBandSolver( void );

@@ -4269,7 +4269,7 @@ void FreeExtraData(ExtraData edata) {   //needed by the old Krylov solver
 */
 
 int
-InitKrylovVariables( double *vin, int n ) {
+InitBandVariables( double *vin, int n ) {
 
     int i;
 
@@ -4306,7 +4306,7 @@ CheckFlag( void *flagvalue, char *funcname, int opt ) {
     return 0;
 }
 
-/**  Krylov: propagates vin (of size n) from tin to tout by BDF (Backward  
+/**  Band: propagates vin (of size n) from tin to tout by BDF (Backward  
  *           Differential Formulas and use of a Newton-Krylov method with  
  *           preconditioning to avoid the costly computation of the        
  *           jacobian.                                                     
@@ -4320,7 +4320,7 @@ CheckFlag( void *flagvalue, char *funcname, int opt ) {
  * 
  * This is actually the Krylov Band solver. */
 void
-Krylov( double *vin, double *vout, double tin, double tout, double stephint, double accuracy, int n, FILE * slog, SolverInput * sinput, Input * input ) {
+Band( double *vin, double *vout, double tin, double tout, double stephint, double accuracy, int n, FILE * slog, SolverInput * sinput, Input * input ) {
     int flag, i, j;
     realtype t, tstop;
     double *divtimes, *divdurations;
@@ -4333,7 +4333,7 @@ Krylov( double *vin, double *vout, double tin, double tout, double stephint, dou
     if( cvode_mem != 0 ) {
         FreeBandSolver(  );
     }
-    InitKrylovVariables( vin, n );
+    InitBandVariables( vin, n );
     InitBandSolver( tin, stephint, accuracy, accuracy );
 
     /* Krylov solver looks ahead and then gets confused by the change
@@ -4421,7 +4421,7 @@ InitBandSolver( realtype tzero, double stephint, double rel_tol, double abs_tol 
     //stephint = 0.0;
     CVodeSetInitStep( cvode_mem, stephint );
 
-    //printf( "Krylov Solver successfully (re)initialized\n" );
+    //printf( "Band Solver successfully (re)initialized\n" );
     return 0;
 }
 

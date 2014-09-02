@@ -73,7 +73,7 @@ ifneq (,$(findstring linux,$(OSTYPE)))
 	DEBUGFLAGS = $(DEBUGFLAGS) -DOMPI_CC
 	PROFILEFLAGS = $(PROFILEFLAGS) -DOMPI_CC
 	FLYEXECS = unfold printscore $(execFile) scramble ##fly_sa.mpi
-	SUNDIALS = /usr/local
+	SUNDIALS = ../sundials
 endif
 
 ifeq ($(OSTYPE),osf1)
@@ -200,7 +200,7 @@ veryclean:
 	rm -f amosa/*.o
 	rm -f nsga2/*.o
 	rm -f ss/*.o
-	rm -r ess/*.o
+	rm -f ess/*.o
 
 help:
 	@echo "make: this is the Makefile for fly code"

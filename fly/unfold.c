@@ -276,9 +276,9 @@ main( int argc, char **argv ) {
             else if( !( strcmp( optarg, "sd" ) ) )
                 ps = SoDe;
             else if( !( strcmp( optarg, "kr" ) ) )
-                ps = Krylov;
-            /*else if (!(strcmp(optarg, "bnd")))
-               ps = Band; */
+                ps = Band;
+            else if (!(strcmp(optarg, "bnd")))
+                ps = Band; 
             else
                 error( "unfold: invalid solver (%s), use: a,bd,bs,e,h,kr,mi,me,r{2,4,ck,f}", optarg );
             break;

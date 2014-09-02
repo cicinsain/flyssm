@@ -72,15 +72,15 @@
 #endif
 
 #ifndef AMOSA // To avoid the duplicate key definition
-	#define AMOSA
+	//#define AMOSA
 #endif
 
 #ifndef NSGA2 // To avoid the duplicate key definition
-	#define NSGA2
+	//#define NSGA2
 #endif
 
 #ifndef SS
-	#define SS
+	//#define SS
 #endif 
 
 #ifndef ESS
@@ -392,10 +392,12 @@ main( int argc, char **argv ) {
 #else
     #ifdef NSGA2
     	printf("Starting Non-dominated Sorting Genetic Algorithm\n");
-    #elif AMOSA
+    #elif defined(AMOSA)
     	printf("Starting Archived Multi-objective Simulated Annealing\n");
-    #elif SS
+    #elif defined(SS)
     	printf("Starting Scatter Search Algorithm\n");
+    #elif defined(ESS)
+    	printf("Starting Enhanced Scatter Search Algorithm\n");
     #else
     	printf("Starting Simulated Annealing\n" );
     #endif

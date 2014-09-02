@@ -1,8 +1,8 @@
 
 RM=rm -f
 # CC=gcc-4.8
-# CC=clang
-# CFLAGS=-Wall -g -std=c99 -O2
+# CC=gcc
+# CFLAGS=-Wall -g -std=gnu99 -O2
 # -fsanitize=address -fno-omit-frame-pointer
 # -O1 -fsanitize=address -fno-omit-frame-pointer
 # -O2 -fsanitize=address -fno-omit-frame-pointer

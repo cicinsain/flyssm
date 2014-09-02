@@ -419,13 +419,13 @@ ParseCommandLine( int argc, char **argv ) {
             else if( !( strcmp( optarg, "rf" ) ) )
                 ps = Rkf;
             else if( !( strcmp( optarg, "sd" ) ) )
-                ps = SoDe;
+                ps = SoDe;            
             else if( !( strcmp( optarg, "kr" ) ) )
-                ps = Krylov;
-            /* else if (!(strcmp(optarg, "bnd")))
-               ps = Band; */
+                ps = Band;
+            else if( !( strcmp( optarg, "bnd" ) ) )
+                ps = Band; 
             else
-                error( "flyMOP: invalid solver (%s), use: a,bs,e,h,kr,mi,me,r{2,4,ck,f}", optarg );
+                error( "flyMOP: invalid solver (%s), use: a,bs,e,h,bnd,mi,me,r{2,4,ck,f}", optarg );
             break;
         case 'S':              /* -S unsets the auto_stop_tune flag */
 #ifdef MPI
@@ -1056,12 +1056,9 @@ GetOptions( void ) {
     else if( ps == Rkf )
         options->solver = strcpy( options->solver, "Rkf" );
     else if( ps == SoDe )
-        options->solver = strcpy( options->solver, "SoDe" );
-    else if( ps == Krylov )
-        options->solver = strcpy( options->solver, "Krylov" );
-    /*else if (ps == Band)
-       options->solver = strcpy(options->solver, "Band");
-     */
+        options->solver = strcpy( options->solver, "SoDe" );    
+    else if (ps == Band)
+       options->solver = strcpy(options->solver, "Band");     
     else
         error( "GetOptions: unknown solver function" );
 
@@ -1136,11 +1133,9 @@ RestoreOptions( Opts * options ) {
     else if( !strcmp( options->solver, "SoDe" ) )
         ps = SoDe;
     else if( !strcmp( options->solver, "Krylov" ) )
-        ps = Krylov;
-    /*
-       else if (!strcmp(options->solver, "Band"))
-       ps = Band;
-     */
+        ps = Band;    
+    else if (!strcmp(options->solver, "Band"))
+       ps = Band;     
     else
         error( "RestoreOptions: unknown solver %s", options->solver );
 
