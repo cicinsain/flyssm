@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="94">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="amosa">
+        <in>amosa.h</in>
+        <in>amosa_real.c</in>
+        <in>burn_in_period.h</in>
+        <in>clustering.h</in>
+        <in>creating_archive.h</in>
+        <in>dominance.h</in>
+        <in>evaluate.h</in>
+        <in>init_sol.h</in>
+        <in>main_process.h</in>
+        <in>number_of_functions.h</in>
+        <in>number_of_variable.h</in>
+        <in>problemdef.h</in>
+        <in>real_mutate_ind.h</in>
+        <in>report.h</in>
+        <in>test_func.h</in>
+        <in>variable.h</in>
+      </df>
+      <df name="ess">
+      </df>
+      <df name="fly">
+        <df name="bak">
+          <in>fly_amosa.c</in>
+          <in>fly_nsga2.h</in>
+        </df>
+        <in>flyMOP.c</in>
+        <in>fly_io.c</in>
+        <in>fly_io.h</in>
+        <in>integrate.c</in>
+        <in>integrate.h</in>
+        <in>maternal.c</in>
+        <in>maternal.h</in>
+        <in>moves.c</in>
+        <in>moves.h</in>
+        <in>printscore.c</in>
+        <in>savestate.c</in>
+        <in>score.c</in>
+        <in>score.h</in>
+        <in>scramble.c</in>
+        <in>scramble.h</in>
+        <in>solvers.c</in>
+        <in>solvers.h</in>
+        <in>translate.c</in>
+        <in>unfold.c</in>
+        <in>zygotic.c</in>
+        <in>zygotic.h</in>
+      </df>
+      <df name="input">
+      </df>
+      <df name="lam">
+        <in>MPI.h</in>
+        <in>dSFMT-common.h</in>
+        <in>dSFMT-params.h</in>
+        <in>dSFMT-params19937.h</in>
+        <in>dSFMT.c</in>
+        <in>dSFMT.h</in>
+        <in>dSFMT_str_state.c</in>
+        <in>dSFMT_str_state.h</in>
+        <in>deviates.c</in>
+        <in>distributions.c</in>
+        <in>distributions.h</in>
+        <in>error.c</in>
+        <in>error.h</in>
+        <in>global.h</in>
+        <in>ioTools.c</in>
+        <in>ioTools.h</in>
+        <in>lsa.c</in>
+        <in>mathLib.c</in>
+        <in>mathLib.h</in>
+        <in>random.c</in>
+        <in>random.h</in>
+        <in>sa.h</in>
+      </df>
+      <df name="nsga2">
+        <df name="input_data">
+        </df>
+        <in>allocate.c</in>
+        <in>auxiliary.c</in>
+        <in>crossover.c</in>
+        <in>crowddist.c</in>
+        <in>decode.c</in>
+        <in>display.c</in>
+        <in>dominance.c</in>
+        <in>eval.c</in>
+        <in>fillnds.c</in>
+        <in>initialize.c</in>
+        <in>list.c</in>
+        <in>merge.c</in>
+        <in>mutation.c</in>
+        <in>nsga2.c</in>
+        <in>nsga2.h</in>
+        <in>problemdef.c</in>
+        <in>rand.c</in>
+        <in>rand.h</in>
+        <in>rank.c</in>
+        <in>report.c</in>
+        <in>sort.c</in>
+        <in>tourselect.c</in>
+      </df>
+      <df name="scripts">
+      </df>
+      <df name="ss">
+        <df name="test_problems">
+          <in>Ackleys.h</in>
+          <in>AluffiPentini.h</in>
+          <in>Beale.h</in>
+          <in>BeckerLago.h</in>
+          <in>Bohachevsky1.h</in>
+          <in>Bohachevsky2.h</in>
+          <in>Branin.h</in>
+          <in>Camel3.h</in>
+          <in>Camel6.h</in>
+          <in>CosMix2.h</in>
+          <in>CosMix4.h</in>
+          <in>DekkersAarts.h</in>
+          <in>EMichalewicz.h</in>
+          <in>Easom.h</in>
+          <in>Expo.h</in>
+          <in>GoldPrice.h</in>
+          <in>Griewank.h</in>
+          <in>Gulf.h</in>
+          <in>Hartman3.h</in>
+          <in>Hartman6.h</in>
+          <in>Helical.h</in>
+          <in>Hosaki.h</in>
+          <in>Kowalik.h</in>
+          <in>LM1.h</in>
+          <in>LM2n10.h</in>
+          <in>LM2n5.h</in>
+          <in>McCormic.h</in>
+          <in>MeyerRoth.h</in>
+          <in>MieleCantrell.h</in>
+          <in>ModRosenbrock.h</in>
+          <in>Modlangerman.h</in>
+          <in>MultiGauss.h</in>
+          <in>Neumaier2.h</in>
+          <in>Neumaier3.h</in>
+          <in>Oddsquare.h</in>
+          <in>Paviani.h</in>
+          <in>Periodic.h</in>
+          <in>PowellQ.h</in>
+          <in>PriceTransistor.h</in>
+          <in>Rastrigin.h</in>
+          <in>Rosenbrock.h</in>
+          <in>STChebychev17.h</in>
+          <in>STChebychev9.h</in>
+          <in>Salomon.h</in>
+          <in>Schaffer1.h</in>
+          <in>Schaffer2.h</in>
+          <in>Schubert.h</in>
+          <in>Schwefel.h</in>
+          <in>Shekel10.h</in>
+          <in>Shekel5.h</in>
+          <in>Shekel7.h</in>
+          <in>Shekelfox10.h</in>
+          <in>Shekelfox5.h</in>
+          <in>Wood.h</in>
+          <in>Zeldasine10.h</in>
+          <in>Zeldasine20.h</in>
+        </df>
+        <in>allocate.c</in>
+        <in>evaluate.c</in>
+        <in>init.c</in>
+        <in>input.c</in>
+        <in>linkedlist.c</in>
+        <in>local_search.c</in>
+        <in>problemdef.c</in>
+        <in>rand.h</in>
+        <in>recombine.c</in>
+        <in>refine.c</in>
+        <in>report.c</in>
+        <in>sort.c</in>
+        <in>ss.c</in>
+        <in>ss.h</in>
+        <in>ssTools.c</in>
+        <in>stats.c</in>
+        <in>update.c</in>
+      </df>
+      <df name="visualizer">
+        <df name="Lsa">
+        </df>
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>
