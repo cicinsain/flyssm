@@ -107,7 +107,7 @@ void re_gen_ref_set(SSType *ssParams, Set *set, int set_size, char type, Input *
 	////////////////////////////
 	//	h = b - g 	|		g //
 	////////////////////////////
-// printf("%d\n", ssParams->scatter_set_size);
+ //printf("scatter size = %d\n", ssParams->scatter_set_size);
 
 	double **M = (double **)malloc(n * sizeof(double*));
 	for (int i = 0; i < n; ++i){
@@ -120,7 +120,7 @@ void re_gen_ref_set(SSType *ssParams, Set *set, int set_size, char type, Input *
 	// 	evaluate_set(ssParams, ssParams->scatter_set, ssParams->scatter_set_size, inp, out);
 	// 	quick_sort_set(ssParams, ssParams->scatter_set, ssParams->scatter_set_size, 'c');
 	// }
-
+        //printf("scat set initialized\n");
 	double **P = (double **)malloc(m * sizeof(double *));
 	for (int i = 0; i < m; ++i){
 		P[i] = (double *)malloc( b * sizeof(double *) );
@@ -132,6 +132,7 @@ void re_gen_ref_set(SSType *ssParams, Set *set, int set_size, char type, Input *
 
 	int max_index;
 	int min_index;
+        
 	for (int k = h; k < b; ++k, --m)
 	{
 		compute_Mt(ssParams, ssParams->ref_set, ssParams->ref_set_size, M, n, k);
@@ -140,20 +141,15 @@ void re_gen_ref_set(SSType *ssParams, Set *set, int set_size, char type, Input *
 		{
 			for (int j = 0; j < n; ++j)
 			{
-				tmp_row[0][j] = ssParams->ref_set->members[0].params[j] - ssParams->scatter_set->members[i].params[j];
+                            tmp_row[0][j] = ssParams->ref_set->members[0].params[j] - ssParams->scatter_set->members[i].params[j];
 			}
 			matrix_product(ssParams, tmp_row, 1, n, M, n, k, &(P[i]), 1, k);
-			msp[i] = max(P[i], k, &max_index);
-			// printf("%d\n", max_index);
-
+                        msp[i] = max(P[i], k, &max_index);
 		}
 		min(msp, m, &min_index);
-// printf("-----%d", min_index);
 		evaluate_ind(ssParams, &(ssParams->scatter_set->members[min_index]), inp, out);
-// printf("hi\n");
 		copy_ind(ssParams, &(ssParams->ref_set->members[k]), &(ssParams->scatter_set->members[min_index]));
 		delete_and_shift(ssParams, ssParams->scatter_set, ssParams->scatter_set_size, min_index);
-
 		#ifdef STATS
 			update_frequency_matrix(ssParams, &(ssParams->ref_set->members[k]));
 		#endif

@@ -16,6 +16,7 @@
 #include <mathLib.h>
 
 #include "fly_io.h"
+#include <time.h>
 
 //
 // INPUT
@@ -1362,6 +1363,8 @@ ReadSSParameters( FILE * fp, Input *inp ) {
         // error( "ReadTheSSParameters: error reading ss section (seed)" );
         srand(time(NULL));
         l_ssParams.seed = rand();
+        //l_ssParams.seed = 1079675130; //Damjan: for testing purposes I would need always the same seed so I can compare the results
+
         fscanf( fp, "%*s\n" );
     }
     printf("seed : %d\n", l_ssParams.seed );
@@ -1574,8 +1577,10 @@ ReadSSParameters( FILE * fp, Input *inp ) {
 
 
     inp->sco.searchspace = InitLimits( fp, inp );               /* Reading the fly variable */
-    Penalty2Limits( inp->sco.searchspace, inp->zyg.defs );      /* convert to explicit limits */
-
+    
+    //Penalty2Limits( inp->sco.searchspace, inp->zyg.defs );      /* convert to explicit limits */ //Damjan: we want to use implicit limits and penalties instead
+    FixNALimits( inp->sco.searchspace, inp->zyg.defs );     
+    
     l_ssParams.min_real_var = (double *)malloc(l_ssParams.nreal * sizeof(double));
     l_ssParams.max_real_var = (double *)malloc(l_ssParams.nreal * sizeof(double));
 
@@ -1586,7 +1591,7 @@ ReadSSParameters( FILE * fp, Input *inp ) {
     /* Translate the SearchSpace to the amosa propriate range. EqParms{ R, T, E, m, h, d, lambda, tau }    */
 
     for (int i = 0; i < inp->zyg.defs.ngenes; ++i){ // R
-        if( inp->twe.Rtweak[i] == 1 ){
+        if( inp->twe.Rtweak[i] == 1 ){                       
             l_ssParams.min_real_var[n]   = inp->sco.searchspace->Rlim[i]->lower;
             l_ssParams.max_real_var[n++] = inp->sco.searchspace->Rlim[i]->upper;
             // printf("R: %f,", l_ssParams.min_real_var[n-1]);
@@ -1713,8 +1718,10 @@ ReadeSSParameters( FILE * fp, Input *inp ) {
 
     eSSType l_eSSParams;
 
-
                 l_eSSParams.n_Params = inp->tra.size;
+                
+                printf("Number of parameters: %d\n", l_eSSParams.n_Params);
+                
                 l_eSSParams.sol = 10;
                 // printf("%s", KCYN);
                 // printf("\n---------------------------------");
@@ -1746,7 +1753,7 @@ ReadeSSParameters( FILE * fp, Input *inp ) {
                 l_eSSParams.set_std_Tol = 1e-3;
 
                 l_eSSParams.equality_type = 0;
-                // l_eSSParams.user_guesses = 1;
+                l_eSSParams.user_guesses = 0;
 
                 /**
                  * Global Options
@@ -1754,7 +1761,8 @@ ReadeSSParameters( FILE * fp, Input *inp ) {
                 // l_eSSParams.n_Params = 2;
 
                 // if (l_eSSParams.maxiter == 0)
-                    l_eSSParams.maxiter = 200;
+                    //l_eSSParams.maxiter = 200;
+                l_eSSParams.maxiter = 10000; //Damjan: ending criteria should be the goodness of the solution, or the lack of improvement
                 
                 l_eSSParams.maxStuck = 20;
 
@@ -1774,18 +1782,19 @@ ReadeSSParameters( FILE * fp, Input *inp ) {
             // #endif
                 
                 l_eSSParams.n_refSet = ceil(1.0 + sqrt(1.0 + 40.0 * l_eSSParams.n_Params) / 2.0);
-                if (l_eSSParams.n_refSet %2 != 0)
+                if (l_eSSParams.n_refSet % 2 != 0)
                     l_eSSParams.n_refSet++;
-                l_eSSParams.n_refSet = MAX(l_eSSParams.n_refSet, 20);
-
+                printf("Size of reference set (before limiting to 20): %d\n", l_eSSParams.n_refSet);
+                l_eSSParams.n_refSet = MAX(l_eSSParams.n_refSet, 20);           //Damjan: shouldn't this be MIN? I´ve read somewhere that the size shouldn't be more than 20. Anyway, max gives slightly better final solution then min (on one example)
+                printf("Final size of reference set: %d\n", l_eSSParams.n_refSet);
                 l_eSSParams.n_subRegions = MIN(4, l_eSSParams.n_Params);
 
                 l_eSSParams.n_scatterSet = MAX(10 * l_eSSParams.n_Params, 40);
-
+                printf("Size of scatter? set: %d\n", l_eSSParams.n_scatterSet);
                 l_eSSParams.n_childsSet = l_eSSParams.n_refSet;
-
-                l_eSSParams.n_candidateSet = l_eSSParams.n_refSet -1 ;
-
+                printf("Size of childs? set: %d\n", l_eSSParams.n_childsSet);
+                l_eSSParams.n_candidateSet = l_eSSParams.n_refSet -1;
+                printf("Size of candidate? set: %d\n", l_eSSParams.n_candidateSet);
                 // l_eSSParams.init_RefSet_Type;
                 // l_eSSParams.combination_Type;
                 // l_eSSParams.regeneration_Type;
@@ -1803,9 +1812,9 @@ ReadeSSParameters( FILE * fp, Input *inp ) {
                 /**
                  * Local Search Options
                  */
-                l_eSSParams.perform_LocalSearch = 0;
+                l_eSSParams.perform_LocalSearch = 1;
                 if (l_eSSParams.local_method == '0') l_eSSParams.local_method = 'n';
-                l_eSSParams.local_min_criteria = 20 ;
+                l_eSSParams.local_min_criteria = 400000;//20 ; //Damjan: changed this because I'm using chi-square instead of rms, inside the search algorithm
                 l_eSSParams.local_maxIter = 500; 
                 // l_eSSParams.local_Freqs;
                 // l_eSSParams.local_SolverMethod;
@@ -2653,7 +2662,7 @@ ReadLimits( FILE * fp, TheProblem defs ) {
          */
         l_limits->pen_vec = ( double * ) calloc( 2 + ncols + egenes, sizeof( double ) );
         if( 1 != sscanf( record, "%lg", l_limits->pen_vec ) )
-            error( "ReadLimitsXXX: error reading Lambda for penalty" );
+            error( "ReadLimits: error reading Lambda for penalty" );
     }
     
     

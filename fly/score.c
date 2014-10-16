@@ -641,71 +641,72 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
      * always.
      */
     /* If you're using limits on contributors to u, check'em here */
-    // printf("Score: Checking the penalties...\n");
-    /*if( inp->sco.searchspace->pen_vec == NULL ) {*/
-    for( i = 0; i < inp->zyg.defs.ngenes; i++ ) {
-        for( j = 0; j < inp->zyg.defs.ngenes; j++ ) {
-            if( inp->zyg.parm.T[( i * inp->zyg.defs.ngenes ) + j] > inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->upper ) {
-                // printf("OUT_OF_BOUND_T: %.10lf > %.10lf | %d | %d\n", inp->zyg.parm.T[(i * inp->zyg.defs.ngenes) + j], inp->sco.searchspace->Tlim[(i * inp->zyg.defs.ngenes) + j]->upper, i, j);
-                out->score = FORBIDDEN_MOVE;
-                return;
-            }
-            if( inp->zyg.parm.T[( i * inp->zyg.defs.ngenes ) + j] < inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->lower ) {
-                // printf("OUT_OF_BOUND_T: %.10lf < %.10lf | %d | %d\n", inp->zyg.parm.T[(i * inp->zyg.defs.ngenes) + j], inp->sco.searchspace->Tlim[(i * inp->zyg.defs.ngenes) + j]->lower, i, j);
-                out->score = FORBIDDEN_MOVE;
-                return;
-            }
-        }
-        for( j = 0; j < inp->zyg.defs.egenes; j++ ) {
-            if( inp->zyg.parm.E[( i * inp->zyg.defs.egenes ) + j] > inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->upper ) {
-                // printf("OUT_OF_BOUND_E: %.10lf > %.10lf | %d | %d\n", inp->zyg.parm.E[(i * inp->zyg.defs.egenes) + j], inp->sco.searchspace->Elim[(i * inp->zyg.defs.egenes) + j]->upper, i, j);
-                out->score = FORBIDDEN_MOVE;
-                return;
-            }
-            if( inp->zyg.parm.E[( i * inp->zyg.defs.egenes ) + j] < inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->lower ) {
-                // printf("OUT_OF_BOUND_E: %.10lf < %.10lf | %d | %d\n", inp->zyg.parm.E[(i * inp->zyg.defs.egenes) + j], inp->sco.searchspace->Elim[(i * inp->zyg.defs.egenes) + j]->lower, i, j);
-                out->score = FORBIDDEN_MOVE;
-                return;
-            }
-        }
-        if( inp->zyg.parm.m[i] > inp->sco.searchspace->mlim[i]->upper ) {
-            // printf("OUT_OF_BOUND_m: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.m[i], inp->sco.searchspace->mlim[i]->upper, i);
-            out->score = FORBIDDEN_MOVE;
-            return;
-        }
-        if( inp->zyg.parm.m[i] < inp->sco.searchspace->mlim[i]->lower ) {
-            // printf("OUT_OF_BOUND_m: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.m[i], inp->sco.searchspace->mlim[i]->lower, i);
-            out->score = FORBIDDEN_MOVE;
-            return;
-        }
-        if( inp->zyg.parm.h[i] > inp->sco.searchspace->hlim[i]->upper ) {
-            // printf("OUT_OF_BOUND_h: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.h[i], inp->sco.searchspace->hlim[i]->upper, i);
-            out->score = FORBIDDEN_MOVE;
-            return;
-        }
-        if( inp->zyg.parm.h[i] < inp->sco.searchspace->hlim[i]->lower ) {
-            // printf("OUT_OF_BOUND_h: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.h[i], inp->sco.searchspace->hlim[i]->lower, i);
-            out->score = FORBIDDEN_MOVE;
-            return;
-        }
-    }
+    //printf("Score: Checking the penalties...\n");
     out->penalty = 0;
-
+            
+    if( inp->sco.searchspace->pen_vec == NULL ) {    //Damjan: don't check limits for those parameters
+       for( i = 0; i < inp->zyg.defs.ngenes; i++ ) {
+           for( j = 0; j < inp->zyg.defs.ngenes; j++ ) {
+               if( inp->zyg.parm.T[( i * inp->zyg.defs.ngenes ) + j] > inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->upper ) {
+                   // printf("OUT_OF_BOUND_T: %.10lf > %.10lf | %d | %d\n", inp->zyg.parm.T[(i * inp->zyg.defs.ngenes) + j], inp->sco.searchspace->Tlim[(i * inp->zyg.defs.ngenes) + j]->upper, i, j);
+                   out->score = FORBIDDEN_MOVE;
+                   return;
+               }
+               if( inp->zyg.parm.T[( i * inp->zyg.defs.ngenes ) + j] < inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->lower ) {
+                   // printf("OUT_OF_BOUND_T: %.10lf < %.10lf | %d | %d\n", inp->zyg.parm.T[(i * inp->zyg.defs.ngenes) + j], inp->sco.searchspace->Tlim[(i * inp->zyg.defs.ngenes) + j]->lower, i, j);
+                   out->score = FORBIDDEN_MOVE;
+                   return;
+               }
+           }
+           for( j = 0; j < inp->zyg.defs.egenes; j++ ) {
+               if( inp->zyg.parm.E[( i * inp->zyg.defs.egenes ) + j] > inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->upper ) {
+                   // printf("OUT_OF_BOUND_E: %.10lf > %.10lf | %d | %d\n", inp->zyg.parm.E[(i * inp->zyg.defs.egenes) + j], inp->sco.searchspace->Elim[(i * inp->zyg.defs.egenes) + j]->upper, i, j);
+                   out->score = FORBIDDEN_MOVE;
+                   return;
+               }
+               if( inp->zyg.parm.E[( i * inp->zyg.defs.egenes ) + j] < inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->lower ) {
+                   // printf("OUT_OF_BOUND_E: %.10lf < %.10lf | %d | %d\n", inp->zyg.parm.E[(i * inp->zyg.defs.egenes) + j], inp->sco.searchspace->Elim[(i * inp->zyg.defs.egenes) + j]->lower, i, j);
+                   out->score = FORBIDDEN_MOVE;
+                   return;
+               }
+           }
+           if( inp->zyg.parm.m[i] > inp->sco.searchspace->mlim[i]->upper ) {
+               // printf("OUT_OF_BOUND_m: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.m[i], inp->sco.searchspace->mlim[i]->upper, i);
+               out->score = FORBIDDEN_MOVE;
+               return;
+           }
+           if( inp->zyg.parm.m[i] < inp->sco.searchspace->mlim[i]->lower ) {
+               // printf("OUT_OF_BOUND_m: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.m[i], inp->sco.searchspace->mlim[i]->lower, i);
+               out->score = FORBIDDEN_MOVE;
+               return;
+           }
+           if( inp->zyg.parm.h[i] > inp->sco.searchspace->hlim[i]->upper ) {
+               // printf("OUT_OF_BOUND_h: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.h[i], inp->sco.searchspace->hlim[i]->upper, i);
+               out->score = FORBIDDEN_MOVE;
+               return;
+           }
+           if( inp->zyg.parm.h[i] < inp->sco.searchspace->hlim[i]->lower ) {
+               // printf("OUT_OF_BOUND_h: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.h[i], inp->sco.searchspace->hlim[i]->lower, i);
+               out->score = FORBIDDEN_MOVE;
+               return;
+           }
+       }
     /* if you're going to calculate penalty on u, do it here */
     /* following lines calculate exp of sum of squares penalty function */
 
-    /*} else {*/
-    if( inp->sco.searchspace->pen_vec != NULL ) {    
+    } else {
+    //if( inp->sco.searchspace->pen_vec != NULL ) {    
+        //printf("Using penalties\n");
         penalty = GetPenalty( inp, inp->sco.searchspace );
         if( penalty == FORBIDDEN_MOVE ) {
-            //printf("FORBIDDEN_MOVE_Penalty\n");
+            printf("FORBIDDEN_MOVE_Penalty\n");
             out->score = FORBIDDEN_MOVE;
             return;
         }
-    /*if (penalty > 0) {
-       printf( "PENALTY = %lg\n", penalty);
-    }*/
-    out->penalty = penalty;
+        /*if (penalty > 0) {
+           printf( "PENALTY = %lg\n", penalty);
+        }*/
+        out->penalty = penalty;
     }
 
     // printf("Penalty computed.\n");
@@ -783,6 +784,7 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
     // printf("\n%d\n", nbScore);
     
     out->score = chisq;
+
     // printf("%lf\n", out->score);
     
     /*=====
@@ -1296,10 +1298,10 @@ CalculateSinglePenalty( double *param, Range **lim, int ncols, double max ) {
     for( int i = 0; i < ncols; ++i ) {
         /* calculate the penalty if at least one of the two limits is set to
            DBL_MAX */
-        if( fabs(lim[ i ]->lower + DBL_MAX) < EPSILON || 
-            fabs(lim[ i ]->upper - DBL_MAX) < EPSILON ) {
+        /*if( fabs(lim[ i ]->lower + DBL_MAX) < EPSILON ||  
+            fabs(lim[ i ]->upper - DBL_MAX) < EPSILON ) {*/         //Damjan: We need to put limits for the optimizer (-100 +100) but we still want to use penalties)
             penalty += DoCalculatePenalty( param[ i ] * max );
-        }
+        //}
     }
     return penalty;
 }
@@ -1312,11 +1314,11 @@ CalculateCompoundPenalty( double *param, Range **lim, int nrows, int ncols, doub
         for( int j = 0; j < ncols; j++ ) {
             /* calculate the penalty if at least one of the two limits is set 
                to DBL_MAX */
-            if( fabs(lim[ i*ncols + j ]->lower + DBL_MAX) < EPSILON || 
-                fabs(lim[ i*ncols + j ]->upper - DBL_MAX) < EPSILON ) {
+            /*if( fabs(lim[ i*ncols + j ]->lower + DBL_MAX) < EPSILON || 
+                fabs(lim[ i*ncols + j ]->upper - DBL_MAX) < EPSILON ) {*/
                 penalty += DoCalculatePenalty( param[ i*ncols + j ] * vmax[j]);
                 //printf("penalty(%d,%d)=%lg vmax=%lg, acc=%lg PARAM=%lg\n", j, i, DoCalculatePenalty( param[ i*ncols + j ] * vmax[j]), vmax[j], penalty, param[ i*ncols + j ]);
-            }
+            //}
         }
     }
     return penalty;
@@ -1364,10 +1366,12 @@ GetPenalty( Input * inp, SearchSpace * limits ) {
     */
     
     //penalty = CalculateSinglePenalty( parm->R, limits->Rlim, inp->zyg.defs.ncols );
+       
     penalty += CalculateCompoundPenalty( parm->T, limits->Tlim, inp->zyg.defs.ngenes, inp->zyg.defs.ngenes, vmax );
     penalty += CalculateCompoundPenalty( parm->E, limits->Elim, inp->zyg.defs.ngenes, inp->zyg.defs.egenes, ( vmax ) + inp->zyg.defs.ngenes );
     penalty += CalculateSinglePenalty( parm->m, limits->mlim, inp->zyg.defs.ngenes, mmax );
     penalty += CalculateSinglePenalty( parm->h, limits->hlim, inp->zyg.defs.ngenes, 1 );
+
     //penalty += CalculateSinglePenalty( parm->d, limits->dlim, inp->zyg.defs.ncols );
     //penalty += CalculateSinglePenalty( parm->lambda, limits->lambdalim, inp->zyg.defs.ncols );
     //penalty += CalculateSinglePenalty( parm->tau, limits->taulim, inp->zyg.defs.ncols );
@@ -1376,8 +1380,10 @@ GetPenalty( Input * inp, SearchSpace * limits ) {
     /* with 64-bit machines, the maximum safe value is about 709, but we stuck to  */
     /* the old value 88.7228391 because we don't want circuits with big penalties anyway */
     
-    if( Lambda * penalty > 88.7228391 ) {
+    //if( Lambda * penalty > 88.7228391 ) {
+    if( Lambda * penalty > 709 ) {
         //printf( "# Argument too big: %lf > %lf\n", penalty, ( 85.19565 / Lambda ) );
+        printf( "# Argument too big: %lf > %lf\n", penalty, ( 709 / Lambda ) );
         return FORBIDDEN_MOVE;
     } else {
         penalty = exp( Lambda * penalty ) - 2.718281828459045;
@@ -1539,6 +1545,57 @@ Penalty2Limits( SearchSpace * limits, TheProblem defs) {
      * _importantly_ we do not need to claim memory anymore, since this has 
      * been done during the reading in of limits.
      */
+    for( i = 0; i < defs.ngenes; i++ ) {
+        for( j = 0; j < defs.ngenes; j++ ) {
+            //limits->Tlim[( i * defs.ngenes ) + j] = ( Range * ) malloc( sizeof( Range ) );
+            if( fabs( limits->Tlim[( i * defs.ngenes ) + j]->lower + DBL_MAX ) < EPSILON ) {
+                limits->Tlim[( i * defs.ngenes ) + j]->lower = u.lower;
+            }
+            if( fabs( limits->Tlim[( i * defs.ngenes ) + j]->upper - DBL_MAX ) < EPSILON ) {
+                limits->Tlim[( i * defs.ngenes ) + j]->upper = u.upper;
+            }
+        }
+
+        for( j = 0; j < defs.egenes; j++ ) {
+            //limits->Elim[( i * defs.egenes ) + j] = ( Range * ) malloc( sizeof( Range ) );
+            if( fabs( limits->Elim[( i * defs.egenes ) + j]->lower + DBL_MAX ) < EPSILON ) {
+                limits->Elim[( i * defs.egenes ) + j]->lower = u.lower;
+            }
+            if( fabs( limits->Elim[( i * defs.egenes ) + j]->upper - DBL_MAX ) < EPSILON ) {
+                limits->Elim[( i * defs.egenes ) + j]->upper = u.upper;
+            }
+        }
+
+        //limits->mlim[ i ] = ( Range * ) malloc( sizeof( Range ) );
+        if( fabs( limits->mlim[ i ]->lower + DBL_MAX ) < EPSILON ) {
+            limits->mlim[ i ]->lower = u.lower;
+        }
+        if( fabs( limits->mlim[ i ]->upper - DBL_MAX ) < EPSILON ) {
+            limits->mlim[ i ]->upper = u.upper;
+        }
+
+        //limits->hlim[ i ] = ( Range * ) malloc( sizeof( Range ) );
+        if( fabs( limits->hlim[ i ]->lower + DBL_MAX ) < EPSILON ) {
+            limits->hlim[ i ]->lower = u.lower;
+        }
+        if( fabs( limits->hlim[ i ]->upper - DBL_MAX ) < EPSILON ) {
+            limits->hlim[ i ]->upper = u.upper;
+        }
+    }
+}
+
+/** FixNALimits: Set open limits to MAXRAND instead of DBLMAX */
+void
+FixNALimits( SearchSpace * limits, TheProblem defs) {
+    int i, j;                   /* local loop counters */
+
+    Range u;                    /* explicit range for u (as in g(u)) */
+
+    u.lower = -100;    /* this is to compensate for the */
+    u.upper = 100;    /* summing up of parameters */
+
+    
+    /* Only change limits where the value was set to (-)DBLMAX*/
     for( i = 0; i < defs.ngenes; i++ ) {
         for( j = 0; j < defs.ngenes; j++ ) {
             //limits->Tlim[( i * defs.ngenes ) + j] = ( Range * ) malloc( sizeof( Range ) );

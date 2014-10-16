@@ -167,7 +167,8 @@ double objective_function(double *s, SSType *ssParams, Input *inp, ScoreOutput *
     //     printf("Got it!\n");
     // }
     // printf("%lf\n", out->score);
-    return sqrt(out->score/1970);
+    //return sqrt((out->score + out->penalty)/1970); //Damjan: Let's try with penalty here
+    return out->score + out->penalty; //Damjan: making it as much as similar to the fly model
     // return out->score;
 
     // Replacing the objectives value with scores from Score()

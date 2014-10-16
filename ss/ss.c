@@ -39,11 +39,10 @@ void InitSS(Input *inp, SSType *ssParams, char *inname){
 	// Allocate memory of ssParams variables, and initialize some parameters
 	init_ssParams(ssParams);
 
-	if ( !ssParams->perform_warm_start ){
+	if ( !ssParams->perform_warm_start ) {
 
 		init_scatter_set(ssParams, ssParams->scatter_set);
 		evaluate_set(ssParams, ssParams->scatter_set, ssParams->scatter_set_size, inp, &out);
-
 		init_ref_set(ssParams);
 		quick_sort_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');		
 															
@@ -86,11 +85,15 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 	printf("Starting the optimization procedure...\n");
 	for (iter = 1; iter < ssParams->max_iter; ++iter)
 	{
+                printf("loop %d\n", iter);
 		// printf("hi\n");
 		// Selecting the SubSets List
 		select_subsets_list(ssParams, ssParams->ref_set, ssParams->ref_set_size);
 		// Generate new candidates
+                printf("generate candidates\n");
 		generate_candiates(ssParams);
+                
+                printf("evaluate set\n");
 		evaluate_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, inp, &out);
 		// if (ssParams->perform_local_search && (iter % ssParams->local_search_freq == 0)  ){
 		// 	printf("%s", KGRN);
@@ -99,17 +102,21 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		// 	refine_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, 's', inp, &out);
 		// }
 		// Update refSet by replacing new cadidates
+                printf("update refset\n");
 		update_ref_set(ssParams);
 		// print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 		// print_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, ssParams->nreal);
 
 		// Perform the local_search
 		if (ssParams->perform_local_search && (iter % ssParams->local_search_freq == 0)  ){
+                        printf("Local search\n");
 			refine_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 's', inp, &out);
 		}
+                printf("quicksort\n");
 		quick_sort_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');
 		
 		// Append the ref_set to the file
+                printf("write set\n");
 		write_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal, ref_set_history_file, iter, 'w');
 		fflush(ref_set_history_file);
 
@@ -118,12 +125,14 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		fflush(best_sols_history_file);
 
 		// loadBar(iter, ssParams->max_iter, 50, 50);
-
-		if (ssParams->perform_stop_criteria)
+                printf("checking stop criterias\n");
+		if (ssParams->perform_stop_criteria) {
+                    printf("stop criteria!!!\n");
 			if (fabs(ssParams->ref_set->members[0].cost - ssParams->ref_set->members[ssParams->ref_set_size - 1].cost) < ssParams->stop_criteria){
 				printf("\n%s   Stop by difference criteria!\n   The difference between the best and worst memebers of refSet is smaller than %lf\n\n%s", KRED, ssParams->stop_criteria, KNRM);
 				break;
 			}
+                }
 
 		if ((ssParams->perform_ref_set_regen && iter != 1) &&
 			(
@@ -136,7 +145,6 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 			// 	re_gen_ref_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 's', inp, &out);
 			// else
 				re_gen_ref_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'n', inp, &out);
-
 			// print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 
 			ssParams->n_regen++;
@@ -172,7 +180,8 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		n_duplicates        = ssParams->n_duplicates;
 		n_function_evals    = ssParams->n_function_evals;
 		n_flatzone_detected = ssParams->n_flatzone_detected;
-
+                
+                printf ("loop done\n");
 	}
 
 	printf("%s", KYEL);

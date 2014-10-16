@@ -54,6 +54,7 @@ void init_ssParams(SSType *ssParams){
 		for (int j = 1; j <= ssParams->p; ++j)
 		{
 			/* Building the sub region matrixes */	// One matrix would be enough but for clarity I use two.
+                        //printf("%d MINREALVAL=%lg, MAXREALVAL=%lg, max-min=%lg, max-min/p=%lg, total = %lg\n", j, ssParams->min_real_var[i], ssParams->max_real_var[i], (ssParams->max_real_var[i] - ssParams->min_real_var[i]), ((ssParams->max_real_var[i] - ssParams->min_real_var[i]) / ssParams->p), (ssParams->min_real_var[i] + ((ssParams->max_real_var[i] - ssParams->min_real_var[i]) / ssParams->p) * (j - 1)));
 			ssParams->min_boundary_matrix[i][j - 1] = ssParams->min_real_var[i] + ((ssParams->max_real_var[i] - ssParams->min_real_var[i]) / ssParams->p) * (j - 1);
 			ssParams->max_boundary_matrix[i][j - 1] = ssParams->min_real_var[i] + ((ssParams->max_real_var[i] - ssParams->min_real_var[i]) / ssParams->p) * j; 
 			
@@ -104,12 +105,14 @@ void init_scatter_set(SSType *ssParams, Set *set){
 	// The first `p` members are uniformy selected from all sub-regions
 	for (int k = 0; k < ssParams->p; ++k)
 	{
+                //printf("numparams = %d\n", ssParams->nreal);
 		for (int i = 0; i < ssParams->nreal; ++i)
 		{
+                        //printf("matrix %lg, %lg\n", ssParams->min_boundary_matrix[i][k], ssParams->max_boundary_matrix[i][k]);
+                        //printf("rndreal = %lg\n", rndreal(ssParams->min_boundary_matrix[i][k], ssParams->max_boundary_matrix[i][k]));
 			set->members[k].params[i] = rndreal(ssParams->min_boundary_matrix[i][k], ssParams->max_boundary_matrix[i][k]);
 		}
 	}
-
 	// A indicated the index of selected sub-regions that the new value should be generated from.
 	int a            = 0;
 	double probs_sum = 0;
@@ -165,7 +168,7 @@ void init_scatter_set(SSType *ssParams, Set *set){
  */
 void init_ref_set(SSType *ssParams){
 
-	printf("Forming the refSet...\n");
+	printf("Forming the refSet... (init.c)\n");
 
 	int m = ssParams->scatter_set_size;
 	int b = ssParams->ref_set_size;

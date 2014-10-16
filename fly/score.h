@@ -216,7 +216,13 @@ double GetCurPenalty( void );
  */
 void Penalty2Limits( SearchSpace * limits, TheProblem defs);
 
-/* Functions used to read stuff into structs */
+
+
+
+/** FixNALimits: Set open limits to MAXRAND instead of DBLMAX */
+void FixNALimits( SearchSpace * limits, TheProblem defs);
+
+
 
 /** Takes a Dlist and returns the corresponding DataTable structure we use 
  * for facts data.                          

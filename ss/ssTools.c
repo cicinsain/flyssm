@@ -32,17 +32,18 @@ double euclidean_distance(SSType *ssParams, individual *ind1, individual *ind2){
 
 void matrix_product(SSType *ssParams, double **A, int a_row, int a_col, double **B, int b_row, int b_col, double **P, int p_row, int p_col){
 
-	int sum  = 0;
+    double sum  = 0;
     for (int i = 0 ; i < a_row ; i++ )
     {
       for (int j = 0 ; j < b_col ; j++ )
       {
         for (int k = 0 ; k < b_row ; k++ )
         {
-          sum = sum + A[i][k]*B[k][j];
+            sum = sum + A[i][k]*B[k][j];
         }
  
         P[i][j] = sum;
+        
         sum = 0;
       }
     }
@@ -97,6 +98,7 @@ int closest_member(SSType *ssParams, Set *set, int set_size, individual *ind, in
 double min(const double *arr, int length, int *index) {
 
     double minimum = arr[0];
+    *index = 0;    //Damjan: adding this in order not to crash when there is no minimum (e.g. all number in vector are 0))
     for (int i = 1; i < length; ++i) {
         if (minimum > arr[i]) {
             minimum = arr[i];
@@ -112,6 +114,7 @@ double min(const double *arr, int length, int *index) {
 double max(const double *arr, int length, int *index) {
 
     double maximum = arr[0];
+    *index = 0;    //Damjan: adding this in order not to crash when there is no maximum (e.g. all number in vector are 0))
     for (int i = 1; i < length; ++i) {
         if (maximum < arr[i]) {
             maximum = arr[i];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="94">
+<configurationDescriptor version="95">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
       <df name="ess">
@@ -42,6 +42,23 @@
         <in>lsa.c</in>
         <in>random.c</in>
       </df>
+      <df name="ss">
+        <in>allocate.c</in>
+        <in>evaluate.c</in>
+        <in>init.c</in>
+        <in>input.c</in>
+        <in>linkedlist.c</in>
+        <in>local_search.c</in>
+        <in>problemdef.c</in>
+        <in>recombine.c</in>
+        <in>refine.c</in>
+        <in>report.c</in>
+        <in>sort.c</in>
+        <in>ss.c</in>
+        <in>ssTools.c</in>
+        <in>stats.c</in>
+        <in>update.c</in>
+      </df>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -63,72 +80,43 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <flagsDictionary>
-        <element flagsID="0" commonFlags="-g -std=gnu99 -O2"/>
-        <element flagsID="1" commonFlags="-std=gnu99 -m64 -O2 -std=gnu99"/>
-        <element flagsID="2"
-                 commonFlags="-std=gnu99 -m64 -O2 -std=gnu99 -m64 -O2 -std=gnu99"/>
+        <element flagsID="0" commonFlags="-std=gnu99 -m64 -O2 -std=gnu99"/>
       </flagsDictionary>
       <codeAssistance>
       </codeAssistance>
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>${MAKE} METHOD=-DESS -f Makefile</buildCommand>
+          <buildCommand>${MAKE} METHOD=-DSS -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
         </makeTool>
       </makefileType>
       <item path="ess/ess.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essAllocate.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essEvaluate.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essGoBeyond.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essIO.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essInit.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essLocalSearch.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essProblem.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essRand.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essRecombine.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essSort.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essStats.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="ess/essTools.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
       </item>
       <folder path="0/ess">
         <cTool>
@@ -146,12 +134,12 @@
             <pElem>lam</pElem>
             <pElem>/usr/local/include</pElem>
             <pElem>sundials/include</pElem>
-            <pElem>ess</pElem>
+            <pElem>ss</pElem>
             <pElem>/usr/include/malloc</pElem>
           </incDir>
           <preprocessorList>
-            <Elem>ESS</Elem>
             <Elem>HAVE_SSE2</Elem>
+            <Elem>SS</Elem>
           </preprocessorList>
         </cTool>
       </folder>
@@ -161,17 +149,33 @@
             <pElem>lam</pElem>
             <pElem>/usr/local/include</pElem>
             <pElem>sundials/include</pElem>
-            <pElem>ess</pElem>
+            <pElem>ss</pElem>
             <pElem>/usr/include/malloc</pElem>
           </incDir>
           <preprocessorList>
-            <Elem>ESS</Elem>
             <Elem>HAVE_SSE2</Elem>
+            <Elem>SS</Elem>
+          </preprocessorList>
+        </cTool>
+      </folder>
+      <folder path="0/ss">
+        <cTool>
+          <incDir>
+            <pElem>ss</pElem>
+            <pElem>lam</pElem>
+            <pElem>/usr/local/include</pElem>
+            <pElem>sundials/include</pElem>
+            <pElem>/usr/include/malloc</pElem>
+            <pElem>fly</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>HAVE_SSE2</Elem>
+            <Elem>SS</Elem>
           </preprocessorList>
         </cTool>
       </folder>
       <item path="fly/flyMOP.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
+        <cTool flags="0">
           <preprocessorList>
             <Elem>COMPILER="gcc"</Elem>
             <Elem>FLAGS="optimized"</Elem>
@@ -182,23 +186,15 @@
         </cTool>
       </item>
       <item path="fly/fly_io.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="fly/integrate.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="fly/maternal.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="fly/moves.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="fly/printscore.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
+        <cTool flags="0">
           <preprocessorList>
             <Elem>COMPILER="gcc"</Elem>
             <Elem>FLAGS="optimized"</Elem>
@@ -209,15 +205,11 @@
         </cTool>
       </item>
       <item path="fly/savestate.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="fly/score.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="fly/scramble.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
+        <cTool flags="0">
           <preprocessorList>
             <Elem>COMPILER="gcc"</Elem>
             <Elem>FLAGS="optimized"</Elem>
@@ -228,15 +220,11 @@
         </cTool>
       </item>
       <item path="fly/solvers.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="fly/translate.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="fly/unfold.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
+        <cTool flags="0">
           <preprocessorList>
             <Elem>COMPILER="gcc"</Elem>
             <Elem>FLAGS="optimized"</Elem>
@@ -247,8 +235,6 @@
         </cTool>
       </item>
       <item path="fly/zygotic.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="2">
-        </cTool>
       </item>
       <item path="lam/dSFMT.c" ex="false" tool="0" flavor2="3">
       </item>
@@ -261,14 +247,40 @@
       <item path="lam/error.c" ex="false" tool="0" flavor2="3">
       </item>
       <item path="lam/ioTools.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="lam/lsa.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
-        </cTool>
       </item>
       <item path="lam/random.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/allocate.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/evaluate.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/init.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/input.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/linkedlist.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/local_search.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/problemdef.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/recombine.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/refine.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/report.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/sort.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/ss.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/ssTools.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/stats.c" ex="false" tool="0" flavor2="3">
+      </item>
+      <item path="ss/update.c" ex="false" tool="0" flavor2="3">
       </item>
     </conf>
   </confs>

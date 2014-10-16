@@ -80,11 +80,11 @@
 #endif
 
 #ifndef SS
-	//#define SS
+	#define SS
 #endif 
 
-#ifndef ESS
-	#define ESS
+#ifndef ESS             //Damjan: should this be removed from here and defined in the Makefile?
+	//#define ESS
 #endif 
 
 /* STATIC VARIABLES ********************************************************/
@@ -424,7 +424,7 @@ main( int argc, char **argv ) {
 
     /* the following is for non-equlibration runs and equilibration runs that  */
     /* have not yet settled to their equilibrium temperature                   */
-    #if !defined(AMOSA) || !defined(NSGA2)
+#if ((!defined(AMOSA) || !defined(NSGA2)) && !defined(ESS) && !defined(SS))
     if( ( bench != 1 ) && ( ( equil != 1 ) || ( 1.0 / S > equil_param.end_T ) ) ) {
         Loop(  );
     }
@@ -543,24 +543,28 @@ Initialize( int argc, char **argv ) {
 
     /* first get Lam parameters, initial temp and energy and initialize S_0 */
     /* if we restore a run from a state file: call RestoreState() */
-    if( !stateflag ) {
+    
+    
+    //if( !stateflag ) {    //Damjan 21/09/2014: removing this feature for testing purposes
         //initial_temp = InitialMove(argc, argv, opt_index, state, &energy );
-        /*========
-        	Amir: This is only for initilization of almost all paramters.
-        	*/
+        //========
+        //	Amir: This is only for initilization of almost all paramters.
+        
         initial_temp = MoveSA( state, &distp, &out, &files, 1, 0 );
 
         //&energy is now the score value in the output structure
         //last two bits decide weather this is a initialization loop and if we want the Jacobian matrix to be calculated
         energy = out.score + out.penalty;
         S_0 = 1. / initial_temp;
-    } else {
+    /*} else {
         printf( "#%d: Restoring state\n", proc_id );
-        /*=========
-        	Amir: Or warm initilization of the algorithm
-        	*/
+        //=========
+        //	Amir: Or warm initilization of the algorithm
+        
         RestoreState( state, &distp, &files );
-    }
+    }*/
+        
+        
     /* initialize those static file names that depend on the output file name */
     InitFilenames( &files );
 #ifdef MPI

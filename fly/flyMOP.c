@@ -511,7 +511,7 @@ ParseCommandLine( int argc, char **argv ) {
  */
 double
 MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * files, int init, int jacobian ) {
-    //printf("MoveSA Function Entered Successfully\n");
+    printf("MoveSA Function Entered Successfully\n");
     char *p;
 
     double i_temp;
@@ -580,7 +580,7 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
         #endif
 
         #ifdef ESS
-            init_defaultSettings(&essParams);
+            init_defaultSettings(&essParams); //Damjan: this is lost in the next line
             essParams = ReadeSSParameters(infile, &inp);
         #endif
 
@@ -634,11 +634,12 @@ MoveSA( NucStatePtr state_ptr, DistParms * distp, ScoreOutput * out, Files * fil
         out->jacobian       = NULL;
         out->residuals      = NULL;
         init_eSS( &essParams, &inp, out);
+        printf("run_eSS\n");
         run_eSS( &essParams, &inp, out);
     #endif
 
     // Ignore the Score function in order to avoid running the SA
-#if !(defined(NSGA2) || defined(AMOSA))
+#if (!(defined(NSGA2) || defined(AMOSA)) && !(defined(ESS)))
         // printf("Hi\n");
 //     //In this function all the calculations are made
     Score( &inp, out, jacobian );

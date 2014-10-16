@@ -11,7 +11,7 @@ void generate_candiates(SSType *ssParams){
 	double *dists        = (double *)malloc( ssParams->nreal * sizeof(double));
 	double mid_cost      = ssParams->ref_set->members[ssParams->max_elite].cost;
 	double diff;
-
+        
 	for (int i = 0; i < ssParams->subsets_list_size; ++i)
 	{
 		for (int j = 0; j < ssParams->nreal; ++j)
@@ -89,37 +89,47 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
 			rnd = rndreal(0, 1);
 			for (i = 0; i < ssParams->nreal; ++i)
 			{
-				new_value = base->params[i] - (dists[i] * rnd);
+                            new_value = base->params[i] - (dists[i] * rnd);
+                            if (i < 4 || i > 32 ) {
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
-				candidate->params[i] = new_value;
+                            }
+                            candidate->params[i] = new_value;
 			}
 			break;
 		case '1':
 			for (i = 0; i < ssParams->nreal; ++i)
 			{
-				new_value = base->params[i] - (rndreal(0,1) * dists[i]);
+                            
+                            new_value = base->params[i] - (rndreal(0,1) * dists[i]);
+                            if (i < 4 || i > 32 ) {
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
-				candidate->params[i] = new_value;
+                            }
+                            candidate->params[i] = new_value;
 			}
 			break;
 		case '2':
 			for (i = 0; i < ssParams->nreal; ++i)
 			{
-				new_value = base->params[i] + (rndreal(0,1) * dists[i]);
+			    new_value = base->params[i] + (rndreal(0,1) * dists[i]);
+                            if (i < 4 || i > 32 ) {
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
-				candidate->params[i] = new_value;
+                            }
+                            candidate->params[i] = new_value;
 			}
 			break;
 		case '3':
 			for (i = 0; i < ssParams->nreal; ++i)
 			{
-				new_value = base->params[i] + (rndreal(0,1) * dists[i]);
+                            
+			    new_value = base->params[i] + (rndreal(0,1) * dists[i]);
+                            if (i < 4 || i > 32 ) {
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
-				candidate->params[i] = new_value;
+                            }
+			    candidate->params[i] = new_value;
 			}
 			break;
 	}

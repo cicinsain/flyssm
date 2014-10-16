@@ -2,6 +2,7 @@
 
 double rndreal (double low, double high) 
 {
+    //printf("%lg, %lg, %lg %lg %lg %lg\n", low, high, (high-low), (double)rand(), ((double)rand() / RAND_MAX), (low + (high-low) * ((double)rand() / RAND_MAX) ));
     return (low + (high-low) * ((double)rand() / RAND_MAX) );
 }
 
