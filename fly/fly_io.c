@@ -1504,7 +1504,7 @@ ReadSSParameters( FILE * fp, Input *inp ) {
     // printf("ref_set_regen_freq: %d\n", l_ssParams.ref_set_regen_freq);
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */
 
-    if( 1 != ( fscanf( fp, "%d\n", &l_ssParams.min_distance_for_local_search ) ) ) /* read the number of paramters */
+    if( 1 != ( fscanf( fp, "%lg\n", &l_ssParams.min_distance_for_local_search ) ) ) /* read the number of paramters */
         error( "ReadTheSSParameters: error reading ss section (min_distance_for_local_search)" );
     // printf("min_distance_for_local_search: %d\n", l_ssParams.min_distance_for_local_search);
     fscanf( fp, "%*s\n" );      /* advance the pointer an extra line */

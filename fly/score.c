@@ -1591,8 +1591,8 @@ FixNALimits( SearchSpace * limits, TheProblem defs) {
 
     Range u;                    /* explicit range for u (as in g(u)) */
 
-    u.lower = -100;    /* this is to compensate for the */
-    u.upper = 100;    /* summing up of parameters */
+    u.lower = -5;    /* this is to compensate for the */
+    u.upper = +5;    /* summing up of parameters */
 
     
     /* Only change limits where the value was set to (-)DBLMAX*/

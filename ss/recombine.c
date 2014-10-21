@@ -91,6 +91,9 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
 			{
                             new_value = base->params[i] - (dists[i] * rnd);
                             if (i < 4 || i > 32 ) {
+                                if (i==4) {
+                                    printf("newvalue = %lg\n", new_value);
+                                }
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
                             }
@@ -100,9 +103,11 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
 		case '1':
 			for (i = 0; i < ssParams->nreal; ++i)
 			{
-                            
                             new_value = base->params[i] - (rndreal(0,1) * dists[i]);
                             if (i < 4 || i > 32 ) {
+                                if (i==4) {
+                                    printf("newvalue = %lg\n", new_value);
+                                }
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
                             }
@@ -114,6 +119,9 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
 			{
 			    new_value = base->params[i] + (rndreal(0,1) * dists[i]);
                             if (i < 4 || i > 32 ) {
+                                if (i==4) {
+                                    printf("newvalue = %lg\n", new_value);
+                                }
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
                             }
@@ -126,6 +134,9 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
                             
 			    new_value = base->params[i] + (rndreal(0,1) * dists[i]);
                             if (i < 4 || i > 32 ) {
+                                if (i==4) {
+                                    printf("newvalue = %lg\n", new_value);
+                                }
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
                             }

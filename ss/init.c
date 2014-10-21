@@ -164,7 +164,7 @@ void init_scatter_set(SSType *ssParams, Set *set){
 
 /*
 	Form the ref_set using the procedure describes in Banga paper
-	It assumes that the ref_set is initialize and the proper memory allocated for it.
+	It assumes that the ref_set is initialized and the proper memory allocated for it.
  */
 void init_ref_set(SSType *ssParams){
 

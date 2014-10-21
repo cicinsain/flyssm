@@ -43,7 +43,7 @@ void refine_set(SSType *ssParams, Set *set, int set_size, char method, Input *in
 								// local_search:
 								// {
 									refine_individual(ssParams, set, set_size, &(set->members[i]), method, inp, out);
-								// 	ssParams->n_refinement++;
+								 	//ssParams->n_refinement++;
 								// }
 							}
 						}
@@ -70,7 +70,7 @@ void refine_individual(SSType *ssParams, Set *set, int set_size, individual *ind
 	// allocate_ind_memory(ssParams, &(new_candidate), ssParams->nreal);
 
 individual new_candidate;
-
+printf("refining individual\n");
 
 	double *new_params = (double *)malloc( ssParams->nreal * sizeof(double));
 
@@ -115,6 +115,7 @@ individual new_candidate;
 	}
 
 	ssParams->n_refinement++;
+        printf("nrefinement: %d\n", ssParams->n_refinement);
 	free(new_params);
 
 	// deallocate_ind_memory(ssParams, new_candidate);
