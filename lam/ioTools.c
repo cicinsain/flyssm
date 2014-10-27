@@ -85,8 +85,9 @@ KillSection( char *filename, char *title ) {
 
     FILE *fp;                   /* name of file where section needs to be killed */
     FILE *tmpfile;              /* name of temporary file */
-
+#if defined(AMOSA) || defined(NSGA2)
     static int fn_counter = 0;
+#endif
 
 
     fulltitle = ( char * ) calloc( MAX_RECORD, sizeof( char ) );

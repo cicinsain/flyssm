@@ -152,9 +152,9 @@ double objective_function(double *s, SSType *ssParams, Input *inp, ScoreOutput *
 
     for (int i = 0; i < inp->tra.size; ++i){
         *( inp->tra.array[i].param  ) = s[i];
-        // printf("%lf, ", s[i]);
+        //printf("%lf, ", s[i]);
     }
-    // printf("\n\n");
+    //printf("inp->tra.size = %d \n\n", inp->tra.size);
     
     // inp->lparm = CopyParm( inp->zyg.parm, &( inp->zyg.defs ) );
     // Computing the out using the inp configuration

@@ -1,7 +1,9 @@
 #include "ss.h"
 // #include "string.h"
 
-
+/*
+        Nelder-Mead
+*/
 void nelder_mead(SSType *ssParams, individual *ind){
 
 }

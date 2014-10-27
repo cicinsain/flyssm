@@ -393,8 +393,9 @@
           <runcommandpicklistitem>fly/fly_ss -s rck -t -l -D -i 4.0 -a 0.001 input/dm_hkgn53_wls_5_003</runcommandpicklistitem>
           <runcommandpicklistitem>fly/fly_ss -s rck -t -l -D -i 4.0 -a 0.001 input/dm_hkgn53_wls_5_003 > flyOutput.txt</runcommandpicklistitem>
           <runcommandpicklistitem>fly/fly_ss -s rck -t -l -D -i 4.0 -a 0.001 input/dm_hkgn53_wls_5_003 | tee flyOutput.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>fly/fly_ss -s rck -t -l -D -i 4.0 -a 0.001 input/dm_hkgn53_wls_5_003 </runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>fly/fly_ss -s rck -t -l -D -i 4.0 -a 0.001 input/dm_hkgn53_wls_5_003 | tee flyOutput.txt</runcommand>
+        <runcommand>fly/fly_ss -s rck -t -l -D -i 4.0 -a 0.001 input/dm_hkgn53_wls_5_003</runcommand>
         <rundir>.</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

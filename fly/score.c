@@ -563,6 +563,7 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
      * check signs. If it appears cleaner, sign checking could be done by the *
      * tweaker                                                                */
     // printf("Score: checking limits... \n");
+    debug = 0;
     for( ii = 0; ii < inp->zyg.defs.ngenes; ii++ ) {
         if( inp->zyg.parm.R[ii] < 0 )
             inp->zyg.parm.R[ii] = -inp->zyg.parm.R[ii];
@@ -573,32 +574,44 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
      * return after as few calculations as possible                           */
     for( i = 0; i < inp->zyg.defs.ngenes; i++ ) {
         if( inp->zyg.parm.R[i] > inp->sco.searchspace->Rlim[i]->upper ) {
-            //printf("OUT_OF_BOUND_R: %.10lf > %.10lf | %d\n", inp->zyg.parm.R[i], inp->sco.searchspace->Rlim[i]->upper, i);
+            if ( debug ) {
+                printf("OUT_OF_BOUND_R: %.10lf > %.10lf | %d\n", inp->zyg.parm.R[i], inp->sco.searchspace->Rlim[i]->upper, i);
+            }
             out->score = FORBIDDEN_MOVE;
             return;
         }
         if( inp->zyg.parm.R[i] < inp->sco.searchspace->Rlim[i]->lower ) {
-            //printf("OUT_OF_BOUND_R: %.10lf < %.10lf | %d\n", inp->zyg.parm.R[i], inp->sco.searchspace->Rlim[i]->lower, i);
+            if ( debug ) {
+                printf("OUT_OF_BOUND_R: %.10lf < %.10lf | %d\n", inp->zyg.parm.R[i], inp->sco.searchspace->Rlim[i]->lower, i);
+            }
             out->score = FORBIDDEN_MOVE;
             return;
         }
         if( inp->zyg.parm.lambda[i] > inp->sco.searchspace->lambdalim[i]->upper ) {
-            //printf("OUT_OF_BOUND_lambda: %.10lf > %.10lf | %d\n", inp->zyg.parm.lambda[i], inp->sco.searchspace->lambdalim[i]->upper, i);
+            if ( debug ) {
+                printf("OUT_OF_BOUND_lambda: %.10lf > %.10lf | %d\n", inp->zyg.parm.lambda[i], inp->sco.searchspace->lambdalim[i]->upper, i);
+            }
             out->score = FORBIDDEN_MOVE;
             return;
         }
         if( inp->zyg.parm.lambda[i] < inp->sco.searchspace->lambdalim[i]->lower ) {
-            //printf("OUT_OF_BOUND_lambda: %.10lf < %.10lf | %d\n", inp->zyg.parm.lambda[i], inp->sco.searchspace->lambdalim[i]->lower, i);
+            if ( debug ) {
+                printf("OUT_OF_BOUND_lambda: %.10lf < %.10lf | %d\n", inp->zyg.parm.lambda[i], inp->sco.searchspace->lambdalim[i]->lower, i);
+            }
             out->score = FORBIDDEN_MOVE;
             return;
         }
         if( inp->zyg.parm.tau[i] > inp->sco.searchspace->taulim[i]->upper ) {
-            //printf("OUT_OF_BOUND_tau>\n");
+            if ( debug ) {
+                printf("OUT_OF_BOUND_tau>\n");
+            }
             out->score = FORBIDDEN_MOVE;
             return;
         }
         if( inp->zyg.parm.tau[i] < inp->sco.searchspace->taulim[i]->lower ) {
-            //printf("OUT_OF_BOUND_tau<\n");
+            if ( debug ) {
+                printf("OUT_OF_BOUND_tau<\n");
+            }
             out->score = FORBIDDEN_MOVE;
             return;
         }
@@ -606,24 +619,32 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
     // printf("SCR STEP2\n");
     if( ( inp->zyg.defs.diff_schedule == 'A' ) || ( inp->zyg.defs.diff_schedule == 'C' ) ) {
         if( inp->zyg.parm.d[0] > inp->sco.searchspace->dlim[0]->upper ) {
-            //printf("OUT_OF_BOUND_d: %.10lf > %.10lf\n", inp->zyg.parm.d[0], inp->sco.searchspace->dlim[0]->upper);
+            if ( debug ) {
+                printf("OUT_OF_BOUND_d: %.10lf > %.10lf\n", inp->zyg.parm.d[0], inp->sco.searchspace->dlim[0]->upper);
+            }
             out->score = FORBIDDEN_MOVE;
             return;
         }
         if( inp->zyg.parm.d[0] < inp->sco.searchspace->dlim[0]->lower ) {
-            //printf("OUT_OF_BOUND_d: %.10lf < %.10lf\n", inp->zyg.parm.d[0], inp->sco.searchspace->dlim[0]->lower);
+            if ( debug ) {
+                printf("OUT_OF_BOUND_d: %.10lf < %.10lf\n", inp->zyg.parm.d[0], inp->sco.searchspace->dlim[0]->lower);
+            }
             out->score = FORBIDDEN_MOVE;
             return;
         }
     } else {
         for( i = 0; i < inp->zyg.defs.ngenes; i++ ) {
             if( inp->zyg.parm.d[i] > inp->sco.searchspace->dlim[i]->upper ) {
-                //printf("OUT_OF_BOUND_d: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.d[i], inp->sco.searchspace->dlim[i]->upper, i);
+                if ( debug ) {
+                    printf("OUT_OF_BOUND_d: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.d[i], inp->sco.searchspace->dlim[i]->upper, i);
+                }
                 out->score = FORBIDDEN_MOVE;
                 return;
             }
             if( inp->zyg.parm.d[i] < inp->sco.searchspace->dlim[i]->lower ) {
-                //printf("OUT_OF_BOUND_d: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.d[i], inp->sco.searchspace->dlim[i]->lower, i);
+                if ( debug ) {
+                    printf("OUT_OF_BOUND_d: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.d[i], inp->sco.searchspace->dlim[i]->lower, i);
+                }
                 out->score = FORBIDDEN_MOVE;
                 return;
             }
@@ -648,45 +669,61 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
        for( i = 0; i < inp->zyg.defs.ngenes; i++ ) {
            for( j = 0; j < inp->zyg.defs.ngenes; j++ ) {
                if( inp->zyg.parm.T[( i * inp->zyg.defs.ngenes ) + j] > inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->upper ) {
-                   // printf("OUT_OF_BOUND_T: %.10lf > %.10lf | %d | %d\n", inp->zyg.parm.T[(i * inp->zyg.defs.ngenes) + j], inp->sco.searchspace->Tlim[(i * inp->zyg.defs.ngenes) + j]->upper, i, j);
+                   if ( debug ) {
+                       printf("OUT_OF_BOUND_T: %.10lf > %.10lf | %d | %d\n", inp->zyg.parm.T[(i * inp->zyg.defs.ngenes) + j], inp->sco.searchspace->Tlim[(i * inp->zyg.defs.ngenes) + j]->upper, i, j);
+                   }
                    out->score = FORBIDDEN_MOVE;
                    return;
                }
                if( inp->zyg.parm.T[( i * inp->zyg.defs.ngenes ) + j] < inp->sco.searchspace->Tlim[( i * inp->zyg.defs.ngenes ) + j]->lower ) {
-                   // printf("OUT_OF_BOUND_T: %.10lf < %.10lf | %d | %d\n", inp->zyg.parm.T[(i * inp->zyg.defs.ngenes) + j], inp->sco.searchspace->Tlim[(i * inp->zyg.defs.ngenes) + j]->lower, i, j);
+                   if ( debug ) {
+                       printf("OUT_OF_BOUND_T: %.10lf < %.10lf | %d | %d\n", inp->zyg.parm.T[(i * inp->zyg.defs.ngenes) + j], inp->sco.searchspace->Tlim[(i * inp->zyg.defs.ngenes) + j]->lower, i, j);
+                   }
                    out->score = FORBIDDEN_MOVE;
                    return;
                }
            }
            for( j = 0; j < inp->zyg.defs.egenes; j++ ) {
                if( inp->zyg.parm.E[( i * inp->zyg.defs.egenes ) + j] > inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->upper ) {
-                   // printf("OUT_OF_BOUND_E: %.10lf > %.10lf | %d | %d\n", inp->zyg.parm.E[(i * inp->zyg.defs.egenes) + j], inp->sco.searchspace->Elim[(i * inp->zyg.defs.egenes) + j]->upper, i, j);
+                   if ( debug ) {
+                       printf("OUT_OF_BOUND_E: %.10lf > %.10lf | %d | %d\n", inp->zyg.parm.E[(i * inp->zyg.defs.egenes) + j], inp->sco.searchspace->Elim[(i * inp->zyg.defs.egenes) + j]->upper, i, j);
+                   }
                    out->score = FORBIDDEN_MOVE;
                    return;
                }
                if( inp->zyg.parm.E[( i * inp->zyg.defs.egenes ) + j] < inp->sco.searchspace->Elim[( i * inp->zyg.defs.egenes ) + j]->lower ) {
-                   // printf("OUT_OF_BOUND_E: %.10lf < %.10lf | %d | %d\n", inp->zyg.parm.E[(i * inp->zyg.defs.egenes) + j], inp->sco.searchspace->Elim[(i * inp->zyg.defs.egenes) + j]->lower, i, j);
+                   if ( debug ) {
+                       printf("OUT_OF_BOUND_E: %.10lf < %.10lf | %d | %d\n", inp->zyg.parm.E[(i * inp->zyg.defs.egenes) + j], inp->sco.searchspace->Elim[(i * inp->zyg.defs.egenes) + j]->lower, i, j);
+                   }
                    out->score = FORBIDDEN_MOVE;
                    return;
                }
            }
            if( inp->zyg.parm.m[i] > inp->sco.searchspace->mlim[i]->upper ) {
-               // printf("OUT_OF_BOUND_m: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.m[i], inp->sco.searchspace->mlim[i]->upper, i);
+               if ( debug ) {
+                   printf("OUT_OF_BOUND_m: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.m[i], inp->sco.searchspace->mlim[i]->upper, i);
+               }
                out->score = FORBIDDEN_MOVE;
                return;
            }
            if( inp->zyg.parm.m[i] < inp->sco.searchspace->mlim[i]->lower ) {
-               // printf("OUT_OF_BOUND_m: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.m[i], inp->sco.searchspace->mlim[i]->lower, i);
+               if ( debug ) {
+                   printf("OUT_OF_BOUND_m: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.m[i], inp->sco.searchspace->mlim[i]->lower, i);
+               }
                out->score = FORBIDDEN_MOVE;
                return;
            }
            if( inp->zyg.parm.h[i] > inp->sco.searchspace->hlim[i]->upper ) {
-               // printf("OUT_OF_BOUND_h: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.h[i], inp->sco.searchspace->hlim[i]->upper, i);
+               if ( debug ) {
+                   printf("OUT_OF_BOUND_h: %.10lf > %.10lf for i = %d\n", inp->zyg.parm.h[i], inp->sco.searchspace->hlim[i]->upper, i);
+               }
                out->score = FORBIDDEN_MOVE;
                return;
            }
            if( inp->zyg.parm.h[i] < inp->sco.searchspace->hlim[i]->lower ) {
-               // printf("OUT_OF_BOUND_h: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.h[i], inp->sco.searchspace->hlim[i]->lower, i);
+               if ( debug ) {
+                   printf("OUT_OF_BOUND_h: %.10lf < %.10lf for i = %d\n", inp->zyg.parm.h[i], inp->sco.searchspace->hlim[i]->lower, i);
+               }
                out->score = FORBIDDEN_MOVE;
                return;
            }
@@ -807,7 +844,7 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
    // printf("penalty=%lg\n", out->penalty);
 //    printf("totalscore=%lg debug=%d\n", totalscore, debug);
 //    printf("================================================\n");     
-
+    debug = 1;
     if( ( debug ) && ( totalscore < best_score ) ) {
         //if (totalscore < best_score) {
         //    printf("%d ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> BEST RMS SCORE %lg -> rms %lg\n", proc_id, totalscore, sqrt(totalscore/inp->zyg.ndp));

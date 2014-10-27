@@ -8,6 +8,13 @@
 
 #include "maternal.h"
 
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
+#include <gsl/gsl_vector.h>
+#include <gsl/gsl_blas.h>
+#include <gsl/gsl_multimin.h>
+#include <gsl/gsl_multifit_nlin.h>
+
 #define STATS
 #define DEBUG
 
@@ -211,6 +218,7 @@ void refine_subsets_list(SSType *ssParams, char method, Input *inp, ScoreOutput 
 void refine_set(SSType *ssParams, Set *set, int set_size, char method, Input *inp, ScoreOutput *out);
 void refine_individual(SSType *ssParams, Set *set, int set_size, individual *ind, char method, Input *inp, ScoreOutput *out);
 void take_step(SSType *ssParams, double *params, double *new_params);
+double nelder_objfn(const gsl_vector *x, void *data); //Damjan
 
 
 // ssTools.c

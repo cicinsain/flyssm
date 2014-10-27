@@ -93,7 +93,7 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
                 printf("generate candidates\n");
 		generate_candiates(ssParams);
                 
-                printf("evaluate set\n");
+                printf("evaluate and update refset\n");
 		evaluate_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, inp, &out);
 		// if (ssParams->perform_local_search && (iter % ssParams->local_search_freq == 0)  ){
 		// 	printf("%s", KGRN);
@@ -102,7 +102,6 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		// 	refine_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, 's', inp, &out);
 		// }
 		// Update refSet by replacing new cadidates
-                printf("update refset\n");
 		update_ref_set(ssParams);
 		// print_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal);
 		// print_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, ssParams->nreal);
@@ -110,13 +109,12 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		// Perform the local_search
 		if (ssParams->perform_local_search && (iter % ssParams->local_search_freq == 0)  ){
                         printf("Local search\n");
-			refine_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 's', inp, &out);
+			refine_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'n', inp, &out); //'s'
 		}
                 printf("quicksort\n");
 		quick_sort_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');
 		
 		// Append the ref_set to the file
-                printf("write set\n");
 		write_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, ssParams->nreal, ref_set_history_file, iter, 'w');
 		fflush(ref_set_history_file);
 
@@ -125,7 +123,6 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		fflush(best_sols_history_file);
 
 		// loadBar(iter, ssParams->max_iter, 50, 50);
-                printf("checking stop criterias\n");
 		if (ssParams->perform_stop_criteria) {
                     printf("stop criteria!!!\n");
 			if (fabs(ssParams->ref_set->members[0].cost - ssParams->ref_set->members[ssParams->ref_set_size - 1].cost) < ssParams->stop_criteria){

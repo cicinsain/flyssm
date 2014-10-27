@@ -84,18 +84,19 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
 	int i;
 	double new_value;
 	double rnd;
+        //printf("generating candidate of type %c\n", type);
 	switch (type){
 		case '0':
 			rnd = rndreal(0, 1);
 			for (i = 0; i < ssParams->nreal; ++i)
 			{
                             new_value = base->params[i] - (dists[i] * rnd);
-                            if (i < 4 || i > 32 ) {
-                                if (i==4) {
-                                    printf("newvalue = %lg\n", new_value);
-                                }
+                            if (i < 4 || i > 32 ) {                                
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
+                            }
+                            if (i==4) {
+                                    //printf("newvalue = %lg\n", new_value);
                             }
                             candidate->params[i] = new_value;
 			}
@@ -105,12 +106,12 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
 			{
                             new_value = base->params[i] - (rndreal(0,1) * dists[i]);
                             if (i < 4 || i > 32 ) {
-                                if (i==4) {
-                                    printf("newvalue = %lg\n", new_value);
-                                }
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
                             }
+                            if (i==4) {
+                                    //printf("newvalue = %lg\n", new_value);
+                                }
                             candidate->params[i] = new_value;
 			}
 			break;
@@ -118,13 +119,13 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
 			for (i = 0; i < ssParams->nreal; ++i)
 			{
 			    new_value = base->params[i] + (rndreal(0,1) * dists[i]);
-                            if (i < 4 || i > 32 ) {
-                                if (i==4) {
-                                    printf("newvalue = %lg\n", new_value);
-                                }
+                            if (i < 4 || i > 32 ) {                                
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
                             }
+                            if (i==4) {
+                                    //printf("newvalue = %lg\n", new_value);
+                                }
                             candidate->params[i] = new_value;
 			}
 			break;
@@ -134,12 +135,12 @@ void generate_ind_candidate(SSType *ssParams, individual *base, individual *cand
                             
 			    new_value = base->params[i] + (rndreal(0,1) * dists[i]);
                             if (i < 4 || i > 32 ) {
-                                if (i==4) {
-                                    printf("newvalue = %lg\n", new_value);
-                                }
 				new_value = MIN(new_value, ssParams->max_real_var[i]);
 				new_value = MAX(new_value, ssParams->min_real_var[i]);
                             }
+                            if (i==4) {
+                                    //printf("newvalue = %lg\n", new_value);
+                                }
 			    candidate->params[i] = new_value;
 			}
 			break;
