@@ -45,11 +45,11 @@ void print_set(SSType *ssParams, Set *set, int set_size, int member_length){
 
 void print_ind(SSType *ssParams, individual *ind, int member_length){
 
-	// for (int i = 0; i < member_length; ++i)
-	// {
-	// 	printf("%.5lf, ", ind->params[i]);
-	// }	
-	// printf("\t (cost: %lf)\t(distance: %lf)\n", ind->cost, ind->distance);
+	for (int i = 0; i < member_length; ++i)
+	{
+            printf("%.5lf, ", ind->params[i]);
+	}	
+	//printf("\t (cost: %lf)\t(distance: %lf)\n", ind->cost, ind->distance);
 	printf("\t (cost: %lf)\n", ind->cost/*, ind->distance*/);
 
 }

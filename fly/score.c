@@ -564,6 +564,8 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
      * tweaker                                                                */
     // printf("Score: checking limits... \n");
     debug = 0;
+    out->penalty = 0;
+    
     for( ii = 0; ii < inp->zyg.defs.ngenes; ii++ ) {
         if( inp->zyg.parm.R[ii] < 0 )
             inp->zyg.parm.R[ii] = -inp->zyg.parm.R[ii];
@@ -588,18 +590,22 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
             return;
         }
         if( inp->zyg.parm.lambda[i] > inp->sco.searchspace->lambdalim[i]->upper ) {
+            out->penalty = GetExtraPenalty(inp, inp->sco.searchspace);
             if ( debug ) {
                 printf("OUT_OF_BOUND_lambda: %.10lf > %.10lf | %d\n", inp->zyg.parm.lambda[i], inp->sco.searchspace->lambdalim[i]->upper, i);
+                printf("LambdaPenalty : %lg\n",out->penalty);
             }
-            out->score = FORBIDDEN_MOVE;
-            return;
+            //out->score = FORBIDDEN_MOVE;
+            //return;
         }
         if( inp->zyg.parm.lambda[i] < inp->sco.searchspace->lambdalim[i]->lower ) {
+            out->penalty = GetExtraPenalty(inp, inp->sco.searchspace);
             if ( debug ) {
                 printf("OUT_OF_BOUND_lambda: %.10lf < %.10lf | %d\n", inp->zyg.parm.lambda[i], inp->sco.searchspace->lambdalim[i]->lower, i);
+                printf("LambdaPenalty : %lg\n",out->penalty);
             }
-            out->score = FORBIDDEN_MOVE;
-            return;
+            //out->score = FORBIDDEN_MOVE;
+            //return;
         }
         if( inp->zyg.parm.tau[i] > inp->sco.searchspace->taulim[i]->upper ) {
             if ( debug ) {
@@ -663,7 +669,7 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
      */
     /* If you're using limits on contributors to u, check'em here */
     //printf("Score: Checking the penalties...\n");
-    out->penalty = 0;
+    
             
     if( inp->sco.searchspace->pen_vec == NULL ) {    //Damjan: don't check limits for those parameters
        for( i = 0; i < inp->zyg.defs.ngenes; i++ ) {
@@ -734,7 +740,7 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
     } else {
     //if( inp->sco.searchspace->pen_vec != NULL ) {    
         //printf("Using penalties\n");
-        penalty = GetPenalty( inp, inp->sco.searchspace );
+        penalty = GetPenalty( inp, inp->sco.searchspace ); 
         if( penalty == FORBIDDEN_MOVE ) {
             printf("FORBIDDEN_MOVE_Penalty\n");
             out->score = FORBIDDEN_MOVE;
@@ -743,7 +749,7 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
         /*if (penalty > 0) {
            printf( "PENALTY = %lg\n", penalty);
         }*/
-        out->penalty = penalty;
+        out->penalty += penalty; //D. adding penalty to what was before because of lambda parameter penalty
     }
 
     // printf("Penalty computed.\n");
@@ -1417,10 +1423,10 @@ GetPenalty( Input * inp, SearchSpace * limits ) {
     /* with 64-bit machines, the maximum safe value is about 709, but we stuck to  */
     /* the old value 88.7228391 because we don't want circuits with big penalties anyway */
     
-    //if( Lambda * penalty > 88.7228391 ) {
-    if( Lambda * penalty > 709 ) {
-        //printf( "# Argument too big: %lf > %lf\n", penalty, ( 85.19565 / Lambda ) );
-        printf( "# Argument too big: %lf > %lf\n", penalty, ( 709 / Lambda ) );
+    if( Lambda * penalty > 88.7228391 ) {
+        printf( "# Argument too big: %lf > %lf\n", penalty, ( 85.19565 / Lambda ) );
+    //if( Lambda * penalty > 709 ) {
+        //printf( "# Argument too big: %lf > %lf\n", penalty, ( 709 / Lambda ) );
         return FORBIDDEN_MOVE;
     } else {
         penalty = exp( Lambda * penalty ) - 2.718281828459045;
@@ -1428,6 +1434,28 @@ GetPenalty( Input * inp, SearchSpace * limits ) {
 
     donethis = 1;
 
+    return ( penalty < 0 )? 0: penalty;
+}
+
+double GetExtraPenalty(Input * inp, SearchSpace * limits) { 
+    double penalty = 0.0;
+    EqParms *parm;          /* local pointer to parameters */
+    parm = &( inp->lparm );
+    if( limits->pen_vec == NULL ) 
+        return -1;
+    //double Lambda = *( ( limits->pen_vec ) );
+    double Lambda = 3;
+    penalty += CalculateSinglePenalty( parm->lambda, limits->lambdalim, inp->zyg.defs.ngenes, 10);
+    //printf("penlaltytemp1: %lg\n", penalty);
+    if( Lambda * penalty > 88.7228391 ) {
+        printf( "# Argument too big: %lf > %lf\n", penalty, ( 85.19565 / Lambda ) );
+        return FORBIDDEN_MOVE;
+    } else {
+        //printf("Lambda = %lg\n", Lambda);
+        //printf("exp = %lg\n", exp( Lambda * penalty ));
+        penalty = exp( Lambda * penalty ) - 2.718281828459045;
+    }
+    //printf("penlaltytemp2: %lg\n", penalty);
     return ( penalty < 0 )? 0: penalty;
 }
 

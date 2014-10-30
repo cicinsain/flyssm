@@ -85,15 +85,17 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 	printf("Starting the optimization procedure...\n");
 	for (iter = 1; iter < ssParams->max_iter; ++iter)
 	{
-                printf("loop %d\n", iter);
+                if (iter % 10 == 0) {
+                  printf("------- loop %d -------\n", iter);
+                }
 		// printf("hi\n");
 		// Selecting the SubSets List
 		select_subsets_list(ssParams, ssParams->ref_set, ssParams->ref_set_size);
 		// Generate new candidates
-                printf("generate candidates\n");
+                //printf("generate candidates\n");
 		generate_candiates(ssParams);
                 
-                printf("evaluate and update refset\n");
+                //printf("evaluate and update refset\n");
 		evaluate_set(ssParams, ssParams->candidates_set, ssParams->candidates_set_size, inp, &out);
 		// if (ssParams->perform_local_search && (iter % ssParams->local_search_freq == 0)  ){
 		// 	printf("%s", KGRN);
@@ -108,10 +110,10 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 
 		// Perform the local_search
 		if (ssParams->perform_local_search && (iter % ssParams->local_search_freq == 0)  ){
-                        printf("Local search\n");
+                        printf("Running local search\n");
 			refine_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'n', inp, &out); //'s'
 		}
-                printf("quicksort\n");
+                //printf("quicksort\n");
 		quick_sort_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');
 		
 		// Append the ref_set to the file
@@ -146,9 +148,9 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 
 			ssParams->n_regen++;
 			quick_sort_set(ssParams, ssParams->ref_set, ssParams->ref_set_size, 'c');
-			printf("%s", KBLU);
-			printf("+");
-			printf("%s", KNRM);
+			//printf("%s", KBLU);
+			//printf("+");
+			//printf("%s", KNRM);
 
 		}
 
@@ -178,7 +180,15 @@ void RunSS(Input *inp, SSType *ssParams, char *inname){
 		n_function_evals    = ssParams->n_function_evals;
 		n_flatzone_detected = ssParams->n_flatzone_detected;
                 
-                printf ("loop done\n");
+                if (iter % 50 == 0) {
+                    printf("%s", KCYN);
+                    printf("\n====================================\n");
+                    printf("Best Solution:\n");
+                    print_ind(ssParams, ssParams->best, ssParams->nreal);
+                    printf("====================================\n");
+                    printf("%s", KNRM);
+                }
+                
 	}
 
 	printf("%s", KYEL);

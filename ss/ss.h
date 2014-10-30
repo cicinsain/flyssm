@@ -15,8 +15,8 @@
 #include <gsl/gsl_multimin.h>
 #include <gsl/gsl_multifit_nlin.h>
 
-#define STATS
-#define DEBUG
+//#define STATS
+//#define DEBUG
 
 #define KNRM  "\x1B[0m"
 #define KRED  "\x1B[31m"

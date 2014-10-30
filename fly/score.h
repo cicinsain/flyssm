@@ -177,6 +177,8 @@ SearchSpace *GetLimits( Input * inp );
  */
 double GetPenalty( Input * inp, SearchSpace * limits );
 
+double GetExtraPenalty(Input * inp, SearchSpace * limits);
+
 double GetCurPenalty( void );
 
 /* A function for converting penalty to explicit limits */

@@ -146,7 +146,6 @@ void refine_individual(SSType *ssParams, Set *set, int set_size, individual *ind
             }            
             while (status == GSL_CONTINUE && iter < ssParams->max_no_improve);
             //while (status == GSL_CONTINUE && iter < 100);
-            //exit(1);
                                     
             if (iter != 0){
             // printf("%d\n", iter);
@@ -157,7 +156,8 @@ void refine_individual(SSType *ssParams, Set *set, int set_size, individual *ind
             }
 
             // gsl_multimin_fminimizer_free(s);
-            // gsl_vector_free(ss);
+            // gsl_vector_frene(ss);
+            //printf("Nelder finished - free mem\n");
             gsl_rng_free (r);
             return;
         }

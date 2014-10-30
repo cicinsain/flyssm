@@ -129,7 +129,7 @@ error( const char *format, ... ) {
     free( msg_array );
     free( msg_types );
     free( msg );
-
+    printf("error.c: error\n");
     exit( 1 );
 
 }
@@ -242,6 +242,7 @@ warning( const char *format, ... ) {
 void
 file_error( const char *call_name ) {
     perror( call_name );
+    printf("error.c: file_error()\n");
     exit( 1 );
 }
 
@@ -251,5 +252,6 @@ file_error( const char *call_name ) {
 void
 PrintMsg( const char *msg, int exit_status ) {
     fprintf( stderr, msg );
+    printf("error.c: print_msg()\n");
     exit( exit_status );
 }
