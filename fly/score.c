@@ -547,7 +547,7 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
         double *chisq_s;
             chisq_s = (double *) calloc (inp->zyg.defs.ngenes, sizeof(double));
     #endif
-
+    debug = 0;
     /* debugging mode: need debugging file name */
     if( debug ) {
         debugfile = ( char * ) calloc( MAX_RECORD, sizeof( char ) );
@@ -563,7 +563,7 @@ Score( Input * inp, ScoreOutput * out, int jacobian ) {
      * check signs. If it appears cleaner, sign checking could be done by the *
      * tweaker                                                                */
     // printf("Score: checking limits... \n");
-    debug = 0;
+    
     out->penalty = 0;
     
     for( ii = 0; ii < inp->zyg.defs.ngenes; ii++ ) {
@@ -1439,23 +1439,23 @@ GetPenalty( Input * inp, SearchSpace * limits ) {
 
 double GetExtraPenalty(Input * inp, SearchSpace * limits) { 
     double penalty = 0.0;
+    double Lambda = 3;
+    
     EqParms *parm;          /* local pointer to parameters */
+    
     parm = &( inp->lparm );
     if( limits->pen_vec == NULL ) 
         return -1;
-    //double Lambda = *( ( limits->pen_vec ) );
-    double Lambda = 3;
+    
     penalty += CalculateSinglePenalty( parm->lambda, limits->lambdalim, inp->zyg.defs.ngenes, 10);
-    //printf("penlaltytemp1: %lg\n", penalty);
+    
     if( Lambda * penalty > 88.7228391 ) {
         printf( "# Argument too big: %lf > %lf\n", penalty, ( 85.19565 / Lambda ) );
         return FORBIDDEN_MOVE;
     } else {
-        //printf("Lambda = %lg\n", Lambda);
-        //printf("exp = %lg\n", exp( Lambda * penalty ));
         penalty = exp( Lambda * penalty ) - 2.718281828459045;
     }
-    //printf("penlaltytemp2: %lg\n", penalty);
+    
     return ( penalty < 0 )? 0: penalty;
 }
 

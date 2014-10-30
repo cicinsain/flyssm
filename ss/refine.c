@@ -154,10 +154,9 @@ void refine_individual(SSType *ssParams, Set *set, int set_size, individual *ind
                 //eSSParams->stats->n_successful_localSearch++;
                 //eSSParams->stats->n_local_search_iterations += iter;
             }
-
-            // gsl_multimin_fminimizer_free(s);
-            // gsl_vector_frene(ss);
             //printf("Nelder finished - free mem\n");
+            //gsl_multimin_fminimizer_free(s); //crashing here
+            gsl_vector_free(ss);            
             gsl_rng_free (r);
             return;
         }
